@@ -1,6 +1,5 @@
 package model.materials;
 
-import controller.Program;
 import model.playfield.Asteroid;
 import model.settler.Settler;
 
@@ -17,11 +16,7 @@ public class Ice extends Material {
      */
     @Override
     public void store(Settler s) {
-        Program.indent++;
-        Program.print();
-        System.out.println("Ice.store()");
-        s.addIce();
-        Program.indent--;
+
     }
 
     /**Meghívja az őt tároló aszteroida Sublime() függvényét
@@ -29,10 +24,5 @@ public class Ice extends Material {
      */
     @Override
     public void reactToSun(Asteroid a) {
-    	Program.indent++;
-		Program.print();
-    	System.out.println("Ice.reactToSun()");
-    	a.sublime();
-    	Program.indent--;
     }
 }
