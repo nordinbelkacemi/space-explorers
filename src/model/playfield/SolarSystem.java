@@ -1,5 +1,5 @@
 package model.playfield;
-
+import java.util.List;
 import java.util.ArrayList;
 
 import controller.Program;
@@ -18,7 +18,7 @@ public class SolarSystem {
 	/**
 	 * A játékteret alkotó AsteroidFieldek tárolója.
 	 */
-	private ArrayList<AsteroidField> asteroidBelt;
+	private List<AsteroidField> asteroidBelt;
 	
 	public SolarSystem() {
 		asteroidBelt = new ArrayList<>();
@@ -28,21 +28,8 @@ public class SolarSystem {
 	 * Létrehozza az aszteroidaövet és inicializálja a benne lévő objektumokat.
 	 * @return
 	 */
-	private ArrayList<AsteroidField> createBelt() {
+	private List<AsteroidField> createBelt() {
 		return null;
-	}
-	
-	/**
-	 * Meghívja az összes AsteroidField ReactToFlare() függvényét.
-	 */
-	public void reactToFlare() {
-		Program.indent++;
-		Program.print();
-		System.out.println("Sun.startFlare");
-		for (AsteroidField field : asteroidBelt) {
-			field.reactToFlare();
-		}
-		Program.indent--;
 	}
 	
 	/**
@@ -53,16 +40,26 @@ public class SolarSystem {
 	}
 	
 	/**
+	 * Meghívja az összes AsteroidField ReactToFlare() függvényét.
+	 */
+	public void reactToFlare() {
+		// nem feltétlenül jó
+		for (AsteroidField field : asteroidBelt) {
+			field.reactToFlare();
+		}
+
+	}
+
+	
+	/**
 	 * A napközelben lévő AsteroidField-ekre meghívja a CheckDangers() függvényt.
 	 */
 	public void updateDangerZone() {
-		Program.indent++;
-		Program.print();
-		System.out.println("SolarSystem.updateDangerZone()");
+		// nem feltétlenül jó 
 		for (AsteroidField field : asteroidBelt) {
 			field.checkDangers();
 		}
-		Program.indent--;
+
 	}
 	
 	/**
