@@ -1,19 +1,19 @@
 package model.ai;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import controller.Program;
 import model.settler.buildable.Robot;
 
 /**
  * A robotok tárolásáért és irányításáért felelős objektum.
  */
-public class AI {
+public class RobotAi implements Ai {
 	
 	/**
 	 * A settlerek által épített és AI által vezérelt robotokat tartalmazza.
 	 */
-	private ArrayList<Robot> robots;
+	private List<Robot> robots;
 	
 	/**
 	* Meghatározza a robotok következő lépését és végre is hajtja azokat.
@@ -23,9 +23,6 @@ public class AI {
 	}
 
 	public void addRobot(Robot r) {
-		Program.indent++;
-		Program.print();
-		System.out.println("AI.addRobot()");
-		Program.indent--;
+		
 	}
 }
