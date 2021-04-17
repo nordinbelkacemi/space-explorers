@@ -1,6 +1,7 @@
 package model.playfield;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.settler.buildable.TeleportGate;
 
@@ -11,16 +12,16 @@ import model.settler.buildable.TeleportGate;
 public class AsteroidField {
 
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
-	private ArrayList<Asteroid> asteroids;
+	private List<Asteroid> asteroids;
 
 	/** A szomszédos AsteroidFieldeket tartalmazza. */
-	private ArrayList<AsteroidField> neighbours;
+	private List<AsteroidField> neighbours;
 
 	/** Az AsteroidFielden elhelyezkedő teleportkapukat tárolja. */
-	private ArrayList<TeleportGate> teleportGates;
+	private List<TeleportGate> teleportGates;
 
-	/**A mezőhöz tartozó kergült kapuk */
-	private ArrayList<MegkergultGate> megkergultGates;
+	/**A megkergült kapukat tartalmazó osztály. */
+	private static MegkergultGates megkergultGates;
 
 	public AsteroidField() {
 		asteroids = new ArrayList<>();
@@ -46,7 +47,7 @@ public class AsteroidField {
 	 * Visszaad egy, az aszteroidához tartozó AsteroidFieldet és annak szomszédait tartalmazó listát.
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
-	public ArrayList<AsteroidField> getNeighbours() {
+	public List<AsteroidField> getNeighbours() {
 		return null;
 	}
 
@@ -54,7 +55,7 @@ public class AsteroidField {
 	 * Visszaadja az asteroids tároló tartalmát.
 	 * @return a mezőben elhelyezkedő aszteroidák
 	 */
-	public ArrayList<Asteroid> getAsteroids(){
+	public List<Asteroid> getAsteroids(){
 		return asteroids;
 	}
 

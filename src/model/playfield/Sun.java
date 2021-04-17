@@ -1,5 +1,7 @@
 package model.playfield;
 
+import org.graalvm.compiler.nodes.InliningLog.UpdateScope;
+
 import controller.Program;
 
 /**
@@ -17,29 +19,22 @@ public class Sun extends Hexagon {
 	 * Kezeli a Nap mozgását és a napkitöréseket.
 	 */
 	public void performAction() {
-		
+		// startFlare();
+		// move();
 	}
 	
 	/**
 	 * Elindítja a napvihart.
 	 */
-	public void startFlare() {
-		Program.indent++;
-		Program.print();
-		System.out.println("Sun.startFlare");
+	private void startFlare() {
 		solarSystem.reactToFlare();
-		Program.indent--;
 	}
 	
 	/**
 	 * Elmozdítja a napot a következő pozíciójába.
 	 */
-	public void move() {
-		Program.indent++;
-		Program.print();
-		System.out.println("Sun.move()");
+	private void move() {
 		solarSystem.updateDangerZone();
-		Program.indent--;
 	}
 	
 	/**

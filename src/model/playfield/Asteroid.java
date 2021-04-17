@@ -1,5 +1,5 @@
 package model.playfield;
-
+import java.util.List;
 import java.util.ArrayList;
 
 import model.materials.Material;
@@ -21,7 +21,7 @@ public class Asteroid {
 	private AsteroidField field;
 
 	/**Az aszteroidán tartózkodó travelereket (robotok vagy telepesek) tárolja */
-	private ArrayList<Traveler> travelers = new ArrayList<>();
+	private List<Traveler> travelers = new ArrayList<>();
 
 	public Asteroid(Material m) {
 		material = m;
@@ -35,19 +35,11 @@ public class Asteroid {
 		thickness = t;
 	}
 
-	public AsteroidField getAsteroidField() {
-		return field;
-	}
-
-	public void setAsteroidField(AsteroidField af) {
-		field = af;
-	}
-
 	/**
 	 * Aszteroidákat generál
 	 * @return a generált aszteroidák
 	 */
-	private ArrayList<Asteroid> createAsteroids() {
+	private List<Asteroid> createAsteroids() {
 		return null;
 	}
 
@@ -95,7 +87,7 @@ public class Asteroid {
 	 * Visszaad egy, az aszteroidához tartozó AsteroidFieldet és annak szomszédait tartalmazó listát
 	 * @return a szomszédok listája
 	 */
-	public ArrayList<AsteroidField> getNeighbours() {
+	public List<AsteroidField> getNeighbours() {
 		return null;
 	}
 
@@ -105,5 +97,13 @@ public class Asteroid {
 
 	/**A jégbőll álló mag elszublimál */
 	public void sublime() {
+	}
+	
+	public AsteroidField getAsteroidField() {
+		return field;
+	}
+
+	public void setAsteroidField(AsteroidField af) {
+		field = af;
 	}
 }
