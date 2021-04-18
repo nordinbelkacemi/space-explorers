@@ -21,7 +21,7 @@ public class Traveler {
 	public Traveler() { }
 
 	public Traveler(Asteroid a) {
-		asteroid = a;
+		setPosition(a);
 	}
 	
 	/**
