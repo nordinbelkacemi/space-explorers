@@ -104,7 +104,7 @@ public class AsteroidField extends Hexagon {
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
 	public List<AsteroidField> getNeighbours() {
-		ArrayList<AsteroidField> neighbourFields= new ArrayList<AsteroidField>();
+		List<AsteroidField> neighbourFields = new ArrayList<AsteroidField>(neighbours);
 		neighbourFields.add(this);
 		return neighbourFields;
 	}
