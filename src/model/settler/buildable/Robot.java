@@ -70,4 +70,10 @@ public class Robot extends Traveler implements Buildable, Driller {
 	public void printToConfig(PrintStream out) {
 		out.print(asteroid.getIndexes().toString());
 	}
+	
+	@Override
+	public void reactToFlare() {
+		super.reactToFlare();
+		ai.remove(this);
+	}
 }

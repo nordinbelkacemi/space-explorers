@@ -9,6 +9,7 @@ import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.playfield.Ufo;
 import model.settler.Settler;
+import model.settler.buildable.Robot;
 
 /**
  * Az ufok tárolásáért és irányításáért felelős objektum.
@@ -51,5 +52,9 @@ public class UfoAi implements Ai {
 			Asteroid a = aF.getAsteroids().get(r.nextInt(aF.getAsteroids().size()));
 			u.move(a);
 		}
+	}
+	
+	public void remove(Ufo r) {
+		ufos.remove(r);
 	}
 }

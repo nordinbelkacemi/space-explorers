@@ -33,6 +33,8 @@ public class Ufo extends Traveler implements Miner{
 
 	public void printToConfig(PrintStream out) {
 		out.print(asteroid.getIndexes().toString());
-    	
 	}
+	
+	@Override
+	public void reactToFlare() {}
 }
