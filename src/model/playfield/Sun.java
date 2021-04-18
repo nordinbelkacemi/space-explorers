@@ -1,5 +1,6 @@
 package model.playfield;
 
+import java.util.Random;
 
 /**
  * Tőle függ, hogy melyik aszteroidamezők vannak napközelben,
@@ -12,6 +13,10 @@ public class Sun extends Hexagon {
 	 */
 	private SolarSystem solarSystem;
 	
+	private Random r = new Random();
+	
+	private int coordCounter = 0;
+	
 	public Sun() {
 		position = new Coordinate(2, 0);
 	}
@@ -20,8 +25,9 @@ public class Sun extends Hexagon {
 	 * Kezeli a Nap mozgását és a napkitöréseket.
 	 */
 	public void performAction() {
-		// startFlare();
-		// move();
+		if (r.nextInt(5) == 1)
+			startFlare();
+		move();
 	}
 	
 	/**
@@ -35,6 +41,15 @@ public class Sun extends Hexagon {
 	 * Elmozdítja a napot a következő pozíciójába.
 	 */
 	private void move() {
+		switch ((coordCounter/2) % 6) {
+			case 0: position = new Coordinate(position.getX() - 1, position.getY() + 1);	break;
+			case 1: position = new Coordinate(position.getX() - 1, position.getY());		break;
+			case 2: position = new Coordinate(position.getX(), position.getY() - 1);		break;
+			case 3: position = new Coordinate(position.getX() + 1, position.getY() - 1);	break;
+			case 4: position = new Coordinate(position.getX() + 1, position.getY());		break;
+			case 5: position = new Coordinate(position.getX(), position.getY() + 1);		break;
+		}
+		coordCounter++;
 		solarSystem.updateDangerZone();
 	}
 	
