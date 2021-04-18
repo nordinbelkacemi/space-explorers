@@ -45,14 +45,6 @@ public class Asteroid {
 	}
 
 	//////////////////////////////////////////// függvények
-	
-	/**
-	 * Aszteroidákat generál
-	 * @return a generált aszteroidák
-	 */
-	private List<Asteroid> createAsteroids() {
-		return null;
-	}
 
 	/**
 	 * A paraméterként kapott traveler-t hozzáadja a travelers tárolóhoz
