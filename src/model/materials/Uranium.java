@@ -27,7 +27,9 @@ public class Uranium extends Material {
 	 * @param s a kapott settler
 	 */
 	@Override
-	public void store(Settler s) {}
+	public void store(Settler s) {
+		s.addUranium(this);
+	}
 	
     @Override
     public String toString() {
