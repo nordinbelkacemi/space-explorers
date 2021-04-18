@@ -17,7 +17,7 @@ import model.settler.buildable.TeleportGate;
  */
 public class AsteroidField extends Hexagon {
 	
-	///////////////////////////////////////// atribuuuts
+	///////////////////////////////////////// attributes
 	
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
