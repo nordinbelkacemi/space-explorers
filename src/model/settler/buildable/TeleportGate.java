@@ -1,5 +1,9 @@
 package model.settler.buildable;
 
+import java.util.List;
+import java.util.Random;
+
+import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 /**
@@ -13,6 +17,8 @@ public class TeleportGate {
 	 */
 	private TeleportGate otherGate;
 	
+	Random r = new Random();
+	
 	/**
 	 * A kapu helyszínéül szolgáló aszteroidamezőt tárolja.
 	 */
@@ -20,7 +26,10 @@ public class TeleportGate {
 	
 	/** Áthelyezi a kaput egy véletlen választott szomszádos aszteroida mezőre. */
 	public void kergul() {
-		
+		List<AsteroidField> neighbourFields = asteroidField.getNeighbours();
+		AsteroidField randomField = neighbourFields.get(r.nextInt(neighbourFields.size()));
+		setAsteroidField(randomField);
+		randomField.addTeleportGate(this);
 	}
 	
 	/**
@@ -40,13 +49,14 @@ public class TeleportGate {
 	 * @param af Az aszteroidamező, ahova kerül a teleportkapu.
 	 */
 	public void setAsteroidField(AsteroidField af) {
-
 		asteroidField = af;
-
 	}
 	
+	/**
+	 * Visszaadja a teleportkapu helyét.
+	 * @return A teleportkapu helye
+	 */
 	public AsteroidField getAsteroidField() {
-
 		return asteroidField;
 	}
 

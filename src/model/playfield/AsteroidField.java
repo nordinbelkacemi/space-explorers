@@ -19,8 +19,6 @@ public class AsteroidField extends Hexagon {
 	
 	///////////////////////////////////////// atribuuuts
 	
-	Random r  = new Random();
-	
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
 
@@ -32,6 +30,8 @@ public class AsteroidField extends Hexagon {
 
 	/**A megkergült kapukat tartalmazó osztály. */
 	private static MegkergultGates megkergultGates;
+	
+	private static List<AsteroidField> belt;
 
 	//////////////////////////////////////// ctors
 	public AsteroidField() {
@@ -48,6 +48,7 @@ public class AsteroidField extends Hexagon {
 	}
 
 	private List<Asteroid> createAsteroids() {
+		Random r  = new Random();
 		ArrayList<Asteroid> field = new ArrayList<>();
 		
 		int emptycount = r.nextInt(2) + 1; // egy vagy kettő üres 
@@ -83,6 +84,9 @@ public class AsteroidField extends Hexagon {
 	 * az Asteroid osztály ReactToFlare() függvényét.
 	 */
 	public void reactToFlare() {
+		for (Asteroid asteroid : asteroids) {
+			asteroid.reactToFlare();
+		}
 	}
 
 	/**
@@ -90,6 +94,9 @@ public class AsteroidField extends Hexagon {
 	 * és minden aszteroidájára meghívja a CheckDangers() függvényt.
 	 */
 	public void checkDangers() {
+		for (Asteroid asteroid : asteroids) {
+			asteroid.checkDangers();
+		}
 	}
 
 	/**
@@ -97,7 +104,9 @@ public class AsteroidField extends Hexagon {
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
 	public List<AsteroidField> getNeighbours() {
-		return null;
+		ArrayList<AsteroidField> neighbourFields= new ArrayList<AsteroidField>();
+		neighbourFields.add(this);
+		return neighbourFields;
 	}
 
 	/**
@@ -113,6 +122,7 @@ public class AsteroidField extends Hexagon {
 	 * @param tg az új teleportkapu
 	 */
 	public void addTeleportGate(TeleportGate tg) {
+		teleportGates.add(tg);
 	}
 
 	/**
@@ -120,6 +130,7 @@ public class AsteroidField extends Hexagon {
 	 * @param af új szomszéd
 	 */
 	public void addNeighbour(AsteroidField af){
+		neighbours.add(af);
 	}
 
 	/**
@@ -127,6 +138,17 @@ public class AsteroidField extends Hexagon {
 	 * @param a új aszteroida
 	 */
 	public void AddAsteroid(Asteroid a) {
+		asteroids.add(a);
+	}
+	
+	public static void setBelt(List<AsteroidField> b) {
+		belt = b;
+	}
+	
+	public Coordinate getIndexes(Asteroid a) {
+		int x = belt.indexOf(this);
+		int y = asteroids.indexOf(a);
+		return new Coordinate(x, y);
 	}
 	
 	public void printToConfig(PrintStream out) {
