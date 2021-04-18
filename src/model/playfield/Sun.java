@@ -42,12 +42,12 @@ public class Sun extends Hexagon {
 	 */
 	private void move() {
 		switch ((coordCounter/2) % 6) {
-			case 0: position = new Coordinate(position.getX() - 1, position.getY() + 1);	break;
-			case 1: position = new Coordinate(position.getX() - 1, position.getY());		break;
-			case 2: position = new Coordinate(position.getX(), position.getY() - 1);		break;
-			case 3: position = new Coordinate(position.getX() + 1, position.getY() - 1);	break;
-			case 4: position = new Coordinate(position.getX() + 1, position.getY());		break;
-			case 5: position = new Coordinate(position.getX(), position.getY() + 1);		break;
+			case 0: position.setX(position.getX() - 1); position.setY(position.getY() + 1);	break;
+			case 1: position.setX(position.getX() - 1); position.setY(position.getY());		break;
+			case 2: position.setX(position.getX()); 	position.setY(position.getY() - 1);	break;
+			case 3: position.setX(position.getX() + 1); position.setY(position.getY() - 1);	break;
+			case 4: position.setX(position.getX() + 1); position.setY(position.getY());		break;
+			case 5: position.setX(position.getX()); 	position.setY(position.getY() + 1);	break;
 		}
 		coordCounter++;
 		solarSystem.updateDangerZone();
