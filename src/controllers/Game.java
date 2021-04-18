@@ -154,4 +154,8 @@ public class Game {
 	public void endSettlerTurn(int n) {
 		choosableSettlers.set(n - 1, null);
 	}
+
+	public ArrayList<AsteroidField> getNeighbours() {
+		return chosenSettler.getNeighbours();
+	}
 }

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controllers.Game;
+import model.playfield.AsteroidField;
 
 public class Console {
     private Game game;
@@ -51,7 +52,6 @@ public class Console {
         printChoosableSettlers();
         
         Integer nSettler = 0;
-        /* settler valasztasa */
         try {
             nSettler = chooseSettler();
         } catch (Exception wrongNumberException) {
@@ -107,16 +107,24 @@ public class Console {
         }
     }
 
-    private void performAction() throws Exception {
+    private void performAction() {
         String input = new String();
 
         boolean correctInput = false;
         while (!correctInput) {
             input = sc.nextLine();
             switch (input) {
-                /* TODO */
-        
+            case "move":
+                showNeighbors();
+            case ""
             }
+        }
+    }
+
+    private void showNeighbors() {
+        ArrayList<AsteroidField> neighbors = game.getNeighbours();
+        for (int i = 0; i < neighbors.size(); i++) {
+            // System.out.println);
         }
     }
 

@@ -63,8 +63,8 @@ public class Traveler {
 	 * és annak szomszédait tartalmazó listát.
 	 * @return A traveller
 	 */
-	public List<AsteroidField> getNeighbours() {
-		List<AsteroidField> neighbours = asteroid.getNeighbours();
+	public ArrayList<AsteroidField> getNeighbours() {
+		ArrayList<AsteroidField> neighbours = asteroid.getNeighbours();
 		return neighbours;
 	}
 
