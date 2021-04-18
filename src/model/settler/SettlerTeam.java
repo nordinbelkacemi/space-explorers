@@ -1,6 +1,7 @@
 package model.settler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A telepesek tárolásáért és a játékossal való kapcsolatért felelős objektum.
@@ -10,7 +11,7 @@ public class SettlerTeam {
 	/**
 	 * Az összes telepest tárolja.
 	 */
-	private ArrayList<Settler> settlers;
+	private List<Settler> settlers;
 	
 	/**
 	 * Visszaadja a telepesek listájából a kiválasztott telepest.

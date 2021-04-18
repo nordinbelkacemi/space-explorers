@@ -1,5 +1,5 @@
 package model.settler;
 
 public interface Driller {
-	public void Drill();
+	public void drill();
 }
