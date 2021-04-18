@@ -1,8 +1,8 @@
 package model.settler.buildable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import controller.Program;
 import model.settler.Settler;
 
 /**
@@ -14,12 +14,8 @@ public class TeleportGatePair implements Buildable {
 	/**
 	 * A kapupárból az elkészített, de még le nem helyezett kapukat tárolja.
 	 */
-	private ArrayList<TeleportGate> gates = new ArrayList<>();
-	
-	public ArrayList<TeleportGate> getGates() {
-		return gates;
-	}
-	
+	private List<TeleportGate> gates = new ArrayList<>();
+
 	/**
 	 * Létrehoz két TeleportGate-t, hozzáadja őket a gates tárolóhoz,
 	 * meghívja mindkét kapun a SetOtherGate függvényt a párjával paraméterezve,
@@ -29,8 +25,6 @@ public class TeleportGatePair implements Buildable {
 	 */
 	@Override
 	public void build(Settler s) {
-		Program.indent++;
-		Program.print();
 		System.out.println("TeleportGatePair.build()");
 		s.getIron();
 		s.getIron();
@@ -47,7 +41,6 @@ public class TeleportGatePair implements Buildable {
 		addTeleportGate(gates.get(0));
 		addTeleportGate(gates.get(1));
 		s.storeTeleportGatePair(this);
-		Program.indent--;
 	}
 	
 	/**
@@ -55,10 +48,8 @@ public class TeleportGatePair implements Buildable {
 	 * @param tg A tárolóhoz adandó teleportkapu.
 	 */
 	public void addTeleportGate(TeleportGate tg) {
-		Program.indent++;
-		Program.print();
-		System.out.println("TeleportGatePair.addTeleportGate()");
-		Program.indent--;
+
+
 	}
 	
 	/**
@@ -67,12 +58,15 @@ public class TeleportGatePair implements Buildable {
 	 * @return Az eltávolított teleportkapu.
 	 */
 	public TeleportGate removeTeleportGate() {
-		Program.indent++;
-		Program.print();
-    	System.out.println("TeleportGate.removeTeleportGate()");
-    	Program.indent--;
+
 		return gates.remove(gates.size()-1);
 	}
-
 	
+	public int getCount() {
+		return 0;
+	}
+	
+	public List<TeleportGate> getGates() {
+		return gates;
+	}
 }
