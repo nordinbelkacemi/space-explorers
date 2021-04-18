@@ -10,7 +10,7 @@ public class Console {
         String input;
 
         System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
-        System.out.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépésre írd be a test parancsot.");
+        System.out.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
         while (!(input = sc.nextLine()).equals("exit")) {
             switch (input) {
             case "play":
