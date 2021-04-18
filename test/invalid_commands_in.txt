@@ -1,0 +1,9 @@
+12
+1
+move
+0
+1
+place teleportgate
+build robot
+save
+exit

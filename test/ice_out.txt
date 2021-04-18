@@ -1,0 +1,6 @@
+Add config file:
+Choose settler: 1
+Your settler can:
+drill
+1
+0. field 0. asteroid sublime

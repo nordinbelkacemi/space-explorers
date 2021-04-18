@@ -1,0 +1,12 @@
+robot_config.txt
+nextturn
+0
+2
+0
+2
+nextturn
+nextturn
+1
+drill
+save    
+exit

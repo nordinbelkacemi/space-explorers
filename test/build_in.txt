@@ -1,0 +1,9 @@
+build.txt
+1
+build robot
+0
+0
+1
+build teleportgate 
+save    
+exit

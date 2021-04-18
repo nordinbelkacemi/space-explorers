@@ -1,0 +1,9 @@
+actions.txt
+1
+drill
+1
+mine
+1
+put back coal
+save    
+exit
