@@ -9,5 +9,4 @@ public class Program {
 		Console c = new Console();
 		c.start();
 	}
-
 }

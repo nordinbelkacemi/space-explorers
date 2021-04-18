@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import console.Console;
@@ -26,9 +27,9 @@ public class Game {
 	private Settler chosenSettler;
 
 	/** A kiválasztható/léptethetö telepesek száma. (pl. ha van 6 telepes, és az elsovel már léptunk, akkor ez a szám 5) */
-	private int nChoosable;
+	private List<Integer> choosableSettlers;
 
-	private Console console;
+	// private Console console;
 
 	public Game() {
 		// playfield
@@ -39,6 +40,8 @@ public class Game {
 		// settlers
 		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
 		settlerTeam.configOut(System.out);
+		
+		choosableSettlers = new ArrayList<Integer>();
 	}
 
 	/** A játékot elindító függvény */
@@ -46,16 +49,27 @@ public class Game {
 		gameOver = false;
 	}
 
+	public void resetChoosableSettlers() {
+		choosableSettlers.clear();
+		for (int i = 1; i <= 6; i++) {
+			choosableSettlers.add(i);
+		}
+	}
+
 	/** 
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre 
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void chooseSettler(int n) {
+	public void chooseSettler(int n) throws Exception {
+		if (n < 0 || !choosableSettlers.contains(n)) {
+			
+		}
 		chosenSettler = settlerTeam.chooseSettler(n);
-		nChoosable -= 1;
 	}
 
-	/** A gameOver változó lekérdezö függvénye */
+	/** A gameOver változó lekérdezö függvénye
+	 * @return True ha a játék véget ért, egyébként False
+	 */
 	public boolean over() {
 		return gameOver;
 	}
