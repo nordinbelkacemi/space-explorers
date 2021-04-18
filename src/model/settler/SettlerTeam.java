@@ -1,7 +1,11 @@
 package model.settler;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import model.playfield.AsteroidField;
 
 /**
  * A telepesek tárolásáért és a játékossal való kapcsolatért felelős objektum.
@@ -12,6 +16,18 @@ public class SettlerTeam {
 	 * Az összes telepest tárolja.
 	 */
 	private List<Settler> settlers;
+	
+	private List<AsteroidField> belt;
+
+	
+	public SettlerTeam(List<AsteroidField> b) {
+		Random r  = new Random();
+		settlers = new ArrayList<>();
+		belt = b;
+		for (int i = 0; i < 6; i++) {
+			settlers.add(new Settler(belt.get(r.nextInt(42)).getAsteroids().get(0),this));
+		}
+	}
 	
 	/**
 	 * Visszaadja a telepesek listájából a kiválasztott telepest.
@@ -28,5 +44,12 @@ public class SettlerTeam {
 	 */
 	public void removeSettler(Settler s) {
 		settlers.remove(s);
+	}
+	
+	public void configOut(PrintStream out) {
+		for (Settler s : settlers) {
+			s.printToConfig(out);
+			out.println();
+		}
 	}
 }

@@ -1,8 +1,5 @@
 package model.playfield;
 import java.util.List;
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -37,6 +34,7 @@ public class SolarSystem {
 	
 	public SolarSystem(Sun s) {
 		asteroidBelt = createBelt();
+		AsteroidField.setBelt(asteroidBelt);
 		sun = s;
 	}
 	
@@ -106,5 +104,9 @@ public class SolarSystem {
 			out.println();
 			i++;
 		}
+	}
+	
+	public List<AsteroidField> getBelt(){
+		return asteroidBelt;
 	}
 }

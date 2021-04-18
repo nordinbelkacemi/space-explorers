@@ -16,8 +16,14 @@ public class Game {
 	private UfoAi uai;
 
 	public Game() {
+		// playfield
 		sun = new Sun();
 		ss = new SolarSystem(sun);
-		ss.configOut(System.out);
+		//ss.configOut(System.out);
+		
+		// settlers
+		st = new SettlerTeam(ss.getBelt()); 
+		st.configOut(System.out);
+		
 	}
 }

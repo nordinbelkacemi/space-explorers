@@ -19,8 +19,6 @@ public class AsteroidField extends Hexagon {
 	
 	///////////////////////////////////////// atribuuuts
 	
-	Random r  = new Random();
-	
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
 
@@ -32,6 +30,8 @@ public class AsteroidField extends Hexagon {
 
 	/**A megkergült kapukat tartalmazó osztály. */
 	private static MegkergultGates megkergultGates;
+	
+	private static List<AsteroidField> belt;
 
 	//////////////////////////////////////// ctors
 	public AsteroidField() {
@@ -48,6 +48,7 @@ public class AsteroidField extends Hexagon {
 	}
 
 	private List<Asteroid> createAsteroids() {
+		Random r  = new Random();
 		ArrayList<Asteroid> field = new ArrayList<>();
 		
 		int emptycount = r.nextInt(2) + 1; // egy vagy kettő üres 
@@ -138,6 +139,16 @@ public class AsteroidField extends Hexagon {
 	 */
 	public void AddAsteroid(Asteroid a) {
 		asteroids.add(a);
+	}
+	
+	public static void setBelt(List<AsteroidField> b) {
+		belt = b;
+	}
+	
+	public Coordinate getIndexes(Asteroid a) {
+		int x = belt.indexOf(this);
+		int y = asteroids.indexOf(a);
+		return new Coordinate(x, y);
 	}
 	
 	public void printToConfig(PrintStream out) {
