@@ -20,9 +20,10 @@ public class UfoAi implements Ai {
 	 */
 	private List<Ufo> ufos;
 	
+	private Random r = new Random();
+	
 	public UfoAi(List<AsteroidField> b) {
 		Ufo.setAi(this);
-		Random r  = new Random();
 		ufos = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			ufos.add(new Ufo(b.get(r.nextInt(42)).getAsteroids().get(0)));
@@ -40,15 +41,14 @@ public class UfoAi implements Ai {
 	* Meghatározza az ufok következő lépését és végre is hajtja azokat.
 	*/
 	public void control() {
-		Random r = new Random();
 		for (Ufo u : ufos) {
-			if (!u.getAsteroid().isEmpty() && u.getAsteroid().getThickness() > 0) {
+			if (!u.getAsteroid().isEmpty() && u.getAsteroid().getThickness() == 0) {
 				u.mine();
 				return;
 			}
 			var neighbours = u.getNeighbours();
-			AsteroidField aF = neighbours.get(r.nextInt(neighbours.size() - 1));
-			Asteroid a = aF.getAsteroids().get(r.nextInt(aF.getAsteroids().size() - 1));
+			AsteroidField aF = neighbours.get(r.nextInt(neighbours.size()));
+			Asteroid a = aF.getAsteroids().get(r.nextInt(aF.getAsteroids().size()));
 			u.move(a);
 		}
 	}
