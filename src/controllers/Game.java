@@ -15,9 +15,19 @@ public class Game {
 	private RobotAi rai;
 	private UfoAi uai;
 
+	private boolean gameOver = false;
+
 	public Game() {
 		sun = new Sun();
 		ss = new SolarSystem(sun);
 		ss.configOut(System.out);
+	}
+
+	public boolean over() {
+		return gameOver;
+	}
+
+	public void start() {
+
 	}
 }
