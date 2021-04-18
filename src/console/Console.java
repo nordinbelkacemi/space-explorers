@@ -17,7 +17,8 @@ public class Console {
                 game = new Game();
                 game.start();
                 while (!game.over()) {
-                    handleCommands();
+                    handlePlayerTurn();
+                    // szolunk a game controllernek hogy a kör további részeit végezze el
                 }
                 break;
             case "test":
@@ -29,6 +30,43 @@ public class Console {
             }
         }
     }
+
+    private void handlePlayerTurn() {
+        game.resetChoosableSettlers();
+
+        while (true) {
+            try {
+                handleSettlerTurn();
+            } catch (Exception e) {
+                break;
+            }
+        }
+    }
+
+    private void handleSettlerTurn() throws Exception {
+        Scanner sc = new Scanner(System.in);
+        String input;
+
+        while (!(input = sc.nextLine()).equals("exit")) {
+            switch(input) {
+                case "next turn":
+                    throw new Exception();  
+                default:
+                    game.chooseSettler(Integer.parseInt(input));
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     private void handleCommands() {
         Scanner sc = new Scanner(System.in);
