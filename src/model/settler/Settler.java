@@ -219,4 +219,32 @@ public class Settler extends Traveler implements Miner, Driller {
     	
     	// material cuccokat majd később
 	}
+
+    public boolean canBuildGate() {
+        return ironStorage.size() >= 2 && iceStorage.size() >= 1 && uraniumStorage.size() >= 1;
+    }
+
+    public boolean canBuildRobot() {
+        return ironStorage.size() >= 1 && coalStorage.size() >= 1 && uraniumStorage.size() >= 1;
+    }
+
+    public boolean canPlaceGate() {
+        return teleportGatePairs.size() >= 1;
+    }
+
+    public int getIronCount() {
+        return ironStorage.size();
+    }
+
+    public int getCoalCount() {
+        return coalStorage.size();
+    }
+
+    public int getIceCount() {
+        return iceStorage.size();
+    }
+
+    public int getUraniumCount() {
+        return uraniumStorage.size();
+    }
 }
