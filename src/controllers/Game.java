@@ -38,11 +38,11 @@ public class Game {
 		solarSystem = new SolarSystem(sun);
 		
 		// settlers
-		settlerTeam = new SettlerTeam(ss.getBelt()); 
+		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
 		// robot
 		robotAi = new RobotAi();
 		// ufo
-		ufoAi = new UfoAi(ss.getBelt());
+		ufoAi = new UfoAi(solarSystem.getBelt());
 		// megkergült
 		megkergultGates = new MegkergultGates();
 		
@@ -50,13 +50,13 @@ public class Game {
 	}
 	
 	public void configOut(PrintStream out) {
-		ss.configOut(out);
+		solarSystem.configOut(out);
 		System.out.println();
-		st.configOut(out);
+		settlerTeam.configOut(out);
 		System.out.println();
-		rai.configOut(out);
+		robotAi.configOut(out);
 		System.out.println();
-		uai.configOut(out);
+		ufoAi.configOut(out);
 	}
 
 	/** A játékot elindító függvény */
