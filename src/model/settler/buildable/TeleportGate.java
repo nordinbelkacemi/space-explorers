@@ -1,6 +1,5 @@
 package model.settler.buildable;
 
-import controller.Program;
 import model.playfield.AsteroidField;
 
 /**
@@ -19,23 +18,20 @@ public class TeleportGate {
 	 */
 	private AsteroidField asteroidField;
 	
+	/** Áthelyezi a kaput egy véletlen választott szomszádos aszteroida mezőre. */
+	public void kergul() {
+		
+	}
+	
 	/**
 	 * Beállítja a teleportkapu párját.
 	 * @param tg A teleportkapu párja.
 	 */
 	public void setOtherGate(TeleportGate tg) {
-		Program.indent++;
-		Program.print();
-		System.out.println("TeleportGate.setOtherGate()");
 		otherGate = tg;
-		Program.indent--;
 	}
 	
 	public TeleportGate getOtherGate() {
-		Program.indent++;
-		Program.print();
-		System.out.println("TeleportGate.getOtherGate()");
-		Program.indent--;
 		return otherGate;
 	}
 	
@@ -44,18 +40,14 @@ public class TeleportGate {
 	 * @param af Az aszteroidamező, ahova kerül a teleportkapu.
 	 */
 	public void setAsteroidField(AsteroidField af) {
-		Program.indent++;
-		Program.print();
-		System.out.println("TeleportGate.setAsteroidField()");
+
 		asteroidField = af;
-		Program.indent--;
+
 	}
 	
 	public AsteroidField getAsteroidField() {
-		Program.indent++;
-		Program.print();
-		System.out.println("TeleportGate.getAsteroidField()");
-		Program.indent--;
+
 		return asteroidField;
 	}
+
 }

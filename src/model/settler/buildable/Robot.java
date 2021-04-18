@@ -1,26 +1,29 @@
 package model.settler.buildable;
 
-import controller.Program;
+
 import java.util.ArrayList;
-import model.ai.AI;
+import java.util.List;
+
+import model.ai.RobotAi;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
+import model.settler.Driller;
 import model.settler.Settler;
 import model.settler.Traveler;
 
 /**
  * A telepeshez hasonló, de nem játszható karakter, a telepesek tudják megépíteni.
  */
-public class Robot extends Traveler implements Buildable {
+public class Robot extends Traveler implements Buildable,Driller {
 
 	/**
 	 * A robotot irányító mesterséges intelligencia.
 	 */
-	private AI ai;
+	private RobotAi ai;
 	
 	public Robot(Asteroid a) {
 		super(a);
-		ai = new AI();
+		ai = new RobotAi();
 	}
 
 	@Override
@@ -34,14 +37,11 @@ public class Robot extends Traveler implements Buildable {
 	 */
 	@Override
 	public void reactToExplosion() {
-		Program.indent++;
-		Program.print();
 		System.out.println("Robot.reactToExplosion()");
-		ArrayList<AsteroidField> neighbourFields = getNeighbours();
-		ArrayList<Asteroid> availableAsteroids = neighbourFields.get(0).getAsteroids();
+		List<AsteroidField> neighbourFields = getNeighbours();
+		List<Asteroid> availableAsteroids = neighbourFields.get(0).getAsteroids();
 		Asteroid a2 = availableAsteroids.get(0);
 		this.setPosition(a2);
-		Program.indent--;
 	}
 	
 	/**
@@ -51,14 +51,17 @@ public class Robot extends Traveler implements Buildable {
 	 */
 	@Override
 	public void build(Settler s) {
-		Program.indent++;
-		Program.print();
 		System.out.println("Robot.build()");
 		s.getIron();
 		s.getCoal();
 		s.getUranium();
 		setPosition(asteroid);
 		ai.addRobot(this);
-		Program.indent--;
+	}
+
+	@Override
+	public void Drill() {
+		
+		
 	}
 }
