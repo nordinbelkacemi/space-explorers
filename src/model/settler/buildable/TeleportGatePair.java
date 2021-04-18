@@ -56,10 +56,17 @@ public class TeleportGatePair implements Buildable {
 		return gates.remove(gates.size()-1);
 	}
 	
+	/**
+	 * Visszaadja a pár még nem lerakott teleportkapuinak számát.
+	 * @return A még nem lerakott teleportkapuinak száma
+	 */
 	public int getCount() {
 		return gates.size();
 	}
 	
+	/** Visszaadja a pár még nem lerakott teleportkapuinak listáját.
+	 * @return A pár még nem lerakott teleportkapuinak listája.
+	 */
 	public List<TeleportGate> getGates() {
 		return gates;
 	}

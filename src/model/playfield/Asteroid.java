@@ -135,10 +135,18 @@ public class Asteroid {
 		return field.getIndexes(this);
 	}
 
+	/**
+	 * Visszaadja, hogy üreges-e az aszteroid
+	 * @return a logikai érték
+	 */
 	public boolean isEmpty() {
 		return material == null;
 	}
 
+	/**
+	 * Visszaadja az aszteroida köpenyének vastagságát
+	 * @return a köpeny vastagsága
+	 */
 	public int getThickness() {
 		return thickness;
 	}

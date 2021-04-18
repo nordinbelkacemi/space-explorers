@@ -17,6 +17,9 @@ public class SettlerTeam {
 	 */
 	private List<Settler> settlers;
 	
+	/**
+	 * Az aszteroidaöv
+	 */
 	private List<AsteroidField> belt;
 
 	public SettlerTeam(List<AsteroidField> b) {
