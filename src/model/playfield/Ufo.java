@@ -12,7 +12,7 @@ import model.settler.Traveler;
  * Csak mozogni és nyersanyagot bányaszni (lopni) tudnak.
  */
 public class Ufo extends Traveler implements Miner{
-	
+
 	/**
 	 * Az ufot irányító központi vezető.
 	 */
@@ -25,8 +25,7 @@ public class Ufo extends Traveler implements Miner{
 
 	@Override
 	public void mine() {
-		// TODO Auto-generated method stub
-		
+		asteroid.removeMaterial();
 	}
 	
 	public static void setAi(UfoAi uai) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.playfield.Ufo;
 import model.settler.Settler;
@@ -39,6 +40,16 @@ public class UfoAi implements Ai {
 	* Meghatározza az ufok következő lépését és végre is hajtja azokat.
 	*/
 	public void control() {
-		
+		Random r = new Random();
+		for (Ufo u : ufos) {
+			if (!u.getAsteroid().isEmpty() && u.getAsteroid().getThickness() > 0) {
+				u.mine();
+				return;
+			}
+			var neighbours = u.getNeighbours();
+			AsteroidField aF = neighbours.get(r.nextInt(neighbours.size() - 1));
+			Asteroid a = aF.getAsteroids().get(r.nextInt(aF.getAsteroids().size() - 1));
+			u.move(a);
+		}
 	}
 }

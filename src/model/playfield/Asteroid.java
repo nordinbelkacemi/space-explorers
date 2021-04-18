@@ -12,7 +12,7 @@ import model.settler.Traveler;
  */
 public class Asteroid {
 	////////////////////////////////////////// atributumok
-	
+
 	/**Az aszteroida belsejében esetlegesen elhelyezkedő nyersanyag */
 	private Material material;
 
@@ -25,9 +25,9 @@ public class Asteroid {
 	/**Az aszteroidán tartózkodó travelereket (robotok vagy telepesek) tárolja */
 	private List<Traveler> travelers = new ArrayList<>();
 
-	
+
 	////////////////////////////////////////// ctors
-	
+
 	/** Nem üres asteroida */
 	public Asteroid(Material m, int t, AsteroidField f) {
 		material = m;
@@ -118,7 +118,7 @@ public class Asteroid {
 	public void sublime() {
 		material = null;
 	}
-	
+
 	public AsteroidField getAsteroidField() {
 		return field;
 	}
@@ -126,15 +126,23 @@ public class Asteroid {
 	public void setAsteroidField(AsteroidField af) {
 		field = af;
 	}
-	
-	/** 
+
+	/**
 	 * Ez nem egy x y koordináta, hanem indexek
 	 * @return x: a field indexe y: az aszteroida indexe a fieldben
 	 */
 	public Coordinate getIndexes() {
 		return field.getIndexes(this);
 	}
-	
+
+	public boolean isEmpty() {
+		return material == null;
+	}
+
+	public int getThickness() {
+		return thickness;
+	}
+
 	public void printToConfig(PrintStream out) {
 		if(material != null)
 			out.print(material.toString());
