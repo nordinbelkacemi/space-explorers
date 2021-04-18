@@ -34,6 +34,7 @@ public class SolarSystem {
 	
 	public SolarSystem(Sun s) {
 		asteroidBelt = createBelt();
+		setNeighbours();
 		AsteroidField.setBelt(asteroidBelt);
 		sun = s;
 	}
@@ -54,7 +55,13 @@ public class SolarSystem {
 	 * Beállítja az aszteroidamezők szomszédossági viszonyait.
 	 */
 	private void setNeighbours() {
-		
+		for (AsteroidField field1 : asteroidBelt) {
+			for (AsteroidField field2 : asteroidBelt) {
+				if (Math.abs(field1.position.getX() - field2.position.getX()) <= 1 && Math.abs(field1.position.getY() - field2.position.getY()) <= 1) {
+					field1.addNeighbour(field2);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -73,9 +80,9 @@ public class SolarSystem {
 	 * A napközelben lévő AsteroidField-ekre meghívja a CheckDangers() függvényt.
 	 */
 	public void updateDangerZone() {
-		// nem feltétlenül jó 
 		for (AsteroidField field : asteroidBelt) {
-			field.checkDangers();
+			if (Math.abs(field.position.getX() - sun.position.getX()) <= 2 && Math.abs(field.position.getY() - sun.position.getY()) <= 2)
+				field.checkDangers();
 		}
 
 	}
