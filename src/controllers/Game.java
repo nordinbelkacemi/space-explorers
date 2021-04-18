@@ -1,9 +1,9 @@
 package controllers;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import console.Console;
 import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.playfield.MegkergultGates;
@@ -35,13 +35,29 @@ public class Game {
 		// playfield
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
-		// ss.configOut(System.out);
 		
 		// settlers
 		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
-		settlerTeam.configOut(System.out);
 		
 		choosableSettlers = new ArrayList<Integer>();
+		// robot
+		robotAi = new RobotAi();
+		// ufo
+		ufoAi = new UfoAi(solarSystem.getBelt());
+		// megkergült
+		megkergultGates = new MegkergultGates();
+		
+		configOut(System.out);
+	}
+	
+	public void configOut(PrintStream out) {
+		solarSystem.configOut(out);
+		System.out.println();
+		settlerTeam.configOut(out);
+		System.out.println();
+		robotAi.configOut(out);
+		System.out.println();
+		ufoAi.configOut(out);
 	}
 
 	/** A játékot elindító függvény */

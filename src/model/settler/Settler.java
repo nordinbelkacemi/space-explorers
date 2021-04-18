@@ -48,13 +48,13 @@ public class Settler extends Traveler implements Miner, Driller {
 
     
     //////////////////////////////////////// ctors
-    public Settler(Asteroid a, SettlerTeam st) {
+
+    public Settler(Asteroid a) {
         asteroid = a;
         uraniumStorage = new ArrayList<>();
         coalStorage = new ArrayList<>();
         iceStorage = new ArrayList<>();
         ironStorage = new ArrayList<>();
-        team = st;
         materialCount = 0;
         teleportGatePairs = new ArrayList<>();
         a.addTraveler(this);
@@ -199,6 +199,10 @@ public class Settler extends Traveler implements Miner, Driller {
     public void reactToExplosion() {
         super.reactToExplosion();
         team.removeSettler(this);
+    }
+    
+    public static void setTeam(SettlerTeam st) {
+    	team = st;
     }
     
     public void printToConfig(PrintStream out) {

@@ -12,6 +12,10 @@ public class Sun extends Hexagon {
 	 */
 	private SolarSystem solarSystem;
 	
+	public Sun() {
+		position = new Coordinate(2, 0);
+	}
+	
 	/**
 	 * Kezeli a Nap mozgását és a napkitöréseket.
 	 */
