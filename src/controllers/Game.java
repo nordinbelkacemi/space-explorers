@@ -14,6 +14,8 @@ import model.playfield.SolarSystem;
 import model.playfield.Sun;
 import model.settler.Settler;
 import model.settler.SettlerTeam;
+import model.settler.buildable.Robot;
+import model.settler.buildable.TeleportGatePair;
 
 public class Game {
 	private Sun sun;
@@ -38,10 +40,10 @@ public class Game {
 		// playfield
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
-		
+
 		// settlers
-		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
-		
+		settlerTeam = new SettlerTeam(solarSystem.getBelt());
+
 		choosableSettlers = new ArrayList<Integer>();
 		// robot
 		robotAi = new RobotAi();
@@ -49,10 +51,10 @@ public class Game {
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		// megkergült
 		megkergultGates = new MegkergultGates();
-		
+
 		configOut(System.out);
 	}
-	
+
 	public void configOut(PrintStream out) {
 		solarSystem.configOut(out);
 		System.out.println();
@@ -75,8 +77,8 @@ public class Game {
 		}
 	}
 
-	/** 
-	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre 
+	/**
+	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
 	 * @param n A kiválasztott telepes sorszáma
 	 */
 	public void chooseSettler(int n) throws Exception {
@@ -95,7 +97,7 @@ public class Game {
 
 	public ArrayList<String> getActions() {
 		ArrayList<String> actions = new ArrayList<String>();
-		
+
 		Asteroid currentAsteroid = chosenSettler.getAsteroid();
 		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
 
@@ -112,7 +114,7 @@ public class Game {
 				break;
 			}
 		}
-		
+
 		if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
 			actions.add("mine");
 		}
@@ -153,5 +155,46 @@ public class Game {
 
 	public void endSettlerTurn(int n) {
 		choosableSettlers.set(n - 1, null);
+	}
+
+	public void mine() {
+		chosenSettler.mine();
+	}
+
+	public void drill() {
+		chosenSettler.drill();
+	}
+
+	public void buildTeleportGate() {
+		chosenSettler.build(new TeleportGatePair());
+	}
+
+	public void placeTeleportGate(int i) {
+		chosenSettler.placeTeleportGate(i);
+	}
+
+	public void buildRobot() {
+		Robot r = new Robot(chosenSettler.getAsteroid());
+		chosenSettler.build(r);
+	}
+
+	public void move(Asteroid a) {
+		chosenSettler.move(a);
+	}
+
+	public void putIronBack() {
+		chosenSettler.putIronBack();
+	}
+
+	public void putCoalBack() {
+		chosenSettler.putCoalBack();
+	}
+
+	public void putUraniumBack() {
+		chosenSettler.putUraniumBack();
+	}
+
+	public void putIceBack() {
+		chosenSettler.putIceBack();
 	}
 }
