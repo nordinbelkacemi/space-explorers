@@ -51,16 +51,19 @@ public class Asteroid {
 	 * @param t a kapott traveler
 	 */
 	public void addTraveler(Traveler t) {
+		travelers.add(t);
 	}
 	/**
 	 * A paraméterként kapott traveler-t eltávolítja a travelers tárolóból
 	 * @param t az eltávolítandó
 	 */
 	public void removeTraveler(Traveler t) {
+		travelers.remove(t);
 	}
 
 	/**Eltávolít egyet az aszteroida rétegei közül, csökkenti a thickness változót eggyel */
 	public void removeLayer() {
+		thickness--;
 	}
 
 	/**
@@ -68,6 +71,7 @@ public class Asteroid {
 	 * @param m a kapott nyersanyag
 	 */
 	public void addMaterial(Material m) {
+		material = m;
 	}
 
 	/**
@@ -75,15 +79,23 @@ public class Asteroid {
 	 * @return a mag anyaga
 	 */
 	public Material removeMaterial() {
-		return null;
+		Material m = material;
+		material = null;
+		return m;
 	}
 
 	/**Napvihar esetén meghívódik, és meghívja az összes rajta tartózkodó traveler ReactToFlare() függvényét */
 	public void reactToFlare() {
+		for (Traveler traveler : travelers) {
+			traveler.reactToFlare();
+		}
 	}
 
 	/**A megfelelő feltételek fennállása esetén felrobbantja az aszteroidát, vagy elszublimáltatja a magjában lévő vízjeget */
 	public void checkDangers() {
+		if(thickness == 0) {
+			material.reactToSun(this);
+		}
 	}
 
 	/**
@@ -91,15 +103,20 @@ public class Asteroid {
 	 * @return a szomszédok listája
 	 */
 	public List<AsteroidField> getNeighbours() {
-		return null;
+		return field.getNeighbours();
 	}
 
-	/**Az aszteroida felrobban, megsemmísítvee ezzel magát és a rajta lévő utazókat */
+	/**Az aszteroida felrobban, megsemmísítve ezzel magát és a rajta lévő utazókat */
 	public void explode() {
+		for (Traveler traveler : travelers) {
+			traveler.reactToExplosion();
+		}
+		field.removeAsteroid(this);
 	}
 
 	/**A jégbőll álló mag elszublimál */
 	public void sublime() {
+		material = null;
 	}
 	
 	public AsteroidField getAsteroidField() {
