@@ -15,7 +15,7 @@ import model.settler.buildable.TeleportGate;
  * A játéktér alapeleme; körben elhelyezve alkotják az aszteroidaövet, felelős a szomszédjaiért.
  * Az aszteroidákat tárolja.
  */
-public class AsteroidField extends Hexagon{
+public class AsteroidField extends Hexagon {
 	
 	///////////////////////////////////////// atribuuuts
 	

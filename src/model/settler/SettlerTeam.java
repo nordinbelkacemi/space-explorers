@@ -27,6 +27,6 @@ public class SettlerTeam {
 	 * @param s A kitörlendő telepes.
 	 */
 	public void removeSettler(Settler s) {
-		
+		settlers.remove(s);
 	}
 }
