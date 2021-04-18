@@ -16,7 +16,7 @@ public class Ice extends Material {
      */
     @Override
     public void store(Settler s) {
-
+    	
     }
 
     /**Meghívja az őt tároló aszteroida Sublime() függvényét
