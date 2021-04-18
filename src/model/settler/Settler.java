@@ -38,6 +38,7 @@ public class Settler extends Traveler implements Miner, Driller {
     /** Az eszköztárában lévő nyersanyagok száma */
     private int materialCount;
     
+    /** A telepes eszköztárának kapacitása */
     private static int capacity = 10;
 
     /** A telepes teleportkapu-párja. Ha nem épített kapupárt akkor null. */
@@ -195,12 +196,19 @@ public class Settler extends Traveler implements Miner, Driller {
     	asteroid.addMaterial(getCoal());
     }
     
+    /**
+     * Az aszteroida felrobbanásának hatására megöli a telepest.
+     */
     @Override
     public void reactToExplosion() {
         super.reactToExplosion();
         team.removeSettler(this);
     }
     
+    /**
+     * Beállítja a telepes csapatát
+     * @param st A beállítandó csapat.
+     */
     public static void setTeam(SettlerTeam st) {
     	team = st;
     }

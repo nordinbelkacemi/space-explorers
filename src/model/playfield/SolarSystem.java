@@ -34,6 +34,7 @@ public class SolarSystem {
 	
 	public SolarSystem(Sun s) {
 		asteroidBelt = createBelt();
+		setNeighbours();
 		AsteroidField.setBelt(asteroidBelt);
 		sun = s;
 	}
@@ -54,18 +55,43 @@ public class SolarSystem {
 	 * Beállítja az aszteroidamezők szomszédossági viszonyait.
 	 */
 	private void setNeighbours() {
-		
+		for (AsteroidField field1 : asteroidBelt) {
+			for (AsteroidField field2 : asteroidBelt) {
+				if (Math.abs(field1.position.getX() - field2.position.getX()) <= 1 && Math.abs(field1.position.getY() - field2.position.getY()) <= 1) {
+					field1.addNeighbour(field2);
+				}
+			}
+		}
 	}
 	
 	/**
-	 * Meghívja az összes AsteroidField ReactToFlare() függvényét.
+	 * Meghívja azon AsteroidField-ek ReactToFlare() függvényét amelyeket eltalál a napkitörés.
 	 */
-	public void reactToFlare() {
-		// nem feltétlenül jó
+	public void reactToFlare(Coordinate d) {
+		Coordinate s = sun.getCo();
 		for (AsteroidField field : asteroidBelt) {
-			field.reactToFlare();
+			Coordinate f = field.getCo();
+			
+			if(d.getX() == 0) {
+				int b = (f.getY()-s.getY())/d.getY();
+				if(b > 0) {
+					field.reactToFlare();
+				}
+			}
+			else if(d.getX() == 0) {
+				int a = (f.getX()-s.getX())/d.getX();
+				if(a > 0) {
+					field.reactToFlare();
+				}
+			}
+			else {
+				int a = (f.getX()-s.getX())/d.getX();
+				int b = (f.getY()-s.getY())/d.getY();
+				if(a > 0 && a == b) {
+					field.reactToFlare();
+				}
+			}
 		}
-
 	}
 
 	
@@ -73,9 +99,9 @@ public class SolarSystem {
 	 * A napközelben lévő AsteroidField-ekre meghívja a CheckDangers() függvényt.
 	 */
 	public void updateDangerZone() {
-		// nem feltétlenül jó 
 		for (AsteroidField field : asteroidBelt) {
-			field.checkDangers();
+			if (Math.abs(field.position.getX() - sun.position.getX()) <= 2 && Math.abs(field.position.getY() - sun.position.getY()) <= 2)
+				field.checkDangers();
 		}
 
 	}

@@ -14,26 +14,34 @@ import model.settler.Traveler;
 public class Ufo extends Traveler implements Miner{
 
 	/**
-	 * Az ufot irányító központi vezető.
+	 * Az ufót irányító központi vezető.
 	 */
 	private static UfoAi ai;
 	
 	public Ufo(Asteroid a) {
-		asteroid = a;
-		a.addTraveler(this);
+		setPosition(a);
 	}
 
+	/**
+	 * A bányászást megvalósító metódus
+	 */
 	@Override
 	public void mine() {
 		asteroid.removeMaterial();
 	}
 	
+	/**
+	 * Beállítja az ufót irányító mesterséges intelligenciát.
+	 * @param uai
+	 */
 	public static void setAi(UfoAi uai) {
     	ai = uai;
     }
 
 	public void printToConfig(PrintStream out) {
 		out.print(asteroid.getIndexes().toString());
-    	
 	}
+	
+	@Override
+	public void reactToFlare() {}
 }

@@ -106,7 +106,7 @@ public class Asteroid {
 		return field.getNeighbours();
 	}
 
-	/**Az aszteroida felrobban, megsemmísítve ezzel magát és a rajta lévő utazókat */
+	/**Az aszteroida felrobban, megsemmisítve ezzel magát és a rajta lévő utazókat */
 	public void explode() {
 		for (Traveler traveler : travelers) {
 			traveler.reactToExplosion();
@@ -114,7 +114,7 @@ public class Asteroid {
 		field.removeAsteroid(this);
 	}
 
-	/**A jégbőll álló mag elszublimál */
+	/**A jégből álló mag elszublimál */
 	public void sublime() {
 		material = null;
 	}
@@ -135,10 +135,18 @@ public class Asteroid {
 		return field.getIndexes(this);
 	}
 
+	/**
+	 * Visszaadja, hogy üreges-e az aszteroid
+	 * @return a logikai érték
+	 */
 	public boolean isEmpty() {
 		return material == null;
 	}
 
+	/**
+	 * Visszaadja az aszteroida köpenyének vastagságát
+	 * @return a köpeny vastagsága
+	 */
 	public int getThickness() {
 		return thickness;
 	}

@@ -24,6 +24,10 @@ public class Traveler {
 		asteroid = a;
 	}
 	
+	/**
+	 * Visszaadja a Traveler aszteroidáját
+	 * @return a Traveler aszteroidája
+	 */
 	public Asteroid getAsteroid() {
 		return asteroid;
 	}

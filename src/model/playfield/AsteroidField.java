@@ -17,7 +17,7 @@ import model.settler.buildable.TeleportGate;
  */
 public class AsteroidField extends Hexagon {
 	
-	///////////////////////////////////////// atribuuuts
+	///////////////////////////////////////// attributes
 	
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
@@ -104,7 +104,7 @@ public class AsteroidField extends Hexagon {
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
 	public ArrayList<AsteroidField> getNeighbours() {
-		ArrayList<AsteroidField> neighbourFields= new ArrayList<AsteroidField>();
+		ArrayList<AsteroidField> neighbourFields = new ArrayList<AsteroidField>();
 		neighbourFields.add(this);
 		return neighbourFields;
 	}

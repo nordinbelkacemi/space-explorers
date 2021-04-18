@@ -17,4 +17,36 @@ public class Coordinate {
     public String toString() {
     	return x + " " + y;
     }
+    
+    /**
+     * Visszaadja az x koordinátát
+     * @return az x koordináta
+     */
+    public int getX() {
+    	return x;
+    }
+    
+    /**
+     * Visszaadja az x koordinátát
+     * @return az x koordináta
+     */
+    public int getY() {
+    	return y;
+    }
+    
+    /**
+     * Beállítja az x koordinátát
+     * @param x az x koordináta
+     */
+    public void setX(int x) {
+    	this.x = x;
+    }
+    
+    /**
+     * Beállítja az y koordinátát
+     * @param y az y koordináta
+     */
+    public void setY(int y) {
+    	this.y = y;
+    }
 }
