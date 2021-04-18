@@ -83,6 +83,9 @@ public class AsteroidField extends Hexagon {
 	 * az Asteroid osztály ReactToFlare() függvényét.
 	 */
 	public void reactToFlare() {
+		for (Asteroid asteroid : asteroids) {
+			asteroid.reactToFlare();
+		}
 	}
 
 	/**
@@ -90,6 +93,9 @@ public class AsteroidField extends Hexagon {
 	 * és minden aszteroidájára meghívja a CheckDangers() függvényt.
 	 */
 	public void checkDangers() {
+		for (Asteroid asteroid : asteroids) {
+			asteroid.checkDangers();
+		}
 	}
 
 	/**
@@ -97,7 +103,9 @@ public class AsteroidField extends Hexagon {
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
 	public List<AsteroidField> getNeighbours() {
-		return null;
+		ArrayList<AsteroidField> neighbourFields= new ArrayList<AsteroidField>();
+		neighbourFields.add(this);
+		return neighbourFields;
 	}
 
 	/**
@@ -113,6 +121,7 @@ public class AsteroidField extends Hexagon {
 	 * @param tg az új teleportkapu
 	 */
 	public void addTeleportGate(TeleportGate tg) {
+		teleportGates.add(tg);
 	}
 
 	/**
@@ -120,6 +129,7 @@ public class AsteroidField extends Hexagon {
 	 * @param af új szomszéd
 	 */
 	public void addNeighbour(AsteroidField af){
+		neighbours.add(af);
 	}
 
 	/**
@@ -127,6 +137,7 @@ public class AsteroidField extends Hexagon {
 	 * @param a új aszteroida
 	 */
 	public void AddAsteroid(Asteroid a) {
+		asteroids.add(a);
 	}
 	
 	public void printToConfig(PrintStream out) {
