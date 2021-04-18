@@ -62,6 +62,9 @@ public class Robot extends Traveler implements Buildable, Driller {
 		ai.addRobot(this);
 	}
 
+	/**
+	 * A fúrást megvalósító metódus
+	 */
 	@Override
 	public void drill() {
 		this.asteroid.removeLayer();
