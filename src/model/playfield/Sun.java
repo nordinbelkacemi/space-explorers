@@ -34,7 +34,17 @@ public class Sun extends Hexagon {
 	 * Elindítja a napvihart.
 	 */
 	private void startFlare() {
-		solarSystem.reactToFlare();
+		Coordinate dir;
+		switch (r.nextInt(6)) {
+			case 0: dir = new Coordinate(0, 1);		break;
+			case 1: dir = new Coordinate(1, 0);		break;
+			case 2: dir = new Coordinate(1, -1);	break;
+			case 3: dir = new Coordinate(0, -1);	break;
+			case 4: dir = new Coordinate(-1, 0);	break;
+			case 5: dir = new Coordinate(-1, 1);	break;
+			default: dir = null;
+		}
+		solarSystem.reactToFlare(dir);
 	}
 	
 	/**

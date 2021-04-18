@@ -65,14 +65,33 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Meghívja az összes AsteroidField ReactToFlare() függvényét.
+	 * Meghívja azon AsteroidField-ek ReactToFlare() függvényét amelyeket eltalál a napkitörés.
 	 */
-	public void reactToFlare() {
-		// nem feltétlenül jó
+	public void reactToFlare(Coordinate d) {
+		Coordinate s = sun.getCo();
 		for (AsteroidField field : asteroidBelt) {
-			field.reactToFlare();
+			Coordinate f = field.getCo();
+			
+			if(d.getX() == 0) {
+				int b = (f.getY()-s.getY())/d.getY();
+				if(b > 0) {
+					field.reactToFlare();
+				}
+			}
+			else if(d.getX() == 0) {
+				int a = (f.getX()-s.getX())/d.getX();
+				if(a > 0) {
+					field.reactToFlare();
+				}
+			}
+			else {
+				int a = (f.getX()-s.getX())/d.getX();
+				int b = (f.getY()-s.getY())/d.getY();
+				if(a > 0 && a == b) {
+					field.reactToFlare();
+				}
+			}
 		}
-
 	}
 
 	

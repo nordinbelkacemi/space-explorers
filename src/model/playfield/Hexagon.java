@@ -9,5 +9,9 @@ public class Hexagon {
 	 * A hexagon pozícióját tárolja.
 	 */
 	protected Coordinate position;
-
+	
+	
+	public Coordinate getCo() {
+		return position;
+	}
 }

@@ -46,6 +46,10 @@ public class RobotAi implements Ai {
 		robots.add(r);
 	}
 	
+	public void remove(Robot r) {
+		robots.remove(r);
+	}
+	
 	public void configOut(PrintStream out) {
 		for (Robot r : robots) {
 			r.printToConfig(out);
