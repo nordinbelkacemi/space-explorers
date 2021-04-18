@@ -1,0 +1,33 @@
+Add config file:
+Choose settler: 1 2
+robot 1 move:
+0. field - 4 asteroids
+0. asteroid - layers: 2, core: iron
+1. asteroid - layers: 0, core: empty
+2. asteroid - layers: 0, core: empty
+3. asteroid - layers: 2, core: empty
+robot 2 move:
+0. field - 4 asteroids
+0. asteroid - layers: 2, core: iron
+1. asteroid - layers: 0, core: empty
+2. asteroid - layers: 0, core: empty
+3. asteroid - layers: 2, core: empty
+ufo 2 move:
+0. field - 4 asteroids
+0. asteroid - layers: 2, core: iron
+1. asteroid - layers: 0, core: empty
+2. asteroid - layers: 0, core: empty
+3. asteroid - layers: 2, core: empty
+ufo 2 move:
+0. field - 4 asteroids
+0. asteroid - layers: 2, core: iron
+1. asteroid - layers: 0, core: empty
+2. asteroid - layers: 0, core: empty
+3. asteroid - layers: 2, core: empty
+Solar flare happens? y/n
+Add direction:
+settler 2 died: 0. field 0. asteroid
+robot 2 died: 0. field 0. asteroid
+ufo 2 died: 0. field 0. asteroid
+teleportgate megkergült: 0. field
+Sun new position: -2 1

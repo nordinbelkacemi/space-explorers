@@ -2,6 +2,7 @@ package model.playfield;
 
 import java.io.PrintStream;
 
+import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.settler.Miner;
 import model.settler.SettlerTeam;
@@ -19,7 +20,7 @@ public class Ufo extends Traveler implements Miner{
 	private static UfoAi ai;
 	
 	public Ufo(Asteroid a) {
-		setPosition(a);
+		super(a);
 	}
 
 	/**

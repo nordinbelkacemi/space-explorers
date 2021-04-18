@@ -1,0 +1,11 @@
+dd config file:
+Choose settler: 1
+Your settler can:
+Move
+1. Field - 1 asteroid
+0. Asteroid - layers: 0, core: empty
+Choose settler: 1
+Your settler can:
+Move
+2. Field - 1 asteroid
+0. Asteroid - layers: 0, core: empty

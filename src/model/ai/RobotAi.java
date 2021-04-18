@@ -23,6 +23,7 @@ public class RobotAi implements Ai {
 	private Random ran = new Random();
 
 	public RobotAi() {
+		Robot.setAi(this);
 		robots = new ArrayList<>();
 	}
 	
