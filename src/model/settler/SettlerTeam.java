@@ -19,13 +19,12 @@ public class SettlerTeam {
 	
 	private List<AsteroidField> belt;
 
-	
 	public SettlerTeam(List<AsteroidField> b) {
 		Random r  = new Random();
 		settlers = new ArrayList<>();
 		belt = b;
 		for (int i = 0; i < 6; i++) {
-			settlers.add(new Settler(belt.get(r.nextInt(42)).getAsteroids().get(0),this));
+			settlers.add(new Settler(belt.get(r.nextInt(42)).getAsteroids().get(0), this));
 		}
 	}
 	
