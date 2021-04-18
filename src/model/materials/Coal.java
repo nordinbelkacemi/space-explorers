@@ -9,7 +9,9 @@ public class Coal extends Material {
      * @param s a kapott settler
      */
     @Override
-    public void store(Settler s) {}
+    public void store(Settler s) {
+    	s.addCoal(this);
+    }
     
     @Override
     public String toString() {
