@@ -31,8 +31,8 @@ public class Robot extends Traveler implements Buildable, Driller {
 		ai.addRobot(this);
 	}
 	
-	public static void setAi(RobotAi a) {
-		ai = a;
+	public static void setAi(RobotAi rai) {
+		ai = rai;
 	}
 
 	@Override
