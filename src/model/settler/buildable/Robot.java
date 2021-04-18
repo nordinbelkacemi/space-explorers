@@ -3,6 +3,7 @@ package model.settler.buildable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.ai.RobotAi;
 import model.playfield.Asteroid;
@@ -21,6 +22,8 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	private RobotAi ai;
 	
+	private Random r = new Random();
+	
 	public Robot(Asteroid a) {
 		super(a);
 		ai = new RobotAi();
@@ -37,11 +40,11 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	@Override
 	public void reactToExplosion() {
-		System.out.println("Robot.reactToExplosion()");
 		List<AsteroidField> neighbourFields = getNeighbours();
-		List<Asteroid> availableAsteroids = neighbourFields.get(0).getAsteroids();
-		Asteroid a2 = availableAsteroids.get(0);
-		this.setPosition(a2);
+		AsteroidField randomField = neighbourFields.get(r.nextInt(neighbourFields.size()));
+		List<Asteroid> availableAsteroids = randomField.getAsteroids();
+		Asteroid randomAsteroid = availableAsteroids.get(r.nextInt(availableAsteroids.size()));
+		this.setPosition(randomAsteroid);
 	}
 	
 	/**
@@ -51,16 +54,15 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	@Override
 	public void build(Settler s) {
-		System.out.println("Robot.build()");
 		s.getIron();
 		s.getCoal();
 		s.getUranium();
-		setPosition(asteroid);
+		this.setPosition(s.getAsteroid());
 		ai.addRobot(this);
 	}
 
 	@Override
 	public void drill() {
-		asteroid.removeLayer();
+		this.asteroid.removeLayer();
 	}
 }

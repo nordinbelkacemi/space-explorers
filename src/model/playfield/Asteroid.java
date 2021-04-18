@@ -110,6 +110,14 @@ public class Asteroid {
 		field = af;
 	}
 	
+	/** 
+	 * Ez nem egy x y koordináta, hanem indexek
+	 * @return x: a field indexe y: az aszteroida indexe a fieldben
+	 */
+	public Coordinate getIndexes() {
+		return field.getIndexes(this);
+	}
+	
 	public void printToConfig(PrintStream out) {
 		if(material != null)
 			out.print(material.toString());

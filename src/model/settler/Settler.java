@@ -1,5 +1,6 @@
 package model.settler;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,15 +41,23 @@ public class Settler extends Traveler implements Miner,Driller{
     private static int capacity = 10;
 
     /** A telepes teleportkapu-párja. Ha nem épített kapupárt akkor null. */
-    private TeleportGatePair teleportGatePair;
+    private List<TeleportGatePair> teleportGatePairs;
 
     /** A telepes csapata. */
     private SettlerTeam team;
 
     
     //////////////////////////////////////// ctors
-    public Settler(Asteroid a) {
-        super(a);
+    public Settler(Asteroid a,SettlerTeam st) {
+        asteroid = a;
+        uraniumStorage = new ArrayList<>();
+        coalStorage = new ArrayList<>();
+        iceStorage = new ArrayList<>();
+        ironStorage = new ArrayList<>();
+        team = st;
+        materialCount = 0;
+        teleportGatePairs = new ArrayList<>();
+        a.addTraveler(this);
     }
 
     public Settler() {}
@@ -65,7 +74,6 @@ public class Settler extends Traveler implements Miner,Driller{
      *  A bányászást megvalósító metódus.
      */
     public void mine() {
-
         System.out.println("Settler.mine()");
         Material m = asteroid.removeMaterial();
         m.store(this);
@@ -88,8 +96,6 @@ public class Settler extends Traveler implements Miner,Driller{
      */
     public void storeTeleportGatePair(TeleportGatePair tgp) {
 
-		System.out.println("Settler.storeTeleportGatePair()");
-    	teleportGatePair = tgp;
 
     }
     
@@ -106,7 +112,7 @@ public class Settler extends Traveler implements Miner,Driller{
      * Elhelyez egy teleportkaput azon az AsteroidField-en, amelyen a telepes elhelyezkedik.
      */
     public void placeTeleportGate() {
-
+/*
 		System.out.println("Settler.placeTeleportGate()");
     	TeleportGate tg = teleportGatePair.removeTeleportGate();
     	tg.setAsteroidField(this.asteroid.getAsteroidField());
@@ -118,7 +124,7 @@ public class Settler extends Traveler implements Miner,Driller{
     		af.addNeighbour(firstAf);
     		firstAf.addNeighbour(af);
     		removeTeleportGatePair();
-    	}
+    	}*/
 
     }
 
@@ -189,8 +195,13 @@ public class Settler extends Traveler implements Miner,Driller{
     
     @Override
     public void reactToExplosion() {
-
-        System.out.println("Settler.reactToExplosion()");
         die();
     }
+    
+    public void printToConfig(PrintStream out) {
+		out.print(asteroid.getIndexes().toString());
+    	
+    	
+    	// material cuccokat majd később
+	}
 }
