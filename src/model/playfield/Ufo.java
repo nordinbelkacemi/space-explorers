@@ -14,10 +14,13 @@ public class Ufo extends Traveler implements Miner{
 	 * Az ufot irányító központi vezető.
 	 */
 	private UfoAi ai;
-	
-	public void Mine() {
-	
+
+	@Override
+	public void mine() {
+		// TODO Auto-generated method stub
 		
 	}
+	
+
 
 }

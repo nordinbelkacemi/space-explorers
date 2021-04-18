@@ -1,16 +1,26 @@
 package model.playfield;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import model.materials.Coal;
+import model.materials.Ice;
+import model.materials.Iron;
+import model.materials.Uranium;
 import model.settler.buildable.TeleportGate;
 
 /**
  * A játéktér alapeleme; körben elhelyezve alkotják az aszteroidaövet, felelős a szomszédjaiért.
  * Az aszteroidákat tárolja.
  */
-public class AsteroidField {
-
+public class AsteroidField extends Hexagon{
+	
+	///////////////////////////////////////// atribuuuts
+	
+	Random r  = new Random();
+	
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
 
@@ -23,12 +33,51 @@ public class AsteroidField {
 	/**A megkergült kapukat tartalmazó osztály. */
 	private static MegkergultGates megkergultGates;
 
+	//////////////////////////////////////// ctors
 	public AsteroidField() {
 		asteroids = new ArrayList<>();
 		neighbours = new ArrayList<>();
 		teleportGates = new ArrayList<>();
 	}
+	
+	public AsteroidField(Coordinate c) {
+		position = c;
+		asteroids = createAsteroids();
+		neighbours = new ArrayList<>();
+		teleportGates = new ArrayList<>();
+	}
 
+	private List<Asteroid> createAsteroids() {
+		ArrayList<Asteroid> field = new ArrayList<>();
+		
+		int emptycount = r.nextInt(2) + 1; // egy vagy kettő üres 
+		for (int i = 0; i < emptycount; i++) {
+			field.add(new Asteroid(r.nextInt(5),this));
+		}
+		
+		int ironcount = r.nextInt(3); // 0-2 vas 
+		for (int i = 0; i < ironcount; i++) {
+			field.add(new Asteroid(new Iron(),r.nextInt(5),this));
+		}
+		
+		int icecount = r.nextInt(2); // 0-2 jég 
+		for (int i = 0; i < icecount; i++) {
+			field.add(new Asteroid(new Ice(),r.nextInt(5),this));
+		}
+		
+		int coalcount = r.nextInt(2); // 0-2 szén 
+		for (int i = 0; i < coalcount; i++) {
+			field.add(new Asteroid(new Coal(),r.nextInt(5),this));
+		}
+		
+		int uraniumcount = r.nextInt(1); // 0-1 urán 
+		for (int i = 0; i < uraniumcount; i++) {
+			field.add(new Asteroid(new Uranium(),r.nextInt(5),this));
+		}		
+		return field;
+	}
+	
+	///////////////////////////////////////// függvények
 	/**
 	 * Napvihar esetén hívódik meg, és minden aszteroidájára meghívja
 	 * az Asteroid osztály ReactToFlare() függvényét.
@@ -78,5 +127,12 @@ public class AsteroidField {
 	 * @param a új aszteroida
 	 */
 	public void AddAsteroid(Asteroid a) {
+	}
+	
+	public void printToConfig(PrintStream out) {
+		for (Asteroid a : asteroids) {
+			out.print(',');
+			a.printToConfig(out);
+		}
 	}
 }

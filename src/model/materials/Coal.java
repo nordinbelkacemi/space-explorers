@@ -10,4 +10,9 @@ public class Coal extends Material {
      */
     @Override
     public void store(Settler s) {}
+    
+    @Override
+    public String toString() {
+    	return "coal ";
+    }
 }

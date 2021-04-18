@@ -12,5 +12,10 @@ public class Iron extends Material {
     public void store(Settler s) {
         s.addIron(this);
     }
+    
+    @Override
+    public String toString() {
+        return "iron ";
+    }
 
 }

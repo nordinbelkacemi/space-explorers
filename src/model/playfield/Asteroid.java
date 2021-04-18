@@ -1,5 +1,6 @@
 package model.playfield;
 import java.util.List;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import model.materials.Material;
@@ -10,7 +11,8 @@ import model.settler.Traveler;
  * A felelőssége még, hogy felrobbanjon ha radioaktív a belseje és napközelben van, vagy elpárologtassa a jeget, ha az van benne.
  */
 public class Asteroid {
-
+	////////////////////////////////////////// atributumok
+	
 	/**Az aszteroida belsejében esetlegesen elhelyezkedő nyersanyag */
 	private Material material;
 
@@ -23,18 +25,27 @@ public class Asteroid {
 	/**Az aszteroidán tartózkodó travelereket (robotok vagy telepesek) tárolja */
 	private List<Traveler> travelers = new ArrayList<>();
 
-	public Asteroid(Material m) {
+	
+	////////////////////////////////////////// ctors
+	
+	/** Nem üres asteroida */
+	public Asteroid(Material m, int t, AsteroidField f) {
 		material = m;
-	}
-
-	public Asteroid() {
+		thickness = t;
+		field = f;
 		travelers = new ArrayList<Traveler>();
 	}
 
-	public Asteroid(int t) {
+	/** Üres asteroida */
+	public Asteroid(int t, AsteroidField f) {
+		material = null;
 		thickness = t;
+		field = f;
+		travelers = new ArrayList<Traveler>();
 	}
 
+	//////////////////////////////////////////// függvények
+	
 	/**
 	 * Aszteroidákat generál
 	 * @return a generált aszteroidák
@@ -105,5 +116,13 @@ public class Asteroid {
 
 	public void setAsteroidField(AsteroidField af) {
 		field = af;
+	}
+	
+	public void printToConfig(PrintStream out) {
+		if(material != null)
+			out.print(material.toString());
+		else
+			out.print("empty ");
+		out.print(thickness);
 	}
 }

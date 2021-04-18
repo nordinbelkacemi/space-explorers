@@ -1,8 +1,5 @@
 package model.playfield;
 
-import org.graalvm.compiler.nodes.InliningLog.UpdateScope;
-
-import controller.Program;
 
 /**
  * Tőle függ, hogy melyik aszteroidamezők vannak napközelben,

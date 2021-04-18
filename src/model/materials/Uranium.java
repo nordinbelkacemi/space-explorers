@@ -13,7 +13,7 @@ public class Uranium extends Material {
 	static private int instability = 3;
 	
 	/** Egy konkrét urán objektum napfényérintéseinek számát tárolja. */
-	private int exposureCount;
+	private int exposureCount = 0;
 	
 	/**Meghívja az aszteroida Explode() függvényét
 	 * @param a az érintett aszteroida
@@ -28,4 +28,9 @@ public class Uranium extends Material {
 	 */
 	@Override
 	public void store(Settler s) {}
+	
+    @Override
+    public String toString() {
+        return "uranium " + exposureCount + " ";
+    }
 }

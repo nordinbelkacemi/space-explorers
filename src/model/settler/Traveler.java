@@ -1,8 +1,8 @@
 package model.settler;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import controller.Program;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
@@ -36,23 +36,21 @@ public class Traveler {
 	 * @param a Az aszteroida amire átrepul a telepes.
 	 */
 	public void move(Asteroid a) {
-		Program.indent++;
-		Program.print();
+
 		System.out.println(this.toString() + ".move()");
 		asteroid.removeTraveler(this);
 		setPosition(a);
-		Program.indent--;
+
 	}
 	
 	/**
 	 * Meghívja az asteroid attribútum által referált aszteroidán a RemoveLayer()-t.
 	 */
 	public void drill() {
-		Program.indent++;
-		Program.print();
+
 		System.out.println(this.toString() + ".drill()");
 		asteroid.removeLayer();
-		Program.indent--;
+
 	}
 	
 	/**
@@ -65,11 +63,10 @@ public class Traveler {
 	 *  Megöli a telepest vagy robotot, ha az nem bújt el egy üreges aszteroida magjában.
 	 */
 	public void reactToFlare() {
-		Program.indent++;
-		Program.print();
+
 		System.out.println(this.toString() + ".reactToFlare");
 		die();
-		Program.indent--;
+
 	}
 
 	/**
@@ -77,12 +74,11 @@ public class Traveler {
 	 * és annak szomszédait tartalmazó listát.
 	 * @return A traveller
 	 */
-	public ArrayList<AsteroidField> getNeighbours() {
-		Program.indent++;
-		Program.print();
+	public List<AsteroidField> getNeighbours() {
+
 		System.out.println(this.toString() + ".getNeighbours()");
-		ArrayList<AsteroidField> neighbours = asteroid.getNeighbours();
-		Program.indent--;
+		List<AsteroidField> neighbours = asteroid.getNeighbours();
+
 		return neighbours;
 	}
 
@@ -91,21 +87,16 @@ public class Traveler {
 	 * @param a
 	 */
 	public void setPosition(Asteroid a) {
-		Program.indent++;
-		Program.print();
 		System.out.println(this.toString() + ".setPosition()");
 		asteroid = a;
 		a.addTraveler(this);
-		Program.indent--;
 	}
 
 	/**
 	 * Eltávolítja az utazót mindent tárolójából.
 	 */
 	protected void die() {
-		Program.indent++;
-		Program.print();
 		System.out.println(this.toString() + ".die()");
-		Program.indent--;
+
 	};
 }
