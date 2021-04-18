@@ -40,6 +40,10 @@ public class TeleportGate {
 		otherGate = tg;
 	}
 	
+	/**
+	 * Visszaadja a teleportkapu párját.
+	 * @return A teleportkapu párja.
+	 */
 	public TeleportGate getOtherGate() {
 		return otherGate;
 	}
