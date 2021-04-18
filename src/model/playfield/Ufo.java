@@ -19,8 +19,7 @@ public class Ufo extends Traveler implements Miner{
 	private static UfoAi ai;
 	
 	public Ufo(Asteroid a) {
-		asteroid = a;
-		a.addTraveler(this);
+		setPosition(a);
 	}
 
 	@Override
