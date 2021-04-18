@@ -1,6 +1,7 @@
 package model.settler.buildable;
 
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -64,5 +65,9 @@ public class Robot extends Traveler implements Buildable, Driller {
 	@Override
 	public void drill() {
 		this.asteroid.removeLayer();
+	}
+	
+	public void printToConfig(PrintStream out) {
+		out.print(asteroid.getIndexes().toString());
 	}
 }
