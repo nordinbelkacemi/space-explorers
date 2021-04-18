@@ -1,5 +1,7 @@
 package console;
+import java.util.ArrayList;
 import java.util.Scanner;
+
 import controllers.Game;
 
 public class Console {
@@ -29,6 +31,8 @@ public class Console {
                 break;
             }
         }
+
+        sc.close();
     }
 
     private void handlePlayerTurn() {
@@ -37,7 +41,7 @@ public class Console {
         while (true) {
             try {
                 handleSettlerTurn();
-            } catch (Exception e) {
+            } catch (Exception nextTurnException) {
                 break;
             }
         }
@@ -46,19 +50,55 @@ public class Console {
     private void handleSettlerTurn() throws Exception {
         Scanner sc = new Scanner(System.in);
         String input;
-
-        while (!(input = sc.nextLine()).equals("exit")) {
-            switch(input) {
-                case "next turn":
-                    throw new Exception();  
-                default:
+        
+        printChoosableSettlers();
+        
+        /* settler valasztasa */
+        input = sc.nextLine();
+        System.out.println("just read this: " + input);
+        boolean correctInput = false;
+        while (!correctInput) {
+            switch (input) {
+            case "next turn":
+                sc.close();
+                correctInput = true;
+                throw new Exception();
+            case "exit":
+                System.exit(1);
+            default:
+                try {
                     game.chooseSettler(Integer.parseInt(input));
+                    correctInput = true;
+                } catch (Exception wrongNumberException) {
+                    System.out.println("invalid command!");
+                }
+                break;
+            }
+        }
+
+        printAvailableActions();
+
+        /* lepes */
+        /* TODO */
+
+        game.endSettlerTurn(Integer.valueOf(input));
+        sc.close();
+    }
+
+    private void printChoosableSettlers() {
+        for (Integer i : game.getChoosableSettlers()) {
+            if (i != null) {
+                System.out.println(i.toString() + ". settler");
             }
         }
     }
 
-
-
+    private void printAvailableActions() {
+        ArrayList<String> actions = game.getActions();
+        for (int i = 0; i < actions.size(); i++) {
+            System.out.println(String.valueOf(i) + ". " + actions.get(i));
+        }
+    }
 
 
 

@@ -35,7 +35,7 @@ public class SettlerTeam {
 	 * @return A sorszámnak megfelelő telepes
 	 */
 	public Settler chooseSettler(int n) {
-		return settlers.get(n);
+		return settlers.get(n - 1);
 	}
 	
 	/**
