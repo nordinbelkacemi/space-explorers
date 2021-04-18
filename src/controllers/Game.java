@@ -1,5 +1,7 @@
 package controllers;
 
+
+import java.io.PrintStream;
 import java.util.List;
 
 import console.Console;
@@ -34,11 +36,27 @@ public class Game {
 		// playfield
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
-		// ss.configOut(System.out);
 		
 		// settlers
-		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
-		settlerTeam.configOut(System.out);
+		settlerTeam = new SettlerTeam(ss.getBelt()); 
+		// robot
+		robotAi = new RobotAi();
+		// ufo
+		ufoAi = new UfoAi(ss.getBelt());
+		// megkergült
+		megkergultGates = new MegkergultGates();
+		
+		configOut(System.out);
+	}
+	
+	public void configOut(PrintStream out) {
+		ss.configOut(out);
+		System.out.println();
+		st.configOut(out);
+		System.out.println();
+		rai.configOut(out);
+		System.out.println();
+		uai.configOut(out);
 	}
 
 	/** A játékot elindító függvény */
