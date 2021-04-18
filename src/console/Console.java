@@ -47,15 +47,39 @@ public class Console {
         }
     }
 
-    private void handleSettlerTurn() throws Exception {
-        String input = new String();
-        
+    private void handleSettlerTurn() throws Exception { 
         printChoosableSettlers();
         
+        Integer nSettler = 0;
         /* settler valasztasa */
-        
+        try {
+            nSettler = chooseSettler();
+        } catch (Exception wrongNumberException) {
+            throw new Exception();
+        }
+
+        printAvailableActions();
+
+        /* lepes */
+        // performAction();
+
+        game.endSettlerTurn(Integer.valueOf(nSettler));
+    }
+
+    private void printChoosableSettlers() {
+        for (Integer i : game.getChoosableSettlers()) {
+            if (i != null) {
+                System.out.println(i.toString() + ". settler");
+            }
+        }
+    }
+
+    private Integer chooseSettler() throws Exception {
+        String input = new String();
+
         boolean correctInput = false;
-        while (!correctInput && !(input = sc.nextLine()).equals(null)) {
+        while (!correctInput) {
+            input = sc.nextLine();
             switch (input) {
             case "next turn":
                 correctInput = true;
@@ -73,20 +97,7 @@ public class Console {
             }
         }
 
-        printAvailableActions();
-
-        /* lepes */
-        
-
-        game.endSettlerTurn(Integer.valueOf(input));
-    }
-
-    private void printChoosableSettlers() {
-        for (Integer i : game.getChoosableSettlers()) {
-            if (i != null) {
-                System.out.println(i.toString() + ". settler");
-            }
-        }
+        return Integer.valueOf(input);
     }
 
     private void printAvailableActions() {
@@ -96,6 +107,18 @@ public class Console {
         }
     }
 
+    private void performAction() throws Exception {
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+                /* TODO */
+        
+            }
+        }
+    }
 
 
 
