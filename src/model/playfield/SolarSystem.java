@@ -1,8 +1,11 @@
 package model.playfield;
 import java.util.List;
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
-import controller.Program;
 
 /**
  * A játéktér maga. A játékelemek közti kommunikációt valósítja meg,
@@ -10,6 +13,18 @@ import controller.Program;
  */
 public class SolarSystem {
 
+	private Coordinate[] cos = {
+									new Coordinate(-4, 4),new Coordinate(-3, 4),new Coordinate(-2, 4),new Coordinate(-1, 4),new Coordinate(0, 4),
+							new Coordinate(-4, 3),new Coordinate(-3, 3),new Coordinate(-2, 3),new Coordinate(-1, 3),new Coordinate(0, 3),new Coordinate(1, 3),
+					new Coordinate(-4, 2),new Coordinate(-3, 2),															new Coordinate(1, 2),new Coordinate(2, 2),
+			new Coordinate(-4, 1),new Coordinate(-3, 1),																			new Coordinate(2, 1),new Coordinate(3, 1),
+	new Coordinate(-4, 0),new Coordinate(-3, 0),																							new Coordinate(3, 1),new Coordinate(4, 0),
+			new Coordinate(-3, -1),new Coordinate(-2, -1),																			new Coordinate(3, -1),new Coordinate(4, -1),
+					new Coordinate(-2, -2),new Coordinate(-1, -2),															new Coordinate(3, -2),new Coordinate(4, -2),
+							new Coordinate(-1, -3),new Coordinate(0, -3),new Coordinate(1, -3),new Coordinate(2, -3),new Coordinate(3, -3),new Coordinate(4, -3),
+									new Coordinate(0, -4),new Coordinate(1, -4),new Coordinate(2, -4),new Coordinate(3, -4),new Coordinate(4, -4)
+	};
+	
 	/**
 	 * A napot tárolja.
 	 */
@@ -20,8 +35,9 @@ public class SolarSystem {
 	 */
 	private List<AsteroidField> asteroidBelt;
 	
-	public SolarSystem() {
-		asteroidBelt = new ArrayList<>();
+	public SolarSystem(Sun s) {
+		asteroidBelt = createBelt();
+		sun = s;
 	}
 	
 	/**
@@ -29,7 +45,11 @@ public class SolarSystem {
 	 * @return
 	 */
 	private List<AsteroidField> createBelt() {
-		return null;
+		ArrayList<AsteroidField> belt = new ArrayList<>();
+		for (int i = 0; i < cos.length; i++) {
+			belt.add(new AsteroidField(cos[i]));
+		}		
+		return belt;
 	}
 	
 	/**
@@ -76,5 +96,15 @@ public class SolarSystem {
 	 */
 	public void setSun(Sun s) {
 		sun = s;
+	}
+	
+	public void configOut(PrintStream out) {
+		int i = 0;
+		for (AsteroidField f : asteroidBelt) {
+			out.print(i);
+			f.printToConfig(out);
+			out.println();
+			i++;
+		}
 	}
 }

@@ -8,6 +8,6 @@ public class Hexagon {
 	/**
 	 * A hexagon pozícióját tárolja.
 	 */
-	private Coordinate position;
+	protected Coordinate position;
 
 }

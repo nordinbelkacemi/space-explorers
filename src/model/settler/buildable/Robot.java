@@ -60,7 +60,7 @@ public class Robot extends Traveler implements Buildable,Driller {
 	}
 
 	@Override
-	public void Drill() {
+	public void drill() {
 		
 		
 	}
