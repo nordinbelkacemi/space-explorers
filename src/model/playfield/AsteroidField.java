@@ -137,10 +137,18 @@ public class AsteroidField extends Hexagon {
 	 * Felvesz egy új aszteroidát a tárolóba.
 	 * @param a új aszteroida
 	 */
-	public void AddAsteroid(Asteroid a) {
+	public void addAsteroid(Asteroid a) {
 		asteroids.add(a);
 	}
 	
+	/**
+	 * Eltávolítunk egy aszteroidát az aszteroidamezőből.
+	 * @param a A kitörlendő aszteroida
+	 */
+	public void removeAsteroid(Asteroid a) {
+		asteroids.remove(a);
+	}
+
 	public static void setBelt(List<AsteroidField> b) {
 		belt = b;
 	}

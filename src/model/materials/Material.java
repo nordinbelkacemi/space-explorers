@@ -18,7 +18,7 @@ public abstract class Material {
 
 	/**
 	 * Megfelelően reagál a naphoz közeli létre.
-	 * @param a Az az aszteroida akinek továbbítja a reakcióját.
+	 * @param a Az aszteroida amiben a nyersanyag elhelyezkedik és akinek továbbítja a reakcióját.
      */
 	public void reactToSun(Asteroid a) {}
 }

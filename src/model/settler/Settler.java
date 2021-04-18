@@ -20,7 +20,7 @@ import model.playfield.AsteroidField;
  * Felel az eszköztárában szereplő eszközökért és anyagokért (visszatevés, építés),
  * a műveleteiért (mozgás, fúrás, bányászat).
  */
-public class Settler extends Traveler implements Miner,Driller{
+public class Settler extends Traveler implements Miner, Driller {
 
 	//////////////////////////////////////// attributumok
 	/** Az eszköztárában lévő Iron típusú nyersanyagok. */
@@ -48,6 +48,7 @@ public class Settler extends Traveler implements Miner,Driller{
 
     
     //////////////////////////////////////// ctors
+
     public Settler(Asteroid a) {
         asteroid = a;
         uraniumStorage = new ArrayList<>();
@@ -61,10 +62,8 @@ public class Settler extends Traveler implements Miner,Driller{
 
     public Settler() {}
 
-    
-    
     //////////////////////////////////////// függvények
-	  @Override
+	@Override
     public String toString() {
         return "Settler";
     }
@@ -73,9 +72,15 @@ public class Settler extends Traveler implements Miner,Driller{
      *  A bányászást megvalósító metódus.
      */
     public void mine() {
-        System.out.println("Settler.mine()");
         Material m = asteroid.removeMaterial();
         m.store(this);
+    }
+    
+    /**
+     *  A fúrást megvalósító metódus.
+     */
+    public void drill() {
+        asteroid.removeLayer();
     }
 
     /**
@@ -84,72 +89,66 @@ public class Settler extends Traveler implements Miner,Driller{
      * @param b
      */
     public void build(Buildable b) {
-
-    	System.out.println("Settler.build()");
     	b.build(this);
-
     }
 
     /**
      * Eltárolja a paraméterben megadott kapupárt.
      */
     public void storeTeleportGatePair(TeleportGatePair tgp) {
-
-
+    	teleportGatePairs.add(tgp);
     }
     
     /**
      * Kitörli a teleportGatePair-ben tárolt kapupárt.
      */
-    public void removeTeleportGatePair() {
-
-		System.out.println("Settler.removeTeleportGatePair()");
-
+    public void removeTeleportGatePair(int index) {
+    	teleportGatePairs.remove(index);
     }
 
     /**
      * Elhelyez egy teleportkaput azon az AsteroidField-en, amelyen a telepes elhelyezkedik.
      */
-    public void placeTeleportGate() {
-/*
-		System.out.println("Settler.placeTeleportGate()");
-    	TeleportGate tg = teleportGatePair.removeTeleportGate();
-    	tg.setAsteroidField(this.asteroid.getAsteroidField());
+    public void placeTeleportGate(int index) {
+    	TeleportGate tg = teleportGatePairs.get(index).removeTeleportGate();
     	AsteroidField af = this.asteroid.getAsteroidField();
+    	tg.setAsteroidField(af);
     	af.addTeleportGate(tg);
-    	if (teleportGatePair.getGates().size() == 0) {
+    	if (teleportGatePairs.get(index).getGates().size() == 0) {
     		TeleportGate firstTg = tg.getOtherGate();
     		AsteroidField firstAf = firstTg.getAsteroidField();
     		af.addNeighbour(firstAf);
     		firstAf.addNeighbour(af);
-    		removeTeleportGatePair();
-    	}*/
-
+    		removeTeleportGatePair(index);
+    	}
     }
 
     /** Hozzáadja a paraméterként kapott vasat a telepes ironStorage tárolójához, valamint eggyel növeli a materialCount-ot.*/
-    public void addIron(Iron i) {}
+    public void addIron(Iron i) {
+    	ironStorage.add(i);
+    }
 
     /** Hozzáadja a paraméterként kapott jeget a telepes iceStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
     public void addIce(Ice i) {
-
-        System.out.println("Settler.addIce()");
-
+    	iceStorage.add(i);
     }
 
     /** Hozzáadja a paraméterként kapott uránt a telepes uraniumStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
-    public void addUranium(Uranium u) {}
+    public void addUranium(Uranium u) {
+    	uraniumStorage.add(u);
+    }
 
     /** Hozzáadja a paraméterként kapott szenet a telepes coalStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
-    public void addCoal(Coal c) {}
+    public void addCoal(Coal c) {
+    	coalStorage.add(c);
+    }
 
     /**
      * Eltávolít egy vasat a tárolójából és visszaadja.
      * @return egy Iron objektum
      */
     public Iron getIron() { 
-
-        return null;
+    	return ironStorage.remove(0);
     }
   
     /**
@@ -157,44 +156,49 @@ public class Settler extends Traveler implements Miner,Driller{
      * @return egy Uranium objektum
      */
     public Uranium getUranium() {
-
-        return null;
+    	return uraniumStorage.remove(0);
     }
 
     /**
      * Eltávolít egy jeget a tárolójából és visszaadja.
      * @return egy Ice objektum
      */
-    public Ice getIce() { return null; }
+    public Ice getIce() {
+    	return iceStorage.remove(0);
+    }
 
     /**
      * Eltávolít egy szenet a tárolójából és visszaadja.
      * @return egy Coal objektum
      */
     public Coal getCoal() {
-
-        return null;
+    	return coalStorage.remove(0);
     }
 
     /**  Visszarak egy egységnyi vasat annak az aszteroidának a magjába, amin éppen tartózkodik. */
     public void putIronBack() {
-
         asteroid.addMaterial(getIron());
-
     }
 
     /**  Visszarak egy egységnyi uránt annak az aszteroidának a magjába, amin éppen tartózkodik. */
-    public void putUraniumBack() {}
+    public void putUraniumBack() {
+    	asteroid.addMaterial(getUranium());
+    }
 
     /**  Visszarak egy egységnyi jeget annak az aszteroidának a magjába, amin éppen tartózkodik. */
-    public void putIceBack() {}
+    public void putIceBack() {
+    	asteroid.addMaterial(getIce());
+    }
 
     /**  Visszarak egy egységnyi szenet annak az aszteroidának a magjába, amin éppen tartózkodik. */
-    public void putCoalBack() {}
+    public void putCoalBack() {
+    	asteroid.addMaterial(getCoal());
+    }
     
     @Override
     public void reactToExplosion() {
-        die();
+        super.reactToExplosion();
+        team.removeSettler(this);
     }
     
     public static void setTeam(SettlerTeam st) {

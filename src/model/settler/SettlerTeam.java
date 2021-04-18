@@ -18,7 +18,7 @@ public class SettlerTeam {
 	private List<Settler> settlers;
 	
 	private List<AsteroidField> belt;
-	
+
 	public SettlerTeam(List<AsteroidField> b) {
 		Settler.setTeam(this);
 		Random r  = new Random();
@@ -35,7 +35,7 @@ public class SettlerTeam {
 	 * @return A sorszámnak megfelelő telepes
 	 */
 	public Settler chooseSettler(int n) {
-		return null;
+		return settlers.get(n);
 	}
 	
 	/**
