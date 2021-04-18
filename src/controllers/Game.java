@@ -152,6 +152,6 @@ public class Game {
 	}
 
 	public void endSettlerTurn(int n) {
-		choosableSettlers.set(n, null);
+		choosableSettlers.set(n - 1, null);
 	}
 }

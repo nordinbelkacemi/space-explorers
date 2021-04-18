@@ -6,9 +6,9 @@ import controllers.Game;
 
 public class Console {
     private Game game;
+    private Scanner sc = new Scanner(System.in);
 
     public void start() {
-        Scanner sc = new Scanner(System.in);
         String input;
 
         System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
@@ -48,19 +48,16 @@ public class Console {
     }
 
     private void handleSettlerTurn() throws Exception {
-        Scanner sc = new Scanner(System.in);
-        String input;
+        String input = new String();
         
         printChoosableSettlers();
         
         /* settler valasztasa */
-        input = sc.nextLine();
-        System.out.println("just read this: " + input);
+        
         boolean correctInput = false;
-        while (!correctInput) {
+        while (!correctInput && !(input = sc.nextLine()).equals(null)) {
             switch (input) {
             case "next turn":
-                sc.close();
                 correctInput = true;
                 throw new Exception();
             case "exit":
@@ -79,10 +76,9 @@ public class Console {
         printAvailableActions();
 
         /* lepes */
-        /* TODO */
+        
 
         game.endSettlerTurn(Integer.valueOf(input));
-        sc.close();
     }
 
     private void printChoosableSettlers() {
