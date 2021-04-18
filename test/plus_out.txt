@@ -1,0 +1,44 @@
+Add config file:
+Choose settler: 1
+Your settler can:
+move
+mine
+robot 1 move:
+0. field - 1 asteroids
+1. field - 1 asteroids
+2. field - 1 asteroids
+0. asteroid - layers: 0, core: empty
+Solar flare happens? y/n 
+Sun new position: 1 1
+Choose settler: 1  
+Your settler can: 
+move
+putback    uranium
+0. field - 1 asteroids
+1. field - 1 asteroids
+2. field - 1 asteroids
+0. asteroid - layers: 0, core: empty
+robot 1 move:                
+0. field - 1 asteroids
+1. field - 1 asteroids
+2. field - 1 asteroids     
+0. asteroid - layers: 0, core: empty
+Solar flare happens? y/n
+Sun new position: 0 2
+Choose settler: 1 
+Your settler can:
+move
+putback    uranium    
+robot 1 move:                
+0. field - 1 asteroids
+1. field - 1 asteroids
+2. field - 1 asteroids
+0. asteroid - layers: 0, core: empty
+Solar flare happens? y/n
+2. field 0. asteroid exploded
+settler 1 died: 2. field 0. asteroid
+robot 1 fly:                
+1. field - 1 asteroids
+2. field - 1 asteroids    
+0. asteroid - layers: 6, core: ?        
+Sun new position: -1 2

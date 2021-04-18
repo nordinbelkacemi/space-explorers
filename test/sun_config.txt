@@ -1,0 +1,14 @@
+0,iron 2,empty 0,empty 0, empty 2
+
+-1 2
+
+0 0
+0 1
+
+0 2
+0 2
+
+0 3
+0 3
+
+field 0, settler 1

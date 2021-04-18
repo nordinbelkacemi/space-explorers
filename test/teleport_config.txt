@@ -1,0 +1,9 @@
+0, empty 0
+41, empty 0
+
+
+41 0
+
+
+
+field 0, settler 0

@@ -102,7 +102,7 @@ public class Asteroid {
 	 * Visszaad egy, az aszteroidához tartozó AsteroidFieldet és annak szomszédait tartalmazó listát
 	 * @return a szomszédok listája
 	 */
-	public List<AsteroidField> getNeighbours() {
+	public ArrayList<AsteroidField> getNeighbours() {
 		return field.getNeighbours();
 	}
 

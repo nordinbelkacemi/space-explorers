@@ -1,0 +1,18 @@
+Add config file:
+Choose settler: 1
+ufo 1 move:
+0. field - 3 asteroids
+0. asteroid - layers: 0, core: coal
+1. asteroid - layers: 0, core: iron
+2. asteroid - layers: 2, core: empty
+Choose settler: 1
+Choose settler: 1
+0. field - 3 asteroids
+0. asteroid - layers: 0, core: empty
+1. asteroid - layers: 0, core: iron
+2. asteroid - layers: 2, core: empty
+Choose settler: 1
+Your settler can:
+move
+drill
+Choose settler: 1

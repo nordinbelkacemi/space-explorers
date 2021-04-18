@@ -1,12 +1,14 @@
 package console;
+import java.util.ArrayList;
 import java.util.Scanner;
+
 import controllers.Game;
 
 public class Console {
     private Game game;
+    private Scanner sc = new Scanner(System.in);
 
     public void start() {
-        Scanner sc = new Scanner(System.in);
         String input;
 
         System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
@@ -29,6 +31,8 @@ public class Console {
                 break;
             }
         }
+
+        sc.close();
     }
 
     private void handlePlayerTurn() {
@@ -37,29 +41,84 @@ public class Console {
         while (true) {
             try {
                 handleSettlerTurn();
-            } catch (Exception e) {
+            } catch (Exception nextTurnException) {
                 break;
             }
         }
     }
 
-    private void handleSettlerTurn() throws Exception {
-        Scanner sc = new Scanner(System.in);
-        String input;
+    private void handleSettlerTurn() throws Exception { 
+        printChoosableSettlers();
+        
+        Integer nSettler = 0;
+        /* settler valasztasa */
+        try {
+            nSettler = chooseSettler();
+        } catch (Exception wrongNumberException) {
+            throw new Exception();
+        }
 
-        while (!(input = sc.nextLine()).equals("exit")) {
-            switch(input) {
-                case "next turn":
-                    throw new Exception();  
-                default:
-                    game.chooseSettler(Integer.parseInt(input));
+        printAvailableActions();
+
+        /* lepes */
+        // performAction();
+
+        game.endSettlerTurn(Integer.valueOf(nSettler));
+    }
+
+    private void printChoosableSettlers() {
+        for (Integer i : game.getChoosableSettlers()) {
+            if (i != null) {
+                System.out.println(i.toString() + ". settler");
             }
         }
     }
 
+    private Integer chooseSettler() throws Exception {
+        String input = new String();
 
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+            case "next turn":
+                correctInput = true;
+                throw new Exception();
+            case "exit":
+                System.exit(1);
+            default:
+                try {
+                    game.chooseSettler(Integer.parseInt(input));
+                    correctInput = true;
+                } catch (Exception wrongNumberException) {
+                    System.out.println("invalid command!");
+                }
+                break;
+            }
+        }
 
+        return Integer.valueOf(input);
+    }
 
+    private void printAvailableActions() {
+        ArrayList<String> actions = game.getActions();
+        for (int i = 0; i < actions.size(); i++) {
+            System.out.println(String.valueOf(i) + ". " + actions.get(i));
+        }
+    }
+
+    private void performAction() throws Exception {
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+                /* TODO */
+        
+            }
+        }
+    }
 
 
 

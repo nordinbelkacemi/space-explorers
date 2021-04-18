@@ -1,0 +1,9 @@
+kergult_config.txt
+1
+move
+1
+0
+1
+move
+2
+0
