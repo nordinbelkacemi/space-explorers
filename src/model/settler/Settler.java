@@ -1,6 +1,7 @@
 package model.settler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.materials.Coal;
 import model.materials.Ice;
@@ -18,22 +19,25 @@ import model.playfield.AsteroidField;
  * Felel az eszköztárában szereplő eszközökért és anyagokért (visszatevés, építés),
  * a műveleteiért (mozgás, fúrás, bányászat).
  */
-public class Settler extends Traveler {
+public class Settler extends Traveler implements Miner,Driller{
 
+	//////////////////////////////////////// attributumok
 	/** Az eszköztárában lévő Iron típusú nyersanyagok. */
-    private ArrayList<Iron> ironStorage;
+    private List<Iron> ironStorage;
 
     /** Az eszköztárában lévő Uranium típusú nyersanyagok. */
-    private ArrayList<Uranium> uraniumStorage;
+    private List<Uranium> uraniumStorage;
 
     /** Az eszköztárában lévő Coal típusú nyersanyagok. */
-    private ArrayList<Coal> coalStorage;
+    private List<Coal> coalStorage;
 
     /** Az eszköztárában lévő Ice típusú nyersanyagok. */
-    private ArrayList<Ice> iceStorage;
+    private List<Ice> iceStorage;
 
     /** Az eszköztárában lévő nyersanyagok száma */
     private int materialCount;
+    
+    private static int capacity = 10;
 
     /** A telepes teleportkapu-párja. Ha nem épített kapupárt akkor null. */
     private TeleportGatePair teleportGatePair;
@@ -41,12 +45,17 @@ public class Settler extends Traveler {
     /** A telepes csapata. */
     private SettlerTeam team;
 
+    
+    //////////////////////////////////////// ctors
     public Settler(Asteroid a) {
         super(a);
     }
 
     public Settler() {}
 
+    
+    
+    //////////////////////////////////////// függvények
 	  @Override
     public String toString() {
         return "Settler";
@@ -178,6 +187,7 @@ public class Settler extends Traveler {
     /**  Visszarak egy egységnyi szenet annak az aszteroidának a magjába, amin éppen tartózkodik. */
     public void putCoalBack() {}
     
+    @Override
     public void reactToExplosion() {
 
         System.out.println("Settler.reactToExplosion()");
