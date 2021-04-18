@@ -2,7 +2,6 @@ package model.settler;
 
 import java.util.ArrayList;
 
-import controller.Program;
 import model.materials.Coal;
 import model.materials.Ice;
 import model.materials.Iron;
@@ -57,12 +56,10 @@ public class Settler extends Traveler {
      *  A bányászást megvalósító metódus.
      */
     public void mine() {
-        Program.indent++;
-        Program.print();
+
         System.out.println("Settler.mine()");
         Material m = asteroid.removeMaterial();
         m.store(this);
-        Program.indent--;
     }
 
     /**
@@ -71,40 +68,36 @@ public class Settler extends Traveler {
      * @param b
      */
     public void build(Buildable b) {
-    	Program.indent++;
-        Program.print();
+
     	System.out.println("Settler.build()");
     	b.build(this);
-    	Program.indent--;
+
     }
 
     /**
      * Eltárolja a paraméterben megadott kapupárt.
      */
     public void storeTeleportGatePair(TeleportGatePair tgp) {
-    	Program.indent++;
-    	Program.print();
+
 		System.out.println("Settler.storeTeleportGatePair()");
     	teleportGatePair = tgp;
-    	Program.indent--;
+
     }
     
     /**
      * Kitörli a teleportGatePair-ben tárolt kapupárt.
      */
     public void removeTeleportGatePair() {
-    	Program.indent++;
-    	Program.print();
+
 		System.out.println("Settler.removeTeleportGatePair()");
-		Program.indent--;
+
     }
 
     /**
      * Elhelyez egy teleportkaput azon az AsteroidField-en, amelyen a telepes elhelyezkedik.
      */
     public void placeTeleportGate() {
-    	Program.indent++;
-    	Program.print();
+
 		System.out.println("Settler.placeTeleportGate()");
     	TeleportGate tg = teleportGatePair.removeTeleportGate();
     	tg.setAsteroidField(this.asteroid.getAsteroidField());
@@ -117,35 +110,31 @@ public class Settler extends Traveler {
     		firstAf.addNeighbour(af);
     		removeTeleportGatePair();
     	}
-    	Program.indent--;
+
     }
 
     /** Hozzáadja a paraméterként kapott vasat a telepes ironStorage tárolójához, valamint eggyel növeli a materialCount-ot.*/
-    public void addIron() {}
+    public void addIron(Iron i) {}
 
     /** Hozzáadja a paraméterként kapott jeget a telepes iceStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
-    public void addIce() {
-        Program.indent++;
-        Program.print();
+    public void addIce(Ice i) {
+
         System.out.println("Settler.addIce()");
-        Program.indent--;
+
     }
 
     /** Hozzáadja a paraméterként kapott uránt a telepes uraniumStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
-    public void addUranium() {}
+    public void addUranium(Uranium u) {}
 
     /** Hozzáadja a paraméterként kapott szenet a telepes coalStorage tárolójához, valamint eggyel növeli a materialCount-ot. */
-    public void addCoal() {}
+    public void addCoal(Coal c) {}
 
     /**
      * Eltávolít egy vasat a tárolójából és visszaadja.
      * @return egy Iron objektum
      */
     public Iron getIron() { 
-        Program.indent++;
-        Program.print();
-        System.out.println("Settler.getIron()");
-        Program.indent--;
+
         return null;
     }
   
@@ -154,10 +143,7 @@ public class Settler extends Traveler {
      * @return egy Uranium objektum
      */
     public Uranium getUranium() {
-        Program.indent++;
-        Program.print();
-        System.out.println("Settler.getUranium()");
-        Program.indent--;
+
         return null;
     }
 
@@ -172,20 +158,15 @@ public class Settler extends Traveler {
      * @return egy Coal objektum
      */
     public Coal getCoal() {
-        Program.indent++;
-        Program.print();
-        System.out.println("Settler.getCoal()");
-        Program.indent--;
+
         return null;
     }
 
     /**  Visszarak egy egységnyi vasat annak az aszteroidának a magjába, amin éppen tartózkodik. */
     public void putIronBack() {
-        Program.indent++;
-        Program.print();
-        System.out.println("Settler.putIronBack()");
+
         asteroid.addMaterial(getIron());
-        Program.indent--;
+
     }
 
     /**  Visszarak egy egységnyi uránt annak az aszteroidának a magjába, amin éppen tartózkodik. */
@@ -198,10 +179,8 @@ public class Settler extends Traveler {
     public void putCoalBack() {}
     
     public void reactToExplosion() {
-        Program.indent++;
-        Program.print();
+
         System.out.println("Settler.reactToExplosion()");
         die();
-        Program.indent--;
     }
 }

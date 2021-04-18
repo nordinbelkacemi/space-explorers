@@ -10,12 +10,7 @@ public class Iron extends Material {
      */
     @Override
     public void store(Settler s) {
-        // String name;
-		// try {
-        //     throw new Exception();
-        // } catch (Exception e) {
-        //     name = e.getStackTrace()[0].toString();
-        // }
+        s.addIron(this);
     }
 
 }
