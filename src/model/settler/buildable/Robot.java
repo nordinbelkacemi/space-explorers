@@ -14,7 +14,7 @@ import model.settler.Traveler;
 /**
  * A telepeshez hasonló, de nem játszható karakter, a telepesek tudják megépíteni.
  */
-public class Robot extends Traveler implements Buildable,Driller {
+public class Robot extends Traveler implements Buildable, Driller {
 
 	/**
 	 * A robotot irányító mesterséges intelligencia.
@@ -61,7 +61,6 @@ public class Robot extends Traveler implements Buildable,Driller {
 
 	@Override
 	public void drill() {
-		
-		
+		asteroid.removeLayer();
 	}
 }
