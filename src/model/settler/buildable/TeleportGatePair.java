@@ -25,7 +25,6 @@ public class TeleportGatePair implements Buildable {
 	 */
 	@Override
 	public void build(Settler s) {
-		System.out.println("TeleportGatePair.build()");
 		s.getIron();
 		s.getIron();
 		s.getIce();
@@ -34,12 +33,9 @@ public class TeleportGatePair implements Buildable {
 		gates.add(new TeleportGate());
 		gates.add(new TeleportGate());
 		gates.get(0).setOtherGate(gates.get(1));
-		gates.get(0).setAsteroidField(s.getAsteroid().getAsteroidField());
+		//gates.get(0).setAsteroidField(s.getAsteroid().getAsteroidField());
 		gates.get(1).setOtherGate(gates.get(0));
-		gates.get(1).setAsteroidField(s.getAsteroid().getAsteroidField());
-		
-		addTeleportGate(gates.get(0));
-		addTeleportGate(gates.get(1));
+		//gates.get(1).setAsteroidField(s.getAsteroid().getAsteroidField());
 		s.storeTeleportGatePair(this);
 	}
 	
@@ -48,8 +44,7 @@ public class TeleportGatePair implements Buildable {
 	 * @param tg A tárolóhoz adandó teleportkapu.
 	 */
 	public void addTeleportGate(TeleportGate tg) {
-
-
+		gates.add(tg);
 	}
 	
 	/**
@@ -58,12 +53,11 @@ public class TeleportGatePair implements Buildable {
 	 * @return Az eltávolított teleportkapu.
 	 */
 	public TeleportGate removeTeleportGate() {
-
 		return gates.remove(gates.size()-1);
 	}
 	
 	public int getCount() {
-		return 0;
+		return gates.size();
 	}
 	
 	public List<TeleportGate> getGates() {
