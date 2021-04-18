@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.PrintStream;
+
 import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.playfield.MegkergultGates;
@@ -19,11 +21,27 @@ public class Game {
 		// playfield
 		sun = new Sun();
 		ss = new SolarSystem(sun);
-		//ss.configOut(System.out);
 		
 		// settlers
 		st = new SettlerTeam(ss.getBelt()); 
-		st.configOut(System.out);
+		// robot
+		rai = new RobotAi();
+		// ufo
+		uai = new UfoAi(ss.getBelt());
+		// megkergült
+		mg = new MegkergultGates();
 		
+		
+		configOut(System.out);
+	}
+	
+	public void configOut(PrintStream out) {
+		ss.configOut(out);
+		System.out.println();
+		st.configOut(out);
+		System.out.println();
+		rai.configOut(out);
+		System.out.println();
+		uai.configOut(out);
 	}
 }
