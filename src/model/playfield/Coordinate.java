@@ -2,17 +2,27 @@ package model.playfield;
 
 /** Egy hexagon pozícióját fejezi ki, két koordinátával. */
 public class Coordinate {
+	
     /**abszcissza */
     private int x;
 
     /**ordináta */
     private int y;
 
+    /**
+     * Konstruktor.
+     * @param x a beállítandó abszcissza
+     * @param y a beállítandó ordináta
+     */
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
     
+    /**
+	 * Visszaadja a koordináta String reprezentációját.
+	 * @return a String
+	 */
     @Override
     public String toString() {
     	return x + " " + y;
