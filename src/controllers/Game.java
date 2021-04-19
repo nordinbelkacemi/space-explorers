@@ -11,7 +11,6 @@ import model.ai.UfoAi;
 
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Coordinate;
 import model.playfield.MegkergultGates;
 import model.playfield.SolarSystem;
 import model.playfield.Sun;
@@ -141,8 +140,8 @@ public class Game {
 			}		
 		}		
 	}
-}
 
+	/////////////////////////////////////////// test
 
 	public ArrayList<String> getActions() {
 		ArrayList<String> actions = new ArrayList<String>();
