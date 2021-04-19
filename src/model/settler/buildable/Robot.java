@@ -24,17 +24,32 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	private static RobotAi ai;
 	
+	/**
+	 * A robot aszteroidájának felrobbanásakor használt Random objektum.
+	 */
 	private Random r = new Random();
 	
+	/**
+	 * Konstruktor.
+	 * @param a az aszteroida, amelyiken megépül a robot
+	 */
 	public Robot(Asteroid a) {
 		super(a);
 		ai.addRobot(this);
 	}
 	
+	/**
+	 * Beállítja a robot ai változóját .
+	 * @param rai a beállítandó RobotAi objektum
+	 */
 	public static void setAi(RobotAi rai) {
 		ai = rai;
 	}
 
+	/**
+	 * Visszaadja a robot String reprezentációját.
+	 * @return a String
+	 */
 	@Override
 	public String toString() {
 		return "Robot";
@@ -56,7 +71,7 @@ public class Robot extends Traveler implements Buildable, Driller {
 	/**
 	 * Beállítja a robot attribútumait a paraméterként kapott, a robotot építő settler
 	 * attribútumainak segítségével, valamint hozzáadja a robotot az aszteroida travelers tárolójához.
-	 * @param s Az a Settler, aki megépíti az adott eszközt.
+	 * @param s az a Settler, aki megépíti az adott eszközt
 	 */
 	@Override
 	public void build(Settler s) {
@@ -68,17 +83,24 @@ public class Robot extends Traveler implements Buildable, Driller {
 	}
 
 	/**
-	 * A fúrást megvalósító metódus
+	 * A fúrást megvalósító metódus.
 	 */
 	@Override
 	public void drill() {
 		this.asteroid.removeLayer();
 	}
 	
+	/**
+	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a Robot adatait.
+	 * @param out ahova kiírja az adatokat
+	 */
 	public void printToConfig(PrintStream out) {
 		out.print(asteroid.getIndexes().toString());
 	}
 	
+	/**
+	 * Napvihar hatására elpusztítja a robotot.
+	 */
 	@Override
 	public void reactToFlare() {
 		super.reactToFlare();
