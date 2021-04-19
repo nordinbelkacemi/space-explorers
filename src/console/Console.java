@@ -63,7 +63,7 @@ public class Console {
         printAvailableActions();
 
         /* lepes */
-        // performAction();
+        performAction();
 
         game.endSettlerTurn(Integer.valueOf(nSettler));
     }
@@ -126,8 +126,10 @@ public class Console {
                 int nAsteroid = chooseAsteroid(nField, neighbors);
 
                 game.moveSettler(nField, nAsteroid);
+                break;
             default:
                 System.out.println("invalid command!");
+                break;
             }
         }
     }
@@ -148,6 +150,7 @@ public class Console {
             switch(input) {
                 case "exit":
                     System.exit(1);
+                    // break;
                 default:
                     int nField = Integer.parseInt(input);
                     if (nField > neighbors.size() || nField < 0) {
@@ -155,6 +158,7 @@ public class Console {
                     } else {
                         correctInput = true;
                     }
+                    break;
             }
         }
 
@@ -162,7 +166,7 @@ public class Console {
     }
 
     private void showFieldAsteroids(int nField, ArrayList<AsteroidField> neighbors) {
-        AsteroidField af = neighbors.get(nField - 1);
+        AsteroidField af = neighbors.get(nField);
         List<Asteroid> asteroids = af.getAsteroids();
 
         for (int i = 0; i < asteroids.size(); i++) {
@@ -193,6 +197,7 @@ public class Console {
             switch(input) {
                 case "exit":
                     System.exit(1);
+                    // break;
                 default:
                     int nAsteroid = Integer.parseInt(input);
                     if (nAsteroid > asteroids.size() || nAsteroid <= 0) {
@@ -200,6 +205,7 @@ public class Console {
                     } else {
                         correctInput = true;
                     }
+                    break;
             }
         }
 
