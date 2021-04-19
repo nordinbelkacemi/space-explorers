@@ -20,6 +20,8 @@ import model.settler.buildable.Robot;
 import model.settler.buildable.TeleportGatePair;
 
 public class Game {
+	class InvalidCmdException extends Exception { }
+
 	private Sun sun;
 	private SolarSystem solarSystem;
 	private MegkergultGates megkergultGates;
@@ -72,9 +74,9 @@ public class Game {
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void chooseSettler(int n) throws Exception {
+	public void chooseSettler(int n) throws InvalidCmdException {
 		if (!choosableSettlers.contains(n)) {
-			throw new Exception();
+			throw new InvalidCmdException();
 		}
 		chosenSettler = settlerTeam.chooseSettler(n);
 	}

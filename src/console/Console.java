@@ -1,4 +1,6 @@
 package console;
+import java.controllers.Game.InvalidCmdException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,9 +13,9 @@ public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
 
-    class ExitException extends Exception {}
-    class NextTurnException extends Exception {}
-    class BackException extends Exception {}
+    class ExitException extends Exception { }
+    class NextTurnException extends Exception { }
+    class BackException extends Exception { }
 
     /** When the player chooses where to move, this type holds the asteroid field index and and asteroid number (also an index, but 1-based) chosen */
     class DestinationSelection {
@@ -45,23 +47,23 @@ public class Console {
      * Interface with a run function. The run function in our case is always a
      * function that takes in an input and throws an exception if the input is an
      * invalid command. Wherever an instance of the interface is called, if an
-     * Exception is thrown by it, it will get called again until it doesn't throw
+     * exception is thrown by it, it will get called again until it doesn't throw
      * anything (this is how invalid commands are handled)
      */
     interface IRunnable {
         /**
          * the referenced function's run method
          * @param input the string passed in by the user (or an input file in a test)
-         * @throws Exception thrown if the string passed in is an invalid command
+         * @throws InvalidCmdException thrown if the string passed in is an invalid command
          */
-        public void run(String input) throws Exception;
+        public void run(String input) throws InvalidCmdException;
     }
 
     /**
      * Interface with a run function. The run function in our case is always a
      * function that takes in an input and can throw exceptions in two cases:
      * 
-     * - if the input is an invalid command (throws Exception)
+     * - if the input is an invalid command (throws InvalidCmdException)
      * - if the input is a back command (throws BackException)
      * 
      * Wherever an instance of the interface is called, if an exception is thrown
@@ -72,19 +74,19 @@ public class Console {
          * the referenced function's run method
          * 
          * @param input the string passed in by the user (or an input file in a test)
-         * @throws Exception thrown if the string passed in is an invalid command
+         * @throws InvalidCmdException thrown if the string passed in is an invalid command
          * @throws BackException thrown if the string passed in is the back command
          */
-        public void run(String input) throws Exception, BackException;
+        public void run(String input) throws InvalidCmdException, BackException;
     }
 
     private IRunnable chooseSettlerMethod = new IRunnable() {
         @Override
-        public void run(String input) throws Exception {
+        public void run(String input) throws InvalidCmdException {
             int n = Integer.parseInt(input);
             try {
                 game.chooseSettler(n);
-            } catch (Exception ex) {
+            } catch (InvalidCmdException ex) {
                 throw ex;
             }
         }
@@ -92,7 +94,7 @@ public class Console {
 
     private IRunnable chooseActionMethod = new IRunnable() {
         @Override
-        public void run(String input) throws Exception {
+        public void run(String input) throws InvalidCmdException {
             switch(input) {
             case "move":
                 ArrayList<AsteroidField> neighbors = game.getNeighbours();
@@ -114,7 +116,7 @@ public class Console {
     
     private IRunnable chooseNeighborMethod = new IRunnable() {
         @Override
-        public void run(String input) throws Exception {
+        public void run(String input) throws InvalidCmdException {
             int n = Integer.parseInt(input);
         }
     };
@@ -380,7 +382,7 @@ public class Console {
                 try {
                     getInputMethod.run(input);
                     correctInput = true;
-                } catch (Exception ex) {
+                } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
                 }
                 break;
@@ -406,7 +408,7 @@ public class Console {
                 try {
                     getInputMethod.run(input);
                     correctInput = true;
-                } catch (Exception ex) {
+                } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
                 } catch (BackException ex) {
 
@@ -438,7 +440,7 @@ public class Console {
                 try {
                     getInputMethod.run(input);
                     correctInput = true;
-                } catch (Exception ex) {
+                } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
                 }
                 break;
