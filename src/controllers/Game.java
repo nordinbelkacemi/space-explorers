@@ -30,7 +30,7 @@ public class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
-	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke True, különben false */
+	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke true, különben false */
 	private boolean gameOver;
 
 	/** A kiválasztott telepes. Ezzel a telepessel léphet a felhasználó (move, drill stb) */
