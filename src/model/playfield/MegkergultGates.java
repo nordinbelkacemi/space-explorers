@@ -11,15 +11,18 @@ import model.settler.buildable.TeleportGate;
  */
 public class MegkergultGates {
 	
-	//* A játék során megkergült kapuk tárolója */
+	//* A játék során megkergült kapuk tárolója. */
 	private List<TeleportGate> gates;
 	
 	
+	/**
+	 * Konstruktor.
+	 */
 	public MegkergultGates() {
 		gates = new ArrayList<>();
 	}
 	
-	/** Ha egy kaput napkitörés ér, ezzel a függvényel teszzük őt megkergültté. */
+	/** Ha egy kaput napkitörés ér, ezzel a függvényel tesszük őt megkergültté. */
 	public void addGate(TeleportGate gate) {
 		gates.add(gate);
 	}
