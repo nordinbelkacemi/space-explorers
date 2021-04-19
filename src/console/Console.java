@@ -11,18 +11,183 @@ public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
 
+    class ExitException extends Exception {}
+    class NextTurnException extends Exception {}
+    class BackException extends Exception {}
+
+    /** When the player chooses where to move, this type holds the asteroid field index and and asteroid number (also an index, but 1-based) chosen */
+    class DestinationSelection {
+        private Integer fieldIdx, asteroidNum;
+
+        public DestinationSelection() {
+            fieldIdx = -1;
+            asteroidNum = -1;
+        }
+
+        public Integer getFieldIdx() {
+            return fieldIdx;
+        }
+
+        public void setFieldIdx(Integer n) {
+            fieldIdx = n;
+        }
+
+        public Integer getAsteroidNum() {
+            return asteroidNum;
+        }
+
+        public void setAsteroidNum(Integer num) {
+            asteroidNum = num;
+        }
+    }
+    
+    /**
+     * Interface with a run function. The run function in our case is always a
+     * function that takes in an input and throws an exception if the input is an
+     * invalid command. Wherever an instance of the interface is called, if an
+     * Exception is thrown by it, it will get called again until it doesn't throw
+     * anything (this is how invalid commands are handled)
+     */
+    interface IRunnable {
+        /**
+         * the referenced function's run method
+         * @param input the string passed in by the user (or an input file in a test)
+         * @throws Exception thrown if the string passed in is an invalid command
+         */
+        public void run(String input) throws Exception;
+    }
+
+    /**
+     * Interface with a run function. The run function in our case is always a
+     * function that takes in an input and can throw exceptions in two cases:
+     * 
+     * - if the input is an invalid command (throws Exception)
+     * - if the input is a back command (throws BackException)
+     * 
+     * Wherever an instance of the interface is called, if an exception is thrown
+     * by it, it will get called again until it doesn't throw anything.
+     */
+    interface IRunnableWithBackCmd {
+        /**
+         * the referenced function's run method
+         * 
+         * @param input the string passed in by the user (or an input file in a test)
+         * @throws Exception thrown if the string passed in is an invalid command
+         * @throws BackException thrown if the string passed in is the back command
+         */
+        public void run(String input) throws Exception, BackException;
+    }
+
+    private IRunnable chooseSettlerMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws Exception {
+            int n = Integer.parseInt(input);
+            try {
+                game.chooseSettler(n);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+    };
+
+    private IRunnable chooseActionMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws Exception {
+            switch(input) {
+            case "move":
+                ArrayList<AsteroidField> neighbors = game.getNeighbours();
+                DestinationSelection destination = selectDestination(neighbors);
+                if (destination.getAsteroidNum() == null || destination.getFieldIdx() == null) {
+                    return;
+                }
+                try {
+                    game.moveSettler(nField, nAsteroid);
+                } catch (Exception ex) {
+                    throw ex;
+                }
+                break;
+            default:
+                throw new Exception(); // in case of invalid command
+            }
+        }
+    };
+    
+    private IRunnable chooseNeighborMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws Exception {
+            int n = Integer.parseInt(input);
+        }
+    };
+
+    private void showNeighbors(ArrayList<AsteroidField> neighbors) {
+        for (int i = 0; i < neighbors.size(); i++) {
+            List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
+            System.out.println(String.valueOf(i) + ". field - " + asteroids.size() +  " asteroids");
+        }
+    }
+
+    private DestinationSelection selectDestination(ArrayList<Asteroid> neighbors) {
+        DestinationSelection destination = new DestinationSelection();
+
+        try {
+            boolean completed = false;
+            while (!completed) {
+                showNeighbors(neighbors);
+                destination.setFieldIdx(Integer.valueOf(getInputNavigableExitable(chooseFieldMethod)));
+                try {
+                    destination.setAsteroidNum(Integer.valueOf(getInputNavigableExitable(chooseAsteroidMethod)));
+                } catch (BackException ex) {
+                    destination.setAsteroidNum(null);
+                }
+            }
+        } catch (BackException ex) {
+            destination.setFieldIdx(null);
+        }
+
+        return destination;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void start() {
         String input;
 
         System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
         System.out.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
-        while (!(input = sc.nextLine()).equals("exit")) {
+
+        boolean playModeExited = false;
+        while (!playModeExited && !(input = sc.nextLine()).equals("exit")) {
             switch (input) {
             case "play":
                 game = new Game();
                 game.start();
                 while (!game.over()) {
-                    handlePlayerTurn();
+                    try {
+                        handlePlayerTurn();
+                    } catch (ExitException ex) {
+                        playModeExited = true;
+                        break;
+                    }
                     // szolunk a game controllernek hogy a kör további részeit végezze el
                 }
                 break;
@@ -38,32 +203,40 @@ public class Console {
         sc.close();
     }
 
-    private void handlePlayerTurn() {
+    private void handlePlayerTurn() throws ExitException {
         game.resetChoosableSettlers();
 
         while (true) {
             try {
                 handleSettlerTurn();
-            } catch (Exception nextTurnException) {
+            } catch (NextTurnException ex) {
                 break;
+            } catch (ExitException ex) {
+                throw ex;
             }
         }
     }
 
-    private void handleSettlerTurn() throws Exception { 
+    private void handleSettlerTurn() throws NextTurnException, ExitException { 
         printChoosableSettlers();
         
         Integer nSettler = 0;
         try {
-            nSettler = chooseSettler();
-        } catch (Exception wrongNumberException) {
-            throw new Exception();
+            nSettler = Integer.parseInt(getInputSkippableExitable(chooseSettlerMethod));
+        } catch (NextTurnException ex) {
+            throw ex;
+        } catch (ExitException ex) {
+            throw ex;
         }
 
         printAvailableActions();
 
         /* lepes */
-        performAction();
+        try {
+            getInputExitable(chooseActionMethod);
+        } catch (ExitException ex) {
+            throw ex;
+        }
 
         game.endSettlerTurn(Integer.valueOf(nSettler));
     }
@@ -76,32 +249,6 @@ public class Console {
         }
     }
 
-    private Integer chooseSettler() throws Exception {
-        String input = new String();
-
-        boolean correctInput = false;
-        while (!correctInput) {
-            input = sc.nextLine();
-            switch (input) {
-            case "next turn":
-                correctInput = true;
-                throw new Exception();
-            case "exit":
-                System.exit(1);
-            default:
-                try {
-                    game.chooseSettler(Integer.parseInt(input));
-                    correctInput = true;
-                } catch (Exception wrongNumberException) {
-                    System.out.println("invalid command!");
-                }
-                break;
-            }
-        }
-
-        return Integer.valueOf(input);
-    }
-
     private void printAvailableActions() {
         ArrayList<String> actions = game.getActions();
         for (int i = 0; i < actions.size(); i++) {
@@ -109,37 +256,22 @@ public class Console {
         }
     }
 
-    private void performAction() {
-        String input = new String();
 
-        boolean correctInput = false;
-        while (!correctInput) {
-            input = sc.nextLine();
-            switch (input) {
-            case "move":
-                correctInput = true;
-                ArrayList<AsteroidField> neighbors = game.getNeighbours();
-                showNeighbors(neighbors);
-                int nField = chooseNeighbor(neighbors);
-                
-                showFieldAsteroids(nField, neighbors);
-                int nAsteroid = chooseAsteroid(nField, neighbors);
 
-                game.moveSettler(nField, nAsteroid);
-                break;
-            default:
-                System.out.println("invalid command!");
-                break;
-            }
-        }
-    }
 
-    private void showNeighbors(ArrayList<AsteroidField> neighbors) {
-        for (int i = 0; i < neighbors.size(); i++) {
-            List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
-            System.out.println(String.valueOf(i) + ". field - " + asteroids.size());
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
     private int chooseNeighbor(ArrayList<AsteroidField> neighbors) {
         String input = new String();
@@ -223,22 +355,95 @@ public class Console {
 
 
 
-    private void handleCommands() {
-        Scanner sc = new Scanner(System.in);
-        String input;
-        while (!(input = sc.nextLine()).equals("exit")) {
-            handleCommand(input);
+
+
+
+
+    /**
+     * For commands where the user can: 
+     * - go back to previous menu point (selection of asteroid field and selection of asteroid) 
+     * - exit the program with the exit command
+     */
+    private String getInputSkippableExitable(IRunnable getInputMethod) throws NextTurnException, ExitException {
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+            case "next turn":
+                correctInput = true;
+                throw new NextTurnException();
+            case "exit":
+                throw new ExitException();
+            default:
+                try {
+                    getInputMethod.run(input);
+                    correctInput = true;
+                } catch (Exception ex) {
+                    System.out.println("invalid command!");
+                }
+                break;
+            }
         }
+
+        return input;
     }
 
-    private void handleCommand(String cmd) {
-        switch (cmd) {
-            case "move":
-                handleMoveCmd();
+    /**
+     * For commands where the user can exit the program with the exit command
+     */
+    private String getInputExitable(IRunnable getInputMethod) throws ExitException {
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+            case "exit":
+                throw new ExitException();
+            default:
+                try {
+                    getInputMethod.run(input);
+                    correctInput = true;
+                } catch (Exception ex) {
+                    System.out.println("invalid command!");
+                } catch (BackException ex) {
+
+                }
+                break;
+            }
         }
+
+        return input;
     }
 
-    private void handleMoveCmd() {
+    /**
+     * For commands where the user can:
+     * - go back to previous menu point (selection of asteroid field and selection of asteroid)
+     * - exit the program with the exit command
+     */
+    private String getInputNavigableExitable(IRunnable getInputMethod) throws BackException, ExitException {
+        String input = new String();
 
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch (input) {
+            case "exit":
+                throw new ExitException();
+            case "back":
+                throw new BackException();
+            default:
+                try {
+                    getInputMethod.run(input);
+                    correctInput = true;
+                } catch (Exception ex) {
+                    System.out.println("invalid command!");
+                }
+                break;
+            }
+        }
+        return input;
     }
 }
