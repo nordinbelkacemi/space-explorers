@@ -252,8 +252,13 @@ public class Game {
 		selectedField = getField(idx);
 	}
 
-	public void selectAsteroid(int n) {
-		selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+	public void selectAsteroid(int n) throws InvalidCmdException {
+		List<Asteroid> asteroids = selectedField.getAsteroids();
+		if (n >= 1 && n <= asteroids.size()) {
+			selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+		} else {
+			throw new InvalidCmdException();
+		}
 	}
 
 	public AsteroidField getSelectedField() {

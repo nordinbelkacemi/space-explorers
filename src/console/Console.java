@@ -67,11 +67,13 @@ public class Console {
     private IRunnable chooseSettlerMethod = new IRunnable() {
         @Override
         public void run(String input) throws InvalidCmdException {
-            int n = Integer.parseInt(input);
             try {
+                int n = Integer.parseInt(input);
                 game.chooseSettler(n);
             } catch (InvalidCmdException ex) {
                 throw ex;
+            } catch (NumberFormatException ex) {
+                throw new InvalidCmdException();
             }
         }
     };
@@ -147,7 +149,7 @@ public class Console {
                 }
             }
 
-            System.out.println(String.valueOf(i) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
+            System.out.println(String.valueOf(i + 1) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
         }
     }
 
@@ -156,6 +158,7 @@ public class Console {
         public void run(String input) throws InvalidCmdException {
             List<AsteroidField> neighbors = game.getNeighbours();
             int fieldIdx = Integer.parseInt(input);
+
             if (fieldIdx >= 0 && fieldIdx < neighbors.size()) {
                 game.selectField(fieldIdx);
             } else {
@@ -167,11 +170,12 @@ public class Console {
     private IRunnable chooseAsteroidMethod = new IRunnable() {
         @Override
         public void run(String input) throws InvalidCmdException {
-            List<Asteroid> asteroids = game.getSelectedField().getAsteroids();
-            int asteroidNum = Integer.parseInt(input);
-            if (asteroidNum >= 1 && asteroidNum <= asteroids.size()) {
+            try {
+                int asteroidNum = Integer.parseInt(input);
                 game.selectAsteroid(asteroidNum);
-            } else {
+            } catch (InvalidCmdException ex) {
+                throw ex;
+            } catch (NumberFormatException ex) {
                 throw new InvalidCmdException();
             }
         }
@@ -243,11 +247,13 @@ public class Console {
                 break;
             } catch (ExitException ex) {
                 throw ex;
+            } catch (InvalidCmdException ex) {
+                System.out.println("invalid command!");
             }
         }
     }
 
-    private void handleSettlerTurn() throws NextTurnException, ExitException {
+    private void handleSettlerTurn() throws NextTurnException, ExitException, InvalidCmdException {
         /* player choosing a settler */
         Integer nSettler = 0;
         try {
@@ -257,6 +263,8 @@ public class Console {
             throw ex;
         } catch (ExitException ex) {
             throw ex;
+        } catch (NumberFormatException ex) {
+            throw new InvalidCmdException();
         }
 
         /* player choosing the action to be performed by the settler */
