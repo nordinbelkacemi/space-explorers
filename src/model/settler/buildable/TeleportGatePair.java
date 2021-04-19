@@ -21,7 +21,7 @@ public class TeleportGatePair implements Buildable {
 	 * meghívja mindkét kapun a SetOtherGate függvényt a párjával paraméterezve,
 	 * majd hozzáadja saját magát (a TeleportGatePair-t) a kapupárt építő
 	 * Settler-hez a Settler StoreTeleportGate() függvényével.
-	 * @param s Az a Settler, aki megépíti az adott eszközt.
+	 * @param s az a Settler, aki megépíti az adott eszközt
 	 */
 	@Override
 	public void build(Settler s) {
@@ -41,7 +41,7 @@ public class TeleportGatePair implements Buildable {
 	
 	/**
 	 * A paraméterként kapott kaput hozzáadja a gates tárolóhoz.
-	 * @param tg A tárolóhoz adandó teleportkapu.
+	 * @param tg a tárolóhoz adandó teleportkapu
 	 */
 	public void addTeleportGate(TeleportGate tg) {
 		gates.add(tg);
@@ -50,7 +50,7 @@ public class TeleportGatePair implements Buildable {
 	/**
 	 * Kapu lehelyezésekor hívódik meg.
 	 * Visszaad egy kaput a gates tömbből, majd eltávolítja azt a tárolóból.
-	 * @return Az eltávolított teleportkapu.
+	 * @return az eltávolított teleportkapu
 	 */
 	public TeleportGate removeTeleportGate() {
 		return gates.remove(gates.size()-1);
@@ -58,14 +58,14 @@ public class TeleportGatePair implements Buildable {
 	
 	/**
 	 * Visszaadja a pár még nem lerakott teleportkapuinak számát.
-	 * @return A még nem lerakott teleportkapuinak száma
+	 * @return a még nem lerakott teleportkapuinak száma
 	 */
 	public int getCount() {
 		return gates.size();
 	}
 	
 	/** Visszaadja a pár még nem lerakott teleportkapuinak listáját.
-	 * @return A pár még nem lerakott teleportkapuinak listája.
+	 * @return a pár még nem lerakott teleportkapuinak listája
 	 */
 	public List<TeleportGate> getGates() {
 		return gates;
