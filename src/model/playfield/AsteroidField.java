@@ -16,9 +16,9 @@ import model.settler.buildable.TeleportGate;
  * Az aszteroidákat tárolja.
  */
 public class AsteroidField extends Hexagon {
-	
+
 	///////////////////////////////////////// attributes
-	
+
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
 
@@ -30,7 +30,7 @@ public class AsteroidField extends Hexagon {
 
 	/**A megkergült kapukat tartalmazó osztály. */
 	private static MegkergultGates megkergultGates;
-	
+
 	private static List<AsteroidField> belt;
 
 	//////////////////////////////////////// ctors
@@ -39,7 +39,7 @@ public class AsteroidField extends Hexagon {
 		neighbours = new ArrayList<>();
 		teleportGates = new ArrayList<>();
 	}
-	
+
 	public AsteroidField(Coordinate c) {
 		position = c;
 		asteroids = createAsteroids();
@@ -50,34 +50,34 @@ public class AsteroidField extends Hexagon {
 	private List<Asteroid> createAsteroids() {
 		Random r  = new Random();
 		ArrayList<Asteroid> field = new ArrayList<>();
-		
-		int emptycount = r.nextInt(2) + 1; // egy vagy kettő üres 
+
+		int emptycount = r.nextInt(2) + 1; // egy vagy kettő üres
 		for (int i = 0; i < emptycount; i++) {
 			field.add(new Asteroid(r.nextInt(5),this));
 		}
-		
-		int ironcount = r.nextInt(3); // 0-2 vas 
+
+		int ironcount = r.nextInt(3); // 0-2 vas
 		for (int i = 0; i < ironcount; i++) {
 			field.add(new Asteroid(new Iron(),r.nextInt(5),this));
 		}
-		
-		int icecount = r.nextInt(3); // 0-2 jég 
+
+		int icecount = r.nextInt(3); // 0-2 jég
 		for (int i = 0; i < icecount; i++) {
 			field.add(new Asteroid(new Ice(),r.nextInt(5),this));
 		}
-		
-		int coalcount = r.nextInt(3); // 0-2 szén 
+
+		int coalcount = r.nextInt(3); // 0-2 szén
 		for (int i = 0; i < coalcount; i++) {
 			field.add(new Asteroid(new Coal(),r.nextInt(5),this));
 		}
-		
-		int uraniumcount = r.nextInt(2); // 0-1 urán 
+
+		int uraniumcount = r.nextInt(2); // 0-1 urán
 		for (int i = 0; i < uraniumcount; i++) {
 			field.add(new Asteroid(new Uranium(),r.nextInt(5),this));
-		}		
+		}
 		return field;
 	}
-	
+
 	///////////////////////////////////////// függvények
 	/**
 	 * Napvihar esetén hívódik meg, és minden aszteroidájára meghívja
@@ -105,7 +105,7 @@ public class AsteroidField extends Hexagon {
 	 */
 	public ArrayList<AsteroidField> getNeighbours() {
 		ArrayList<AsteroidField> neighbourFields = new ArrayList<AsteroidField>();
-		neighbourFields.add(this);
+		neighbourFields.add(0, this);
 		return neighbourFields;
 	}
 
@@ -140,7 +140,7 @@ public class AsteroidField extends Hexagon {
 	public void addAsteroid(Asteroid a) {
 		asteroids.add(a);
 	}
-	
+
 	/**
 	 * Eltávolítunk egy aszteroidát az aszteroidamezőből.
 	 * @param a A kitörlendő aszteroida
@@ -152,21 +152,25 @@ public class AsteroidField extends Hexagon {
 	public static void setBelt(List<AsteroidField> b) {
 		belt = b;
 	}
-	
+
 	public Coordinate getIndexes(Asteroid a) {
 		int x = belt.indexOf(this);
 		int y = asteroids.indexOf(a);
 		return new Coordinate(x, y);
 	}
-	
+
 	public void printToConfig(PrintStream out) {
 		for (Asteroid a : asteroids) {
 			out.print(',');
 			a.printToConfig(out);
 		}
-	}
-
-	public Coordinate getCoordinates() {
+	}	
+  
+  public Coordinate getCoordinates() {
 		return position;
 	}
+	////////////////////////////////////////// test
+
+
+
 }

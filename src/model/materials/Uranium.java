@@ -22,6 +22,8 @@ public class Uranium extends Material {
     public void reactToSun(Asteroid a) {
     	a.explode();
     }
+    
+    public Uranium() {}
 
 	/**Meghívja a paraméterként kapott settler AddUranium() függvényét
 	 * @param s a kapott settler
@@ -35,4 +37,9 @@ public class Uranium extends Material {
     public String toString() {
         return "uranium " + exposureCount + " ";
     }
+    
+    ////////////////////////////////// test
+    public Uranium(int e) {
+		exposureCount = e;
+	}
 }

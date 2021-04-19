@@ -1,19 +1,23 @@
 package controllers;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import model.ai.RobotAi;
 import model.ai.UfoAi;
+
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Coordinate;
 import model.playfield.MegkergultGates;
 import model.playfield.SolarSystem;
 import model.playfield.Sun;
 import model.settler.Settler;
 import model.settler.SettlerTeam;
+import model.settler.buildable.Robot;
+import model.settler.buildable.TeleportGatePair;
 
 public class Game {
 	private Sun sun;
@@ -38,11 +42,9 @@ public class Game {
 		// playfield
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
-		
+
 		// settlers
 		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
-		
-		choosableSettlers = new ArrayList<Integer>();
 		// robot
 		robotAi = new RobotAi();
 		// ufo
@@ -50,17 +52,8 @@ public class Game {
 		// megkergült
 		megkergultGates = new MegkergultGates();
 		
-		configOut(System.out);
-	}
-	
-	public void configOut(PrintStream out) {
-		solarSystem.configOut(out);
-		System.out.println();
-		settlerTeam.configOut(out);
-		System.out.println();
-		robotAi.configOut(out);
-		System.out.println();
-		ufoAi.configOut(out);
+		choosableSettlers = new ArrayList<Integer>();
+		//configOut(System.out);
 	}
 
 	/** A játékot elindító függvény */
@@ -75,8 +68,8 @@ public class Game {
 		}
 	}
 
-	/** 
-	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre 
+	/**
+	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
 	 * @param n A kiválasztott telepes sorszáma
 	 */
 	public void chooseSettler(int n) throws Exception {
@@ -93,9 +86,66 @@ public class Game {
 		return gameOver;
 	}
 
+	
+	/////////////////////////////////////////// test
+	public Game(InputStream in) {
+		solarSystem = new SolarSystem();
+		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0); 
+		robotAi = new RobotAi();
+		ufoAi = new UfoAi(solarSystem.getBelt(),0);
+		megkergultGates = new MegkergultGates();
+		
+		choosableSettlers = new ArrayList<Integer>();
+		//configOut(System.out);
+	}
+	
+	public void configOut(PrintStream out) {
+		solarSystem.configOut(out);
+		out.println();
+		settlerTeam.configOut(out);
+		out.println();
+		robotAi.configOut(out);
+		out.println();
+		ufoAi.configOut(out);
+	}
+	
+	public void configIn(InputStream in) throws Exception {
+		int state = 0; // 0-asteroids 1-sun 2-settlers 3-robots 4-ufos 5-gates
+		Scanner sc = new Scanner(in);
+		String line = null;
+		while(sc.hasNextLine()) {
+			line = sc.nextLine();
+			if(line.isEmpty()) state++;
+			switch (state) {
+			case 0:
+				solarSystem.createField(line);
+				break;
+			case 1:
+				sun = new Sun(line);
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+			case 5:
+				
+				break;
+			default:
+				break;
+			}		
+		}		
+	}
+
+	/////////////////////////////////////////// test
+
 	public ArrayList<String> getActions() {
 		ArrayList<String> actions = new ArrayList<String>();
-		
+
 		Asteroid currentAsteroid = chosenSettler.getAsteroid();
 		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
 
@@ -112,7 +162,7 @@ public class Game {
 				break;
 			}
 		}
-		
+
 		if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
 			actions.add("mine");
 		}
@@ -157,5 +207,47 @@ public class Game {
 
 	public ArrayList<AsteroidField> getNeighbours() {
 		return chosenSettler.getNeighbours();
+	}
+
+	public void mine() {
+		chosenSettler.mine();
+	}
+
+	public void drill() {
+		chosenSettler.drill();
+	}
+
+	public void buildTeleportGate() {
+		chosenSettler.build(new TeleportGatePair());
+	}
+
+	public void placeTeleportGate(int i) {
+		chosenSettler.placeTeleportGate(i);
+	}
+
+	public void buildRobot() {
+		Robot r = new Robot(chosenSettler.getAsteroid());
+		chosenSettler.build(r);
+	}
+
+	public void moveSettler(int fI, int aI) {
+		Asteroid a = chosenSettler.getAsteroid().getNeighbours().get(fI).getAsteroids().get(aI - 1);
+		chosenSettler.move(a);
+	}
+
+	public void putIronBack() {
+		chosenSettler.putIronBack();
+	}
+
+	public void putCoalBack() {
+		chosenSettler.putCoalBack();
+	}
+
+	public void putUraniumBack() {
+		chosenSettler.putUraniumBack();
+	}
+
+	public void putIceBack() {
+		chosenSettler.putIceBack();
 	}
 }
