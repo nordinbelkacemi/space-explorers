@@ -11,6 +11,10 @@ public class Hexagon {
 	protected Coordinate position;
 	
 	
+	/**
+	 * Visszaadja a Hexagon pozícióját.
+	 * @return a Hexagon pozíciója
+	 */
 	public Coordinate getCo() {
 		return position;
 	}
