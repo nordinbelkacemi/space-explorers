@@ -1,8 +1,10 @@
 package console;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import controllers.Game;
+import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 public class Console {
@@ -115,18 +117,98 @@ public class Console {
             input = sc.nextLine();
             switch (input) {
             case "move":
-                showNeighbors();
-            case ""
+                correctInput = true;
+                ArrayList<AsteroidField> neighbors = game.getNeighbours();
+                showNeighbors(neighbors);
+                int nField = chooseNeighbor(neighbors);
+                
+                showFieldAsteroids(nField, neighbors);
+                int nAsteroid = chooseAsteroid(nField, neighbors);
+
+                game.moveSettler(nField, nAsteroid);
+            default:
+                System.out.println("invalid command!");
             }
         }
     }
 
-    private void showNeighbors() {
-        ArrayList<AsteroidField> neighbors = game.getNeighbours();
+    private void showNeighbors(ArrayList<AsteroidField> neighbors) {
         for (int i = 0; i < neighbors.size(); i++) {
-            // System.out.println);
+            List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
+            System.out.println(String.valueOf(i) + ". field - " + asteroids.size());
         }
     }
+
+    private int chooseNeighbor(ArrayList<AsteroidField> neighbors) {
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch(input) {
+                case "exit":
+                    System.exit(1);
+                default:
+                    int nField = Integer.parseInt(input);
+                    if (nField > neighbors.size() || nField < 0) {
+                        System.out.println("invalid command!");
+                    } else {
+                        correctInput = true;
+                    }
+            }
+        }
+
+        return Integer.parseInt(input);
+    }
+
+    private void showFieldAsteroids(int nField, ArrayList<AsteroidField> neighbors) {
+        AsteroidField af = neighbors.get(nField - 1);
+        List<Asteroid> asteroids = af.getAsteroids();
+
+        for (int i = 0; i < asteroids.size(); i++) {
+            Asteroid asteroid = asteroids.get(i);
+
+            String core = "?";
+            if (asteroid.getThickness() == 0) {
+                if (asteroid.isEmpty()) {
+                    core = "empty";
+                } else {
+                    core = asteroid.getMaterial().toString();
+                }
+            }
+
+            System.out.println(String.valueOf(i) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
+        }
+    }
+
+    private int chooseAsteroid(int nField, ArrayList<AsteroidField> neighbors) {
+        AsteroidField af = neighbors.get(nField - 1);
+        List<Asteroid> asteroids = af.getAsteroids();
+        
+        String input = new String();
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            input = sc.nextLine();
+            switch(input) {
+                case "exit":
+                    System.exit(1);
+                default:
+                    int nAsteroid = Integer.parseInt(input);
+                    if (nAsteroid > asteroids.size() || nAsteroid <= 0) {
+                        System.out.println("invalid command!");
+                    } else {
+                        correctInput = true;
+                    }
+            }
+        }
+
+        return Integer.parseInt(input);
+    } 
+
+
+
+
 
 
 
