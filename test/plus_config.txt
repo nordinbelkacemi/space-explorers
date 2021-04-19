@@ -1,0 +1,13 @@
+0,uranium 2 0 
+1,iron 6
+2,empty 0
+
+2 0
+
+0 0
+
+2 0
+
+
+field 0, field 2
+field 1, settler 0

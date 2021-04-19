@@ -21,9 +21,13 @@ public class Traveler {
 	public Traveler() { }
 
 	public Traveler(Asteroid a) {
-		asteroid = a;
+		setPosition(a);
 	}
 	
+	/**
+	 * Visszaadja a Traveler aszteroidáját
+	 * @return a Traveler aszteroidája
+	 */
 	public Asteroid getAsteroid() {
 		return asteroid;
 	}

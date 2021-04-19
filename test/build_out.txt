@@ -1,0 +1,21 @@
+Add config file:
+Choose settler: 1
+Your settler can:
+move
+drill
+build robot
+build teleportgate
+place teleportgate
+robot 1 move:        
+0. field - 1 asteroids
+1. field - 1 asteroids
+0. asteroid - layers: 0, core: empty 
+Choose settler: 1
+Your settler can:
+move
+drill
+build teleportgate
+place teleportgate
+robot 1 move:        
+0. field - 1 asteroids
+1. field - 1 asteroids

@@ -2,6 +2,7 @@ package model.playfield;
 
 import java.io.PrintStream;
 
+import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.settler.Miner;
 import model.settler.SettlerTeam;
@@ -14,19 +15,26 @@ import model.settler.Traveler;
 public class Ufo extends Traveler implements Miner{
 
 	/**
-	 * Az ufot irányító központi vezető.
+	 * Az ufót irányító központi vezető.
 	 */
 	private static UfoAi ai;
 	
 	public Ufo(Asteroid a) {
-		setPosition(a);
+		super(a);
 	}
 
+	/**
+	 * A bányászást megvalósító metódus
+	 */
 	@Override
 	public void mine() {
 		asteroid.removeMaterial();
 	}
 	
+	/**
+	 * Beállítja az ufót irányító mesterséges intelligenciát.
+	 * @param uai
+	 */
 	public static void setAi(UfoAi uai) {
     	ai = uai;
     }

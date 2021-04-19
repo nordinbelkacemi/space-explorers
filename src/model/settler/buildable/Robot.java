@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.ai.Ai;
 import model.ai.RobotAi;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
@@ -21,13 +22,17 @@ public class Robot extends Traveler implements Buildable, Driller {
 	/**
 	 * A robotot irányító mesterséges intelligencia.
 	 */
-	private RobotAi ai;
+	private static RobotAi ai;
 	
 	private Random r = new Random();
 	
 	public Robot(Asteroid a) {
 		super(a);
-		ai = new RobotAi();
+		ai.addRobot(this);
+	}
+	
+	public static void setAi(RobotAi rai) {
+		ai = rai;
 	}
 
 	@Override
@@ -62,6 +67,9 @@ public class Robot extends Traveler implements Buildable, Driller {
 		ai.addRobot(this);
 	}
 
+	/**
+	 * A fúrást megvalósító metódus
+	 */
 	@Override
 	public void drill() {
 		this.asteroid.removeLayer();

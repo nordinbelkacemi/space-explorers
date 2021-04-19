@@ -38,6 +38,7 @@ public class Settler extends Traveler implements Miner, Driller {
     /** Az eszköztárában lévő nyersanyagok száma */
     private int materialCount;
     
+    /** A telepes eszköztárának kapacitása */
     private static int capacity = 10;
 
     /** A telepes teleportkapu-párja. Ha nem épített kapupárt akkor null. */
@@ -195,12 +196,19 @@ public class Settler extends Traveler implements Miner, Driller {
     	asteroid.addMaterial(getCoal());
     }
     
+    /**
+     * Az aszteroida felrobbanásának hatására megöli a telepest.
+     */
     @Override
     public void reactToExplosion() {
         super.reactToExplosion();
         team.removeSettler(this);
     }
     
+    /**
+     * Beállítja a telepes csapatát
+     * @param st A beállítandó csapat.
+     */
     public static void setTeam(SettlerTeam st) {
     	team = st;
     }
@@ -211,4 +219,32 @@ public class Settler extends Traveler implements Miner, Driller {
     	
     	// material cuccokat majd később
 	}
+
+    public boolean canBuildGate() {
+        return ironStorage.size() >= 2 && iceStorage.size() >= 1 && uraniumStorage.size() >= 1;
+    }
+
+    public boolean canBuildRobot() {
+        return ironStorage.size() >= 1 && coalStorage.size() >= 1 && uraniumStorage.size() >= 1;
+    }
+
+    public boolean canPlaceGate() {
+        return teleportGatePairs.size() >= 1;
+    }
+
+    public int getIronCount() {
+        return ironStorage.size();
+    }
+
+    public int getCoalCount() {
+        return coalStorage.size();
+    }
+
+    public int getIceCount() {
+        return iceStorage.size();
+    }
+
+    public int getUraniumCount() {
+        return uraniumStorage.size();
+    }
 }

@@ -1,0 +1,7 @@
+0,empty 0,empty 0,uranium 4 
+
+
+0 2
+
+0 0
+0 1
