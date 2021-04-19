@@ -93,6 +93,27 @@ public class Console {
 
                 game.moveSettler();
                 break;
+            case "build teleportgate":
+            	game.buildTeleportGate();
+            	break;
+            case "build robot":
+            	game.buildRobot();
+            	break;
+            case "putback iron":
+            	game.putIronBack();
+            	break;
+            case "putback ice":
+            	game.putIceBack();
+            	break;
+            case "putback coal":
+            	game.putCoalBack();
+            	break;
+            case "putback uranium":
+            	game.putUraniumBack();
+            	break;
+            case "place teleportgate":
+            	//TODO
+            	break;
             default:
                 throw new InvalidCmdException(); // in case of invalid command
             }
