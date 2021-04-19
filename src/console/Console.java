@@ -15,7 +15,8 @@ public class Console {
 
     class ExitException extends Exception { }
     class NextTurnException extends Exception { }
-    class BackException extends Exception { }
+    class InvalidOrBackCmdException { }
+    class BackCmdException extends InvalidOrBackCmdException { }
 
     /** When the player chooses where to move, this type holds the asteroid field index and and asteroid number (also an index, but 1-based) chosen */
     class DestinationSelection {
@@ -56,28 +57,7 @@ public class Console {
          * @param input the string passed in by the user (or an input file in a test)
          * @throws InvalidCmdException thrown if the string passed in is an invalid command
          */
-        public void run(String input) throws InvalidCmdException;
-    }
-
-    /**
-     * Interface with a run function. The run function in our case is always a
-     * function that takes in an input and can throw exceptions in two cases:
-     * 
-     * - if the input is an invalid command (throws InvalidCmdException)
-     * - if the input is a back command (throws BackException)
-     * 
-     * Wherever an instance of the interface is called, if an exception is thrown
-     * by it, it will get called again until it doesn't throw anything.
-     */
-    interface IRunnableWithBackCmd {
-        /**
-         * the referenced function's run method
-         * 
-         * @param input the string passed in by the user (or an input file in a test)
-         * @throws InvalidCmdException thrown if the string passed in is an invalid command
-         * @throws BackException thrown if the string passed in is the back command
-         */
-        public void run(String input) throws InvalidCmdException, BackException;
+        public void run(String input) throws InvalidOrBackCmdException;
     }
 
     private IRunnable chooseSettlerMethod = new IRunnable() {
@@ -94,7 +74,7 @@ public class Console {
 
     private IRunnable chooseActionMethod = new IRunnable() {
         @Override
-        public void run(String input) throws InvalidCmdException {
+        public void run(String input) throws InvalidOrBackCmdException {
             switch(input) {
             case "move":
                 ArrayList<AsteroidField> neighbors = game.getNeighbours();
@@ -102,14 +82,11 @@ public class Console {
                 if (destination.getAsteroidNum() == null || destination.getFieldIdx() == null) {
                     return;
                 }
-                try {
-                    game.moveSettler(nField, nAsteroid);
-                } catch (Exception ex) {
-                    throw ex;
-                }
+                game.moveSettler(nField, nAsteroid);
+                
                 break;
             default:
-                throw new Exception(); // in case of invalid command
+                throw new InvalidCmdException(); // in case of invalid command
             }
         }
     };
@@ -219,11 +196,11 @@ public class Console {
         }
     }
 
-    private void handleSettlerTurn() throws NextTurnException, ExitException { 
-        printChoosableSettlers();
-        
-        Integer nSettler = 0;
+    private void handleSettlerTurn() throws NextTurnException, ExitException {
+        /* player choosing a settler */
+        Integer nSettler = new Integer();
         try {
+            printChoosableSettlers();
             nSettler = Integer.parseInt(getInputSkippableExitable(chooseSettlerMethod));
         } catch (NextTurnException ex) {
             throw ex;
@@ -231,13 +208,18 @@ public class Console {
             throw ex;
         }
 
-        printAvailableActions();
-
-        /* lepes */
-        try {
-            getInputExitable(chooseActionMethod);
-        } catch (ExitException ex) {
-            throw ex;
+        /* player choosing the action to be performed by the settler */
+        boolean doneWithAction = false;
+        while(!doneWithAction) {
+            try {
+                printAvailableActions();
+                getInputExitable(chooseActionMethod);
+                doneWithAction = true;
+            } catch (ExitException ex) {
+                throw ex;
+            } catch (BackCmdException ex) {
+                /* do nothing just need to loop back (keep doneWithAction false) */
+            }
         }
 
         game.endSettlerTurn(Integer.valueOf(nSettler));
@@ -393,9 +375,13 @@ public class Console {
     }
 
     /**
-     * For commands where the user can exit the program with the exit command
+     * For commands where the user can exit the program with the exit command.
+     * Additionally, if the command given within the getInputMethod parameter of the
+     * function was a back command, a BackException gets caught and thrown to the caller.
+     * 
+     * @throws ExitException if the user input was the exit commands
      */
-    private String getInputExitable(IRunnable getInputMethod) throws ExitException {
+    private String getInputExitable(IRunnable getInputMethod) throws BackCmdException, ExitException {
         String input = new String();
 
         boolean correctInput = false;
@@ -411,7 +397,7 @@ public class Console {
                 } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
                 } catch (BackException ex) {
-
+                    throw ex;
                 }
                 break;
             }
@@ -424,6 +410,9 @@ public class Console {
      * For commands where the user can:
      * - go back to previous menu point (selection of asteroid field and selection of asteroid)
      * - exit the program with the exit command
+     * 
+     * @throws BackException if the user input was the back command
+     * @throws ExitException if the user input was the exit command
      */
     private String getInputNavigableExitable(IRunnable getInputMethod) throws BackException, ExitException {
         String input = new String();

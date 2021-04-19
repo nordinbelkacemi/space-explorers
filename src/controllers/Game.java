@@ -20,7 +20,7 @@ import model.settler.buildable.Robot;
 import model.settler.buildable.TeleportGatePair;
 
 public class Game {
-	class InvalidCmdException extends Exception { }
+	class InvalidCmdException extends InvalidOrBackCmdException { }
 
 	private Sun sun;
 	private SolarSystem solarSystem;
