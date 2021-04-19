@@ -16,6 +16,9 @@ import java.util.ArrayList;
  */
 public class SolarSystem {
 
+	/**
+	 * A játékteret alkotó koordináták, ezeken a helyeken vannak AsteroidFieldek.
+	 */
 	private Coordinate[] cos = {
 									new Coordinate(-4, 4),new Coordinate(-3, 4),new Coordinate(-2, 4),new Coordinate(-1, 4),new Coordinate(0, 4),
 							new Coordinate(-4, 3),new Coordinate(-3, 3),new Coordinate(-2, 3),new Coordinate(-1, 3),new Coordinate(0, 3),new Coordinate(1, 3),
@@ -38,6 +41,10 @@ public class SolarSystem {
 	 */
 	private List<AsteroidField> asteroidBelt;
 	
+	/**
+	 * Konstruktor.
+	 * @param s az aszteroidaövben lévő nap
+	 */
 	public SolarSystem(Sun s) {
 		asteroidBelt = createBelt();
 		setNeighbours();
@@ -48,7 +55,7 @@ public class SolarSystem {
 	
 	/**
 	 * Létrehozza az aszteroidaövet és inicializálja a benne lévő objektumokat.
-	 * @return
+	 * @return a játékteret alkotó AsteroidFieldek listája
 	 */
 	private List<AsteroidField> createBelt() {
 		ArrayList<AsteroidField> belt = new ArrayList<>();
@@ -124,13 +131,17 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Sun setter.
-	 * @param s 
+	 * Beállítja a napot.
+	 * @param s a nap objektum
 	 */
 	public void setSun(Sun s) {
 		sun = s;
 	}
 	
+	/**
+	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a SolarSystem adatait.
+	 * @param out ahova kiírja az adatokat
+	 */
 	public void configOut(PrintStream out) {
 		int i = 0;
 		for (AsteroidField f : asteroidBelt) {
@@ -141,6 +152,10 @@ public class SolarSystem {
 		}
 	}
 	
+	/**
+	 * Visszaadja a játékteret alkotó AsteroidFieldek listáját.
+	 * @return az AsteroidFieldek listája
+	 */
 	public List<AsteroidField> getBelt(){
 		return asteroidBelt;
 	}

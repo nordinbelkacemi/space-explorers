@@ -30,7 +30,7 @@ public class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
-	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke True, különben false */
+	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke true, különben false */
 	private boolean gameOver;
 
 	/** A kiválasztott telepes. Ezzel a telepessel léphet a felhasználó (move, drill stb) */
@@ -258,8 +258,13 @@ public class Game {
 		selectedField = getField(idx);
 	}
 
-	public void selectAsteroid(int n) {
-		selectedAsteroid = selectedField.getAsteroids().get(n);
+	public void selectAsteroid(int n) throws InvalidCmdException {
+		List<Asteroid> asteroids = selectedField.getAsteroids();
+		if (n >= 1 && n <= asteroids.size()) {
+			selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+		} else {
+			throw new InvalidCmdException();
+		}
 	}
 
 	public AsteroidField getSelectedField() {

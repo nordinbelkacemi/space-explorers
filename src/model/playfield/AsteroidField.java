@@ -17,7 +17,7 @@ import model.settler.buildable.TeleportGate;
  */
 public class AsteroidField extends Hexagon {
 
-	///////////////////////////////////////// attributes
+	///////////////////////////////////////// attribútumok
 
 	/** Az AsteroidFieldhez tartozó aszteroidákat tárolja. */
 	private List<Asteroid> asteroids;
@@ -28,12 +28,13 @@ public class AsteroidField extends Hexagon {
 	/** Az AsteroidFielden elhelyezkedő teleportkapukat tárolja. */
 	private List<TeleportGate> teleportGates;
 
-	/**A megkergült kapukat tartalmazó osztály. */
+	/** A megkergült kapukat tartalmazó osztály. */
 	private static MegkergultGates megkergultGates;
 
+	/** Az összes AsteroidField listája. */
 	private static List<AsteroidField> belt;
 
-	//////////////////////////////////////// ctors
+	//////////////////////////////////////// konstruktorok
 	public AsteroidField() {
 		asteroids = new ArrayList<>();
 		neighbours = new ArrayList<>();
@@ -46,7 +47,12 @@ public class AsteroidField extends Hexagon {
 		neighbours = new ArrayList<>();
 		teleportGates = new ArrayList<>();
 	}
-
+	////////////////////////////////////////
+	
+	/**
+	 * Véletlenszerűen generál egy aszteroidákból álló listát.
+	 * @return a generált lista
+	 */
 	private List<Asteroid> createAsteroids() {
 		Random r  = new Random();
 		ArrayList<Asteroid> field = new ArrayList<>();
@@ -104,7 +110,7 @@ public class AsteroidField extends Hexagon {
 	 * @return a szomszédos aszteroidákat tartalmazó aszteroidamezők
 	 */
 	public ArrayList<AsteroidField> getNeighbours() {
-		ArrayList<AsteroidField> neighbourFields = new ArrayList<AsteroidField>();
+		ArrayList<AsteroidField> neighbourFields = new ArrayList<AsteroidField>(neighbours);
 		neighbourFields.add(0, this);
 		return neighbourFields;
 	}
@@ -149,16 +155,29 @@ public class AsteroidField extends Hexagon {
 		asteroids.remove(a);
 	}
 
+	/**
+	 * Beállítja az AsteroidField belt változóját.
+	 * @param b az AsteroidFieldek listája
+	 */
 	public static void setBelt(List<AsteroidField> b) {
 		belt = b;
 	}
 
+	/**
+	 * Visszaadja egy adott aszteroida indexek szerinti koordinátáit.
+	 * @param a az aszteroida
+	 * @return az indexek szerinti koordináta
+	 */
 	public Coordinate getIndexes(Asteroid a) {
 		int x = belt.indexOf(this);
 		int y = asteroids.indexOf(a);
 		return new Coordinate(x, y);
 	}
 
+	/**
+	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban az AsteroidField adatait.
+	 * @param out ahova kiírja az adatokat
+	 */
 	public void printToConfig(PrintStream out) {
 		for (Asteroid a : asteroids) {
 			out.print(',');
@@ -166,11 +185,13 @@ public class AsteroidField extends Hexagon {
 		}
 	}	
   
-  public Coordinate getCoordinates() {
+	
+	/**
+	 * Visszaadja az AsteroidField koordinátáit.
+	 * @return a koordináta
+	 */
+	public Coordinate getCoordinates() {
 		return position;
 	}
-	////////////////////////////////////////// test
-
-
 
 }
