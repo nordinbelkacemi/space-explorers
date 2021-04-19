@@ -1,5 +1,9 @@
 package console;
-import java.controllers.Game.InvalidCmdException;
+import exceptions.InvalidOrBackCmdException;
+import exceptions.NextTurnException;
+import exceptions.BackCmdException;
+import exceptions.ExitException;
+import exceptions.InvalidCmdException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,33 +17,31 @@ public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
 
-    class ExitException extends Exception { }
-    class NextTurnException extends Exception { }
-    class InvalidOrBackCmdException { }
-    class BackCmdException extends InvalidOrBackCmdException { }
-
-    /** When the player chooses where to move, this type holds the asteroid field index and and asteroid number (also an index, but 1-based) chosen */
+    /**
+     * When the player chooses where to move, this type holds the asteroid field
+     * index and and asteroid number (also an index, but 1-based) chosen
+     */
     class DestinationSelection {
-        private Integer fieldIdx, asteroidNum;
+        private int fieldIdx, asteroidNum;
 
         public DestinationSelection() {
             fieldIdx = -1;
             asteroidNum = -1;
         }
 
-        public Integer getFieldIdx() {
+        public int getFieldIdx() {
             return fieldIdx;
         }
 
-        public void setFieldIdx(Integer n) {
+        public void setFieldIdx(int n) {
             fieldIdx = n;
         }
 
-        public Integer getAsteroidNum() {
+        public int getAsteroidNum() {
             return asteroidNum;
         }
 
-        public void setAsteroidNum(Integer num) {
+        public void setAsteroidNum(int num) {
             asteroidNum = num;
         }
     }
@@ -54,10 +56,12 @@ public class Console {
     interface IRunnable {
         /**
          * the referenced function's run method
+         * 
          * @param input the string passed in by the user (or an input file in a test)
-         * @throws InvalidCmdException thrown if the string passed in is an invalid command
+         * @throws InvalidCmdException thrown if the string passed in is an invalid
+         *                             command
          */
-        public void run(String input) throws InvalidOrBackCmdException;
+        public void run(String input) throws InvalidCmdException, BackCmdException, ExitException;
     }
 
     private IRunnable chooseSettlerMethod = new IRunnable() {
@@ -74,30 +78,53 @@ public class Console {
 
     private IRunnable chooseActionMethod = new IRunnable() {
         @Override
-        public void run(String input) throws InvalidOrBackCmdException {
+        public void run(String input) throws InvalidCmdException, BackCmdException, ExitException {
             switch(input) {
             case "move":
                 ArrayList<AsteroidField> neighbors = game.getNeighbours();
-                DestinationSelection destination = selectDestination(neighbors);
-                if (destination.getAsteroidNum() == null || destination.getFieldIdx() == null) {
-                    return;
+
+                try {
+                    selectDestination(neighbors);
+                } catch (BackCmdException ex) {
+                    throw ex;
+                } catch (ExitException ex) {
+                    throw ex;
                 }
-                game.moveSettler(nField, nAsteroid);
-                
+
+                game.moveSettler();
                 break;
             default:
                 throw new InvalidCmdException(); // in case of invalid command
             }
         }
     };
-    
-    private IRunnable chooseNeighborMethod = new IRunnable() {
-        @Override
-        public void run(String input) throws InvalidCmdException {
-            int n = Integer.parseInt(input);
-        }
-    };
 
+    
+    private void selectDestination(ArrayList<AsteroidField> neighbors) throws BackCmdException, ExitException {
+        DestinationSelection destination = new DestinationSelection();
+        
+        boolean destinationSelected = false;
+        while (!destinationSelected) {
+            try {
+                showNeighbors(neighbors);
+                destination.setFieldIdx(Integer.valueOf(getInputNavigableExitable(chooseFieldMethod)));
+                try {
+                    showFieldAsteroids(destination.getFieldIdx());
+                    destination.setAsteroidNum(Integer.valueOf(getInputNavigableExitable(chooseAsteroidMethod)));
+                    destinationSelected = true;
+                } catch (BackCmdException ex) {
+                    continue;
+                } catch (ExitException ex) {
+                    throw ex;
+                }
+            } catch (BackCmdException ex) {
+                throw ex;
+            } catch (ExitException ex) {
+                throw ex;
+            }
+        }
+    }
+    
     private void showNeighbors(ArrayList<AsteroidField> neighbors) {
         for (int i = 0; i < neighbors.size(); i++) {
             List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
@@ -105,26 +132,50 @@ public class Console {
         }
     }
 
-    private DestinationSelection selectDestination(ArrayList<Asteroid> neighbors) {
-        DestinationSelection destination = new DestinationSelection();
+    private void showFieldAsteroids(int fieldIdx) {
+        List<Asteroid> asteroids = game.getFieldAsteroids(fieldIdx);
 
-        try {
-            boolean completed = false;
-            while (!completed) {
-                showNeighbors(neighbors);
-                destination.setFieldIdx(Integer.valueOf(getInputNavigableExitable(chooseFieldMethod)));
-                try {
-                    destination.setAsteroidNum(Integer.valueOf(getInputNavigableExitable(chooseAsteroidMethod)));
-                } catch (BackException ex) {
-                    destination.setAsteroidNum(null);
+        for (int i = 0; i < asteroids.size(); i++) {
+            Asteroid asteroid = asteroids.get(i);
+
+            String core = "?";
+            if (asteroid.getThickness() == 0) {
+                if (asteroid.isEmpty()) {
+                    core = "empty";
+                } else {
+                    core = asteroid.getMaterial().toString();
                 }
             }
-        } catch (BackException ex) {
-            destination.setFieldIdx(null);
-        }
 
-        return destination;
+            System.out.println(String.valueOf(i) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
+        }
     }
+
+    private IRunnable chooseFieldMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws InvalidCmdException {
+            List<AsteroidField> neighbors = game.getNeighbours();
+            int fieldIdx = Integer.parseInt(input);
+            if (fieldIdx >= 0 && fieldIdx < neighbors.size()) {
+                game.selectField(fieldIdx);
+            } else {
+                throw new InvalidCmdException();
+            }
+        }
+    };
+
+    private IRunnable chooseAsteroidMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws InvalidCmdException {
+            List<Asteroid> asteroids = game.getSelectedField().getAsteroids();
+            int asteroidNum = Integer.parseInt(input);
+            if (asteroidNum >= 1 && asteroidNum <= asteroids.size()) {
+                game.selectAsteroid(asteroidNum);
+            } else {
+                throw new InvalidCmdException();
+            }
+        }
+    };
 
 
 
@@ -198,7 +249,7 @@ public class Console {
 
     private void handleSettlerTurn() throws NextTurnException, ExitException {
         /* player choosing a settler */
-        Integer nSettler = new Integer();
+        Integer nSettler = 0;
         try {
             printChoosableSettlers();
             nSettler = Integer.parseInt(getInputSkippableExitable(chooseSettlerMethod));
@@ -254,86 +305,6 @@ public class Console {
 
 
 
-    
-
-
-    private int chooseNeighbor(ArrayList<AsteroidField> neighbors) {
-        String input = new String();
-
-        boolean correctInput = false;
-        while (!correctInput) {
-            input = sc.nextLine();
-            switch(input) {
-                case "exit":
-                    System.exit(1);
-                    // break;
-                default:
-                    int nField = Integer.parseInt(input);
-                    if (nField > neighbors.size() || nField < 0) {
-                        System.out.println("invalid command!");
-                    } else {
-                        correctInput = true;
-                    }
-                    break;
-            }
-        }
-
-        return Integer.parseInt(input);
-    }
-
-    private void showFieldAsteroids(int nField, ArrayList<AsteroidField> neighbors) {
-        AsteroidField af = neighbors.get(nField);
-        List<Asteroid> asteroids = af.getAsteroids();
-
-        for (int i = 0; i < asteroids.size(); i++) {
-            Asteroid asteroid = asteroids.get(i);
-
-            String core = "?";
-            if (asteroid.getThickness() == 0) {
-                if (asteroid.isEmpty()) {
-                    core = "empty";
-                } else {
-                    core = asteroid.getMaterial().toString();
-                }
-            }
-
-            System.out.println(String.valueOf(i) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
-        }
-    }
-
-    private int chooseAsteroid(int nField, ArrayList<AsteroidField> neighbors) {
-        AsteroidField af = neighbors.get(nField - 1);
-        List<Asteroid> asteroids = af.getAsteroids();
-        
-        String input = new String();
-
-        boolean correctInput = false;
-        while (!correctInput) {
-            input = sc.nextLine();
-            switch(input) {
-                case "exit":
-                    System.exit(1);
-                    // break;
-                default:
-                    int nAsteroid = Integer.parseInt(input);
-                    if (nAsteroid > asteroids.size() || nAsteroid <= 0) {
-                        System.out.println("invalid command!");
-                    } else {
-                        correctInput = true;
-                    }
-                    break;
-            }
-        }
-
-        return Integer.parseInt(input);
-    } 
-
-
-
-
-
-
-
 
 
 
@@ -366,6 +337,10 @@ public class Console {
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
+                } catch (BackCmdException ex) {
+                    /* do nothing */
+                } catch (ExitException ex) {
+                    throw ex;
                 }
                 break;
             }
@@ -396,7 +371,7 @@ public class Console {
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
                     System.out.println("invalid command!");
-                } catch (BackException ex) {
+                } catch (BackCmdException ex) {
                     throw ex;
                 }
                 break;
@@ -414,7 +389,7 @@ public class Console {
      * @throws BackException if the user input was the back command
      * @throws ExitException if the user input was the exit command
      */
-    private String getInputNavigableExitable(IRunnable getInputMethod) throws BackException, ExitException {
+    private String getInputNavigableExitable(IRunnable getInputMethod) throws BackCmdException, ExitException {
         String input = new String();
 
         boolean correctInput = false;
@@ -424,7 +399,7 @@ public class Console {
             case "exit":
                 throw new ExitException();
             case "back":
-                throw new BackException();
+                throw new BackCmdException();
             default:
                 try {
                     getInputMethod.run(input);
