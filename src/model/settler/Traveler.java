@@ -18,14 +18,21 @@ public class Traveler {
 	 */
 	protected Asteroid asteroid;
 	
+	/**
+	 * Paraméter nélküli konstruktor.
+	 */
 	public Traveler() { }
 
+	/**
+	 * Konstruktor.
+	 * @param a az aszteroida, amelyiken tartózkodik a telepes
+	 */
 	public Traveler(Asteroid a) {
 		setPosition(a);
 	}
 	
 	/**
-	 * Visszaadja a Traveler aszteroidáját
+	 * Visszaadja a Traveler aszteroidáját.
 	 * @return a Traveler aszteroidája
 	 */
 	public Asteroid getAsteroid() {
@@ -37,7 +44,7 @@ public class Traveler {
 	 * meghívja a RemoveTraveler() függvényt arra az aszteroidára, amelyen a Traveler jelenleg tartózkodik, 
 	 * a SetPosition() függvénnyel pedig átállítja az asteroid attribútumot a 
 	 * paraméterként kapott aszteroidára.
-	 * @param a Az aszteroida amire átrepul a telepes.
+	 * @param a az aszteroida amire átrepul a telepes
 	 */
 	public void move(Asteroid a) {
 		asteroid.removeTraveler(this);
@@ -61,7 +68,7 @@ public class Traveler {
 	/**
 	 * Visszaad egy, a Traveler aszteroidájához tartozó AsteroidFieldet
 	 * és annak szomszédait tartalmazó listát.
-	 * @return A traveller
+	 * @return a Traveler
 	 */
 	public List<AsteroidField> getNeighbours() {
 		List<AsteroidField> neighbours = asteroid.getNeighbours();
@@ -69,8 +76,8 @@ public class Traveler {
 	}
 
 	/**
-	 * Az asteroid privát taghoz tartozó setter.
-	 * @param a
+	 * Beállítja a Traveler új pozícióját.
+	 * @param a a Traveler új pozíciója
 	 */
 	public void setPosition(Asteroid a) {
 		asteroid = a;

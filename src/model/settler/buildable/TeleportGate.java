@@ -17,6 +17,9 @@ public class TeleportGate {
 	 */
 	private TeleportGate otherGate;
 	
+	/**
+	 * A megkergült kapu mozgatásakor használt Random objektum.
+	 */
 	Random r = new Random();
 	
 	/**
@@ -34,7 +37,7 @@ public class TeleportGate {
 	
 	/**
 	 * Beállítja a teleportkapu párját.
-	 * @param tg A teleportkapu párja.
+	 * @param tg a teleportkapu párja
 	 */
 	public void setOtherGate(TeleportGate tg) {
 		otherGate = tg;
@@ -42,7 +45,7 @@ public class TeleportGate {
 	
 	/**
 	 * Visszaadja a teleportkapu párját.
-	 * @return A teleportkapu párja.
+	 * @return a teleportkapu párja
 	 */
 	public TeleportGate getOtherGate() {
 		return otherGate;
@@ -50,7 +53,7 @@ public class TeleportGate {
 	
 	/**
 	 * Beállítja a teleportkapu helyét.
-	 * @param af Az aszteroidamező, ahova kerül a teleportkapu.
+	 * @param af az aszteroidamező, ahova kerül a teleportkapu
 	 */
 	public void setAsteroidField(AsteroidField af) {
 		asteroidField = af;
@@ -58,7 +61,7 @@ public class TeleportGate {
 	
 	/**
 	 * Visszaadja a teleportkapu helyét.
-	 * @return A teleportkapu helye
+	 * @return a teleportkapu helye
 	 */
 	public AsteroidField getAsteroidField() {
 		return asteroidField;

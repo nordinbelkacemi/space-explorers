@@ -3,7 +3,7 @@ package model.materials;
 import model.playfield.Asteroid;
 import model.settler.Settler;
 
-/**Az urán, mint kibányászható nyersanyag osztálya, radioaktív, nem szublimál */
+/** Az urán, mint kibányászható nyersanyag osztálya, radioaktív, nem szublimál. */
 public class Uranium extends Material {
 
 	/**
@@ -15,7 +15,8 @@ public class Uranium extends Material {
 	/** Egy konkrét urán objektum napfényérintéseinek számát tárolja. */
 	private int exposureCount = 0;
 	
-	/**Meghívja az aszteroida Explode() függvényét
+	/**
+	 * Meghívja az aszteroida Explode() függvényét.
 	 * @param a az érintett aszteroida
 	 */
     @Override
@@ -25,14 +26,18 @@ public class Uranium extends Material {
     
     public Uranium() {}
 
-	/**Meghívja a paraméterként kapott settler AddUranium() függvényét
-	 * @param s a kapott settler
+	/**Meghívja a paraméterként kapott settler AddUranium() függvényét.
+	 * @param s a kapott Settler
 	 */
 	@Override
 	public void store(Settler s) {
 		s.addUranium(this);
 	}
 	
+	/**
+	 * Visszaadja az urán String reprezentációját.
+	 * @return a String
+	 */
     @Override
     public String toString() {
         return "uranium " + exposureCount + " ";

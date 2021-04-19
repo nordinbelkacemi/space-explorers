@@ -12,13 +12,13 @@ import model.settler.Settler;
 public abstract class Material {
 	/**
 	 * A telepesnek a megfelelő tárolójához hozzáadja magát.
-	 * @param s Az a settler akinek a tárolójába elhelyazi magát.
+	 * @param s az a settler akinek a tárolójába elhelyazi magát
 	 * */
 	public abstract void store(Settler s);
 
 	/**
 	 * Megfelelően reagál a naphoz közeli létre.
-	 * @param a Az aszteroida amiben a nyersanyag elhelyezkedik és akinek továbbítja a reakcióját.
+	 * @param a az aszteroida amiben a nyersanyag elhelyezkedik és akinek továbbítja a reakcióját
      */
 	public void reactToSun(Asteroid a) {}
 }
