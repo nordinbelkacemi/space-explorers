@@ -226,7 +226,8 @@ public class Game {
 		chosenSettler.build(r);
 	}
 
-	public void move(Asteroid a) {
+	public void moveSettler(int fI, int aI) {
+		Asteroid a = chosenSettler.getAsteroid().getNeighbours().get(fI).getAsteroids().get(aI - 1);
 		chosenSettler.move(a);
 	}
 
