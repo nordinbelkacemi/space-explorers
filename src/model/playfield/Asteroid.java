@@ -158,4 +158,8 @@ public class Asteroid {
 			out.print("empty ");
 		out.print(thickness);
 	}
+
+	public Material getMaterial() {
+		return material;
+	}
 }

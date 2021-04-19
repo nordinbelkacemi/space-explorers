@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.InvalidCmdException;
 import model.ai.RobotAi;
 import model.ai.UfoAi;
 
@@ -18,6 +19,8 @@ import model.settler.Settler;
 import model.settler.SettlerTeam;
 import model.settler.buildable.Robot;
 import model.settler.buildable.TeleportGatePair;
+
+
 
 public class Game {
 	private Sun sun;
@@ -35,6 +38,12 @@ public class Game {
 
 	/** A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6 telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6) */
 	private List<Integer> choosableSettlers;
+
+	/** telepes mozgása során kiválasztott cél asteroid field */
+	private AsteroidField selectedField;
+
+	/** telepes mozgása során kiválasztott cél aszteroida */
+	private Asteroid selectedAsteroid;
 
 	// private Console console;
 
@@ -72,9 +81,9 @@ public class Game {
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void chooseSettler(int n) throws Exception {
+	public void chooseSettler(int n) throws InvalidCmdException {
 		if (!choosableSettlers.contains(n)) {
-			throw new Exception();
+			throw new InvalidCmdException();
 		}
 		chosenSettler = settlerTeam.chooseSettler(n);
 	}
@@ -205,6 +214,10 @@ public class Game {
 		choosableSettlers.set(n - 1, null);
 	}
 
+	public ArrayList<AsteroidField> getNeighbours() {
+		return chosenSettler.getNeighbours();
+	}
+
 	public void mine() {
 		chosenSettler.mine();
 	}
@@ -226,9 +239,33 @@ public class Game {
 		chosenSettler.build(r);
 	}
 
-	public void moveSettler(int fI, int aI) {
-		Asteroid a = chosenSettler.getAsteroid().getNeighbours().get(fI).getAsteroids().get(aI - 1);
-		chosenSettler.move(a);
+	public AsteroidField getField(int idx) {
+		return chosenSettler.getAsteroid().getNeighbours().get(idx);
+	}
+
+	public List<Asteroid> getFieldAsteroids(int idx) {
+		AsteroidField field = getField(idx);
+		return field.getAsteroids();
+	}
+
+	public void selectField(int idx) {
+		selectedField = getField(idx);
+	}
+
+	public void selectAsteroid(int n) {
+		selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+	}
+
+	public AsteroidField getSelectedField() {
+		return selectedField;
+	}
+
+	// public Asteroid getSelectedAsteroid() {
+	// 	return selectedAsteroid;
+	// }
+
+	public void moveSettler() {
+		chosenSettler.move(selectedAsteroid);
 	}
 
 	public void putIronBack() {
