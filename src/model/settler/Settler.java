@@ -22,7 +22,7 @@ import model.playfield.AsteroidField;
  */
 public class Settler extends Traveler implements Miner, Driller {
 
-	//////////////////////////////////////// attributumok
+	//////////////////////////////////////// attribútumok
 	/** Az eszköztárában lévő Iron típusú nyersanyagok. */
     private List<Iron> ironStorage;
 
@@ -35,10 +35,10 @@ public class Settler extends Traveler implements Miner, Driller {
     /** Az eszköztárában lévő Ice típusú nyersanyagok. */
     private List<Ice> iceStorage;
 
-    /** Az eszköztárában lévő nyersanyagok száma */
+    /** Az eszköztárában lévő nyersanyagok száma. */
     private int materialCount;
     
-    /** A telepes eszköztárának kapacitása */
+    /** A telepes eszköztárának kapacitása. */
     private static int capacity = 10;
 
     /** A telepes teleportkapu-párja. Ha nem épített kapupárt akkor null. */
@@ -48,22 +48,29 @@ public class Settler extends Traveler implements Miner, Driller {
     private static SettlerTeam team;
 
     
-    //////////////////////////////////////// ctors
+    //////////////////////////////////////// konstruktorok
 
+    /**
+	 * Konstruktor.
+	 * @param a az aszteroida, amelyiken a telepes tartózkodik.
+	 */
     public Settler(Asteroid a) {
-        asteroid = a;
+        super(a);
         uraniumStorage = new ArrayList<>();
         coalStorage = new ArrayList<>();
         iceStorage = new ArrayList<>();
         ironStorage = new ArrayList<>();
         materialCount = 0;
         teleportGatePairs = new ArrayList<>();
-        a.addTraveler(this);
     }
 
     public Settler() {}
 
     //////////////////////////////////////// függvények
+    /**
+	 * Visszaadja a telepes String reprezentációját.
+	 * @return a String
+	 */
 	@Override
     public String toString() {
         return "Settler";
@@ -87,7 +94,7 @@ public class Settler extends Traveler implements Miner, Driller {
     /**
      * Meghívja a paraméterben megkapott Buildable interfészt megvalósító objektum Build() függvényét,
      * ezzel megépíti az adott dolgot.
-     * @param b
+     * @param b a megépítendő objektum
      */
     public void build(Buildable b) {
     	b.build(this);
@@ -206,13 +213,17 @@ public class Settler extends Traveler implements Miner, Driller {
     }
     
     /**
-     * Beállítja a telepes csapatát
-     * @param st A beállítandó csapat.
+     * Beállítja a telepes csapatát.
+     * @param st a beállítandó csapat
      */
     public static void setTeam(SettlerTeam st) {
     	team = st;
     }
     
+    /**
+	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a telepes adatait.
+	 * @param out ahova kiírja az adatokat
+	 */
     public void printToConfig(PrintStream out) {
 		out.print(asteroid.getIndexes().toString());
     	
@@ -220,30 +231,58 @@ public class Settler extends Traveler implements Miner, Driller {
     	// material cuccokat majd később
 	}
 
+    /**
+     * Visszaadja, hogy a telepes tud-e teleportkapukat építeni.
+     * @return a logikai érték
+     */
     public boolean canBuildGate() {
         return ironStorage.size() >= 2 && iceStorage.size() >= 1 && uraniumStorage.size() >= 1;
     }
 
+    /**
+     * Visszaadja, hogy a telepes tud-e robotot építeni.
+     * @return a logikai érték
+     */
     public boolean canBuildRobot() {
         return ironStorage.size() >= 1 && coalStorage.size() >= 1 && uraniumStorage.size() >= 1;
     }
 
+    /**
+     * Visszaadja, hogy a telepes tud-e teleportkaput lehelyezni.
+     * @return a logikai érték
+     */
     public boolean canPlaceGate() {
         return teleportGatePairs.size() >= 1;
     }
 
+    /**
+     * Visszaadja, hogy a telepesnél hány egység vas van.
+     * @return a telepesnél lévő egységek száma
+     */
     public int getIronCount() {
         return ironStorage.size();
     }
 
+    /**
+     * Visszaadja, hogy a telepesnél hány egység szén van.
+     * @return a telepesnél lévő egységek száma
+     */
     public int getCoalCount() {
         return coalStorage.size();
     }
 
+    /**
+     * Visszaadja, hogy a telepesnél hány egység vízjég van.
+     * @return a telepesnél lévő egységek száma
+     */
     public int getIceCount() {
         return iceStorage.size();
     }
 
+    /**
+     * Visszaadja, hogy a telepesnél hány egység urán van.
+     * @return a telepesnél lévő egységek száma
+     */
     public int getUraniumCount() {
         return uraniumStorage.size();
     }
