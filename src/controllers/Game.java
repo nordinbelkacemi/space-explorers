@@ -1,11 +1,14 @@
 package controllers;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import model.ai.RobotAi;
 import model.ai.UfoAi;
+
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.playfield.Coordinate;
@@ -42,27 +45,16 @@ public class Game {
 		solarSystem = new SolarSystem(sun);
 
 		// settlers
-		settlerTeam = new SettlerTeam(solarSystem.getBelt());
-
-		choosableSettlers = new ArrayList<Integer>();
+		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
 		// robot
 		robotAi = new RobotAi();
 		// ufo
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		// megkergült
 		megkergultGates = new MegkergultGates();
-
-		configOut(System.out);
-	}
-
-	public void configOut(PrintStream out) {
-		solarSystem.configOut(out);
-		System.out.println();
-		settlerTeam.configOut(out);
-		System.out.println();
-		robotAi.configOut(out);
-		System.out.println();
-		ufoAi.configOut(out);
+		
+		choosableSettlers = new ArrayList<Integer>();
+		//configOut(System.out);
 	}
 
 	/** A játékot elindító függvény */
@@ -94,6 +86,63 @@ public class Game {
 	public boolean over() {
 		return gameOver;
 	}
+
+	
+	/////////////////////////////////////////// test
+	public Game(InputStream in) {
+		solarSystem = new SolarSystem();
+		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0); 
+		robotAi = new RobotAi();
+		ufoAi = new UfoAi(solarSystem.getBelt(),0);
+		megkergultGates = new MegkergultGates();
+		
+		choosableSettlers = new ArrayList<Integer>();
+		//configOut(System.out);
+	}
+	
+	public void configOut(PrintStream out) {
+		solarSystem.configOut(out);
+		out.println();
+		settlerTeam.configOut(out);
+		out.println();
+		robotAi.configOut(out);
+		out.println();
+		ufoAi.configOut(out);
+	}
+	
+	public void configIn(InputStream in) throws Exception {
+		int state = 0; // 0-asteroids 1-sun 2-settlers 3-robots 4-ufos 5-gates
+		Scanner sc = new Scanner(in);
+		String line = null;
+		while(sc.hasNextLine()) {
+			line = sc.nextLine();
+			if(line.isEmpty()) state++;
+			switch (state) {
+			case 0:
+				solarSystem.createField(line);
+				break;
+			case 1:
+				sun = new Sun(line);
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+			case 5:
+				
+				break;
+			default:
+				break;
+			}		
+		}		
+	}
+}
+
 
 	public ArrayList<String> getActions() {
 		ArrayList<String> actions = new ArrayList<String>();

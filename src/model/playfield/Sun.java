@@ -70,4 +70,14 @@ public class Sun extends Hexagon {
 	public void setSolarSystem(SolarSystem ss) {
 		solarSystem = ss;
 	}
+	
+	/////////////////////////////// test
+	
+	public Sun(String s) {
+		String[] data = s.split(" ");
+		position = new Coordinate(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+		solarSystem.setSun(this);
+		
+	}
+	
 }

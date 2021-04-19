@@ -21,6 +21,8 @@ public class UfoAi implements Ai {
 	 */
 	private List<Ufo> ufos;
 	
+	private List<AsteroidField> belt;
+	
 	private Random r = new Random();
 	
 	public UfoAi(List<AsteroidField> b) {
@@ -56,5 +58,12 @@ public class UfoAi implements Ai {
 	
 	public void remove(Ufo r) {
 		ufos.remove(r);
+	}
+	
+	//////////////////////////////////////////test
+	public UfoAi(List<AsteroidField> b,int t) {
+		belt = b;
+		Ufo.setAi(this);
+		ufos = new ArrayList<>();
 	}
 }

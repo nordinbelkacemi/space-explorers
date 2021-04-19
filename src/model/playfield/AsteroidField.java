@@ -164,9 +164,13 @@ public class AsteroidField extends Hexagon {
 			out.print(',');
 			a.printToConfig(out);
 		}
-	}
-
-	public Coordinate getCoordinates() {
+	}	
+  
+  public Coordinate getCoordinates() {
 		return position;
 	}
+	////////////////////////////////////////// test
+
+
+
 }
