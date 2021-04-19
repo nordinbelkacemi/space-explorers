@@ -52,4 +52,11 @@ public class SettlerTeam {
 			out.println();
 		}
 	}
+	
+	////////////////////////////////////////// test
+	public SettlerTeam(List<AsteroidField> b,int t) {
+		belt = b;
+		Settler.setTeam(this);
+		settlers = new ArrayList<>();
+	}
 }

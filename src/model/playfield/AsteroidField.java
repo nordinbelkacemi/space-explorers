@@ -165,4 +165,7 @@ public class AsteroidField extends Hexagon {
 			a.printToConfig(out);
 		}
 	}
+	
+	////////////////////////////////////////// test
+	
 }
