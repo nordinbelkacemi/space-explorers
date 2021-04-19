@@ -45,7 +45,7 @@ public class Console {
             asteroidNum = num;
         }
     }
-    
+
     /**
      * Interface with a run function. The run function in our case is always a
      * function that takes in an input and throws an exception if the input is an
@@ -56,7 +56,7 @@ public class Console {
     interface IRunnable {
         /**
          * the referenced function's run method
-         * 
+         *
          * @param input the string passed in by the user (or an input file in a test)
          * @throws InvalidCmdException thrown if the string passed in is an invalid
          *                             command
@@ -93,16 +93,22 @@ public class Console {
 
                 game.moveSettler();
                 break;
+            case "drill":
+                game.drill();
+                break;
+            case "mine":
+                game.mine();
+                break;
             default:
                 throw new InvalidCmdException(); // in case of invalid command
             }
         }
     };
 
-    
+
     private void selectDestination(ArrayList<AsteroidField> neighbors) throws BackCmdException, ExitException {
         DestinationSelection destination = new DestinationSelection();
-        
+
         boolean destinationSelected = false;
         while (!destinationSelected) {
             try {
@@ -124,7 +130,7 @@ public class Console {
             }
         }
     }
-    
+
     private void showNeighbors(ArrayList<AsteroidField> neighbors) {
         for (int i = 0; i < neighbors.size(); i++) {
             List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
@@ -315,8 +321,8 @@ public class Console {
 
 
     /**
-     * For commands where the user can: 
-     * - go back to previous menu point (selection of asteroid field and selection of asteroid) 
+     * For commands where the user can:
+     * - go back to previous menu point (selection of asteroid field and selection of asteroid)
      * - exit the program with the exit command
      */
     private String getInputSkippableExitable(IRunnable getInputMethod) throws NextTurnException, ExitException {
@@ -353,7 +359,7 @@ public class Console {
      * For commands where the user can exit the program with the exit command.
      * Additionally, if the command given within the getInputMethod parameter of the
      * function was a back command, a BackException gets caught and thrown to the caller.
-     * 
+     *
      * @throws ExitException if the user input was the exit commands
      */
     private String getInputExitable(IRunnable getInputMethod) throws BackCmdException, ExitException {
@@ -385,7 +391,7 @@ public class Console {
      * For commands where the user can:
      * - go back to previous menu point (selection of asteroid field and selection of asteroid)
      * - exit the program with the exit command
-     * 
+     *
      * @throws BackException if the user input was the back command
      * @throws ExitException if the user input was the exit command
      */

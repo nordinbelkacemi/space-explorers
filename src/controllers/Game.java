@@ -53,14 +53,14 @@ public class Game {
 		solarSystem = new SolarSystem(sun);
 
 		// settlers
-		settlerTeam = new SettlerTeam(solarSystem.getBelt()); 
+		settlerTeam = new SettlerTeam(solarSystem.getBelt());
 		// robot
 		robotAi = new RobotAi();
 		// ufo
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		// megkergült
 		megkergultGates = new MegkergultGates();
-		
+
 		choosableSettlers = new ArrayList<Integer>();
 		//configOut(System.out);
 	}
@@ -95,19 +95,19 @@ public class Game {
 		return gameOver;
 	}
 
-	
+
 	/////////////////////////////////////////// test
 	public Game(InputStream in) {
 		solarSystem = new SolarSystem();
-		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0); 
+		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0);
 		robotAi = new RobotAi();
 		ufoAi = new UfoAi(solarSystem.getBelt(),0);
 		megkergultGates = new MegkergultGates();
-		
+
 		choosableSettlers = new ArrayList<Integer>();
 		//configOut(System.out);
 	}
-	
+
 	public void configOut(PrintStream out) {
 		solarSystem.configOut(out);
 		out.println();
@@ -117,7 +117,7 @@ public class Game {
 		out.println();
 		ufoAi.configOut(out);
 	}
-	
+
 	public void configIn(InputStream in) throws Exception {
 		int state = 0; // 0-asteroids 1-sun 2-settlers 3-robots 4-ufos 5-gates
 		Scanner sc = new Scanner(in);
@@ -133,21 +133,21 @@ public class Game {
 				sun = new Sun(line);
 				break;
 			case 2:
-				
+
 				break;
 			case 3:
-				
+
 				break;
 			case 4:
-				
+
 				break;
 			case 5:
-				
+
 				break;
 			default:
 				break;
-			}		
-		}		
+			}
+		}
 	}
 
 	/////////////////////////////////////////// test
@@ -245,7 +245,13 @@ public class Game {
 
 	public List<Asteroid> getFieldAsteroids(int idx) {
 		AsteroidField field = getField(idx);
-		return field.getAsteroids();
+		List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
+		for (Asteroid asteroid : field.getAsteroids()) {
+			if (asteroid != chosenSettler.getAsteroid()) {
+				onlyNeighbours.add(asteroid);
+			}
+		}
+		return onlyNeighbours;
 	}
 
 	public void selectField(int idx) {
@@ -253,7 +259,7 @@ public class Game {
 	}
 
 	public void selectAsteroid(int n) {
-		selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+		selectedAsteroid = selectedField.getAsteroids().get(n);
 	}
 
 	public AsteroidField getSelectedField() {
