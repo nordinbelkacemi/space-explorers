@@ -1,0 +1,9 @@
+Add config file:
+Choose settler: 1
+Your settler can:
+place teleportgate
+pair1: gate2
+Your settler can:
+move
+0. field - 1 asteroid
+1. asteroid - layers 0, core: empty
