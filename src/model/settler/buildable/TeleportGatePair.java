@@ -125,4 +125,8 @@ public class TeleportGatePair implements Buildable {
 			
 		}
 	}
+
+	public TeleportGatePair() {
+		// TODO Auto-generated constructor stub
+	}
 }
