@@ -123,6 +123,8 @@ public class Console {
             case "place teleportgate":
             	//TODO
             	break;
+            case "save":
+            	// TODO game.configOut(out);
             default:
                 throw new InvalidCmdException();
             }
@@ -201,6 +203,30 @@ public class Console {
             try {
                 int asteroidNum = Integer.parseInt(input);
                 game.selectAsteroid(asteroidNum);
+            } catch (InvalidCmdException ex) {
+                throw ex;
+            } catch (NumberFormatException ex) {
+                throw new InvalidCmdException();
+            }
+        }
+    };
+    
+    private void selectTeleporgatePair() throws BackCmdException, ExitException {
+        // TODO
+    }
+    
+    private void showTeleportgates() {
+    	for (int i = 0; i < game.getNumberofTeleportgatePairs(); i++) {
+            System.out.println(String.valueOf(i + 1) + ". pair");
+        }
+    }
+    
+    private IRunnable chooseTeleportgateMethod = new IRunnable() {
+        @Override
+        public void run(String input) throws InvalidCmdException {
+            try {
+                int gateNum = Integer.parseInt(input);
+                game.placeTeleportGate(gateNum);
             } catch (InvalidCmdException ex) {
                 throw ex;
             } catch (NumberFormatException ex) {
