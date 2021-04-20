@@ -158,9 +158,6 @@ public class Game {
 		Asteroid currentAsteroid = chosenSettler.getAsteroid();
 		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
 
-		// Coordinate settlerCoordinates = chosenSettler.getAsteroid().getAsteroidField().getCoordinates();
-		// actions.add(settlerCoordinates.toString());
-
 		if (currentAsteroid.getThickness() > 0) {
 			actions.add("drill");
 		}
