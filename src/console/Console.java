@@ -4,6 +4,8 @@ import console.exceptions.BackCmdException;
 import console.exceptions.ExitException;
 import console.exceptions.InvalidCmdException;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +18,7 @@ import model.playfield.AsteroidField;
 public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
-
+    private PrintStream output = Print(System.out);
     /**
      * When the player chooses where to move, this type holds the asteroid field
      * index and and asteroid number (also an index, but 1-based) chosen
@@ -160,7 +162,7 @@ public class Console {
     private void showNeighbors(ArrayList<AsteroidField> neighbors) {
         for (int i = 0; i < neighbors.size(); i++) {
             List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
-            System.out.println(String.valueOf(i) + ". field - " + asteroids.size() +  " asteroids");
+            output.println(String.valueOf(i) + ". field - " + asteroids.size() +  " asteroids");
         }
     }
 
@@ -179,7 +181,7 @@ public class Console {
                 }
             }
 
-            System.out.println(String.valueOf(i + 1) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
+            output.println(String.valueOf(i + 1) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
         }
     }
 
@@ -217,7 +219,7 @@ public class Console {
     
     private void showTeleportgates() {
     	for (int i = 0; i < game.getNumberofTeleportgatePairs(); i++) {
-            System.out.println(String.valueOf(i + 1) + ". pair");
+            output.println(String.valueOf(i + 1) + ". pair");
         }
     }
     
@@ -234,8 +236,7 @@ public class Console {
             }
         }
     };
-
-
+    
 
 
 
@@ -260,8 +261,8 @@ public class Console {
     public void start() {
         String input;
 
-        System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
-        System.out.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
+        output.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
+        output.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
 
         boolean playModeExited = false;
         while (!playModeExited && !(input = sc.nextLine()).equals("exit")) {
@@ -281,10 +282,12 @@ public class Console {
                 }
                 break;
             case "test":
-                System.out.println("entered testing mode ");
+                sc = new Scanner(valamisource);
+                output.println("entered testing mode ");
+                output = new PrintStream(valamifile);
                 break;
             default:
-                System.out.println("invalid command");
+                output.println("invalid command");
                 break;
             }
         }
@@ -297,13 +300,13 @@ public class Console {
 
         while (true) {
             try {
-                handleSettlerTurn();
+                    handleSettlerTurn();
             } catch (NextTurnException ex) {
                 break;
             } catch (ExitException ex) {
                 throw ex;
             } catch (InvalidCmdException ex) {
-                System.out.println("invalid command!");
+                output.println("invalid command!");
             }
         }
     }
@@ -346,14 +349,14 @@ public class Console {
                 outString += i.toString() + " ";
             }
         }
-        System.out.println(outString);
+        output.println(outString);
     }
 
     private void printAvailableActions() {
         ArrayList<String> actions = game.getActions();
-        System.out.println("Your settler can:");
+        output.println("Your settler can:");
         for (int i = 0; i < actions.size(); i++) {
-            System.out.println(actions.get(i));
+            output.println(actions.get(i));
         }
     }
 
@@ -365,12 +368,7 @@ public class Console {
         // game.move
     }
 
-
-
-
-
-
-
+    private void handleTest() {}
 
 
 
@@ -410,7 +408,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 } catch (BackCmdException ex) {
                     /* do nothing */
                 } catch (ExitException ex) {
@@ -444,7 +442,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 } catch (BackCmdException ex) {
                     throw ex;
                 }
@@ -479,7 +477,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 }
                 break;
             }
