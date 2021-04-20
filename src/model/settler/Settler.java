@@ -254,6 +254,10 @@ public class Settler extends Traveler implements Miner, Driller {
     public boolean canPlaceGate() {
         return teleportGatePairs.size() >= 1;
     }
+    
+    public int getNumberofTeleportgatePairs() {
+    	return teleportGatePairs.size();
+    }
 
     /**
      * Visszaadja, hogy a telepesnél hány egység vas van.
