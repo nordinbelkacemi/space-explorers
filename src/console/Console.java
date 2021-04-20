@@ -313,17 +313,20 @@ public class Console {
     }
 
     private void printChoosableSettlers() {
+        String outString = "Choose settler: ";
         for (Integer i : game.getChoosableSettlers()) {
             if (i != null) {
-                System.out.println(i.toString() + ". settler");
+                outString += i.toString() + " ";
             }
         }
+        System.out.println(outString);
     }
 
     private void printAvailableActions() {
         ArrayList<String> actions = game.getActions();
+        System.out.println("Your settler can:");
         for (int i = 0; i < actions.size(); i++) {
-            System.out.println(String.valueOf(i) + ". " + actions.get(i));
+            System.out.println(actions.get(i));
         }
     }
 
