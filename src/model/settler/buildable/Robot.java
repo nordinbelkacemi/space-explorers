@@ -71,6 +71,12 @@ public class Robot extends Traveler implements Buildable, Driller {
 		this.setPosition(randomAsteroid);
 	}
 	
+	@Override
+	public String die() {
+		ai.remove(this);
+		return super.die();
+	}
+	
 	/**
 	 * Beállítja a robot attribútumait a paraméterként kapott, a robotot építő settler
 	 * attribútumainak segítségével, valamint hozzáadja a robotot az aszteroida travelers tárolójához.
