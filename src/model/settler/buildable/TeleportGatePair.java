@@ -81,7 +81,7 @@ public class TeleportGatePair implements Buildable {
 	////////////////////////////////////////////////////// test
 
 	public TeleportGatePair() {
-		
+
 	}
 	
 	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) throws Exception {

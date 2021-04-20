@@ -256,7 +256,21 @@ public class Console {
         }
     };
     
-
+    private IRunnable addInputStream = new IRunnable() {
+        @Override
+        public void run(String input) throws InvalidCmdException {
+            try {
+                if(input == "console") {
+                	sc = new Scanner(System.in);
+                } else {
+                	sc = new Scanner(new File("src/test/" + input));
+				}
+            } catch (FileNotFoundException ex) {
+                throw new InvalidCmdException();
+            } 
+        }
+    };
+    
 
 
 
@@ -281,7 +295,7 @@ public class Console {
         String input;
 
         output.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
-        output.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
+        output.println("Type \"test\" to launch the game's tests, or \"play\" to play the game.");
 
         boolean gameOver = false;
         while (!gameOver && !(input = sc.nextLine()).equals("exit")) {
@@ -302,8 +316,15 @@ public class Console {
                 gameOver = true;
                 break;
             case "test":
-                // sc = new Scanner(valamisource);
                 output.println("entered testing mode ");
+                output.println("Add input:");
+                try {
+					getInputExitable(addInputStream);
+				} catch (BackCmdException e) {} 
+                catch (ExitException e) {
+                	gameOver = true;
+				}
+                // sc = new Scanner(valamisource);
                 // output = new PrintStream(valamifile);
                 break;
             default:
