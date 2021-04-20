@@ -47,8 +47,6 @@ public class Game {
 	
 	private int selectedTeleportgatePair;
 
-	private int flareTimer;
-
 	// private Console console;
 
 	public Game() {
@@ -76,7 +74,7 @@ public class Game {
 
 	public void resetChoosableSettlers() {
 		choosableSettlers.clear();
-		for (int i = 1; i <= 6; i++) {
+		for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
 			choosableSettlers.add(i);
 		}
 	}
@@ -254,6 +252,8 @@ public class Game {
 		output += sun.performAction();
 		robotAi.control();
 		ufoAi.control();
+
+		resetChoosableSettlers();
 
 		return output;
 	}

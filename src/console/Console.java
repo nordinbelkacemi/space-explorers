@@ -142,16 +142,15 @@ public class Console {
 
 
     private void selectDestination(ArrayList<AsteroidField> neighbors) throws BackCmdException, ExitException {
-        DestinationSelection destination = new DestinationSelection();
-
         boolean destinationSelected = false;
         while (!destinationSelected) {
+            int selectedFieldIdx;
             try {
                 showNeighbors(neighbors);
-                destination.setFieldIdx(Integer.valueOf(getInputNavigableExitable(chooseFieldMethod)));
+                selectedFieldIdx = Integer.parseInt(getInputNavigableExitable(chooseFieldMethod));
                 try {
-                    showFieldAsteroids(destination.getFieldIdx());
-                    destination.setAsteroidNum(Integer.valueOf(getInputNavigableExitable(chooseAsteroidMethod)));
+                    showFieldAsteroids(selectedFieldIdx);
+                    getInputNavigableExitable(chooseAsteroidMethod);
                     destinationSelected = true;
                 } catch (BackCmdException ex) {
                     continue;

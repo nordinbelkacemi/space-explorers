@@ -209,7 +209,7 @@ public class Settler extends Traveler implements Miner, Driller {
         super.reactToExplosion();
         team.removeSettler(this);
     }
-    
+
     /**
      * Beállítja a telepes csapatát.
      * @param st a beállítandó csapat
