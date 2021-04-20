@@ -66,4 +66,9 @@ public class UfoAi implements Ai {
 		Ufo.setAi(this);
 		ufos = new ArrayList<>();
 	}
+
+	public void addUfo(String s,List<AsteroidField> belt) {
+		String[] asteroid = s.split(",");
+		ufos.add(new Ufo(belt.get(Integer.parseInt(asteroid[0])).getAsteroids().get(Integer.parseInt(asteroid[1]))));
+	}
 }

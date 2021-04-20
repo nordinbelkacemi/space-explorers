@@ -306,13 +306,13 @@ public class Game {
 				settlerTeam.addSettler(line);
 				break;
 			case 3:
-				
+				robotAi.addRobot(line,solarSystem.getBelt());
 				break;
 			case 4:
-
+				ufoAi.addUfo(line, solarSystem.getBelt());
 				break;
 			case 5:
-
+				new TeleportGatePair(line,settlerTeam,solarSystem.getBelt());
 				break;
 			default:
 				break;

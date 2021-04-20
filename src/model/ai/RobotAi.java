@@ -8,6 +8,7 @@ import java.util.Random;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.playfield.Ufo;
+import model.settler.Settler;
 import model.settler.buildable.Robot;
 
 /**
@@ -56,5 +57,11 @@ public class RobotAi implements Ai {
 			r.printToConfig(out);
 			out.println();
 		}
+	}
+	
+	///////////////////////////////////////// test
+	public void addRobot(String s,List<AsteroidField> belt) {
+		String[] asteroid = s.split(",");
+		robots.add(new Robot(belt.get(Integer.parseInt(asteroid[0])).getAsteroids().get(Integer.parseInt(asteroid[1]))));
 	}
 }
