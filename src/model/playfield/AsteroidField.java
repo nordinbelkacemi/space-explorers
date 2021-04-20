@@ -2,6 +2,7 @@ package model.playfield;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -89,10 +90,12 @@ public class AsteroidField extends Hexagon {
 	 * Napvihar esetén hívódik meg, és minden aszteroidájára meghívja
 	 * az Asteroid osztály ReactToFlare() függvényét.
 	 */
-	public void reactToFlare() {
-		for (Asteroid asteroid : asteroids) {
-			asteroid.reactToFlare();
+	public String reactToFlare() {
+		String output = new String("");
+		for (int i = 0; i < asteroids.size(); i++) {
+			output += asteroids.get(i).reactToFlare();
 		}
+		return output;
 	}
 
 	/**
@@ -100,8 +103,9 @@ public class AsteroidField extends Hexagon {
 	 * és minden aszteroidájára meghívja a CheckDangers() függvényt.
 	 */
 	public void checkDangers() {
-		for (Asteroid asteroid : asteroids) {
-			asteroid.checkDangers();
+		Iterator<Asteroid> asteroidIter = asteroids.iterator();
+		while (asteroidIter.hasNext()) {
+			asteroidIter.next().checkDangers(asteroidIter);
 		}
 	}
 
@@ -151,8 +155,8 @@ public class AsteroidField extends Hexagon {
 	 * Eltávolítunk egy aszteroidát az aszteroidamezőből.
 	 * @param a A kitörlendő aszteroida
 	 */
-	public void removeAsteroid(Asteroid a) {
-		asteroids.remove(a);
+	public void removeAsteroid(Iterator<Asteroid> asteroidIter) {
+		asteroidIter.remove();
 	}
 
 	/**

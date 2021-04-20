@@ -1,17 +1,14 @@
 package test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
 public class Test {
     
-    public static void test {
+    public static void test() {
         System.out.println("Choose a test case");
         System.out.println("actions");
         System.out.println("build");

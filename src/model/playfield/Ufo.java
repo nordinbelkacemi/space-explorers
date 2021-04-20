@@ -1,6 +1,7 @@
 package model.playfield;
 
 import java.io.PrintStream;
+import java.util.Iterator;
 
 import model.ai.RobotAi;
 import model.ai.UfoAi;
@@ -12,7 +13,7 @@ import model.settler.Traveler;
  * Az űrben garázdálkodó ufok osztálya.
  * Csak mozogni és nyersanyagot bányaszni (lopni) tudnak.
  */
-public class Ufo extends Traveler implements Miner{
+public class Ufo extends Traveler implements Miner {
 
 	/**
 	 * Az ufót irányító központi vezető.
@@ -55,5 +56,11 @@ public class Ufo extends Traveler implements Miner{
 	 * Felülírja az ős függvényét, az Ufok nem halnak meg napvihar hatására.
 	 */
 	@Override
-	public void reactToFlare() {}
+	public String reactToFlare(Iterator<Traveler> ufoIter) { 
+		return getDeathInfo();
+	}
+
+	public String getDeathInfo() {
+		return new String("");
+	}
 }
