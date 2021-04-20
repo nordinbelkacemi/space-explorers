@@ -1,9 +1,8 @@
 package console;
-import exceptions.InvalidOrBackCmdException;
-import exceptions.NextTurnException;
-import exceptions.BackCmdException;
-import exceptions.ExitException;
-import exceptions.InvalidCmdException;
+import console.exceptions.NextTurnException;
+import console.exceptions.BackCmdException;
+import console.exceptions.ExitException;
+import console.exceptions.InvalidCmdException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,7 @@ import controllers.Game;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
+/** The class responsible for handling console input and input */
 public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
@@ -49,17 +49,18 @@ public class Console {
     /**
      * Interface with a run function. The run function in our case is always a
      * function that takes in an input and throws an exception if the input is an
-     * invalid command. Wherever an instance of the interface is called, if an
-     * exception is thrown by it, it will get called again until it doesn't throw
-     * anything (this is how invalid commands are handled)
+     * exit command, an invalid command or a back command.
      */
     interface IRunnable {
         /**
-         * the referenced function's run method
+         * The referenced function's run method. When implementing, the function
+         * should only throw the necessary exceptions in a given context.
          *
          * @param input the string passed in by the user (or an input file in a test)
          * @throws InvalidCmdException thrown if the string passed in is an invalid
          *                             command
+         * @throws BackCmdException
+         * @throws ExitException
          */
         public void run(String input) throws InvalidCmdException, BackCmdException, ExitException;
     }
@@ -123,7 +124,7 @@ public class Console {
             	//TODO
             	break;
             default:
-                throw new InvalidCmdException(); // in case of invalid command
+                throw new InvalidCmdException();
             }
         }
     };
