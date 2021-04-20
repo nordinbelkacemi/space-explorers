@@ -251,8 +251,13 @@ public class Game {
 		return onlyNeighbours;
 	}
 
-	public void selectField(int idx) {
-		selectedField = getField(idx);
+	public void selectField(int idx) throws InvalidCmdException {
+		List<AsteroidField> neighbors = getNeighbours();
+		if (idx >= 0 && idx < neighbors.size()) {
+			selectedField = getField(idx);
+		} else {
+			throw new InvalidCmdException();
+		}
 	}
 
 	public void selectAsteroid(int n) throws InvalidCmdException {
@@ -290,5 +295,21 @@ public class Game {
 
 	public void putIceBack() {
 		chosenSettler.putIceBack();
+	}
+
+	public void moveSun() {
+
+	}
+
+	public void moveRobots() {
+
+	}
+
+	public void moveUfos() {
+
+	}
+
+	public void moveMegkergultGates() {
+
 	}
 }
