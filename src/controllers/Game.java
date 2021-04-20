@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import exceptions.InvalidCmdException;
+import console.exceptions.InvalidCmdException;
 import model.ai.RobotAi;
 import model.ai.UfoAi;
 
@@ -270,10 +270,6 @@ public class Game {
 	public AsteroidField getSelectedField() {
 		return selectedField;
 	}
-
-	// public Asteroid getSelectedAsteroid() {
-	// 	return selectedAsteroid;
-	// }
 
 	public void moveSettler() {
 		chosenSettler.move(selectedAsteroid);
