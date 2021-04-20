@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.materials.Coal;
+import model.materials.Ice;
+import model.materials.Iron;
+import model.materials.Uranium;
+import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 /**
@@ -69,5 +74,40 @@ public class SettlerTeam {
 		belt = b;
 		Settler.setTeam(this);
 		settlers = new ArrayList<>();
+	}
+	
+	public void addSettler(String s) throws Exception {
+		String[] data=s.split(",");
+		String[] asteroid = data[1].split(" ");
+		Settler settler = new Settler(belt.get(Integer.parseInt(asteroid[0])).getAsteroids().get(Integer.parseInt(asteroid[1])));
+		for (int i = 1; i < data.length; i++) {
+			String[] material = data[i].split(" ");
+			if (material.length == 3) {
+				if(material[0] == "uranium") {
+					for (int j = 0; j < Integer.parseInt(material[2]); j++) {
+						settler.addUranium(new Uranium(Integer.parseInt(material[1])));
+					}
+				}
+				else throw new Exception();
+			}
+			else if(material.length == 2){
+				for (int j = 0; j < Integer.parseInt(material[1]); j++) {
+					switch (material[0]) {
+						case "iron":
+							settler.addIron(new Iron());
+							break;
+						case "ice":
+							settler.addIce(new Ice());
+							break;
+						case "coal":
+							settler.addCoal(new Coal());
+							break;
+						default:
+							throw new Exception();
+					}
+				}
+			}
+		}
+		settlers.add(settler);
 	}
 }

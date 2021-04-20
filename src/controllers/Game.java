@@ -299,13 +299,14 @@ public class Game {
 				solarSystem.createField(line);
 				break;
 			case 1:
+				sun.setSolarSystem(solarSystem);
 				sun = new Sun(line);
 				break;
 			case 2:
-
+				settlerTeam.addSettler(line);
 				break;
 			case 3:
-
+				
 				break;
 			case 4:
 
