@@ -121,7 +121,7 @@ public class Console {
             	game.putUraniumBack();
             	break;
             case "place teleportgate":
-            	//TODO
+            	// TODO
             	break;
             case "save":
             	// TODO game.configOut(out);
@@ -186,12 +186,12 @@ public class Console {
     private IRunnable chooseFieldMethod = new IRunnable() {
         @Override
         public void run(String input) throws InvalidCmdException {
-            List<AsteroidField> neighbors = game.getNeighbours();
-            int fieldIdx = Integer.parseInt(input);
-
-            if (fieldIdx >= 0 && fieldIdx < neighbors.size()) {
+            try {
+                int fieldIdx = Integer.parseInt(input);
                 game.selectField(fieldIdx);
-            } else {
+            } catch (InvalidCmdException ex) {
+                throw ex;
+            } catch (NumberFormatException ex) {
                 throw new InvalidCmdException();
             }
         }
@@ -276,6 +276,7 @@ public class Console {
                         playModeExited = true;
                         break;
                     }
+                    stepGame();
                     // szolunk a game controllernek hogy a kör további részeit végezze el
                 }
                 break;
@@ -354,6 +355,14 @@ public class Console {
         for (int i = 0; i < actions.size(); i++) {
             System.out.println(actions.get(i));
         }
+    }
+
+    private void stepGame() {
+        game.moveSun();
+        game.moveRobots();
+        game.moveUfos();
+        game.moveMegkergultGates();
+        // game.move
     }
 
 
