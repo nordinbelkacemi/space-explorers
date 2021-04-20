@@ -118,8 +118,9 @@ public class Asteroid {
 
 	/** Az aszteroida felrobban, megsemmisítve ezzel magát és a rajta lévő utazókat. */
 	public void explode() {
-		for (Traveler traveler : travelers) {
-			traveler.reactToExplosion();
+		Iterator<Traveler> travelerIter = travelers.iterator();
+		while (travelerIter.hasNext()) {
+			travelerIter.next().reactToExplosion(travelerIter);
 		}
 		field.removeAsteroid(asteroidIter);
 	}

@@ -30,9 +30,6 @@ public class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
-	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke true, különben false */
-	private boolean gameOver;
-
 	/** A kiválasztott telepes. Ezzel a telepessel léphet a felhasználó (move, drill stb) */
 	private Settler chosenSettler;
 
@@ -46,8 +43,6 @@ public class Game {
 	private Asteroid selectedAsteroid;
 	
 	private int selectedTeleportgatePair;
-
-	private int flareTimer;
 
 	// private Console console;
 
@@ -71,12 +66,12 @@ public class Game {
 
 	/** A játékot elindító függvény */
 	public void start() {
-		gameOver = false;
+		resetChoosableSettlers();
 	}
 
 	public void resetChoosableSettlers() {
 		choosableSettlers.clear();
-		for (int i = 1; i <= 6; i++) {
+		for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
 			choosableSettlers.add(i);
 		}
 	}
@@ -96,7 +91,7 @@ public class Game {
 	 * @return True ha a játék véget ért, egyébként False
 	 */
 	public boolean over() {
-		return gameOver;
+		return getChoosableSettlers().isEmpty();
 	}
 
 	public ArrayList<String> getActions() {
@@ -254,6 +249,8 @@ public class Game {
 		output += sun.performAction();
 		robotAi.control();
 		ufoAi.control();
+
+		resetChoosableSettlers();
 
 		return output;
 	}

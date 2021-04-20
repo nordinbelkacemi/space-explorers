@@ -142,16 +142,15 @@ public class Console {
 
 
     private void selectDestination(ArrayList<AsteroidField> neighbors) throws BackCmdException, ExitException {
-        DestinationSelection destination = new DestinationSelection();
-
         boolean destinationSelected = false;
         while (!destinationSelected) {
+            int selectedFieldIdx;
             try {
                 showNeighbors(neighbors);
-                destination.setFieldIdx(Integer.valueOf(getInputNavigableExitable(chooseFieldMethod)));
+                selectedFieldIdx = Integer.parseInt(getInputNavigableExitable(chooseFieldMethod));
                 try {
-                    showFieldAsteroids(destination.getFieldIdx());
-                    destination.setAsteroidNum(Integer.valueOf(getInputNavigableExitable(chooseAsteroidMethod)));
+                    showFieldAsteroids(selectedFieldIdx);
+                    getInputNavigableExitable(chooseAsteroidMethod);
                     destinationSelected = true;
                 } catch (BackCmdException ex) {
                     continue;
@@ -298,8 +297,8 @@ public class Console {
         output.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
         output.println("Type \"test\" to launch the game's tests, or \"play\" to play the game.");
 
-        boolean playModeExited = false;
-        while (!playModeExited && !(input = sc.nextLine()).equals("exit")) {
+        boolean gameOver = false;
+        while (!gameOver && !(input = sc.nextLine()).equals("exit")) {
             switch (input) {
             case "play":
                 game = new Game();
@@ -308,12 +307,13 @@ public class Console {
                     try {
                         handlePlayerTurn();
                     } catch (ExitException ex) {
-                        playModeExited = true;
+                        gameOver = true;
                         break;
                     }
                     String gameStepOutput = game.step();
-                    System.out.println(gameStepOutput);
+                    System.out.println(gameStepOutput.trim());
                 }
+                gameOver = true;
                 break;
             case "test":
                 output.println("entered testing mode ");
@@ -322,7 +322,7 @@ public class Console {
 					getInputExitable(addInputStream);
 				} catch (BackCmdException e) {} 
                 catch (ExitException e) {
-                	playModeExited = true;
+                	gameOver = true;
 				}
                 // sc = new Scanner(valamisource);
                 // output = new PrintStream(valamifile);
