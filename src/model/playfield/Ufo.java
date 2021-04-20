@@ -59,6 +59,12 @@ public class Ufo extends Traveler implements Miner {
 	public String reactToFlare(Iterator<Traveler> ufoIter) { 
 		return getDeathInfo();
 	}
+	
+	@Override
+	public String die() {
+		ai.remove(this);
+		return super.die();
+	}
 
 	public String getDeathInfo() {
 		return new String("");
