@@ -283,8 +283,8 @@ public class Console {
         output.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
         output.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
 
-        boolean playModeExited = false;
-        while (!playModeExited && !(input = sc.nextLine()).equals("exit")) {
+        boolean gameOver = false;
+        while (!gameOver && !(input = sc.nextLine()).equals("exit")) {
             switch (input) {
             case "play":
                 game = new Game();
@@ -293,12 +293,13 @@ public class Console {
                     try {
                         handlePlayerTurn();
                     } catch (ExitException ex) {
-                        playModeExited = true;
+                        gameOver = true;
                         break;
                     }
                     String gameStepOutput = game.step();
-                    System.out.println(gameStepOutput);
+                    System.out.println(gameStepOutput.trim());
                 }
+                gameOver = true;
                 break;
             case "test":
                 // sc = new Scanner(valamisource);

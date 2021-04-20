@@ -63,7 +63,7 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 * Egy véletlenszerű szomszédos aszteroidára helyezi át a robotot.
 	 */
 	@Override
-	public void reactToExplosion() {
+	public void reactToExplosion(Iterator<Traveler> travelerIter) {
 		List<AsteroidField> neighbourFields = getNeighbours();
 		AsteroidField randomField = neighbourFields.get(r.nextInt(neighbourFields.size()));
 		List<Asteroid> availableAsteroids = randomField.getAsteroids();

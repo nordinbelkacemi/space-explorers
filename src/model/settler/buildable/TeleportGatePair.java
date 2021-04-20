@@ -79,8 +79,12 @@ public class TeleportGatePair implements Buildable {
 	}
 	
 	////////////////////////////////////////////////////// test
+
+	public TeleportGatePair() {
+		
+	}
 	
-	public TeleportGatePair(String s,SettlerTeam st,List<AsteroidField> belt,MegkergultGates kergult) throws Exception {
+	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) throws Exception {
 		TeleportGate teleportgate1 = new TeleportGate();
 		TeleportGate teleportgate2 = new TeleportGate();
 		gates.add(teleportgate1);
@@ -98,11 +102,12 @@ public class TeleportGatePair implements Buildable {
 				throw new Exception();
 		}
 		else if(data.length == 2){
-			String[] gate1 =data[0].split(" ");
+			String[] gate1 = data[0].split(" ");
 			if(gate1[0] == "field") {
 				int x = 1;
 				if(gate1.length == 3) {
-					kergult.addGate(teleportgate1); x = 2;
+					kergult.addGate(teleportgate1);
+					x = 2;
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
 			}
@@ -113,7 +118,8 @@ public class TeleportGatePair implements Buildable {
 			if(gate2[0] == "field") {
 				int x = 1;
 				if(gate2.length == 3) {
-					kergult.addGate(teleportgate2); x = 2;
+					kergult.addGate(teleportgate2);
+					x = 2;
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
 			}

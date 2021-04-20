@@ -30,9 +30,6 @@ public class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
-	/** A játék végét jelzö valtozó: Ha vége a játék, akkor az értéke true, különben false */
-	private boolean gameOver;
-
 	/** A kiválasztott telepes. Ezzel a telepessel léphet a felhasználó (move, drill stb) */
 	private Settler chosenSettler;
 
@@ -69,7 +66,7 @@ public class Game {
 
 	/** A játékot elindító függvény */
 	public void start() {
-		gameOver = false;
+		resetChoosableSettlers();
 	}
 
 	public void resetChoosableSettlers() {
@@ -94,7 +91,7 @@ public class Game {
 	 * @return True ha a játék véget ért, egyébként False
 	 */
 	public boolean over() {
-		return gameOver;
+		return getChoosableSettlers().isEmpty();
 	}
 
 	public ArrayList<String> getActions() {
