@@ -202,12 +202,12 @@ public class Settler extends Traveler implements Miner, Driller {
     }
     
     /**
-     * Az aszteroida felrobbanásának hatására megöli a telepest.
+     * Megöli a telepest.
      */
     @Override
-    public void reactToExplosion() {
-        super.reactToExplosion();
-        team.removeSettler(this);
+    public String die() {
+    	team.removeSettler(this);
+        return super.die();
     }
     
     /**
