@@ -227,7 +227,7 @@ public class Game {
 		chosenSettler.build(new TeleportGatePair());
 	}
 
-	public void placeTeleportGate(int i) {
+	public void placeTeleportGate(int i) throws InvalidCmdException {
 		chosenSettler.placeTeleportGate(i);
 	}
 
@@ -266,6 +266,10 @@ public class Game {
 
 	public AsteroidField getSelectedField() {
 		return selectedField;
+	}
+	
+	public int getNumberofTeleportgatePairs() {
+		return chosenSettler.getNumberofTeleportgatePairs();
 	}
 
 	public void moveSettler() {
