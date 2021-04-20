@@ -4,6 +4,9 @@ import console.exceptions.BackCmdException;
 import console.exceptions.ExitException;
 import console.exceptions.InvalidCmdException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -121,10 +124,15 @@ public class Console {
             	game.putUraniumBack();
             	break;
             case "place teleportgate":
-            	// TODO
+            	try {
+            		selectTeleportgatePair();
+                } catch (BackCmdException ex) {
+                    throw ex;
+                } catch (ExitException ex) {
+                    throw ex;
+                }
+            	game.placeTeleportGate();
             	break;
-            case "save":
-            	// TODO game.configOut(out);
             default:
                 throw new InvalidCmdException();
             }
@@ -211,8 +219,19 @@ public class Console {
         }
     };
     
-    private void selectTeleporgatePair() throws BackCmdException, ExitException {
-        // TODO
+    private void selectTeleportgatePair() throws BackCmdException, ExitException {
+        boolean teleportgateSelected = false;
+        while (!teleportgateSelected) {
+            try {
+                showTeleportgates();
+                int chosenTeleportgate = Integer.valueOf(getInputNavigableExitable(chooseTeleportgateMethod));
+                teleportgateSelected = true;
+            } catch (BackCmdException ex) {
+                throw ex;
+            } catch (ExitException ex) {
+                throw ex;
+            }
+        }
     }
     
     private void showTeleportgates() {
@@ -226,7 +245,9 @@ public class Console {
         public void run(String input) throws InvalidCmdException {
             try {
                 int gateNum = Integer.parseInt(input);
-                game.placeTeleportGate(gateNum);
+                if (!(gateNum >= 1 && gateNum <= game.getNumberofTeleportgatePairs()))
+                	throw new InvalidCmdException();
+                game.selectTeleportgatePair(gateNum - 1);
             } catch (InvalidCmdException ex) {
                 throw ex;
             } catch (NumberFormatException ex) {
@@ -403,6 +424,14 @@ public class Console {
             case "next turn":
                 correctInput = true;
                 throw new NextTurnException();
+            case "save":
+            	try {
+            		game.configOut(new PrintStream(new File("savedgame.txt")));
+            	} catch (FileNotFoundException e) {
+            		System.out.println("Hiba a mentés közben!");
+            	}
+            	System.out.println("Játék elmentve!");
+            	break;
             case "exit":
                 throw new ExitException();
             default:

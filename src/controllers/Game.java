@@ -44,6 +44,8 @@ public class Game {
 
 	/** telepes mozgása során kiválasztott cél aszteroida */
 	private Asteroid selectedAsteroid;
+	
+	private int selectedTeleportgatePair;
 
 	// private Console console;
 
@@ -182,10 +184,10 @@ public class Game {
 		}
 
 		if (chosenSettler.canPlaceGate()) {
-			actions.add("place teleport gate");
+			actions.add("place teleportgate");
 		}
 
-		if (currentAsteroid.isEmpty()) {
+		if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
 			if (chosenSettler.getIronCount() >= 1) {
 				actions.add("putback iron");
 			}
@@ -227,8 +229,8 @@ public class Game {
 		chosenSettler.build(new TeleportGatePair());
 	}
 
-	public void placeTeleportGate(int i) throws InvalidCmdException {
-		chosenSettler.placeTeleportGate(i);
+	public void placeTeleportGate() {
+		chosenSettler.placeTeleportGate(selectedTeleportgatePair);
 	}
 
 	public void buildRobot() {
@@ -268,6 +270,7 @@ public class Game {
 			throw new InvalidCmdException();
 		}
 	}
+	
 
 	public AsteroidField getSelectedField() {
 		return selectedField;
@@ -275,6 +278,10 @@ public class Game {
 	
 	public int getNumberofTeleportgatePairs() {
 		return chosenSettler.getNumberofTeleportgatePairs();
+	}
+	
+	public void selectTeleportgatePair(int selectedPair) throws InvalidCmdException {
+		selectedTeleportgatePair = selectedPair;
 	}
 
 	public void moveSettler() {
