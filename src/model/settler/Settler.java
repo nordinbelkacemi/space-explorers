@@ -64,8 +64,6 @@ public class Settler extends Traveler implements Miner, Driller {
         teleportGatePairs = new ArrayList<>();
     }
 
-    public Settler() {}
-
     //////////////////////////////////////// függvények
     /**
 	 * Visszaadja a telepes String reprezentációját.
@@ -290,4 +288,7 @@ public class Settler extends Traveler implements Miner, Driller {
     public int getUraniumCount() {
         return uraniumStorage.size();
     }
+    
 }
+    //////////////////////////////////////////////// test
+    

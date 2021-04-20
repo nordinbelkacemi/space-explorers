@@ -1,61 +1,61 @@
-0,empty 3,empty 3,iron 4,iron 4,ice 0,ice 1,coal 3
-1,empty 4,iron 2,ice 0,ice 3,coal 4
-2,empty 1,empty 0,coal 4,coal 1
-3,empty 1,iron 2,iron 2,ice 2,ice 0,coal 1,coal 2,uranium 0 3
-4,empty 4,iron 0,iron 0,uranium 0 4
-5,empty 0,empty 3,iron 4,coal 0,uranium 0 4
-6,empty 4,empty 0,iron 2,iron 2,ice 3
-7,empty 3,empty 2,iron 4,ice 4,uranium 0 2
-8,empty 0,iron 4,iron 3,ice 1,coal 2,uranium 0 3
-9,empty 2,empty 2,coal 1,coal 0,uranium 0 0
-10,empty 3,ice 2,coal 2
-11,empty 2,iron 2,iron 4,coal 3,uranium 0 2
-12,empty 0,iron 4,ice 4,ice 2,coal 2
-13,empty 1,ice 3,coal 4,uranium 0 2
-14,empty 3,iron 2,ice 0,uranium 0 0
-15,empty 0,iron 2,iron 2,ice 0,coal 2,coal 4
-16,empty 3,iron 1,coal 1,coal 3
-17,empty 0,empty 3,iron 3,ice 0,coal 1,uranium 0 2
-18,empty 0,empty 3,iron 2,iron 4,ice 1,coal 0,coal 2,uranium 0 0
-19,empty 3,empty 4,iron 3,ice 4,ice 3,coal 1,coal 1
-20,empty 1,iron 2,iron 0,ice 1,ice 2,coal 3,coal 1,uranium 0 2
-21,empty 0,iron 1,iron 0,ice 1
-22,empty 3,iron 3,ice 1,ice 1,coal 0,coal 0,uranium 0 3
-23,empty 2,empty 0
-24,empty 1,iron 3,coal 2
-25,empty 3,iron 0,coal 2,coal 2,uranium 0 2
-26,empty 4,ice 4,uranium 0 4
-27,empty 4,ice 2,coal 4,coal 1,uranium 0 3
-28,empty 3,coal 3,uranium 0 1
-29,empty 2,iron 1,ice 4,ice 2,coal 2
-30,empty 0,empty 0,iron 0,ice 3,ice 2,coal 1,coal 0,uranium 0 3
-31,empty 2,iron 3,iron 4,coal 1,coal 3
-32,empty 1,empty 2,ice 0,ice 0,coal 1,coal 3,uranium 0 1
-33,empty 1,ice 0,ice 0,coal 1,coal 1,uranium 0 4
-34,empty 3,iron 4,coal 3,coal 1
-35,empty 0,empty 4,coal 0
-36,empty 4,ice 3,ice 2
-37,empty 4,iron 0,coal 2,coal 2
-38,empty 3,iron 1,coal 3,coal 1
-39,empty 4,iron 1,iron 3,ice 3,uranium 0 2
-40,empty 2,iron 2,iron 0,ice 4,ice 0,coal 3,coal 1,uranium 0 4
-41,empty 4,ice 0
+0,empty 0,empty 3,iron 0,iron 2,ice 3,uranium 0 1
+1,empty 2,iron 1,ice 4,ice 2,uranium 0 2
+2,empty 2,empty 3,iron 0,iron 4,ice 2,uranium 0 3
+3,empty 0,empty 1,iron 2,uranium 0 0
+4,empty 1,empty 3,iron 4,iron 0,coal 2,coal 1
+5,empty 3,iron 0,ice 1
+6,empty 0,ice 0,coal 4,coal 0,uranium 0 1
+7,empty 4,empty 1,iron 4,iron 0
+8,empty 3,iron 4,iron 2,ice 1,coal 4
+9,empty 1,empty 0,iron 1,iron 1,ice 2,ice 1,coal 2
+10,empty 4,empty 2,iron 0,coal 2,uranium 0 1
+11,empty 3,iron 2,coal 1
+12,empty 4,empty 3,ice 1,ice 2,uranium 0 1
+13,empty 2,iron 1,coal 4,coal 0,uranium 0 0
+14,empty 1,empty 4,iron 2,coal 3,coal 0
+15,empty 0,empty 2,coal 2,uranium 0 4
+16,empty 2,iron 2,ice 4,ice 1,uranium 0 3
+17,empty 2,coal 2,uranium 0 4
+18,empty 4,empty 0,iron 0,ice 0,ice 1,uranium 0 2
+19,empty 2,empty 3,iron 4,iron 0,ice 3,coal 1
+20,empty 0,ice 4,ice 1,coal 1,coal 4
+21,empty 1,coal 1,coal 0,uranium 0 3
+22,empty 0,empty 3,iron 4,iron 1,coal 1
+23,empty 1,iron 3,iron 3,ice 3
+24,empty 2,empty 2,iron 4,coal 0,coal 4,uranium 0 2
+25,empty 2,empty 3,ice 0,uranium 0 0
+26,empty 4,empty 2,iron 3,coal 0
+27,empty 0,iron 4,ice 2,coal 2,coal 1,uranium 0 1
+28,empty 0,empty 0,iron 4,coal 2,coal 2
+29,empty 0,iron 0,iron 1,coal 0
+30,empty 3,coal 2,uranium 0 0
+31,empty 4,empty 3
+32,empty 2,iron 2,iron 4,ice 2,ice 3,coal 4,coal 1
+33,empty 0
+34,empty 3,iron 2,ice 3,ice 0,coal 2,uranium 0 2
+35,empty 3,empty 4,iron 0,ice 4
+36,empty 2,empty 3,iron 0,coal 2,uranium 0 1
+37,empty 0,ice 0,ice 4,coal 2,coal 4
+38,empty 0,empty 2,ice 4,ice 4,coal 3,coal 3
+39,empty 0,empty 2,ice 0,uranium 0 0
+40,empty 0,empty 3,iron 4,ice 0,ice 0,coal 0
+41,empty 2,iron 3,iron 4,coal 1,coal 0
 
-5 0
-12 4
-38 0
+1 0
+27 0
+37 0
+41 0
+10 0
 35 0
-4 0
-19 0
 
 
-29 0
-22 0
-40 0
-26 0
-18 0
-4 0
-23 0
+25 0
+2 0
+35 0
+20 0
 32 0
-35 0
-23 0
+32 0
+28 0
+12 0
+32 0
+6 0
