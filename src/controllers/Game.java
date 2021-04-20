@@ -44,6 +44,8 @@ public class Game {
 
 	/** telepes mozgása során kiválasztott cél aszteroida */
 	private Asteroid selectedAsteroid;
+	
+	private int selectedTeleportgatePair;
 
 	// private Console console;
 
@@ -95,8 +97,175 @@ public class Game {
 		return gameOver;
 	}
 
+	public ArrayList<String> getActions() {
+		ArrayList<String> actions = new ArrayList<String>();
 
-	/////////////////////////////////////////// test
+		Asteroid currentAsteroid = chosenSettler.getAsteroid();
+		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
+
+		if (currentAsteroid.getThickness() > 0) {
+			actions.add("drill");
+		}
+
+		for (AsteroidField af : neighbors) {
+			if (af.getAsteroids().size() > 0) {
+				actions.add("move");
+				break;
+			}
+		}
+
+		if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
+			actions.add("mine");
+		}
+
+		if (chosenSettler.canBuildGate()) {
+			actions.add("build teleportgate");
+		}
+
+		if (chosenSettler.canBuildRobot()) {
+			actions.add("build robot");
+		}
+
+		if (chosenSettler.canPlaceGate()) {
+			actions.add("place teleportgate");
+		}
+
+		if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
+			if (chosenSettler.getIronCount() >= 1) {
+				actions.add("putback iron");
+			}
+			if (chosenSettler.getUraniumCount() >= 1) {
+				actions.add("putback uranium");
+			}
+			if (chosenSettler.getCoalCount() >= 1) {
+				actions.add("putback coal");
+			}
+			if (chosenSettler.getIceCount() >= 1) {
+				actions.add("putback ice");
+			}
+		}
+
+		return actions;
+	}
+
+	public List<Integer> getChoosableSettlers() {
+		return choosableSettlers;
+	}
+
+	public void endSettlerTurn(int n) {
+		choosableSettlers.set(n - 1, null);
+	}
+
+	public ArrayList<AsteroidField> getNeighbours() {
+		return chosenSettler.getNeighbours();
+	}
+
+	public void mine() {
+		chosenSettler.mine();
+	}
+
+	public void drill() {
+		chosenSettler.drill();
+	}
+
+	public void buildTeleportGate() {
+		chosenSettler.build(new TeleportGatePair());
+	}
+
+	public void placeTeleportGate() {
+		chosenSettler.placeTeleportGate(selectedTeleportgatePair);
+	}
+
+	public void buildRobot() {
+		Robot r = new Robot(chosenSettler.getAsteroid());
+		chosenSettler.build(r);
+	}
+
+	public AsteroidField getField(int idx) {
+		return chosenSettler.getAsteroid().getNeighbours().get(idx);
+	}
+
+	public List<Asteroid> getFieldAsteroids(int idx) {
+		AsteroidField field = getField(idx);
+		List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
+		for (Asteroid asteroid : field.getAsteroids()) {
+			if (asteroid != chosenSettler.getAsteroid()) {
+				onlyNeighbours.add(asteroid);
+			}
+		}
+		return onlyNeighbours;
+	}
+
+	public void selectField(int idx) throws InvalidCmdException {
+		List<AsteroidField> neighbors = getNeighbours();
+		if (idx >= 0 && idx < neighbors.size()) {
+			selectedField = getField(idx);
+		} else {
+			throw new InvalidCmdException();
+		}
+	}
+
+	public void selectAsteroid(int n) throws InvalidCmdException {
+		List<Asteroid> asteroids = selectedField.getAsteroids();
+		if (n >= 1 && n <= asteroids.size()) {
+			selectedAsteroid = selectedField.getAsteroids().get(n - 1);
+		} else {
+			throw new InvalidCmdException();
+		}
+	}
+	
+
+	public AsteroidField getSelectedField() {
+		return selectedField;
+	}
+	
+	public int getNumberofTeleportgatePairs() {
+		return chosenSettler.getNumberofTeleportgatePairs();
+	}
+	
+	public void selectTeleportgatePair(int selectedPair) throws InvalidCmdException {
+		selectedTeleportgatePair = selectedPair;
+	}
+
+	public void moveSettler() {
+		chosenSettler.move(selectedAsteroid);
+	}
+
+	public void putIronBack() {
+		chosenSettler.putIronBack();
+	}
+
+	public void putCoalBack() {
+		chosenSettler.putCoalBack();
+	}
+
+	public void putUraniumBack() {
+		chosenSettler.putUraniumBack();
+	}
+
+	public void putIceBack() {
+		chosenSettler.putIceBack();
+	}
+
+	public void moveSun() {
+
+	}
+
+	public void moveRobots() {
+
+	}
+
+	public void moveUfos() {
+
+	}
+
+	public void moveMegkergultGates() {
+
+	}
+	
+	
+	/////////////////////////////////////// test
+	
 	public Game(InputStream in) {
 		solarSystem = new SolarSystem();
 		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0);
@@ -148,168 +317,5 @@ public class Game {
 				break;
 			}
 		}
-	}
-
-	/////////////////////////////////////////// test
-
-	public ArrayList<String> getActions() {
-		ArrayList<String> actions = new ArrayList<String>();
-
-		Asteroid currentAsteroid = chosenSettler.getAsteroid();
-		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
-
-		if (currentAsteroid.getThickness() > 0) {
-			actions.add("drill");
-		}
-
-		for (AsteroidField af : neighbors) {
-			if (af.getAsteroids().size() > 0) {
-				actions.add("move");
-				break;
-			}
-		}
-
-		if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
-			actions.add("mine");
-		}
-
-		if (chosenSettler.canBuildGate()) {
-			actions.add("build teleportgate");
-		}
-
-		if (chosenSettler.canBuildRobot()) {
-			actions.add("build robot");
-		}
-
-		if (chosenSettler.canPlaceGate()) {
-			actions.add("place teleport gate");
-		}
-
-		if (currentAsteroid.isEmpty()) {
-			if (chosenSettler.getIronCount() >= 1) {
-				actions.add("putback iron");
-			}
-			if (chosenSettler.getUraniumCount() >= 1) {
-				actions.add("putback uranium");
-			}
-			if (chosenSettler.getCoalCount() >= 1) {
-				actions.add("putback coal");
-			}
-			if (chosenSettler.getIceCount() >= 1) {
-				actions.add("putback ice");
-			}
-		}
-
-		return actions;
-	}
-
-	public List<Integer> getChoosableSettlers() {
-		return choosableSettlers;
-	}
-
-	public void endSettlerTurn(int n) {
-		choosableSettlers.set(n - 1, null);
-	}
-
-	public ArrayList<AsteroidField> getNeighbours() {
-		return chosenSettler.getNeighbours();
-	}
-
-	public void mine() {
-		chosenSettler.mine();
-	}
-
-	public void drill() {
-		chosenSettler.drill();
-	}
-
-	public void buildTeleportGate() {
-		chosenSettler.build(new TeleportGatePair());
-	}
-
-	public void placeTeleportGate(int i) throws InvalidCmdException {
-		chosenSettler.placeTeleportGate(i);
-	}
-
-	public void buildRobot() {
-		Robot r = new Robot(chosenSettler.getAsteroid());
-		chosenSettler.build(r);
-	}
-
-	public AsteroidField getField(int idx) {
-		return chosenSettler.getAsteroid().getNeighbours().get(idx);
-	}
-
-	public List<Asteroid> getFieldAsteroids(int idx) {
-		AsteroidField field = getField(idx);
-		List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
-		for (Asteroid asteroid : field.getAsteroids()) {
-			if (asteroid != chosenSettler.getAsteroid()) {
-				onlyNeighbours.add(asteroid);
-			}
-		}
-		return onlyNeighbours;
-	}
-
-	public void selectField(int idx) throws InvalidCmdException {
-		List<AsteroidField> neighbors = getNeighbours();
-		if (idx >= 0 && idx < neighbors.size()) {
-			selectedField = getField(idx);
-		} else {
-			throw new InvalidCmdException();
-		}
-	}
-
-	public void selectAsteroid(int n) throws InvalidCmdException {
-		List<Asteroid> asteroids = selectedField.getAsteroids();
-		if (n >= 1 && n <= asteroids.size()) {
-			selectedAsteroid = selectedField.getAsteroids().get(n - 1);
-		} else {
-			throw new InvalidCmdException();
-		}
-	}
-
-	public AsteroidField getSelectedField() {
-		return selectedField;
-	}
-	
-	public int getNumberofTeleportgatePairs() {
-		return chosenSettler.getNumberofTeleportgatePairs();
-	}
-
-	public void moveSettler() {
-		chosenSettler.move(selectedAsteroid);
-	}
-
-	public void putIronBack() {
-		chosenSettler.putIronBack();
-	}
-
-	public void putCoalBack() {
-		chosenSettler.putCoalBack();
-	}
-
-	public void putUraniumBack() {
-		chosenSettler.putUraniumBack();
-	}
-
-	public void putIceBack() {
-		chosenSettler.putIceBack();
-	}
-
-	public void moveSun() {
-
-	}
-
-	public void moveRobots() {
-
-	}
-
-	public void moveUfos() {
-
-	}
-
-	public void moveMegkergultGates() {
-
 	}
 }
