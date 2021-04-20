@@ -307,7 +307,7 @@ public class Game {
 				ufoAi.addUfo(line, solarSystem.getBelt());
 				break;
 			case 5:
-				new TeleportGatePair(line,settlerTeam,solarSystem.getBelt());
+				new TeleportGatePair(line,settlerTeam,solarSystem.getBelt(),megkergultGates);
 				break;
 			default:
 				break;
