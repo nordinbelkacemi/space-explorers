@@ -288,7 +288,13 @@ public class Settler extends Traveler implements Miner, Driller {
     public int getUraniumCount() {
         return uraniumStorage.size();
     }
-    
+
+    @Override
+    protected String getTravelerInfo() {
+        int settlerNum = team.getSettlers().indexOf(this) + 1;
+        return "settler " + settlerNum;
+    }
+
 }
     //////////////////////////////////////////////// test
     

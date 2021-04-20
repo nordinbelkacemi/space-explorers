@@ -3,6 +3,7 @@ package model.settler.buildable;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,8 @@ import model.ai.Ai;
 import model.ai.RobotAi;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
+import model.playfield.Coordinate;
+import model.playfield.SolarSystem;
 import model.settler.Driller;
 import model.settler.Settler;
 import model.settler.Traveler;
@@ -91,7 +94,9 @@ public class Robot extends Traveler implements Buildable, Driller {
 	}
 	
 	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a Robot adatait.
+	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak
+	 * megfelelő formátumban a Robot adatait.
+	 * 
 	 * @param out ahova kiírja az adatokat
 	 */
 	public void printToConfig(PrintStream out) {
@@ -102,8 +107,15 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 * Napvihar hatására elpusztítja a robotot.
 	 */
 	@Override
-	public void reactToFlare() {
-		super.reactToFlare();
-		ai.remove(this);
+	public String reactToFlare(Iterator<Traveler> travelerIter) {
+		String output = super.reactToFlare(travelerIter);
+		ai.remove(travelerIter);
+		return output;
+	}
+
+	@Override
+	protected String getTravelerInfo() {
+		int robotNum = ai.getRobots().indexOf(this) + 1;
+		return "robot " + robotNum;
 	}
 }

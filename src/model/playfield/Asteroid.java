@@ -2,6 +2,7 @@ package model.playfield;
 import java.util.List;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import model.materials.Material;
 import model.settler.Traveler;
@@ -25,6 +26,7 @@ public class Asteroid {
 	/** Az aszteroidán tartózkodó travelereket (robotok vagy telepesek) tárolja. */
 	private List<Traveler> travelers = new ArrayList<>();
 
+	private Iterator<Asteroid> asteroidIter;
 
 	////////////////////////////////////////// konstruktorok
 
@@ -61,6 +63,10 @@ public class Asteroid {
 		travelers.remove(t);
 	}
 
+	public void removeTraveler(Iterator<Traveler> travelerIter) {
+		travelerIter.remove();
+	}
+
 	/** Eltávolít egyet az aszteroida rétegei közül, csökkenti a thickness változót eggyel. */
 	public void removeLayer() {
 		thickness--;
@@ -85,15 +91,19 @@ public class Asteroid {
 	}
 
 	/** Napvihar esetén meghívódik, és meghívja az összes rajta tartózkodó traveler ReactToFlare() függvényét. */
-	public void reactToFlare() {
-		for (Traveler traveler : travelers) {
-			traveler.reactToFlare();
+	public String reactToFlare() {
+		String output = new String("");
+		Iterator<Traveler> travelerIter = travelers.iterator();
+		while (travelerIter.hasNext()) {
+			output += travelerIter.next().reactToFlare(travelerIter);
 		}
+		return output;
 	}
 
 	/** A megfelelő feltételek fennállása esetén felrobbantja az aszteroidát, vagy elszublimáltatja a magjában lévő vízjeget. */
-	public void checkDangers() {
-		if(thickness == 0) {
+	public void checkDangers(Iterator<Asteroid> asteroidIter) {
+		if(material != null && thickness == 0) {
+			this.asteroidIter = asteroidIter;
 			material.reactToSun(this);
 		}
 	}
@@ -111,7 +121,7 @@ public class Asteroid {
 		for (Traveler traveler : travelers) {
 			traveler.reactToExplosion();
 		}
-		field.removeAsteroid(this);
+		field.removeAsteroid(asteroidIter);
 	}
 
 	/** A jégből álló mag elszublimál. */

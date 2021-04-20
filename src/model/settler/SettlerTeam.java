@@ -9,7 +9,6 @@ import model.materials.Coal;
 import model.materials.Ice;
 import model.materials.Iron;
 import model.materials.Uranium;
-import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 /**
@@ -74,6 +73,10 @@ public class SettlerTeam {
 		belt = b;
 		Settler.setTeam(this);
 		settlers = new ArrayList<>();
+	}
+
+	public List<Settler> getSettlers() {
+		return settlers;
 	}
 	
 	public void addSettler(String s) throws Exception {

@@ -2,12 +2,13 @@ package model.ai;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Ufo;
+import model.settler.Traveler;
 import model.settler.buildable.Robot;
 
 /**
@@ -50,11 +51,19 @@ public class RobotAi implements Ai {
 	public void remove(Robot r) {
 		robots.remove(r);
 	}
+
+	public void remove(Iterator<Traveler> robotIter) {
+		robotIter.remove();
+	}
 	
 	public void configOut(PrintStream out) {
 		for (Robot r : robots) {
 			r.printToConfig(out);
 			out.println();
 		}
+	}
+
+	public List<Robot> getRobots() {
+		return robots;
 	}
 }

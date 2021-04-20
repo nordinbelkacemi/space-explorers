@@ -4,6 +4,8 @@ import console.exceptions.BackCmdException;
 import console.exceptions.ExitException;
 import console.exceptions.InvalidCmdException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import model.playfield.AsteroidField;
 public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
-    private PrintStream output = Print(System.out);
+    private PrintStream output = new PrintStream(System.out);
     /**
      * When the player chooses where to move, this type holds the asteroid field
      * index and and asteroid number (also an index, but 1-based) chosen
@@ -295,14 +297,14 @@ public class Console {
                         playModeExited = true;
                         break;
                     }
-                    stepGame();
-                    // szolunk a game controllernek hogy a kör további részeit végezze el
+                    String gameStepOutput = game.step();
+                    System.out.println(gameStepOutput);
                 }
                 break;
             case "test":
-                sc = new Scanner(valamisource);
+                // sc = new Scanner(valamisource);
                 output.println("entered testing mode ");
-                output = new PrintStream(valamifile);
+                // output = new PrintStream(valamifile);
                 break;
             default:
                 output.println("invalid command");
@@ -378,15 +380,8 @@ public class Console {
         }
     }
 
-    private void stepGame() {
-        game.moveSun();
-        game.moveRobots();
-        game.moveUfos();
-        game.moveMegkergultGates();
-        // game.move
-    }
-
     private void handleTest() {}
+
 
 
 
