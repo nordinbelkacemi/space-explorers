@@ -70,4 +70,8 @@ public class SettlerTeam {
 		Settler.setTeam(this);
 		settlers = new ArrayList<>();
 	}
+
+	public List<Settler> getSettlers() {
+		return settlers;
+	}
 }

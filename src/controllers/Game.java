@@ -45,6 +45,8 @@ public class Game {
 	/** telepes mozgása során kiválasztott cél aszteroida */
 	private Asteroid selectedAsteroid;
 
+	private int flareTimer;
+
 	// private Console console;
 
 	public Game() {
@@ -297,19 +299,12 @@ public class Game {
 		chosenSettler.putIceBack();
 	}
 
-	public void moveSun() {
+	public String step() {
+		String output = new String("");
+		output += sun.performAction();
+		robotAi.control();
+		ufoAi.control();
 
-	}
-
-	public void moveRobots() {
-
-	}
-
-	public void moveUfos() {
-
-	}
-
-	public void moveMegkergultGates() {
-
+		return output;
 	}
 }

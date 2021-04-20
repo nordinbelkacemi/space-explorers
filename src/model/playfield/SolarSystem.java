@@ -83,31 +83,38 @@ public class SolarSystem {
 	/**
 	 * Meghívja azon AsteroidField-ek ReactToFlare() függvényét amelyeket eltalál a napkitörés.
 	 */
-	public void reactToFlare(Coordinate d) {
+	public String reactToFlare(Coordinate d) {
+		String output = new String("");
+
 		Coordinate s = sun.getCo();
 		for (AsteroidField field : asteroidBelt) {
 			Coordinate f = field.getCo();
 			
 			if(d.getX() == 0) {
-				int b = (f.getY()-s.getY())/d.getY();
-				if(b > 0) {
-					field.reactToFlare();
+				int b = (f.getY() - s.getY()) / d.getY();
+				if (b > 0) {
+					String fieldReactionOutput = field.reactToFlare();
+					output += fieldReactionOutput;
 				}
 			}
-			else if(d.getX() == 0) {
-				int a = (f.getX()-s.getX())/d.getX();
-				if(a > 0) {
-					field.reactToFlare();
+			else if(d.getY() == 0) {
+				int a = (f.getX() - s.getX()) / d.getX();
+				if (a > 0) {
+					String fieldReactionOutput = field.reactToFlare();
+					output += fieldReactionOutput;
 				}
 			}
 			else {
-				int a = (f.getX()-s.getX())/d.getX();
-				int b = (f.getY()-s.getY())/d.getY();
-				if(a > 0 && a == b) {
-					field.reactToFlare();
+				int a = (f.getX() - s.getX()) / d.getX();
+				int b = (f.getY() - s.getY()) / d.getY();
+				if (a > 0 && a == b) {
+					String fieldReactionOutput = field.reactToFlare();
+					output += fieldReactionOutput;
 				}
 			}
 		}
+
+		return output;
 	}
 
 	

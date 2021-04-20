@@ -14,6 +14,7 @@ import model.settler.buildable.TeleportGate;
 import model.settler.buildable.TeleportGatePair;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
+import model.playfield.Coordinate;
 
 /**
  * A játékos által irányított telepes.
@@ -289,5 +290,11 @@ public class Settler extends Traveler implements Miner, Driller {
      */
     public int getUraniumCount() {
         return uraniumStorage.size();
+    }
+
+    @Override
+    protected String getTravelerInfo() {
+        int settlerNum = team.getSettlers().indexOf(this) + 1;
+        return "settler " + settlerNum;
     }
 }
