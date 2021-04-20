@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Test {
     
-    public static void main(String[] args) {
+    public static void test {
         System.out.println("Choose a test case");
         System.out.println("actions");
         System.out.println("build");
