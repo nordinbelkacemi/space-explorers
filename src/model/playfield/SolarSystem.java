@@ -169,9 +169,10 @@ public class SolarSystem {
 	
 	////////////////////////////// test
 	public SolarSystem() {
-		asteroidBelt = new ArrayList<>();
+		asteroidBelt = createBelt();
 		setNeighbours();
 		AsteroidField.setBelt(asteroidBelt);
+		sun = null;
 	}
 	
 	public void createField(String s) throws Exception {

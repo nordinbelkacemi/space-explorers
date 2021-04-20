@@ -4,6 +4,10 @@ import console.exceptions.BackCmdException;
 import console.exceptions.ExitException;
 import console.exceptions.InvalidCmdException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +20,7 @@ import model.playfield.AsteroidField;
 public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
-
+    private PrintStream output = new PrintStream(System.out);
     /**
      * When the player chooses where to move, this type holds the asteroid field
      * index and and asteroid number (also an index, but 1-based) chosen
@@ -121,10 +125,15 @@ public class Console {
             	game.putUraniumBack();
             	break;
             case "place teleportgate":
-            	// TODO
+            	try {
+            		selectTeleportgatePair();
+                } catch (BackCmdException ex) {
+                    throw ex;
+                } catch (ExitException ex) {
+                    throw ex;
+                }
+            	game.placeTeleportGate();
             	break;
-            case "save":
-            	// TODO game.configOut(out);
             default:
                 throw new InvalidCmdException();
             }
@@ -160,7 +169,7 @@ public class Console {
     private void showNeighbors(ArrayList<AsteroidField> neighbors) {
         for (int i = 0; i < neighbors.size(); i++) {
             List<Asteroid> asteroids = neighbors.get(i).getAsteroids();
-            System.out.println(String.valueOf(i) + ". field - " + asteroids.size() +  " asteroids");
+            output.println(String.valueOf(i) + ". field - " + asteroids.size() +  " asteroids");
         }
     }
 
@@ -179,7 +188,7 @@ public class Console {
                 }
             }
 
-            System.out.println(String.valueOf(i + 1) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
+            output.println(String.valueOf(i + 1) + ". asteroid - layers: " + String.valueOf(asteroid.getThickness()) + ", core: " + core);
         }
     }
 
@@ -211,13 +220,24 @@ public class Console {
         }
     };
     
-    private void selectTeleporgatePair() throws BackCmdException, ExitException {
-        // TODO
+    private void selectTeleportgatePair() throws BackCmdException, ExitException {
+        boolean teleportgateSelected = false;
+        while (!teleportgateSelected) {
+            try {
+                showTeleportgates();
+                int chosenTeleportgate = Integer.valueOf(getInputNavigableExitable(chooseTeleportgateMethod));
+                teleportgateSelected = true;
+            } catch (BackCmdException ex) {
+                throw ex;
+            } catch (ExitException ex) {
+                throw ex;
+            }
+        }
     }
     
     private void showTeleportgates() {
     	for (int i = 0; i < game.getNumberofTeleportgatePairs(); i++) {
-            System.out.println(String.valueOf(i + 1) + ". pair");
+            output.println(String.valueOf(i + 1) + ". pair");
         }
     }
     
@@ -226,7 +246,9 @@ public class Console {
         public void run(String input) throws InvalidCmdException {
             try {
                 int gateNum = Integer.parseInt(input);
-                game.placeTeleportGate(gateNum);
+                if (!(gateNum >= 1 && gateNum <= game.getNumberofTeleportgatePairs()))
+                	throw new InvalidCmdException();
+                game.selectTeleportgatePair(gateNum - 1);
             } catch (InvalidCmdException ex) {
                 throw ex;
             } catch (NumberFormatException ex) {
@@ -234,8 +256,7 @@ public class Console {
             }
         }
     };
-
-
+    
 
 
 
@@ -260,8 +281,8 @@ public class Console {
     public void start() {
         String input;
 
-        System.out.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
-        System.out.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
+        output.println("ASZTEROIDABANYASZAT PROTOTIPUS\n");
+        output.println("Egy új játék elkezdéséhez írd be a play parancsot, tesztelési módba való átlépéshez írd be a test parancsot.");
 
         boolean playModeExited = false;
         while (!playModeExited && !(input = sc.nextLine()).equals("exit")) {
@@ -281,10 +302,12 @@ public class Console {
                 }
                 break;
             case "test":
-                System.out.println("entered testing mode ");
+                // sc = new Scanner(valamisource);
+                output.println("entered testing mode ");
+                // output = new PrintStream(valamifile);
                 break;
             default:
-                System.out.println("invalid command");
+                output.println("invalid command");
                 break;
             }
         }
@@ -297,13 +320,13 @@ public class Console {
 
         while (true) {
             try {
-                handleSettlerTurn();
+                    handleSettlerTurn();
             } catch (NextTurnException ex) {
                 break;
             } catch (ExitException ex) {
                 throw ex;
             } catch (InvalidCmdException ex) {
-                System.out.println("invalid command!");
+                output.println("invalid command!");
             }
         }
     }
@@ -346,22 +369,18 @@ public class Console {
                 outString += i.toString() + " ";
             }
         }
-        System.out.println(outString);
+        output.println(outString);
     }
 
     private void printAvailableActions() {
         ArrayList<String> actions = game.getActions();
-        System.out.println("Your settler can:");
+        output.println("Your settler can:");
         for (int i = 0; i < actions.size(); i++) {
-            System.out.println(actions.get(i));
+            output.println(actions.get(i));
         }
     }
 
-
-
-
-
-
+    private void handleTest() {}
 
 
 
@@ -395,6 +414,14 @@ public class Console {
             case "next turn":
                 correctInput = true;
                 throw new NextTurnException();
+            case "save":
+            	try {
+            		game.configOut(new PrintStream(new File("savedgame.txt")));
+            	} catch (FileNotFoundException e) {
+            		System.out.println("Hiba a mentés közben!");
+            	}
+            	System.out.println("Játék elmentve!");
+            	break;
             case "exit":
                 throw new ExitException();
             default:
@@ -402,7 +429,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 } catch (BackCmdException ex) {
                     /* do nothing */
                 } catch (ExitException ex) {
@@ -436,7 +463,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 } catch (BackCmdException ex) {
                     throw ex;
                 }
@@ -471,7 +498,7 @@ public class Console {
                     getInputMethod.run(input);
                     correctInput = true;
                 } catch (InvalidCmdException ex) {
-                    System.out.println("invalid command!");
+                    output.println("invalid command!");
                 }
                 break;
             }

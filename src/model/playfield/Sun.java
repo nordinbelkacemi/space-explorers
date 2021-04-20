@@ -85,7 +85,6 @@ public class Sun extends Hexagon {
 		String[] data = s.split(" ");
 		position = new Coordinate(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
 		solarSystem.setSun(this);
-		
 	}
 	
 }
