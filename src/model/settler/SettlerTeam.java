@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import console.exceptions.InvalidCmdException;
 import model.materials.Coal;
 import model.materials.Ice;
 import model.materials.Iron;
@@ -80,19 +81,19 @@ public class SettlerTeam {
 		return settlers;
 	}
 	
-	public void addSettler(String s) throws Exception {
+	public void addSettler(String s) throws InvalidCmdException {
 		String[] data=s.split(",");
-		String[] asteroid = data[1].split(" ");
+		String[] asteroid = data[0].split(" ");
 		Settler settler = new Settler(belt.get(Integer.parseInt(asteroid[0])).getAsteroids().get(Integer.parseInt(asteroid[1])));
 		for (int i = 1; i < data.length; i++) {
 			String[] material = data[i].split(" ");
 			if (material.length == 3) {
-				if(material[0] == "uranium") {
+				if(material[0].equals("uranium")) {
 					for (int j = 0; j < Integer.parseInt(material[2]); j++) {
 						settler.addUranium(new Uranium(Integer.parseInt(material[1])));
 					}
 				}
-				else throw new Exception();
+				else throw new InvalidCmdException();
 			}
 			else if(material.length == 2){
 				for (int j = 0; j < Integer.parseInt(material[1]); j++) {
@@ -107,7 +108,7 @@ public class SettlerTeam {
 							settler.addCoal(new Coal());
 							break;
 						default:
-							throw new Exception();
+							throw new InvalidCmdException();
 					}
 				}
 			}

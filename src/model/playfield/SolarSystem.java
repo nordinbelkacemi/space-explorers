@@ -1,6 +1,7 @@
 package model.playfield;
 import java.util.List;
 
+import console.exceptions.InvalidCmdException;
 import model.materials.Coal;
 import model.materials.Ice;
 import model.materials.Iron;
@@ -175,7 +176,7 @@ public class SolarSystem {
 		sun = null;
 	}
 	
-	public void createField(String s) throws Exception {
+	public void createField(String s) throws InvalidCmdException  {
 		String[] data=s.split(",");
 		String[] asteroid = null;
 		int index = Integer.parseInt(data[0]);
@@ -183,10 +184,10 @@ public class SolarSystem {
 		for (int i = 1; i < data.length; i++) {
 			asteroid = data[i].split(" ");
 			if (asteroid.length == 3) {
-				if(asteroid[0] == "uranium") {
+				if(asteroid[0].equals("uranium")) {
 					field.addAsteroid(new Asteroid(new Uranium(Integer.parseInt(asteroid[1])), Integer.parseInt(asteroid[2]),field));
 				}
-				else throw new Exception();
+				else throw new InvalidCmdException();
 			}
 			else if(asteroid.length == 2){
 				switch (asteroid[0]) {

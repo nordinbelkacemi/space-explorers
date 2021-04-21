@@ -1,8 +1,11 @@
+invalid_commands_config.txt
 12
 1
 move
 0
 1
+next turn
+7
 place teleportgate
 build robot
 save

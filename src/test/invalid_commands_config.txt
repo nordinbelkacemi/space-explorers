@@ -1,4 +1,5 @@
-0, uranium 2 0, ice 2
+0,uranium 2 0,ice 2
 
+2 0
 
 0 0

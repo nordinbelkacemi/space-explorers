@@ -1,14 +1,24 @@
 Add config file:
-Choose settler: 1
-invalid command, try again!
+Choose settler: 1 2 3 4 5 6 
+invalid command!
 Your settler can:
 move
-0. field - 2 asteroids
-1. asteroid - layers: 2, core: ice
-Choose settler: 1
-invalid command, try again!
-Choose settler: 1
-invalid command, try again!
-Choose settler: 1
-invalid command, try again!
-Choose settler: 1
+0. field - 8 asteroids
+1. field - 6 asteroids
+2. field - 3 asteroids
+3. field - 5 asteroids
+1. asteroid - layers: 3, core: ?
+2. asteroid - layers: 4, core: ?
+3. asteroid - layers: 4, core: ?
+4. asteroid - layers: 4, core: ?
+5. asteroid - layers: 3, core: ?
+6. asteroid - layers: 0, core: uranium 2 
+7. asteroid - layers: 2, core: ?
+Choose settler: 2 3 4 5 6 
+Solar flare happened this turn.
+
+Choose settler: 1 2 3 4 5 6 
+invalid command!
+invalid command!
+invalid command!
+Játék elmentve!

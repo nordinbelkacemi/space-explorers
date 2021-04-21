@@ -115,7 +115,8 @@ public class Robot extends Traveler implements Buildable, Driller {
 	@Override
 	public String reactToFlare(Iterator<Traveler> travelerIter) {
 		String output = super.reactToFlare(travelerIter);
-		ai.remove(travelerIter);
+		//ai.remove(travelerIter);
+		ai.remove(this);
 		return output;
 	}
 

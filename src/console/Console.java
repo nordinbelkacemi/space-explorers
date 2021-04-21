@@ -20,6 +20,7 @@ import model.playfield.AsteroidField;
 public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
+    private Scanner scTemp;
     private PrintStream output = new PrintStream(System.out);
     /**
      * When the player chooses where to move, this type holds the asteroid field
@@ -260,10 +261,21 @@ public class Console {
         @Override
         public void run(String input) throws InvalidCmdException {
             try {
-                if(input == "console") {
-                	sc = new Scanner(System.in);
+                scTemp = new Scanner(new File("src/test/" + input));
+            } catch (FileNotFoundException ex) {
+                throw new InvalidCmdException();
+            } 
+        }
+    };
+    
+    private IRunnable addOutputStream = new IRunnable() {
+        @Override
+        public void run(String input) throws InvalidCmdException {
+            try {
+                if(input.equals("console")) {
+                	output = new PrintStream(System.out);
                 } else {
-                	sc = new Scanner(new File("src/test/" + input));
+                	output = new PrintStream(new File(input));
 				}
             } catch (FileNotFoundException ex) {
                 throw new InvalidCmdException();
@@ -320,10 +332,36 @@ public class Console {
                 output.println("Add input:");
                 try {
 					getInputExitable(addInputStream);
+					output.println("Add output:");
+					getInputExitable(addOutputStream);
+					output.println("Add config file:");
+					if (scTemp != null)
+						sc = scTemp;
+					game = new Game(sc);
+					
+					game.start();
+	                while (!game.over()) {
+	                    try {
+	                        handlePlayerTurn();
+	                    } catch (ExitException ex) {
+	                        playModeExited = true;
+	                        break;
+	                    }
+	                    String gameStepOutput = game.step();
+	                    System.out.println(gameStepOutput);
+	                }
+	                break;
+	                
 				} catch (BackCmdException e) {} 
                 catch (ExitException e) {
                 	gameOver = true;
 				}
+                catch (InvalidCmdException e) {
+                	output.println("invalid command");
+                }
+                catch (FileNotFoundException e) {
+                	output.println("invalid command");
+                }
                 // sc = new Scanner(valamisource);
                 // output = new PrintStream(valamifile);
                 break;

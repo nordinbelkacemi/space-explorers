@@ -3,7 +3,10 @@ kergult_config.txt
 move
 1
 0
+next turn
 1
 move
 2
 0
+save
+exit
