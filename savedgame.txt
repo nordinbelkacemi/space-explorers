@@ -1,7 +1,10 @@
-0,ice 0
+0,empty 0
+1,empty 0
+2,empty 0
+3,empty 0
 
--2 2
+-1 2
 
-0 0
+1 0
 
 
