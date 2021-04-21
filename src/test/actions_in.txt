@@ -1,9 +1,12 @@
-actions.txt
+actions_config.txt
 1
 drill
+next turn
 1
 mine
+next turn
 1
 put back coal
+next turn
 save    
 exit
