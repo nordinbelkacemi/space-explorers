@@ -267,7 +267,6 @@ public class Game {
 		megkergultGates = new MegkergultGates();
 
 		choosableSettlers = new ArrayList<Integer>();
-		//configOut(System.out);
 		configIn(sc);
 	}
 
