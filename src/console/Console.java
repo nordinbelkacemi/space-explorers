@@ -344,7 +344,7 @@ public class Console {
 	                    try {
 	                        handlePlayerTurn();
 	                    } catch (ExitException ex) {
-	                        playModeExited = true;
+	                        gameOver = true;
 	                        break;
 	                    }
 	                    String gameStepOutput = game.step();

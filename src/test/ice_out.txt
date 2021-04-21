@@ -1,7 +1,7 @@
 Add config file:
-Choose settler: 1 2 3 4 5 6 
+Choose settler: 1
 Your settler can:
 drill
 move
-Choose settler: 2 3 4 5 6 
+Choose settler:
 Játék elmentve!

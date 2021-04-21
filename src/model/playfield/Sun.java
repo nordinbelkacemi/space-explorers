@@ -87,4 +87,9 @@ public class Sun extends Hexagon {
 		solarSystem.setSun(this);
 	}
 	
+	@Override
+	public String toString() {
+		return position.toString();
+	}
+	
 }
