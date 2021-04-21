@@ -1,21 +1,19 @@
 Add config file:
-Choose settler: 1
+Choose settler: 1 2 3 4 5 6 
 Your settler can:
-move
 drill
+move
+build teleportgate
 build robot
-build teleportgate
 place teleportgate
-robot 1 move:        
-0. field - 1 asteroids
-1. field - 1 asteroids
-0. asteroid - layers: 0, core: empty 
-Choose settler: 1
+Choose settler: 2 3 4 5 6 
+Solar flare happened this turn.
+
+Choose settler: 1 2 3 4 5 6 
 Your settler can:
-move
 drill
+move
 build teleportgate
 place teleportgate
-robot 1 move:        
-0. field - 1 asteroids
-1. field - 1 asteroids
+Choose settler: 2 3 4 5 6 
+Játék elmentve!
