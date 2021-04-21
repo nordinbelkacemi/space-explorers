@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -163,10 +162,8 @@ public class Game {
 		chosenSettler.mine();
 	}
 
-	/* TODO drill string return for ice sublimation */
-	public String drill() {
+	public void drill() {
 		chosenSettler.drill();
-		return new String("");
 	}
 
 	public void buildTeleportGate() {

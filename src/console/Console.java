@@ -6,7 +6,6 @@ import console.exceptions.InvalidCmdException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,12 @@ public class Console {
     private Game game;
     private Scanner sc = new Scanner(System.in);
     private Scanner scTemp;
-    private PrintStream output = new PrintStream(System.out);
+    private static PrintStream output = new PrintStream(System.out);
+
+    public static void print(String s) {
+        output.println(s);
+    }
+
     /**
      * When the player chooses where to move, this type holds the asteroid field
      * index and and asteroid number (also an index, but 1-based) chosen
@@ -102,9 +106,6 @@ public class Console {
                 game.moveSettler();
                 break;
             case "drill":
-                String drillOutput = game.drill();
-                if (!drillOutput.equals(""))
-                    output.println(drillOutput);
                 game.drill();
                 break;
             case "mine":
