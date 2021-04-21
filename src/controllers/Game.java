@@ -163,8 +163,8 @@ public class Game {
 		chosenSettler.mine();
 	}
 
-	public void drill() {
-		chosenSettler.drill();
+	public String drill() {
+		return chosenSettler.drill();
 	}
 
 	public void buildTeleportGate() {

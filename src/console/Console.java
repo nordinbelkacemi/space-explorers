@@ -105,7 +105,9 @@ public class Console {
                 game.drill();
                 break;
             case "mine":
-                game.mine();
+                String mineOutput = game.mine();
+                if (!mineOutput.equals(""))
+                    output.println(mineOutput);
                 break;
             case "build teleportgate":
             	game.buildTeleportGate();
@@ -344,7 +346,7 @@ public class Console {
 	                    try {
 	                        handlePlayerTurn();
 	                    } catch (ExitException ex) {
-	                        playModeExited = true;
+	                        gameOver = true;
 	                        break;
 	                    }
 	                    String gameStepOutput = game.step();
@@ -379,7 +381,7 @@ public class Console {
 
         while (true) {
             try {
-                    handleSettlerTurn();
+                handleSettlerTurn();
             } catch (NextTurnException ex) {
                 break;
             } catch (ExitException ex) {
