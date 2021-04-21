@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -261,7 +263,7 @@ public class Game {
 	
 	/////////////////////////////////////// test
 	
-	public Game(InputStream in) {
+	public Game(Scanner sc) throws InvalidCmdException, FileNotFoundException {
 		solarSystem = new SolarSystem();
 		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0);
 		robotAi = new RobotAi();
@@ -270,6 +272,7 @@ public class Game {
 
 		choosableSettlers = new ArrayList<Integer>();
 		//configOut(System.out);
+		configIn(sc);
 	}
 
 	public void configOut(PrintStream out) {
@@ -282,35 +285,41 @@ public class Game {
 		ufoAi.configOut(out);
 	}
 
-	public void configIn(InputStream in) throws Exception {
+	public void configIn(Scanner scanner) throws InvalidCmdException, FileNotFoundException  {
 		int state = 0; // 0-asteroids 1-sun 2-settlers 3-robots 4-ufos 5-gates
-		Scanner sc = new Scanner(in);
 		String line = null;
-		while(sc.hasNextLine()) {
-			line = sc.nextLine();
-			if(line.isEmpty()) state++;
-			switch (state) {
-			case 0:
-				solarSystem.createField(line);
-				break;
-			case 1:
-				sun.setSolarSystem(solarSystem);
-				sun = new Sun(line);
-				break;
-			case 2:
-				settlerTeam.addSettler(line);
-				break;
-			case 3:
-				robotAi.addRobot(line,solarSystem.getBelt());
-				break;
-			case 4:
-				ufoAi.addUfo(line, solarSystem.getBelt());
-				break;
-			case 5:
-				new TeleportGatePair(line,settlerTeam,solarSystem.getBelt(),megkergultGates);
-				break;
-			default:
-				break;
+		Scanner sc;
+		if (scanner.hasNextLine()) {
+			sc = new Scanner(new File("src/test/" + scanner.nextLine()));
+			while (sc.hasNextLine()) {
+				line = sc.nextLine();
+				if (line.isEmpty()) {
+					state++;
+					continue;
+				}
+				switch (state) {
+				case 0:
+					solarSystem.createField(line);
+					break;
+				case 1:
+					sun = new Sun(line, solarSystem);
+					sun.setSolarSystem(solarSystem);
+					break;
+				case 2:
+					settlerTeam.addSettler(line);
+					break;
+				case 3:
+					robotAi.addRobot(line,solarSystem.getBelt());
+					break;
+				case 4:
+					ufoAi.addUfo(line, solarSystem.getBelt());
+					break;
+				case 5:
+					new TeleportGatePair(line,settlerTeam,solarSystem.getBelt(),megkergultGates);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
