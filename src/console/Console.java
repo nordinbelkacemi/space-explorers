@@ -102,12 +102,13 @@ public class Console {
                 game.moveSettler();
                 break;
             case "drill":
+                String drillOutput = game.drill();
+                if (!drillOutput.equals(""))
+                    output.println(drillOutput);
                 game.drill();
                 break;
             case "mine":
-                String mineOutput = game.mine();
-                if (!mineOutput.equals(""))
-                    output.println(mineOutput);
+                game.mine();
                 break;
             case "build teleportgate":
             	game.buildTeleportGate();

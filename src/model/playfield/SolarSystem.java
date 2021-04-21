@@ -153,11 +153,15 @@ public class SolarSystem {
 	public void configOut(PrintStream out) {
 		int i = 0;
 		for (AsteroidField f : asteroidBelt) {
-			out.print(i);
-			f.printToConfig(out);
-			out.println();
-			i++;
+			if(!f.getAsteroids().isEmpty()) {
+				out.print(i);
+				f.printToConfig(out);
+				out.println();
+				i++;
+			}
 		}
+		out.println();
+		out.println(sun.toString());
 	}
 	
 	/**
@@ -170,10 +174,18 @@ public class SolarSystem {
 	
 	////////////////////////////// test
 	public SolarSystem() {
-		asteroidBelt = createBelt();
+		asteroidBelt = createBelt(0);
 		setNeighbours();
 		AsteroidField.setBelt(asteroidBelt);
 		sun = null;
+	}
+	
+	private List<AsteroidField> createBelt(int t) {
+		ArrayList<AsteroidField> belt = new ArrayList<>();
+		for (int i = 0; i < cos.length; i++) {
+			belt.add(new AsteroidField(cos[i],0));
+		}		
+		return belt;
 	}
 	
 	public void createField(String s) throws InvalidCmdException  {

@@ -198,4 +198,11 @@ public class AsteroidField extends Hexagon {
 		return position;
 	}
 
+	/////////////////////////////////// test
+	public AsteroidField(Coordinate c,int t) {
+		position = c;
+		asteroids = new ArrayList<>();
+		neighbours = new ArrayList<>();
+		teleportGates = new ArrayList<>();
+	}
 }
