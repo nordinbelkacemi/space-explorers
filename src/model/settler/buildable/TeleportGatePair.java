@@ -80,8 +80,12 @@ public class TeleportGatePair implements Buildable {
 	}
 	
 	////////////////////////////////////////////////////// test
+
+	public TeleportGatePair() {
+
+	}
 	
-	public TeleportGatePair(String s,SettlerTeam st,List<AsteroidField> belt,MegkergultGates kergult) throws InvalidCmdException {
+	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) throws InvalidCmdException {
 		TeleportGate teleportgate1 = new TeleportGate();
 		TeleportGate teleportgate2 = new TeleportGate();
 		gates.add(teleportgate1);
@@ -100,9 +104,9 @@ public class TeleportGatePair implements Buildable {
 		}
 		else if(data.length == 2){
 			String[] gate1 =data[0].split(" ");
-			if(gate1[0].equals("field")) {
+			if (gate1[0].equals("field")) {
 				int x = 1;
-				if(gate1.length == 3) {
+				if (gate1.length == 3) {
 					kergult.addGate(teleportgate1);
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
@@ -125,9 +129,5 @@ public class TeleportGatePair implements Buildable {
 				throw new InvalidCmdException();
 			
 		}
-	}
-
-	public TeleportGatePair() {
-		// TODO Auto-generated constructor stub
 	}
 }

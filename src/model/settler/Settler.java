@@ -209,7 +209,7 @@ public class Settler extends Traveler implements Miner, Driller {
     	team.removeSettler(this);
         return super.die();
     }
-    
+
     /**
      * Beállítja a telepes csapatát.
      * @param st a beállítandó csapat

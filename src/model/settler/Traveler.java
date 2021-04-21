@@ -57,7 +57,8 @@ public abstract class Traveler {
 	/**
 	 * Az aszteroida felrobbanásának hatására reagál.
 	 */
-	public void reactToExplosion() {
+	public void reactToExplosion(Iterator<Traveler> travelerIter) {
+		this.travelerIter = travelerIter;
 		die();
 	}
 
