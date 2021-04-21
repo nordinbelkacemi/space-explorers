@@ -1,6 +1,8 @@
 package model.materials;
 
+import console.Console;
 import model.playfield.Asteroid;
+import model.playfield.Coordinate;
 import model.settler.Settler;
 
 /** A vízjég, mint kibányászható nyersanyag osztálya, nem radioaktív, szublimál. */
@@ -21,6 +23,11 @@ public class Ice extends Material {
      */
     @Override
     public void reactToSun(Asteroid a) {
+        Coordinate coordinate = a.getIndexes();
+        int fieldIdx = coordinate.getX();
+        int asteroidIdx = coordinate.getY();
+
+        Console.print(fieldIdx + ". field " + asteroidIdx + ". asteroid sublime");
     	a.sublime();
     }
     

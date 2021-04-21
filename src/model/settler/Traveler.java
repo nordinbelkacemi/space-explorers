@@ -98,8 +98,8 @@ public abstract class Traveler {
         int asteroidIdx = coordinate.getY();
 		String travelerInfo = getTravelerInfo();
 
-		//asteroid.removeTraveler(travelerIter);
-		asteroid.removeTraveler(this);
+		asteroid.removeTraveler(travelerIter);
+		// asteroid.removeTraveler(this);
 
 		return travelerInfo + " died: " + fieldIdx + ". field " + asteroidIdx + ". asteroid\n";
 	}

@@ -1,0 +1,9 @@
+Add config file:
+Choose settler: 1 
+Your settler can:
+drill
+move
+build teleportgate
+build robot
+place teleportgate
+Choose settler: 
