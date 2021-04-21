@@ -3,6 +3,7 @@ package model.settler.buildable;
 import java.util.ArrayList;
 import java.util.List;
 
+import console.exceptions.InvalidCmdException;
 import model.materials.Coal;
 import model.materials.Ice;
 import model.materials.Iron;
@@ -80,7 +81,7 @@ public class TeleportGatePair implements Buildable {
 	
 	////////////////////////////////////////////////////// test
 	
-	public TeleportGatePair(String s,SettlerTeam st,List<AsteroidField> belt,MegkergultGates kergult) throws Exception {
+	public TeleportGatePair(String s,SettlerTeam st,List<AsteroidField> belt,MegkergultGates kergult) throws InvalidCmdException {
 		TeleportGate teleportgate1 = new TeleportGate();
 		TeleportGate teleportgate2 = new TeleportGate();
 		gates.add(teleportgate1);
@@ -95,33 +96,33 @@ public class TeleportGatePair implements Buildable {
 				st.chooseSettler(Integer.parseInt(gate[1])).storeTeleportGatePair(this);
 			}
 			else
-				throw new Exception();
+				throw new InvalidCmdException();
 		}
 		else if(data.length == 2){
 			String[] gate1 =data[0].split(" ");
-			if(gate1[0] == "field") {
+			if(gate1[0].equals("field")) {
 				int x = 1;
 				if(gate1.length == 3) {
-					kergult.addGate(teleportgate1); x = 2;
+					kergult.addGate(teleportgate1);
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
 			}
 			else
-				throw new Exception();
+				throw new InvalidCmdException();
 			
 			String[] gate2 =data[1].split(" ");
-			if(gate2[0] == "field") {
+			if(gate2[0].equals("field")) {
 				int x = 1;
 				if(gate2.length == 3) {
-					kergult.addGate(teleportgate2); x = 2;
+					kergult.addGate(teleportgate2);
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
 			}
-			else if (gate2[0] == "settler") {
+			else if (gate2[0].equals("settler")) {
 				st.chooseSettler(Integer.parseInt(gate2[1])).storeTeleportGatePair(this);
 			}
 			else
-				throw new Exception();
+				throw new InvalidCmdException();
 			
 		}
 	}
