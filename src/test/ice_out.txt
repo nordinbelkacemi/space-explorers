@@ -1,7 +1,0 @@
-Add config file:
-Choose settler: 1
-Your settler can:
-drill
-move
-Choose settler:
-Játék elmentve!

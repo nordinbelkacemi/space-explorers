@@ -1,7 +1,0 @@
-player_wins_config.txt
-1
-move
-0
-1
-nextturn
-exit

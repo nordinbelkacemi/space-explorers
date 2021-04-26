@@ -8,8 +8,6 @@ import java.util.Random;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.playfield.Ufo;
-import model.settler.Settler;
-import model.settler.buildable.Robot;
 
 /**
  * Az ufok tárolásáért és irányításáért felelős objektum.

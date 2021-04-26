@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Coordinate;
 
 /**
  * Absztrakt ősosztály.
@@ -65,9 +64,9 @@ public abstract class Traveler {
 	/**
 	 *  Megöli a telepest vagy robotot, ha az nem bújt el egy üreges aszteroida magjában.
 	 */
-	public String reactToFlare(Iterator<Traveler> travelerIter) {
+	public void reactToFlare(Iterator<Traveler> travelerIter) {
 		this.travelerIter = travelerIter;
-		return die();
+		die();
 	}
 
 	/**
@@ -92,16 +91,8 @@ public abstract class Traveler {
 	/**
 	 * Eltávolítja az utazót mindent tárolójából.
 	 */
-	protected String die() {
-		Coordinate coordinate = getAsteroid().getIndexes();
-        int fieldIdx = coordinate.getX();
-        int asteroidIdx = coordinate.getY();
-		String travelerInfo = getTravelerInfo();
-
+	protected void die() {
 		asteroid.removeTraveler(travelerIter);
-		// asteroid.removeTraveler(this);
-
-		return travelerInfo + " died: " + fieldIdx + ". field " + asteroidIdx + ". asteroid\n";
 	}
 
 	protected String getTravelerInfo() {

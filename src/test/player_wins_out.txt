@@ -1,7 +1,0 @@
-Add config file:
-Choose settler: 1 2
-Your settler can: move
-0. field - 2 asteroids
-1. asteroid - layers: 3, core : empty
-Choose settler: 2
-Space base is built. You win!

@@ -1,8 +1,0 @@
-build_config.txt
-1
-build robot
-next turn
-1
-build teleportgate
-save
-exit

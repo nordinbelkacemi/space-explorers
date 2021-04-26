@@ -1,5 +1,0 @@
-lose_config.txt
-1
-drill
-y
--1,1

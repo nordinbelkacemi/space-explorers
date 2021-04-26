@@ -1,4 +1,0 @@
-0, empty 3, empty 2
-
-0 1, iron 3,uranium 3
-0 2, ice 3,coal 3

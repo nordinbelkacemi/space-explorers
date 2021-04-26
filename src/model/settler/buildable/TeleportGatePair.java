@@ -3,11 +3,6 @@ package model.settler.buildable;
 import java.util.ArrayList;
 import java.util.List;
 
-import console.exceptions.InvalidCmdException;
-import model.materials.Coal;
-import model.materials.Ice;
-import model.materials.Iron;
-import model.materials.Uranium;
 import model.playfield.AsteroidField;
 import model.playfield.MegkergultGates;
 import model.settler.Settler;
@@ -85,7 +80,7 @@ public class TeleportGatePair implements Buildable {
 
 	}
 	
-	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) throws InvalidCmdException {
+	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) {
 		TeleportGate teleportgate1 = new TeleportGate();
 		TeleportGate teleportgate2 = new TeleportGate();
 		gates.add(teleportgate1);
@@ -99,8 +94,6 @@ public class TeleportGatePair implements Buildable {
 			if(gate[0] == "settler") {
 				st.chooseSettler(Integer.parseInt(gate[1])).storeTeleportGatePair(this);
 			}
-			else
-				throw new InvalidCmdException();
 		}
 		else if(data.length == 2){
 			String[] gate1 =data[0].split(" ");
@@ -111,8 +104,6 @@ public class TeleportGatePair implements Buildable {
 				}
 				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
 			}
-			else
-				throw new InvalidCmdException();
 			
 			String[] gate2 =data[1].split(" ");
 			if(gate2[0].equals("field")) {
@@ -125,8 +116,6 @@ public class TeleportGatePair implements Buildable {
 			else if (gate2[0].equals("settler")) {
 				st.chooseSettler(Integer.parseInt(gate2[1])).storeTeleportGatePair(this);
 			}
-			else
-				throw new InvalidCmdException();
 			
 		}
 	}

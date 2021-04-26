@@ -64,15 +64,15 @@ public class Settler extends Traveler implements Miner, Driller {
         teleportGatePairs = new ArrayList<>();
     }
 
-    // //////////////////////////////////////// függvények
-    // /**
-	//  * Visszaadja a telepes String reprezentációját.
-	//  * @return a String
-	//  */
-	// @Override
-    // public String toString() {
-    //     return "Settler";
-    // }
+    //////////////////////////////////////// függvények
+    /**
+	 * Visszaadja a telepes String reprezentációját.
+	 * @return a String
+	 */
+	@Override
+    public String toString() {
+        return "Settler";
+    }
 
     /**
      *  A bányászást megvalósító metódus.
@@ -205,10 +205,9 @@ public class Settler extends Traveler implements Miner, Driller {
      * Megöli a telepest.
      */
     @Override
-    public String die() {
-        String output = super.die();
+    public void die() {
+        super.die();
     	team.removeSettler(this);
-        return output;
     }
 
     /**
@@ -289,13 +288,4 @@ public class Settler extends Traveler implements Miner, Driller {
     public int getUraniumCount() {
         return uraniumStorage.size();
     }
-
-    @Override
-    protected String getTravelerInfo() {
-        int settlerNum = team.getSettlers().indexOf(this) + 1;
-        return "settler " + settlerNum;
-    }
-
-}
-    //////////////////////////////////////////////// test
-    
+}   

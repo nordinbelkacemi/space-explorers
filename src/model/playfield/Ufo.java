@@ -3,10 +3,8 @@ package model.playfield;
 import java.io.PrintStream;
 import java.util.Iterator;
 
-import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.settler.Miner;
-import model.settler.SettlerTeam;
 import model.settler.Traveler;
 
 /**
@@ -56,17 +54,13 @@ public class Ufo extends Traveler implements Miner {
 	 * Felülírja az ős függvényét, az Ufok nem halnak meg napvihar hatására.
 	 */
 	@Override
-	public String reactToFlare(Iterator<Traveler> ufoIter) { 
-		return getDeathInfo();
+	public void reactToFlare(Iterator<Traveler> ufoIter) { 
+		
 	}
 	
 	@Override
-	public String die() {
+	public void die() {
 		ai.remove(this);
-		return super.die();
-	}
-
-	public String getDeathInfo() {
-		return new String("");
+		super.die();
 	}
 }

@@ -90,12 +90,10 @@ public class AsteroidField extends Hexagon {
 	 * Napvihar esetén hívódik meg, és minden aszteroidájára meghívja
 	 * az Asteroid osztály ReactToFlare() függvényét.
 	 */
-	public String reactToFlare() {
-		String output = new String("");
+	public void reactToFlare() {
 		for (int i = 0; i < asteroids.size(); i++) {
-			output += asteroids.get(i).reactToFlare();
+			asteroids.get(i).reactToFlare();
 		}
-		return output;
 	}
 
 	/**

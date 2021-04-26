@@ -2,17 +2,13 @@ package model.settler.buildable;
 
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import model.ai.Ai;
 import model.ai.RobotAi;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Coordinate;
-import model.playfield.SolarSystem;
 import model.settler.Driller;
 import model.settler.Settler;
 import model.settler.Traveler;
@@ -72,9 +68,9 @@ public class Robot extends Traveler implements Buildable, Driller {
 	}
 	
 	@Override
-	public String die() {
+	public void die() {
 		ai.remove(this);
-		return super.die();
+		super.die();
 	}
 	
 	/**
@@ -113,11 +109,10 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 * Napvihar hatására elpusztítja a robotot.
 	 */
 	@Override
-	public String reactToFlare(Iterator<Traveler> travelerIter) {
-		String output = super.reactToFlare(travelerIter);
-		//ai.remove(travelerIter);
-		ai.remove(this);
-		return output;
+	public void reactToFlare(Iterator<Traveler> travelerIter) {
+		super.reactToFlare(travelerIter);
+		ai.remove(travelerIter);
+		// ai.remove(this);
 	}
 
 	@Override

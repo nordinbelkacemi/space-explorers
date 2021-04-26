@@ -1,5 +1,0 @@
-ice_config.txt
-1
-drill
-save
-exit

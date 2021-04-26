@@ -1,13 +1,8 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import console.exceptions.InvalidCmdException;
 import model.ai.RobotAi;
 import model.ai.UfoAi;
 
@@ -45,24 +40,15 @@ public class Game {
 	
 	private int selectedTeleportgatePair;
 
-	// private Console console;
-
 	public Game() {
-		// playfield
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
-
-		// settlers
 		settlerTeam = new SettlerTeam(solarSystem.getBelt());
-		// robot
 		robotAi = new RobotAi();
-		// ufo
 		ufoAi = new UfoAi(solarSystem.getBelt());
-		// megkergült
 		megkergultGates = new MegkergultGates();
 
 		choosableSettlers = new ArrayList<Integer>();
-		//configOut(System.out);
 	}
 
 	/** A játékot elindító függvény */
@@ -81,11 +67,8 @@ public class Game {
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void chooseSettler(int n) throws InvalidCmdException {
-		if (!choosableSettlers.contains(n)) {
-			throw new InvalidCmdException();
-		}
-		chosenSettler = settlerTeam.chooseSettler(n);
+	public void chooseSettler(int n) {
+
 	}
 
 	/** A gameOver változó lekérdezö függvénye
@@ -194,24 +177,13 @@ public class Game {
 		return onlyNeighbours;
 	}
 
-	public void selectField(int idx) throws InvalidCmdException {
-		List<AsteroidField> neighbors = getNeighbours();
-		if (idx >= 0 && idx < neighbors.size()) {
-			selectedField = getField(idx);
-		} else {
-			throw new InvalidCmdException();
-		}
+	public void chooseField(int idx) {
+		
 	}
 
-	public void selectAsteroid(int n) throws InvalidCmdException {
-		List<Asteroid> asteroids = selectedField.getAsteroids();
-		if (n >= 1 && n <= asteroids.size()) {
-			selectedAsteroid = selectedField.getAsteroids().get(n - 1);
-		} else {
-			throw new InvalidCmdException();
-		}
+	public void chooseAsteroid(int n) {
+		
 	}
-	
 
 	public AsteroidField getSelectedField() {
 		return selectedField;
@@ -221,7 +193,7 @@ public class Game {
 		return chosenSettler.getNumberofTeleportgatePairs();
 	}
 	
-	public void selectTeleportgatePair(int selectedPair) throws InvalidCmdException {
+	public void selectTeleportgatePair(int selectedPair) {
 		selectedTeleportgatePair = selectedPair;
 	}
 
@@ -245,77 +217,12 @@ public class Game {
 		chosenSettler.putIceBack();
 	}
 
-	public String step() {
-		String output = new String("");
-		output += sun.performAction();
+	public void step() {
+		sun.performAction();
 		robotAi.control();
 		ufoAi.control();
 
 		resetChoosableSettlers();
-
-		return output;
-	}
-	
-	
-	/////////////////////////////////////// test
-	
-	public Game(Scanner sc) throws InvalidCmdException, FileNotFoundException {
-		solarSystem = new SolarSystem();
-		settlerTeam = new SettlerTeam(solarSystem.getBelt(),0);
-		robotAi = new RobotAi();
-		ufoAi = new UfoAi(solarSystem.getBelt(),0);
-		megkergultGates = new MegkergultGates();
-
-		choosableSettlers = new ArrayList<Integer>();
-		configIn(sc);
 	}
 
-	public void configOut(PrintStream out) {
-		solarSystem.configOut(out);
-		out.println();
-		settlerTeam.configOut(out);
-		out.println();
-		robotAi.configOut(out);
-		out.println();
-		ufoAi.configOut(out);
-	}
-
-	public void configIn(Scanner scanner) throws InvalidCmdException, FileNotFoundException  {
-		int state = 0; // 0-asteroids 1-sun 2-settlers 3-robots 4-ufos 5-gates
-		String line = null;
-		Scanner sc;
-		if (scanner.hasNextLine()) {
-			sc = new Scanner(new File("src/test/" + scanner.nextLine()));
-			while (sc.hasNextLine()) {
-				line = sc.nextLine();
-				if (line.isEmpty()) {
-					state++;
-					continue;
-				}
-				switch (state) {
-				case 0:
-					solarSystem.createField(line);
-					break;
-				case 1:
-					sun = new Sun(line, solarSystem);
-					sun.setSolarSystem(solarSystem);
-					break;
-				case 2:
-					settlerTeam.addSettler(line);
-					break;
-				case 3:
-					robotAi.addRobot(line,solarSystem.getBelt());
-					break;
-				case 4:
-					ufoAi.addUfo(line, solarSystem.getBelt());
-					break;
-				case 5:
-					new TeleportGatePair(line,settlerTeam,solarSystem.getBelt(),megkergultGates);
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}
 }

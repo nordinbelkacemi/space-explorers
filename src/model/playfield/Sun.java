@@ -26,20 +26,17 @@ public class Sun extends Hexagon {
 	 * 
 	 * @return 1 ha történt napkitörés, 0 ha nem.
 	 */
-	public String performAction() {
-		String output = new String("");
-		// if (r.nextInt(5) == 1) {
-			output += startFlare();
-		// }
+	public void performAction() {
+		if (r.nextInt(5) == 1) {
+			startFlare();
+		}
 		move();
-
-		return output;
 	}
 	
 	/**
 	 * Elindítja a napvihart.
 	 */
-	private String startFlare() {
+	private void startFlare() {
 		Coordinate dir;
 		switch (r.nextInt(6)) {
 			case 0: dir = new Coordinate(0, 1);		break;
@@ -50,9 +47,7 @@ public class Sun extends Hexagon {
 			case 5: dir = new Coordinate(-1, 1);	break;
 			default: dir = null;
 		}
-		String output = new String("Solar flare happened this turn.\n");
-		output += solarSystem.reactToFlare(dir);
-		return output;
+		solarSystem.reactToFlare(dir);
 	}
 	
 	/**

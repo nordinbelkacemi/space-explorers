@@ -8,8 +8,6 @@ import java.util.Random;
 
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.Ufo;
-import model.settler.Settler;
 import model.settler.Traveler;
 import model.settler.buildable.Robot;
 

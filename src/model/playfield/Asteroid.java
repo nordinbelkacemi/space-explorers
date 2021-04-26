@@ -91,13 +91,11 @@ public class Asteroid {
 	}
 
 	/** Napvihar esetén meghívódik, és meghívja az összes rajta tartózkodó traveler ReactToFlare() függvényét. */
-	public String reactToFlare() {
-		String output = new String("");
+	public void reactToFlare() {
 		Iterator<Traveler> travelerIter = travelers.iterator();
 		while (travelerIter.hasNext()) {
-			output += travelerIter.next().reactToFlare(travelerIter);
+			travelerIter.next().reactToFlare(travelerIter);
 		}
-		return output;
 	}
 
 	/** A megfelelő feltételek fennállása esetén felrobbantja az aszteroidát, vagy elszublimáltatja a magjában lévő vízjeget. */

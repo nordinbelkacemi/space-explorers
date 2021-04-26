@@ -1,12 +1,6 @@
 package model.playfield;
 import java.util.List;
 
-import console.exceptions.InvalidCmdException;
-import model.materials.Coal;
-import model.materials.Ice;
-import model.materials.Iron;
-import model.materials.Uranium;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -84,9 +78,7 @@ public class SolarSystem {
 	/**
 	 * Meghívja azon AsteroidField-ek ReactToFlare() függvényét amelyeket eltalál a napkitörés.
 	 */
-	public String reactToFlare(Coordinate d) {
-		String output = new String("");
-
+	public void reactToFlare(Coordinate d) {
 		Coordinate s = sun.getCo();
 		for (AsteroidField field : asteroidBelt) {
 			Coordinate f = field.getCo();
@@ -94,28 +86,23 @@ public class SolarSystem {
 			if(d.getX() == 0) {
 				int b = (f.getY() - s.getY()) / d.getY();
 				if (b > 0) {
-					String fieldReactionOutput = field.reactToFlare();
-					output += fieldReactionOutput;
+					field.reactToFlare();
 				}
 			}
 			else if(d.getY() == 0) {
 				int a = (f.getX() - s.getX()) / d.getX();
 				if (a > 0) {
-					String fieldReactionOutput = field.reactToFlare();
-					output += fieldReactionOutput;
+					field.reactToFlare();
 				}
 			}
 			else {
 				int a = (f.getX() - s.getX()) / d.getX();
 				int b = (f.getY() - s.getY()) / d.getY();
 				if (a > 0 && a == b) {
-					String fieldReactionOutput = field.reactToFlare();
-					output += fieldReactionOutput;
+					field.reactToFlare();
 				}
 			}
 		}
-
-		return output;
 	}
 
 	
@@ -171,55 +158,4 @@ public class SolarSystem {
 	public List<AsteroidField> getBelt(){
 		return asteroidBelt;
 	}
-	
-	////////////////////////////// test
-	public SolarSystem() {
-		asteroidBelt = createBelt(0);
-		setNeighbours();
-		AsteroidField.setBelt(asteroidBelt);
-		sun = null;
-	}
-	
-	private List<AsteroidField> createBelt(int t) {
-		ArrayList<AsteroidField> belt = new ArrayList<>();
-		for (int i = 0; i < cos.length; i++) {
-			belt.add(new AsteroidField(cos[i],0));
-		}		
-		return belt;
-	}
-	
-	public void createField(String s) throws InvalidCmdException  {
-		String[] data=s.split(",");
-		String[] asteroid = null;
-		int index = Integer.parseInt(data[0]);
-		AsteroidField field = asteroidBelt.get(index);
-		for (int i = 1; i < data.length; i++) {
-			asteroid = data[i].split(" ");
-			if (asteroid.length == 3) {
-				if(asteroid[0].equals("uranium")) {
-					field.addAsteroid(new Asteroid(new Uranium(Integer.parseInt(asteroid[1])), Integer.parseInt(asteroid[2]),field));
-				}
-				else throw new InvalidCmdException();
-			}
-			else if(asteroid.length == 2){
-				switch (asteroid[0]) {
-					case "iron":
-						field.addAsteroid(new Asteroid(new Iron(), Integer.parseInt(asteroid[1]),field));
-						break;
-					case "ice":
-						field.addAsteroid(new Asteroid(new Ice(), Integer.parseInt(asteroid[1]),field));
-						break;
-					case "coal":
-						field.addAsteroid(new Asteroid(new Coal(), Integer.parseInt(asteroid[1]),field));
-						break;
-					case "empty":
-						field.addAsteroid(new Asteroid(Integer.parseInt(asteroid[1]),field));
-						break;
-					default:
-						break;
-				}
-			}
-		}
-	}
-	
 }
