@@ -1,10 +1,10 @@
-package model.settler.buildable;
+package models.settler.buildable;
 
 import java.util.List;
 import java.util.Random;
 
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
 
 /**
  * Minden teleportkapu ismeri a párját, rajtuk keresztül oldjuk meg a

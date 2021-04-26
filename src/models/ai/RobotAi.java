@@ -1,4 +1,4 @@
-package model.ai;
+package models.ai;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
-import model.settler.Traveler;
-import model.settler.buildable.Robot;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
+import models.settler.Traveler;
+import models.settler.buildable.Robot;
 
 /**
  * A robotok tárolásáért és irányításáért felelős objektum.

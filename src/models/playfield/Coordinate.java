@@ -1,4 +1,4 @@
-package model.playfield;
+package models.playfield;
 
 /** Egy hexagon pozícióját fejezi ki, két koordinátával. */
 public class Coordinate {

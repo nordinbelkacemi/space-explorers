@@ -1,4 +1,4 @@
-package model.settler;
+package models.settler;
 
 /**
  * A bányászni képes entitások interfésze.

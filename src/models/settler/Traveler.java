@@ -1,10 +1,10 @@
-package model.settler;
+package models.settler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
 
 /**
  * Absztrakt ősosztály.

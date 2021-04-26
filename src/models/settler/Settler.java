@@ -1,19 +1,19 @@
-package model.settler;
+package models.settler;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.materials.Coal;
-import model.materials.Ice;
-import model.materials.Iron;
-import model.materials.Material;
-import model.materials.Uranium;
-import model.settler.buildable.Buildable;
-import model.settler.buildable.TeleportGate;
-import model.settler.buildable.TeleportGatePair;
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
+import models.materials.Coal;
+import models.materials.Ice;
+import models.materials.Iron;
+import models.materials.Material;
+import models.materials.Uranium;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
+import models.settler.buildable.Buildable;
+import models.settler.buildable.TeleportGate;
+import models.settler.buildable.TeleportGatePair;
 
 /**
  * A játékos által irányított telepes.

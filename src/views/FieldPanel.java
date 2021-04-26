@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
-import model.playfield.AsteroidField;
+import models.playfield.AsteroidField;
 
 public class FieldPanel extends UpdatablePanel {
     private List<JLabel> asteroids;

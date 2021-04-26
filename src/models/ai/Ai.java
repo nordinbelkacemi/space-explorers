@@ -1,4 +1,4 @@
-package model.ai;
+package models.ai;
 
 /**
  * Egy olyan interface amely "irányíthatóvá" teszi az őt implementáló osztályokat.

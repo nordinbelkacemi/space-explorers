@@ -1,6 +1,6 @@
-package model.settler.buildable;
+package models.settler.buildable;
 
-import model.settler.Settler;
+import models.settler.Settler;
 
 /**
  * A telepesek által megépíthető szerkezeteket csoportosítja,

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
-import model.playfield.Asteroid;
+import models.playfield.Asteroid;
 
 public class AsteroidPanel {
 

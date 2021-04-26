@@ -1,11 +1,11 @@
-package model.playfield;
+package models.playfield;
 
 import java.io.PrintStream;
 import java.util.Iterator;
 
-import model.ai.UfoAi;
-import model.settler.Miner;
-import model.settler.Traveler;
+import models.ai.UfoAi;
+import models.settler.Miner;
+import models.settler.Traveler;
 
 /**
  * Az űrben garázdálkodó ufok osztálya.

@@ -1,4 +1,4 @@
-package model.playfield;
+package models.playfield;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -6,11 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import model.materials.Coal;
-import model.materials.Ice;
-import model.materials.Iron;
-import model.materials.Uranium;
-import model.settler.buildable.TeleportGate;
+import models.materials.Coal;
+import models.materials.Ice;
+import models.materials.Iron;
+import models.materials.Uranium;
+import models.settler.buildable.TeleportGate;
 
 /**
  * A játéktér alapeleme; körben elhelyezve alkotják az aszteroidaövet, felelős a szomszédjaiért.
