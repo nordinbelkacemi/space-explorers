@@ -1,6 +1,6 @@
-package model.materials;
+package models.materials;
 
-import model.settler.Settler;
+import models.settler.Settler;
 
 /** A vas, mint kibányászható nyersanyag osztálya, nem radioaktív, nem szublimál. */
 public class Iron extends Material {

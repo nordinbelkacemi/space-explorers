@@ -1,6 +1,6 @@
 package views;
 
-import model.playfield.SolarSystem;
+import models.playfield.SolarSystem;
 
 public class SpacePanel extends UpdatablePanel {
 

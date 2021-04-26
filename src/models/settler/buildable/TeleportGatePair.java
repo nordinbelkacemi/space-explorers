@@ -1,12 +1,12 @@
-package model.settler.buildable;
+package models.settler.buildable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.playfield.AsteroidField;
-import model.playfield.MegkergultGates;
-import model.settler.Settler;
-import model.settler.SettlerTeam;
+import models.playfield.AsteroidField;
+import models.playfield.MegkergultGates;
+import models.settler.Settler;
+import models.settler.SettlerTeam;
 
 /**
  * Az összetartozó teleportkapukat reprezentálja,

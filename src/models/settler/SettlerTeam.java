@@ -1,11 +1,11 @@
-package model.settler;
+package models.settler;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.playfield.AsteroidField;
+import models.playfield.AsteroidField;
 
 /**
  * A telepesek tárolásáért és a játékossal való kapcsolatért felelős objektum.

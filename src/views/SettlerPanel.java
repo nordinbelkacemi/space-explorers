@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import model.settler.Settler;
+import models.settler.Settler;
 
 public class SettlerPanel extends UpdatablePanel {
     private List<JLabel> inventory;

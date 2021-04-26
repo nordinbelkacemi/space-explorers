@@ -1,9 +1,9 @@
-package model.playfield;
+package models.playfield;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.settler.buildable.TeleportGate;
+import models.settler.buildable.TeleportGate;
 
 /**
  * A megkergült teleportkapukat tároló osztály.

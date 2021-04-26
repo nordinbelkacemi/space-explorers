@@ -1,11 +1,12 @@
-package model.playfield;
+package models.playfield;
 import java.util.List;
+
+import models.materials.Material;
+import models.settler.Traveler;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import model.materials.Material;
-import model.settler.Traveler;
 
 /**
  * Az adott aszteroida köpenyének vastagságát és a magjában lévő nyersanyagot tárolja, valamint a rajta tartózkodó telepeseket és robotokat.

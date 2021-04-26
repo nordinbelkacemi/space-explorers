@@ -1,4 +1,4 @@
-package model.playfield;
+package models.playfield;
 import java.util.List;
 
 import java.io.PrintStream;

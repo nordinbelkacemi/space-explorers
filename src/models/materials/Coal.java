@@ -1,6 +1,6 @@
-package model.materials;
+package models.materials;
 
-import model.settler.Settler;
+import models.settler.Settler;
 
 /** A szén, mint kibányászható nyersanyag osztálya, nem radioaktív, nem szublimál. */
 public class Coal extends Material {

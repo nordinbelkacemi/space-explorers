@@ -1,4 +1,4 @@
-package model.settler.buildable;
+package models.settler.buildable;
 
 
 import java.io.PrintStream;
@@ -6,12 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import model.ai.RobotAi;
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
-import model.settler.Driller;
-import model.settler.Settler;
-import model.settler.Traveler;
+import models.ai.RobotAi;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
+import models.settler.Driller;
+import models.settler.Settler;
+import models.settler.Traveler;
 
 /**
  * A telepeshez hasonló, de nem játszható karakter, a telepesek tudják megépíteni.

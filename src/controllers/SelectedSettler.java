@@ -1,6 +1,6 @@
 package controllers;
 
-import model.settler.Settler;
+import models.settler.Settler;
 import views.SpaceExplorersGui;
 
 public class SelectedSettler {

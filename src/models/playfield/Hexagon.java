@@ -1,4 +1,4 @@
-package model.playfield;
+package models.playfield;
 
 /**
  * Felelős a mező helyzetéért.

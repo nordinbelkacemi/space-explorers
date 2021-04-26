@@ -1,7 +1,7 @@
-package model.materials;
+package models.materials;
 
-import model.playfield.Asteroid;
-import model.settler.Settler;
+import models.playfield.Asteroid;
+import models.settler.Settler;
 
 /**
  * Absztrakt ősosztály.

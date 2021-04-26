@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import model.ai.RobotAi;
-import model.ai.UfoAi;
-
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
-import model.playfield.MegkergultGates;
-import model.playfield.SolarSystem;
-import model.playfield.Sun;
-import model.settler.Settler;
-import model.settler.SettlerTeam;
+import models.ai.RobotAi;
+import models.ai.UfoAi;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
+import models.playfield.MegkergultGates;
+import models.playfield.SolarSystem;
+import models.playfield.Sun;
+import models.settler.Settler;
+import models.settler.SettlerTeam;
 import views.SpaceExplorersGui;
 
 public class Game {

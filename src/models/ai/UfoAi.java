@@ -1,13 +1,13 @@
-package model.ai;
+package models.ai;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.playfield.Asteroid;
-import model.playfield.AsteroidField;
-import model.playfield.Ufo;
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
+import models.playfield.Ufo;
 
 /**
  * Az ufok tárolásáért és irányításáért felelős objektum.

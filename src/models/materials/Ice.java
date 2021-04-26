@@ -1,7 +1,7 @@
-package model.materials;
+package models.materials;
 
-import model.playfield.Asteroid;
-import model.settler.Settler;
+import models.playfield.Asteroid;
+import models.settler.Settler;
 
 /** A vízjég, mint kibányászható nyersanyag osztálya, nem radioaktív, szublimál. */
 public class Ice extends Material {
