@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.ai.RobotAi;
@@ -13,12 +14,12 @@ import model.playfield.SolarSystem;
 import model.playfield.Sun;
 import model.settler.Settler;
 import model.settler.SettlerTeam;
-import model.settler.buildable.Robot;
-import model.settler.buildable.TeleportGatePair;
-
-
+import views.SpaceExplorersGui;
 
 public class Game {
+	private static Game instance = new Game();
+	private SpaceExplorersGui gui;
+
 	private Sun sun;
 	private SolarSystem solarSystem;
 	private MegkergultGates megkergultGates;
@@ -26,10 +27,10 @@ public class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
-	/** A kiválasztott telepes. Ezzel a telepessel léphet a felhasználó (move, drill stb) */
-	private Settler chosenSettler;
-
-	/** A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6 telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6) */
+	/**
+	 * A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6
+	 * telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6)
+	 */
 	private List<Integer> choosableSettlers;
 
 	/** telepes mozgása során kiválasztott cél asteroid field */
@@ -40,7 +41,9 @@ public class Game {
 	
 	private int selectedTeleportgatePair;
 
-	public Game() {
+	private Game() {
+		/* TODO Game.ctor where/how to set gui ? */
+
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
 		settlerTeam = new SettlerTeam(solarSystem.getBelt());
@@ -48,181 +51,182 @@ public class Game {
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		megkergultGates = new MegkergultGates();
 
-		choosableSettlers = new ArrayList<Integer>();
+		choosableSettlers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6));
 	}
 
-	/** A játékot elindító függvény */
-	public void start() {
-		resetChoosableSettlers();
-	}
-
-	public void resetChoosableSettlers() {
-		choosableSettlers.clear();
-		for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
-			choosableSettlers.add(i);
-		}
+	public Game getInstance() {
+		return instance;
 	}
 
 	/**
-	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo telepesre
+	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo
+	 * telepesre
+	 * 
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void chooseSettler(int n) {
-
+	public void selectSettler(int n) {
+		/* TODO Game.selectSettler */
 	}
 
-	/** A gameOver változó lekérdezö függvénye
-	 * @return True ha a játék véget ért, egyébként False
+	/**
+	 * Egy AsteroidField-et kiválasztó függvény: beállítja a chosenField-et a
+	 * megfelelö asteroid fieldre.
+	 * 
+	 * @param n A kiválasztott AsteroidField sorszáma
 	 */
-	public boolean over() {
-		return getChoosableSettlers().isEmpty();
+	public void selectField(int n) {
+		/* TODO Game.selectField */
 	}
 
-	public ArrayList<String> getActions() {
-		ArrayList<String> actions = new ArrayList<String>();
-
-		Asteroid currentAsteroid = chosenSettler.getAsteroid();
-		ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
-
-		if (currentAsteroid.getThickness() > 0) {
-			actions.add("drill");
-		}
-
-		for (AsteroidField af : neighbors) {
-			if (af.getAsteroids().size() > 0) {
-				actions.add("move");
-				break;
-			}
-		}
-
-		if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
-			actions.add("mine");
-		}
-
-		if (chosenSettler.canBuildGate()) {
-			actions.add("build teleportgate");
-		}
-
-		if (chosenSettler.canBuildRobot()) {
-			actions.add("build robot");
-		}
-
-		if (chosenSettler.canPlaceGate()) {
-			actions.add("place teleportgate");
-		}
-
-		if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
-			if (chosenSettler.getIronCount() >= 1) {
-				actions.add("putback iron");
-			}
-			if (chosenSettler.getUraniumCount() >= 1) {
-				actions.add("putback uranium");
-			}
-			if (chosenSettler.getCoalCount() >= 1) {
-				actions.add("putback coal");
-			}
-			if (chosenSettler.getIceCount() >= 1) {
-				actions.add("putback ice");
-			}
-		}
-
-		return actions;
+	/**
+	 * Egy AsteroidField-et kiválasztó függvény: beállítja a chosenField-et a
+	 * megfelelö asteroid fieldre.
+	 * 
+	 * @param n A kiválasztott AsteroidField sorszáma
+	 */
+	public void selectAsteroid(int n) {
+		/* TODO Game.selectField */
 	}
 
-	public List<Integer> getChoosableSettlers() {
-		return choosableSettlers;
+	public void log(String message) {
+		/* TODO Game.log */
 	}
 
-	public void endSettlerTurn(int n) {
-		choosableSettlers.set(n - 1, null);
+	public void EndTurn() {
+		/* TODO Game.EndTurn */
 	}
 
-	public ArrayList<AsteroidField> getNeighbours() {
-		return chosenSettler.getNeighbours();
-	}
 
-	public void mine() {
-		chosenSettler.mine();
-	}
 
-	public void drill() {
-		chosenSettler.drill();
-	}
 
-	public void buildTeleportGate() {
-		chosenSettler.build(new TeleportGatePair());
-	}
 
-	public void placeTeleportGate() {
-		chosenSettler.placeTeleportGate(selectedTeleportgatePair);
-	}
 
-	public void buildRobot() {
-		Robot r = new Robot(chosenSettler.getAsteroid());
-		chosenSettler.build(r);
-	}
 
-	public AsteroidField getField(int idx) {
-		return chosenSettler.getAsteroid().getNeighbours().get(idx);
-	}
 
-	public List<Asteroid> getFieldAsteroids(int idx) {
-		AsteroidField field = getField(idx);
-		List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
-		for (Asteroid asteroid : field.getAsteroids()) {
-			if (asteroid != chosenSettler.getAsteroid()) {
-				onlyNeighbours.add(asteroid);
-			}
-		}
-		return onlyNeighbours;
-	}
 
-	public void chooseField(int idx) {
-		
-	}
 
-	public void chooseAsteroid(int n) {
-		
-	}
 
-	public AsteroidField getSelectedField() {
-		return selectedField;
-	}
+
+
+
+	// /** A játékot elindító függvény */
+	// public void start() {
+	// 	/* TODO Game.start */
+	// }
+
+	// public void resetChoosableSettlers() {
+	// 	choosableSettlers.clear();
+	// 	for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
+	// 		choosableSettlers.add(i);
+	// 	}
+	// }
 	
-	public int getNumberofTeleportgatePairs() {
-		return chosenSettler.getNumberofTeleportgatePairs();
-	}
+	// /**
+	//  * A gameOver változó lekérdezö függvénye
+	//  * 
+	//  * @return True ha a játék véget ért, egyébként False
+	//  */
+	// public boolean over() {
+	// 	return getChoosableSettlers().isEmpty();
+	// }
+
+	// public ArrayList<String> getActions() {
+	// 	ArrayList<String> actions = new ArrayList<String>();
+
+	// 	Asteroid currentAsteroid = chosenSettler.getAsteroid();
+	// 	ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
+
+	// 	if (currentAsteroid.getThickness() > 0) {
+	// 		actions.add("drill");
+	// 	}
+
+	// 	for (AsteroidField af : neighbors) {
+	// 		if (af.getAsteroids().size() > 0) {
+	// 			actions.add("move");
+	// 			break;
+	// 		}
+	// 	}
+
+	// 	if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
+	// 		actions.add("mine");
+	// 	}
+
+	// 	if (chosenSettler.canBuildGate()) {
+	// 		actions.add("build teleportgate");
+	// 	}
+
+	// 	if (chosenSettler.canBuildRobot()) {
+	// 		actions.add("build robot");
+	// 	}
+
+	// 	if (chosenSettler.canPlaceGate()) {
+	// 		actions.add("place teleportgate");
+	// 	}
+
+	// 	if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
+	// 		if (chosenSettler.getIronCount() >= 1) {
+	// 			actions.add("putback iron");
+	// 		}
+	// 		if (chosenSettler.getUraniumCount() >= 1) {
+	// 			actions.add("putback uranium");
+	// 		}
+	// 		if (chosenSettler.getCoalCount() >= 1) {
+	// 			actions.add("putback coal");
+	// 		}
+	// 		if (chosenSettler.getIceCount() >= 1) {
+	// 			actions.add("putback ice");
+	// 		}
+	// 	}
+
+	// 	return actions;
+	// }
+
+	// public List<Integer> getChoosableSettlers() {
+	// 	return choosableSettlers;
+	// }
+
+	// public void endSettlerTurn(int n) {
+	// 	choosableSettlers.set(n - 1, null);
+	// }
+
+	// public ArrayList<AsteroidField> getNeighbours() {
+	// 	return chosenSettler.getNeighbours();
+	// }
+
+	// public AsteroidField getField(int idx) {
+	// 	return chosenSettler.getAsteroid().getNeighbours().get(idx);
+	// }
+
+	// public List<Asteroid> getFieldAsteroids(int idx) {
+	// 	AsteroidField field = getField(idx);
+	// 	List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
+	// 	for (Asteroid asteroid : field.getAsteroids()) {
+	// 		if (asteroid != chosenSettler.getAsteroid()) {
+	// 			onlyNeighbours.add(asteroid);
+	// 		}
+	// 	}
+	// 	return onlyNeighbours;
+	// }
+
+
+	// public AsteroidField getSelectedField() {
+	// 	return selectedField;
+	// }
 	
-	public void selectTeleportgatePair(int selectedPair) {
-		selectedTeleportgatePair = selectedPair;
-	}
+	// public int getNumberofTeleportgatePairs() {
+	// 	return chosenSettler.getNumberofTeleportgatePairs();
+	// }
+	
+	// public void selectTeleportgatePair(int selectedPair) {
+	// 	selectedTeleportgatePair = selectedPair;
+	// }
 
-	public void moveSettler() {
-		chosenSettler.move(selectedAsteroid);
-	}
+	// public void step() {
+	// 	sun.performAction();
+	// 	robotAi.control();
+	// 	ufoAi.control();
 
-	public void putIronBack() {
-		chosenSettler.putIronBack();
-	}
-
-	public void putCoalBack() {
-		chosenSettler.putCoalBack();
-	}
-
-	public void putUraniumBack() {
-		chosenSettler.putUraniumBack();
-	}
-
-	public void putIceBack() {
-		chosenSettler.putIceBack();
-	}
-
-	public void step() {
-		sun.performAction();
-		robotAi.control();
-		ufoAi.control();
-
-		resetChoosableSettlers();
-	}
+	// 	resetChoosableSettlers();
+	// }
 
 }
