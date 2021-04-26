@@ -1,4 +1,4 @@
-# Space explorers
+# Space explorers 🚀
 Az emberiség elhatározta, hogy kiaknázza az aszteroidabányászatban rejlő lehetőségeket. Ehhez a telepeseknek fel kell építeniük egy űrbázist az aszteroidaövben. Az építéshez szükséges erőforrásokat túlságosan drága lenne odavinni, így azokat az aszteroidákból kell kinyerni.
 
 A játékosok a telepeseket irányítják. A telepesek egyszemélyes űrhajókkal járják az aszteroidákat megfelelő nyersanyagok után kutatva.
