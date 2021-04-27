@@ -13,10 +13,11 @@ public class SelectedSettler {
         set(settler);
     }
 
-    public SelectedSettler getInstance() {
+    public static SelectedSettler getInstance() {
         return instance;
     }
 
+    /** Ezt a fuggvényt így kell meghivni: SelectedSettler.getInstance().set(...) */
     public void set(Settler settler) {
         this.settler = settler;
     }
