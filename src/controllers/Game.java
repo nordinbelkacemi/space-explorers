@@ -31,7 +31,7 @@ public class Game {
 	 * A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6
 	 * telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6)
 	 */
-	private List<Integer> choosableSettlers;
+	private List<Settler> selectableSettlers;
 
 	/** telepes mozgása során kiválasztott cél asteroid field */
 	private AsteroidField selectedField;
@@ -51,7 +51,7 @@ public class Game {
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		megkergultGates = new MegkergultGates();
 
-		choosableSettlers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
 	}
 
 	public static Game getInstance() {
