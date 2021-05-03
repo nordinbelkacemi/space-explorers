@@ -61,13 +61,14 @@ public class TeamPanel extends UpdatablePanel {
     	addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				double x = e.getPoint().getX(), y = e.getPoint().getY();
+				int x = (int) e.getPoint().getX(), y = (int) e.getPoint().getY();
 				int startX = (getSize().width - 575)/2;
 				if(y < 125 && y > 50 && x < startX+575 && x > startX) {
 					x -= startX;
 					x /= 96;
+					//System.out.println(x + " " +selectableSettlers.get(x).getId());
 					if(x < selectableSettlers.size())
-						Game.getInstance().selectSettler(selectableSettlers.get((int) x).getId());
+						Game.getInstance().selectSettler(selectableSettlers.get(x).getId());
 				}
 			}
 
@@ -90,8 +91,7 @@ public class TeamPanel extends UpdatablePanel {
 
         nextTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                Game.getInstance().resetSelectableSettlers();
-				update();
+                Game.getInstance().endTurn();
             }
 		});
 

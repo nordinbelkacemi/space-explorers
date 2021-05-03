@@ -70,9 +70,10 @@ public class Game {
 
 		Settler selectedSettler = null;
 		for (Settler settler : settlers) {
-			if (settler.getId() == id)
+			if (settler.getId() == id) {
 				selectedSettler = settler;
 				break;
+			}
 		}
 		
 		SelectedSettler.getInstance().set(selectedSettler);
@@ -104,9 +105,9 @@ public class Game {
 	}
 
 	public void endTurn() {
-		for (Settler settler : getSettlers()) {
-			selectableSettlers.add(settler);
-		}
+		SelectedSettler.getInstance().set(null);
+		resetSelectableSettlers();
+		gui.turnEnded();
 	}
 
 	
