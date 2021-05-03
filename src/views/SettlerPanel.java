@@ -22,13 +22,13 @@ public class SettlerPanel extends UpdatablePanel {
     private List<JLabel> inventory;
     private List<JButton> actionButtons;
     private Settler settler;
-    private BufferedImage settlerImg;
-    
+    private List<BufferedImage> settlerImages;
+    private BufferedImage settlerImage;
     SettlerPanel() {
     	InputStream in;
 		try {
 			in = new FileInputStream("res/redbig.png");
-			settlerImg = ImageIO.read(in);
+			settlerImage = ImageIO.read(in);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,6 +50,11 @@ public class SettlerPanel extends UpdatablePanel {
     	super.paint(g);
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLER", 10, 30);
-    	g.drawImage(settlerImg,100,50,null);
+    	g.drawImage(settlerImage,100,50,null);
 	}
+
+    public void setSettlerImage(int id) {
+        int idx = id - 1;
+        settlerImage = settlerImages.get(idx);
+    }
 }

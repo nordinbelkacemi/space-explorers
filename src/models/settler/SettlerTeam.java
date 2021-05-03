@@ -32,7 +32,9 @@ public class SettlerTeam {
 		settlers = new ArrayList<>();
 		belt = b;
 		for (int i = 0; i < 6; i++) {
-			settlers.add(new Settler(belt.get(r.nextInt(42)).getAsteroids().get(0)));
+			Settler settler = new Settler(belt.get(r.nextInt(42)).getAsteroids().get(0));
+			settler.setId(i + 1);
+			settlers.add(settler);
 		}
 	}
 	

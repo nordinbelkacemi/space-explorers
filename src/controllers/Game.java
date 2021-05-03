@@ -51,7 +51,10 @@ public class Game {
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		megkergultGates = new MegkergultGates();
 
-
+		selectableSettlers = new ArrayList<Settler>();
+		for (Settler settler : getSettlers()) {
+			selectableSettlers.add(settler);
+		}
 	}
 
 	public static Game getInstance() {
@@ -64,8 +67,18 @@ public class Game {
 	 * 
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void selectSettler(int n) {
-		/* TODO Game.selectSettler */
+	public void selectSettler(int id) {
+		List<Settler> settlers = settlerTeam.getSettlers();
+
+		Settler selectedSettler = null;
+		for (Settler settler : settlers) {
+			if (settler.getId() == id)
+				selectedSettler = settler;
+				break;
+		}
+		
+		SelectedSettler.getInstance().set(selectedSettler);
+		gui.settlerSelected();
 	}
 
 	/**
@@ -92,8 +105,10 @@ public class Game {
 		/* TODO Game.log */
 	}
 
-	public void EndTurn() {
-		/* TODO Game.EndTurn */
+	public void endTurn() {
+		for (Settler settler : getSettlers()) {
+			selectableSettlers.add(settler);
+		}
 	}
 
 	
@@ -115,7 +130,13 @@ public class Game {
 		return solarSystem;
 	}
 
+	public List<Settler> getSettlers() {
+		return settlerTeam.getSettlers();
+	}
 
+	public List<Settler> getSelectableSettlers() {
+		return selectableSettlers;
+	}
 
 
 
@@ -130,7 +151,7 @@ public class Game {
 
 	// /** A játékot elindító függvény */
 	// public void start() {
-	// 	/* TODO Game.start */
+	// 
 	// }
 
 	// public void resetChoosableSettlers() {
@@ -247,5 +268,4 @@ public class Game {
 
 	// 	resetChoosableSettlers();
 	// }
-
 }
