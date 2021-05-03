@@ -21,12 +21,18 @@ import models.playfield.SolarSystem;
 public class SpacePanel extends UpdatablePanel {
 
     private SolarSystem solarSystem;
-    private BufferedImage sunField;
+    private BufferedImage sunFieldImg;
+    private BufferedImage fieldImg;
+    private BufferedImage sunImg;
     private List<AsteroidField> belt;
     public SpacePanel() {
     	try {
     		InputStream in = new FileInputStream("res/sunfield.png");
-			sunField = ImageIO.read(in);
+			sunFieldImg = ImageIO.read(in);
+			in = new FileInputStream("res/field.png");
+			fieldImg = ImageIO.read(in);
+			in = new FileInputStream("res/sun.png");
+			sunImg = ImageIO.read(in);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,12 +50,19 @@ public class SpacePanel extends UpdatablePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
+    	Coordinate sunCo = solarSystem.getSun().getCo();
     	for (AsteroidField field : belt) {
 			Coordinate co = field.getCo();
 			int x = (getSize().width/2 + co.getX()*46+co.getY()*23)-20;
 			int y = (int) (getSize().height/2 + co.getY()*Math.sqrt(3)*23) -20;
-			g.drawImage(sunField,x,y,null);
+			
+			if (Math.abs(co.getX() - sunCo.getX()) <= 2 && Math.abs(co.getY() - sunCo.getY()) <= 2)
+				g.drawImage(sunFieldImg,x,y,null);
+			else
+				g.drawImage(fieldImg,x,y,null);
 		}
-    	
+    	int x = (getSize().width/2 + sunCo.getX()*46+sunCo.getY()*23)-20;
+		int y = (int) (getSize().height/2 + sunCo.getY()*Math.sqrt(3)*23) -20;
+		g.drawImage(sunImg,x,y,null);
 	}
 }

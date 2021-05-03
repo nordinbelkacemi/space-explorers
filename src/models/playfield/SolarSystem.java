@@ -158,4 +158,8 @@ public class SolarSystem {
 	public List<AsteroidField> getBelt(){
 		return asteroidBelt;
 	}
+
+	public Hexagon getSun() {
+		return sun;
+	}
 }
