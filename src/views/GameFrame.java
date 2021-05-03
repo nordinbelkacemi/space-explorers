@@ -8,6 +8,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controllers.Game;
+import controllers.SelectedSettler;
+
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
     private TeamPanel teamPanel;
@@ -18,11 +21,13 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     private SpacePanel spacePanel;
     
     public GameFrame() {
+    	Game.getInstance().setGui(this);
+		SelectedSettler.getInstance().setGui(this);
     	//setBackground(Color.black);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	setTitle("SPACE EXPLORERS");
     	setExtendedState(JFrame.MAXIMIZED_BOTH); 
-    	setMinimumSize(new Dimension(800,600));
+    	setMinimumSize(new Dimension(1000,800));
     	
     	// full frame layout
     	BorderLayout BL = new BorderLayout();
@@ -56,9 +61,9 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		eastPanel.add(asteroidPanel);
 		eastPanel.setVisible(true);
 		add(eastPanel,BorderLayout.LINE_END);
-		
-		
+	
 		pack();
+		setVisible(true);
 	}
 
 	public void settlerSelected(){
