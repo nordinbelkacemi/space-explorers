@@ -4,11 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
@@ -60,17 +58,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		add(eastPanel,BorderLayout.LINE_END);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		pack();
-    	setVisible(true);
 	}
 
 	public void settlerSelected(){

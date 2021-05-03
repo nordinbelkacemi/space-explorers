@@ -1,6 +1,7 @@
 package controllers;
 
 import models.settler.Settler;
+import views.GameFrame;
 import views.SpaceExplorersGui;
 
 public class SelectedSettler {
@@ -84,4 +85,13 @@ public class SelectedSettler {
 
         // settler.putIceBack();
     }
+    
+    
+    public void setGui(GameFrame gameFrame) {
+		gui = gameFrame;
+	}
+
+	public Settler getSelectedSettler() {
+		return settler;
+	}
 }

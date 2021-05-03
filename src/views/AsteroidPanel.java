@@ -2,11 +2,13 @@ package views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
+import controllers.Game;
 import models.playfield.Asteroid;
 
 public class AsteroidPanel extends UpdatablePanel{
@@ -24,6 +26,11 @@ public class AsteroidPanel extends UpdatablePanel{
     }
 
     public void update() {
-        /* TODO AsteroidPanel.update */
+        asteroid = Game.getInstance().getSelectedAsteroid();
+        repaint();
     }
+    
+    public void paint(Graphics g) {
+    	super.paint(g);
+	}
 }
