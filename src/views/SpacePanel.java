@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -27,11 +28,11 @@ public class SpacePanel extends UpdatablePanel {
     		InputStream in = new FileInputStream("res/sunfield.png");
 			sunField = ImageIO.read(in);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
+		update();
 		setVisible(true);
     }
 
@@ -43,14 +44,12 @@ public class SpacePanel extends UpdatablePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	
-    	//belt.get(1);
-    	/*for (AsteroidField field : belt) {
+    	for (AsteroidField field : belt) {
 			Coordinate co = field.getCo();
-			int x = 0;
-			int y = 0;
-			//g.drawImage(sunField,x,y,null);
-		}*/
+			int x = (getSize().width/2 + co.getX()*46+co.getY()*23)-20;
+			int y = (int) (getSize().height/2 + co.getY()*Math.sqrt(3)*23) -20;
+			g.drawImage(sunField,x,y,null);
+		}
     	
 	}
 }
