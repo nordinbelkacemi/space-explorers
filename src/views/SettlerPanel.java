@@ -1,7 +1,10 @@
 package views;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -13,7 +16,10 @@ public class SettlerPanel extends UpdatablePanel {
     private Settler settler;
     
     SettlerPanel() {
-        /* TODO SettlerPanel.ctor */
+    	setBorder(BorderFactory.createLineBorder(Color.white));
+		setBackground(Color.black);
+		setPreferredSize(new Dimension(250,600));
+		setVisible(true);
     }
 
     public void update() {

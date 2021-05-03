@@ -1,12 +1,15 @@
 package views;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import models.playfield.Asteroid;
 
-public class AsteroidPanel {
+public class AsteroidPanel extends UpdatablePanel{
 
     private JLabel thickness;
     private JLabel core;
@@ -14,7 +17,10 @@ public class AsteroidPanel {
     private Asteroid asteroid;
 
     public AsteroidPanel() {
-        /* TODO AsteroidPanel.ctor */
+    	setBorder(BorderFactory.createLineBorder(Color.white));
+		setBackground(Color.black);
+		setPreferredSize(new Dimension(250,300));
+		setVisible(true);
     }
 
     public void update() {
