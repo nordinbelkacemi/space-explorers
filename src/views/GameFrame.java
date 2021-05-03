@@ -68,9 +68,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 	}
 
 	public void settlerSelected(){
-		Settler selectedSettler = SelectedSettler.getInstance().getSelectedSettler();
-		int id = selectedSettler.getId();
-        settlerPanel.setSettlerImage(id);
 		settlerPanel.update();
     }
 
