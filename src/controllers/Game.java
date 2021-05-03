@@ -52,9 +52,7 @@ public class Game {
 		megkergultGates = new MegkergultGates();
 
 		selectableSettlers = new ArrayList<Settler>();
-		for (Settler settler : getSettlers()) {
-			selectableSettlers.add(settler);
-		}
+		initSelectableSettlers();
 	}
 
 	public static Game getInstance() {
@@ -136,6 +134,17 @@ public class Game {
 
 	public List<Settler> getSelectableSettlers() {
 		return selectableSettlers;
+	}
+
+	public void resetSelectableSettlers() {
+		selectableSettlers.clear();
+		initSelectableSettlers();
+	}
+
+	private void initSelectableSettlers() {
+		for (Settler settler : getSettlers()) {
+			selectableSettlers.add(settler);
+		}
 	}
 
 
