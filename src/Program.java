@@ -1,6 +1,9 @@
+import views.GameFrame;
+
 public class Program {
 
 	public static void main(String[] args) {
-		/* TODO Program.main */
+		GameFrame gameFrame = new GameFrame();
+		
 	}
 }

@@ -1,9 +1,9 @@
 package views;
 
 public interface SpaceExplorersGui {
-    public void SettlerSelected();
-    public void FieldSelected();
-    public void AsteroidSelected();
-    public void SettlerPerformedAction();
+    public void settlerSelected();
+    public void fieldSelected();
+    public void asteroidSelected();
+    public void settlerPerformedAction();
     public void log();
 }
