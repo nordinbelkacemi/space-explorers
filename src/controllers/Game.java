@@ -13,6 +13,7 @@ import models.playfield.SolarSystem;
 import models.playfield.Sun;
 import models.settler.Settler;
 import models.settler.SettlerTeam;
+import views.GameFrame;
 import views.SpaceExplorersGui;
 
 public class Game {
@@ -41,7 +42,7 @@ public class Game {
 	private int selectedTeleportgatePair;
 
 	private Game() {
-		/* TODO Game.ctor where/how to set gui ? */
+		/* TODO Game.ctor where/how to set gui ? */ // itt csak azokat kell setelni amiket a gui lekérhet
 
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
@@ -93,6 +94,25 @@ public class Game {
 
 	public void EndTurn() {
 		/* TODO Game.EndTurn */
+	}
+
+	
+	
+	
+	public void setGui(GameFrame gameFrame) {
+		gui = gameFrame;
+	}
+	
+	public AsteroidField getSelectedField() {
+		return selectedField;
+	}
+
+	public Asteroid getSelectedAsteroid() {
+		return selectedAsteroid;
+	}
+
+	public SolarSystem getSolarSystem() {
+		return solarSystem;
 	}
 
 
