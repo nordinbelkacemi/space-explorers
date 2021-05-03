@@ -22,9 +22,10 @@ public class SelectedSettler {
     public void set(Settler settler) {
         this.settler = settler;
     }
-
+    
     public void performAction(String action) {
-        /* TODO SelectedSettler.performAction */
+        int idx = Game.getInstance().getSelectableSettlers().indexOf(settler);
+        Game.getInstance().getSelectableSettlers().set(idx, null);
     }
 
     public void mine() {

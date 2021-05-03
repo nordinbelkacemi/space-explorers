@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -17,7 +18,9 @@ public class SettlerPanel extends UpdatablePanel {
     private List<JLabel> inventory;
     private List<JButton> actionButtons;
     private Settler settler;
-    
+    private List<BufferedImage> settlerImages;
+    private BufferedImage settlerImage;
+
     SettlerPanel() {
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
@@ -33,4 +36,9 @@ public class SettlerPanel extends UpdatablePanel {
     public void paint(Graphics g) {
     	super.paint(g);
 	}
+
+    public void setSettlerImage(int id) {
+        int idx = id - 1;
+        settlerImage = settlerImages.get(idx);
+    }
 }

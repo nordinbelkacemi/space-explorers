@@ -31,7 +31,7 @@ public class Game {
 	 * A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6
 	 * telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6)
 	 */
-	private List<Integer> choosableSettlers;
+	private List<Settler> selectableSettlers;
 
 	/** telepes mozgása során kiválasztott cél asteroid field */
 	private AsteroidField selectedField;
@@ -51,11 +51,10 @@ public class Game {
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		megkergultGates = new MegkergultGates();
 
-		choosableSettlers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6));
-	}
-
-	public static Game getInstance() {
-		return instance;
+		selectableSettlers = new ArrayList<Settler>();
+		for (Settler settler : getSettlers()) {
+			selectableSettlers.add(settler);
+		}
 	}
 
 	/**
@@ -64,8 +63,18 @@ public class Game {
 	 * 
 	 * @param n A kiválasztott telepes sorszáma
 	 */
-	public void selectSettler(int n) {
-		/* TODO Game.selectSettler */
+	public void selectSettler(int id) {
+		List<Settler> settlers = settlerTeam.getSettlers();
+
+		Settler selectedSettler = null;
+		for (Settler settler : settlers) {
+			if (settler.getId() == id)
+				selectedSettler = settler;
+				break;
+		}
+		
+		SelectedSettler.getInstance().set(selectedSettler);
+		gui.settlerSelected();
 	}
 
 	/**
@@ -92,8 +101,10 @@ public class Game {
 		/* TODO Game.log */
 	}
 
-	public void EndTurn() {
-		/* TODO Game.EndTurn */
+	public void endTurn() {
+		for (Settler settler : getSettlers()) {
+			selectableSettlers.add(settler);
+		}
 	}
 
 	
@@ -115,7 +126,17 @@ public class Game {
 		return solarSystem;
 	}
 
+	public static Game getInstance() {
+		return instance;
+	}
 
+	public List<Settler> getSettlers() {
+		return settlerTeam.getSettlers();
+	}
+
+	public List<Settler> getSelectableSettlers() {
+		return selectableSettlers;
+	}
 
 
 
@@ -130,7 +151,7 @@ public class Game {
 
 	// /** A játékot elindító függvény */
 	// public void start() {
-	// 	/* TODO Game.start */
+	// 
 	// }
 
 	// public void resetChoosableSettlers() {
@@ -247,5 +268,4 @@ public class Game {
 
 	// 	resetChoosableSettlers();
 	// }
-
 }

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import controllers.Game;
 import controllers.SelectedSettler;
+import models.settler.Settler;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
@@ -67,7 +68,9 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 	}
 
 	public void settlerSelected(){
-        /* TODO GameFrame.SettlerSelected */
+		Settler selectedSettler = SelectedSettler.getInstance().getSelectedSettler();
+		int id = selectedSettler.getId();
+        settlerPanel.setSettlerImage(id);
     }
 
     public void fieldSelected(){
