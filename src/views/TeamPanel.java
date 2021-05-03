@@ -2,12 +2,14 @@ package views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,10 +21,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import controllers.Game;
-import controllers.SelectedSettler;
 import models.settler.Settler;
 
-
+import controllers.Game;
 
 public class TeamPanel extends UpdatablePanel {
 
@@ -86,6 +87,14 @@ public class TeamPanel extends UpdatablePanel {
 		nextTurnButton.setForeground(Color.white);
 		nextTurnButton.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 		nextTurnButton.setFocusPainted(false);
+
+        nextTurnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                Game.getInstance().resetSelectableSettlers();
+				update();
+            }
+		});
+
 		add(nextTurnButton);
 		update();
 		setVisible(true);
