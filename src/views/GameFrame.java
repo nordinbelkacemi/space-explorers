@@ -86,4 +86,10 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     public void log(){
         /* TODO GameFrame.log */
     }
+
+	@Override
+	public void turnEnded() {
+		settlerPanel.update();
+		teamPanel.update();
+	}
 }
