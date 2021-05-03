@@ -53,16 +53,16 @@ public class SpacePanel extends UpdatablePanel {
     	Coordinate sunCo = solarSystem.getSun().getCo();
     	for (AsteroidField field : belt) {
 			Coordinate co = field.getCo();
-			int x = (getSize().width/2 + co.getX()*46+co.getY()*23)-20;
-			int y = (int) (getSize().height/2 + co.getY()*Math.sqrt(3)*23) -20;
+			int x = (getSize().width/2 + co.getX()*50+co.getY()*25)-20;
+			int y = (int) (getSize().height/2 + co.getY()*Math.sqrt(3)*25) -20;
 			
 			if (Math.abs(co.getX() - sunCo.getX()) <= 2 && Math.abs(co.getY() - sunCo.getY()) <= 2)
 				g.drawImage(sunFieldImg,x,y,null);
 			else
 				g.drawImage(fieldImg,x,y,null);
 		}
-    	int x = (getSize().width/2 + sunCo.getX()*46+sunCo.getY()*23)-20;
-		int y = (int) (getSize().height/2 + sunCo.getY()*Math.sqrt(3)*23) -20;
+    	int x = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25)-20;
+		int y = (int) (getSize().height/2 + sunCo.getY()*Math.sqrt(3)*25) -20;
 		g.drawImage(sunImg,x,y,null);
 	}
 }

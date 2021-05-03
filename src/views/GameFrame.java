@@ -28,7 +28,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	setTitle("SPACE EXPLORERS");
     	setExtendedState(JFrame.MAXIMIZED_BOTH); 
-    	setMinimumSize(new Dimension(1000,800));
+    	setMinimumSize(new Dimension(1200,800));
     	
     	// full frame layout
     	BorderLayout BL = new BorderLayout();

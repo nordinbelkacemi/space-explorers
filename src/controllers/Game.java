@@ -57,6 +57,10 @@ public class Game {
 		}
 	}
 
+	public static Game getInstance() {
+		return instance;
+	}
+
 	/**
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo
 	 * telepesre
@@ -124,10 +128,6 @@ public class Game {
 
 	public SolarSystem getSolarSystem() {
 		return solarSystem;
-	}
-
-	public static Game getInstance() {
-		return instance;
 	}
 
 	public List<Settler> getSettlers() {
