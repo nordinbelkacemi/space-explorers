@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import controllers.Game;
 import controllers.SelectedSettler;
-import model.settler.Settler;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
