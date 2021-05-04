@@ -88,8 +88,8 @@ public class SpacePanel extends GamePanel {
     	}
     	
     	Coordinate sunCo = solarSystem.getSun().getCo();
-    	double SX = sunCo.getX() + sunCo.getY() / 2.0f;
-		double SY = sunCo.getY() * Math.sqrt(3) / 2.0f;
+    	//double SX = sunCo.getX() + sunCo.getY() / 2.0f;
+		//double SY = sunCo.getY() * Math.sqrt(3) / 2.0f;
     	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25)-20;
 		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25) -20;
 		g.drawImage(sunImg,sx,sy,null);
@@ -97,11 +97,13 @@ public class SpacePanel extends GamePanel {
 			Coordinate co = field.getCo();
 			int x = (getSize().width/2 + co.getX()*50+co.getY()*25)-20;
 			int y = (int) (getSize().height/2 - co.getY()*Math.sqrt(3)*25) -20;
-			double X = co.getX() + co.getY() / 2.0f;
-			double Y = co.getY() * Math.sqrt(3) / 2.0f;
-			if (Math.pow(SX - X,2) + Math.pow(SY - Y,2) <= 4) {
-				g.drawImage(sunFieldImg,x,y,null);
-			}
+			//double X = co.getX() + co.getY() / 2.0f;
+			//double Y = co.getY() * Math.sqrt(3) / 2.0f;
+			int diffX = sunCo.getX() - co.getX();
+			int diffY = sunCo.getY() - co.getY();
+			if (Math.abs(diffX) <= 2 && Math.abs(diffY) <= 2 && Math.abs(diffX + diffY) <= 2) {
+					g.drawImage(sunFieldImg,x,y,null);
+				}
 			else
 				g.drawImage(fieldImg,x,y,null);
 		}    	
