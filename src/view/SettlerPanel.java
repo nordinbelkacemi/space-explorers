@@ -42,14 +42,30 @@ public class SettlerPanel extends GamePanel {
 		"res/purplebig.png",
 		"res/orangebig.png"
 	));
-
+	/** amit lehet csinalni eppen */
 	private List<String> actions;
+
+	/** minden lehetoseg */
+	private List<String> allActions;
+
 	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
     SettlerPanel() {
-    	super(new Dimension(300,600));
-		loadImages(settlerImages, settlerImagePaths);    	
+		super(new Dimension(300,600));
+		loadImages(settlerImages, settlerImagePaths);
 		initButtons();
+		allActions = new ArrayList<>(Arrays.asList(
+			"move",
+			"drill",
+			"mine",
+			"build robot",
+			"build teleportgate",
+			"place teleportgate",
+			"putback iron",
+			"putback uranium",
+			"putback coal",
+			"putback ice"
+		));
 		setVisible(true);
 		update();
     }
@@ -82,7 +98,6 @@ public class SettlerPanel extends GamePanel {
     
     public void placeButtons() {
 		/* TODO SettlerPanel.placeButtons */
-		List<String> allActions = new ArrayList<>(actionButtons.keySet());
 
     	for (int i = 0; i < 3; i++) {
 			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 30);
