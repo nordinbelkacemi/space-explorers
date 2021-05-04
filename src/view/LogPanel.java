@@ -11,9 +11,7 @@ public class LogPanel extends GamePanel {
     private JTextField log;
 
     public LogPanel() {
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setPreferredSize(new Dimension(300,150));
+    	super(new Dimension(300,150));
 		setVisible(true);
     }
 

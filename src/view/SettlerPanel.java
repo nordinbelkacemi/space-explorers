@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import controllers.Game;
 import controllers.SelectedSettler;
 import model.settler.Settler;
-import view.actionbuttons.ActionButton;
 import view.actionbuttons.BuildRobotButton;
 import view.actionbuttons.BuildTeleportGateButton;
 import view.actionbuttons.DrillButton;
@@ -36,13 +35,12 @@ public class SettlerPanel extends GamePanel {
     private Settler settler;
     private List<BufferedImage> settlerImages = new ArrayList<>();
 	private ArrayList<String> settlerImagePaths = new ArrayList<>(Arrays.asList(
-		"res/redsmall.png",
-		"res/bluesmall.png",
-		"res/greensmall.png",
-		"res/yellowsmall.png",
-		"res/purplesmall.png",
-		"res/orangesmall.png",
-		"res/graysmall.png"
+		"res/redbig.png",
+		"res/bluebig.png",
+		"res/greenbig.png",
+		"res/yellowbig.png",
+		"res/purplebig.png",
+		"res/orangebig.png"
 	));
 	/** amit lehet csinalni eppen */
 	private List<String> actions;
@@ -50,11 +48,12 @@ public class SettlerPanel extends GamePanel {
 	/** minden lehetoseg */
 	private List<String> allActions;
 
-	private HashMap<String, ActionButton> actionButtons = new HashMap<>();
+	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
     SettlerPanel() {
+		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
-
+		initButtons();
 		allActions = new ArrayList<>(Arrays.asList(
 			"move",
 			"drill",
@@ -67,12 +66,6 @@ public class SettlerPanel extends GamePanel {
 			"putback coal",
 			"putback ice"
 		));
-
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setForeground(Color.white);
-		setPreferredSize(new Dimension(300,600));
-		initButtons();
 		setVisible(true);
 		update();
     }

@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.SelectedSettler;
+import view.GameButton;
 
-public class PutBackIronButton extends ActionButton {
+public class PutBackIronButton extends GameButton {
     public PutBackIronButton() {
         super("putback iron");
         addActionListener(new ActionListener() {

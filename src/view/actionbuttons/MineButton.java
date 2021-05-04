@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.SelectedSettler;
+import view.GameButton;
 
-public class MineButton extends ActionButton {
+public class MineButton extends GameButton {
     public MineButton() {
         super("mine");
         addActionListener(new ActionListener() {
