@@ -1,5 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import models.playfield.Asteroid;
+import models.playfield.AsteroidField;
 import models.settler.Settler;
 import views.GameFrame;
 import views.SpaceExplorersGui;
@@ -21,6 +26,56 @@ public class SelectedSettler {
     /** Ezt a fuggvényt így kell meghivni: SelectedSettler.getInstance().set(...) */
     public void set(Settler settler) {
         this.settler = settler;
+    }
+    
+    public List<String> getActions() {
+ 	 	List<String> actions = new ArrayList<String>();
+
+ 	 	Asteroid currentAsteroid = settler.getAsteroid();
+ 	 	List<AsteroidField> neighbors = currentAsteroid.getNeighbours();
+
+ 	 	for (AsteroidField af : neighbors) {
+ 	 		if (af.getAsteroids().size() > 0) {
+ 	 			actions.add("move");
+ 	 			break;
+ 	 		}
+ 	 	}
+ 	 	
+ 	 	if (currentAsteroid.getThickness() > 0) {
+ 	 		actions.add("drill");
+ 	 	}
+
+ 	 	if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
+ 	 		actions.add("mine");
+ 	 	}
+
+ 	 	if (settler.canBuildRobot()) {
+ 	 		actions.add("build robot");
+ 	 	}
+ 	 	
+ 	 	if (settler.canBuildGate()) {
+ 	 		actions.add("build teleportgate");
+ 	 	}
+
+ 	 	if (settler.canPlaceGate()) {
+ 	 		actions.add("place teleportgate");
+ 	 	}
+
+ 	 	if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
+ 	 		if (settler.getIronCount() >= 1) {
+ 	 			actions.add("putback iron");
+ 	 		}
+ 	 		if (settler.getUraniumCount() >= 1) {
+ 	 			actions.add("putback uranium");
+ 	 		}
+ 	 		if (settler.getCoalCount() >= 1) {
+ 	 			actions.add("putback coal");
+ 	 		}
+ 	 		if (settler.getIceCount() >= 1) {
+ 	 			actions.add("putback ice");
+ 	 		}
+ 	 	}
+ 	 	return actions;
     }
     
     public void performAction(String action) {

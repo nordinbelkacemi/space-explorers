@@ -86,12 +86,9 @@ public class SpacePanel extends UpdatablePanel {
 			double Y = co.getY() * Math.sqrt(3) / 2.0f;
 			if (Math.pow(SX - X,2) + Math.pow(SY - Y,2) <= 4) {
 				g.drawImage(sunFieldImg,x,y,null);
-				System.out.println(co.getX() + " " + sunCo.getX() + "\t" + co.getY() + " " + sunCo.getY());
 			}
 			else
 				g.drawImage(fieldImg,x,y,null);
-		}
-    	System.out.println("\n");
-    	
+		}    	
 	}
 }

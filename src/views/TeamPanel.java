@@ -76,18 +76,11 @@ public class TeamPanel extends UpdatablePanel {
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}
 		});
-    	
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
 		setForeground(Color.white);
 		setPreferredSize(new Dimension(300,150));
-		nextTurnButton = new JButton("next turn");
-		nextTurnButton.setSize(50, 30);
-		nextTurnButton.setBackground(Color.black);
-		nextTurnButton.setForeground(Color.white);
-		nextTurnButton.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
-		nextTurnButton.setFocusPainted(false);
-
+		nextTurnButton = new GameButton("next turn");
         nextTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 Game.getInstance().endTurn();
@@ -95,8 +88,9 @@ public class TeamPanel extends UpdatablePanel {
 		});
 
 		add(nextTurnButton);
-		update();
+		
 		setVisible(true);
+		update();
     }
 
     public void update() {
@@ -106,7 +100,7 @@ public class TeamPanel extends UpdatablePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-		nextTurnButton.setLocation(new Point(getSize().width - 150, 10));
+    	nextTurnButton.setLocation(getSize().width - 150, 10);
     	int startX = (getSize().width - 575)/2;
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLERS", 10, 30);
