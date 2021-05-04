@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionListener;
@@ -23,7 +22,6 @@ import javax.swing.JButton;
 import controllers.Game;
 import models.settler.Settler;
 
-import controllers.Game;
 
 public class TeamPanel extends UpdatablePanel {
 
@@ -66,8 +64,9 @@ public class TeamPanel extends UpdatablePanel {
 				if(y < 125 && y > 50 && x < startX+575 && x > startX) {
 					x -= startX;
 					x /= 96;
-					if(x < selectableSettlers.size())
-						Game.getInstance().selectSettler(selectableSettlers.get(x).getId());
+					Settler settler = selectableSettlers.get(x);
+					if(x < selectableSettlers.size() && settler != null)
+						Game.getInstance().selectSettler(settler.getId());
 				}
 			}
 
