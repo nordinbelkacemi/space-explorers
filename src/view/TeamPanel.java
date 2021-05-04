@@ -9,56 +9,39 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import controllers.Game;
 import model.settler.Settler;
+import view.actionbuttons.ActionButton;
 
 
 public class TeamPanel extends UpdatablePanel {
 
 	private List<Settler> selectableSettlers;
-	
     private JButton nextTurnButton;
-    private List<BufferedImage> settlerImages = new ArrayList<>();
+	private List<BufferedImage> settlerImages = new ArrayList<>();
+	private ArrayList<String> settlerImagePaths = new ArrayList<>(Arrays.asList(
+		"res/redsmall.png",
+		"res/bluesmall.png",
+		"res/greensmall.png",
+		"res/yellowsmall.png",
+		"res/purplesmall.png",
+		"res/orangesmall.png",
+		"res/graysmall.png"
+	));
 
     public TeamPanel() {
-    	try {
-    		InputStream in = new FileInputStream("res/redsmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/bluesmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/greensmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/yellowsmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/purplesmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/orangesmall.png");
-			settlerImages.add(ImageIO.read(in));
-			
-			in = new FileInputStream("res/graysmall.png");
-			settlerImages.add(ImageIO.read(in));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
+		loadImages(settlerImages, settlerImagePaths);
+
     	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				int x = (int) e.getPoint().getX(), y = (int) e.getPoint().getY();
 				int startX = (getSize().width - 575) / 2;
 				if (y < 125 && y > 50 && x < startX + 575 && x > startX) {
@@ -74,7 +57,7 @@ public class TeamPanel extends UpdatablePanel {
 		setBackground(Color.black);
 		setForeground(Color.white);
 		setPreferredSize(new Dimension(300,150));
-		nextTurnButton = new GameButton("next turn");
+		nextTurnButton = new ActionButton("next turn");
         nextTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 Game.getInstance().endTurn();
