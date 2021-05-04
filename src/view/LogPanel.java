@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 
-public class LogPanel extends UpdatablePanel {
+public class LogPanel extends GamePanel {
 
     private JTextField log;
 

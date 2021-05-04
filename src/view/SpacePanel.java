@@ -20,7 +20,7 @@ import model.playfield.Coordinate;
 import model.playfield.SolarSystem;
 import model.settler.Settler;
 
-public class SpacePanel extends UpdatablePanel {
+public class SpacePanel extends GamePanel {
 
     private SolarSystem solarSystem;
     private BufferedImage sunFieldImg;

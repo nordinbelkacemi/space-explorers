@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import controllers.Game;
 import model.playfield.Asteroid;
 
-public class AsteroidPanel extends UpdatablePanel{
+public class AsteroidPanel extends GamePanel{
 
     private JLabel thickness;
     private JLabel core;

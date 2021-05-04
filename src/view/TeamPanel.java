@@ -21,7 +21,7 @@ import model.settler.Settler;
 import view.actionbuttons.ActionButton;
 
 
-public class TeamPanel extends UpdatablePanel {
+public class TeamPanel extends GamePanel {
 
 	private List<Settler> selectableSettlers;
     private JButton nextTurnButton;

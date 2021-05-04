@@ -22,7 +22,7 @@ import model.settler.Settler;
 import view.actionbuttons.ActionButton;
 import view.actionbuttons.MoveButton;
 
-public class SettlerPanel extends UpdatablePanel {
+public class SettlerPanel extends GamePanel {
     private List<JLabel> inventory;
     private Settler settler;
     private List<BufferedImage> settlerImages = new ArrayList<>();

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public abstract class UpdatablePanel extends JPanel {
+public abstract class GamePanel extends JPanel implements Updatable {
 
     /**
      * Egy adott panelen levo kepeket tarolo listajaba betolti a paths listaban
@@ -28,6 +28,4 @@ public abstract class UpdatablePanel extends JPanel {
             }
         }
     }
-
-    public abstract void update();
 }

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import controllers.Game;
 import model.playfield.AsteroidField;
 
-public class FieldPanel extends UpdatablePanel {
+public class FieldPanel extends GamePanel {
     private List<JLabel> asteroids;
     private List<JLabel> teleportGates;
     private AsteroidField field;
