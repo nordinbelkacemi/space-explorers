@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -15,11 +16,12 @@ public class FieldPanel extends UpdatablePanel {
     private List<JLabel> asteroids;
     private List<JLabel> teleportGates;
     private AsteroidField field;
-    private int index;
+    private String index;
 
     public FieldPanel() {
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
+		setForeground(Color.white);
 		setPreferredSize(new Dimension(250,300));
 		setVisible(true);
 		update();
@@ -28,12 +30,16 @@ public class FieldPanel extends UpdatablePanel {
     public void update() {
         field = Game.getInstance().getSelectedField();
         if (field != null) {
-            index = Game.getInstance().getSolarSystem().getBelt().indexOf(field);
+            index = String.valueOf(Game.getInstance().getSolarSystem().getBelt().indexOf(field));
         }
         repaint();
     }
     
     public void paint(Graphics g) {
     	super.paint(g);
+    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
+    	g.drawString("FIELD", 10, 30);
+    	if(field != null)
+    		g.drawString(index, 10, 60);
 	}
 }

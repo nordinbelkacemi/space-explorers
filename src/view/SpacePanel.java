@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -42,6 +44,28 @@ public class SpacePanel extends UpdatablePanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    	
+    	addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
+				for (int i = 0; i < belt.size(); i++) {
+					Coordinate co = belt.get(i).getCo();
+					int x = (getSize().width/2 + co.getX()*50+co.getY()*25);
+					int y = (int) (getSize().height/2 - co.getY()*Math.sqrt(3)*25);
+					if(Math.pow(x-xc,2) + Math.pow(y-yc,2) < 1600) {
+						Game.getInstance().selectField(i);
+						break;
+					}
+				}
+			}
+
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+		});
+    	
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
 		update();

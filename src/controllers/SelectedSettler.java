@@ -82,6 +82,7 @@ public class SelectedSettler {
         int idx = Game.getInstance().getSelectableSettlers().indexOf(settler);
         Game.getInstance().getSelectableSettlers().set(idx, null);
         settler = null;
+        Game.getInstance().checkTurnEnd();
         gui.settlerPerformedAction();
     }
 
