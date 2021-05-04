@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.SelectedSettler;
+import view.GameButton;
 
-public class BuildRobotButton extends ActionButton {
+public class BuildRobotButton extends GameButton {
     public BuildRobotButton() {
         super("build robot");
         addActionListener(new ActionListener() {

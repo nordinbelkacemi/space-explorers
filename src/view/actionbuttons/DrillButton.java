@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.SelectedSettler;
+import view.GameButton;
 
-public class DrillButton extends ActionButton {
+public class DrillButton extends GameButton {
     public DrillButton() {
         super("drill");
         addActionListener(new ActionListener() {

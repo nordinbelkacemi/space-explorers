@@ -19,9 +19,7 @@ public class AsteroidPanel extends GamePanel{
     private Asteroid asteroid;
 
     public AsteroidPanel() {
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setPreferredSize(new Dimension(250,300));
+    	super(new Dimension(250,300));
 		setVisible(true);
     }
 

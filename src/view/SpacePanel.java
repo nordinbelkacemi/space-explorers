@@ -30,6 +30,7 @@ public class SpacePanel extends GamePanel {
     private BufferedImage hexagon2Img;
     private List<AsteroidField> belt;
     public SpacePanel() {
+    	super(null);
     	try {
     		InputStream in = new FileInputStream("res/sunfield.png");
 			sunFieldImg = ImageIO.read(in);
@@ -60,9 +61,6 @@ public class SpacePanel extends GamePanel {
 				}
 			}
 		});
-    	
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
 		update();
 		setVisible(true);
     }

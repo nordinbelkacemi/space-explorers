@@ -1,4 +1,4 @@
-package view.actionbuttons;
+package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,9 +6,9 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
-public class ActionButton extends JButton {
+public class GameButton extends JButton {
 
-	public ActionButton(String text) {
+	public GameButton(String text) {
 		super(text);
 		setBackground(Color.black);
 		setForeground(Color.white);
