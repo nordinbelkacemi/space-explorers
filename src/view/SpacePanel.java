@@ -47,7 +47,7 @@ public class SpacePanel extends UpdatablePanel {
     	
     	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
 				for (int i = 0; i < belt.size(); i++) {
 					Coordinate co = belt.get(i).getCo();

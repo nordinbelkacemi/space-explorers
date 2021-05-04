@@ -7,51 +7,41 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import controllers.Game;
 import controllers.SelectedSettler;
-import model.playfield.AsteroidField;
 import model.settler.Settler;
+import view.actionbuttons.ActionButton;
+import view.actionbuttons.MoveButton;
 
 public class SettlerPanel extends UpdatablePanel {
     private List<JLabel> inventory;
-    private List<String> actions;
-    private List<JButton> actionButtons = new ArrayList<>();
     private Settler settler;
     private List<BufferedImage> settlerImages = new ArrayList<>();
+	private ArrayList<String> settlerImagePaths = new ArrayList<>(Arrays.asList(
+		"res/redsmall.png",
+		"res/bluesmall.png",
+		"res/greensmall.png",
+		"res/yellowsmall.png",
+		"res/purplesmall.png",
+		"res/orangesmall.png",
+		"res/graysmall.png"
+	));
+
+	private List<String> actions;
+	private HashMap<String, ActionButton> actionButtons = new HashMap<>();
 
     SettlerPanel() {
-    	try {
-			InputStream in = new FileInputStream("res/redbig.png");
-			settlerImages.add(ImageIO.read(in));
+		loadImages(settlerImages, settlerImagePaths);
 
-			in = new FileInputStream("res/bluebig.png");
-			settlerImages.add(ImageIO.read(in));
-
-			in = new FileInputStream("res/greenbig.png");
-			settlerImages.add(ImageIO.read(in));
-
-			in = new FileInputStream("res/yellowbig.png");
-			settlerImages.add(ImageIO.read(in));
-
-			in = new FileInputStream("res/purplebig.png");
-			settlerImages.add(ImageIO.read(in));
-
-			in = new FileInputStream("res/orangebig.png");
-			settlerImages.add(ImageIO.read(in));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
 		setForeground(Color.white);
@@ -62,152 +52,54 @@ public class SettlerPanel extends UpdatablePanel {
     }
 
     public void initButtons() {
-    	JButton button = new GameButton("move");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().move();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("drill");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().drill();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("mine");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().mine();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("build robot");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().buildRobot();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("build teleportgate");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().buildTeleportGate();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("place teleportgate");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().placeTeleportGate();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("putback iron");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().putIronBack();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("putback uranium");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().putUraniumBack();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("putback coal");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().putCoalBack();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	button = new GameButton("putback ice");
-    	button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-               	SelectedSettler.getInstance().putIceBack();
-            }
-		});
-    	actionButtons.add(button);
-    	
-    	for (JButton b : actionButtons) {
-			add(b);
+		actionButtons.put("move", new MoveButton());
+		actionButtons.put("move", new MoveButton());
+		actionButtons.put("drill", new MoveButton());
+		actionButtons.put("mine", new MoveButton());
+		actionButtons.put("build robot", new MoveButton());
+		actionButtons.put("build teleportgate", new MoveButton());
+		actionButtons.put("place teleportgate", new MoveButton());
+		actionButtons.put("putback iron", new MoveButton());
+		actionButtons.put("putback uranium", new MoveButton());
+		actionButtons.put("putback coal", new MoveButton());
+		actionButtons.put("putback ice", new MoveButton());
+
+		for (String action : actionButtons.keySet()) {
+			JButton button = actionButtons.get(action);
+			add(button);
 		}
     	clearButtons();
     }
     
     public void clearButtons() {
-    	for (JButton button : actionButtons) {
+    	for (String action : actionButtons.keySet()) {
+			JButton button = actionButtons.get(action);
 			button.setVisible(false);
 		}
     }
     
     public void placeButtons() {
+		/* TODO SettlerPanel.placeButtons */
+		List<String> allActions = new ArrayList<>(actionButtons.keySet());
+
     	for (int i = 0; i < 3; i++) {
-			actionButtons.get(i).setLocation(15+i*100, getSize().height/2 + 30);
+			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 30);
 		}
     	for (int i = 3; i < 6; i++) {
-    		actionButtons.get(i).setLocation(15, getSize().height/2+ 80 + (i-3)*40);
+    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2+ 80 + (i-3)*40);
 		}
     	for (int i = 6; i < 10; i++) {
-    		actionButtons.get(i).setLocation(15, getSize().height/2+ 210 + (i-6)*40);
+    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2+ 210 + (i-6)*40);
 		}
     }
     
     public void updateAvailableButtons() {
     	actions = SelectedSettler.getInstance().getActions();
     	
-    	JButton button = actionButtons.get(0);
-    	if (actions.contains("move"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(1);
-    	if (actions.contains("drill"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(2);
-    	if (actions.contains("mine"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(3);
-    	if (actions.contains("build robot"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(4);
-    	if (actions.contains("build teleportgate"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(5);
-    	if (actions.contains("place teleportgate"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(6);
-    	if (actions.contains("putback iron"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(7);
-    	if (actions.contains("putback uranium"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(8);
-    	if (actions.contains("putback coal"))
-    		button.setVisible(true);
-    	
-    	button = actionButtons.get(9);
-    	if (actions.contains("putback ice"))
-    		button.setVisible(true);
+		for (String action : actions) {
+			JButton button = actionButtons.get(action);
+			button.setVisible(true);
+		}
     }
 
     public void update() {
