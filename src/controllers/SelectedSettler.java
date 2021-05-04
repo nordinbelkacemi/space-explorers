@@ -78,31 +78,37 @@ public class SelectedSettler {
  	 	return actions;
     }
     
-    public void performAction(String action) {
+    public void performAction() {
         int idx = Game.getInstance().getSelectableSettlers().indexOf(settler);
         Game.getInstance().getSelectableSettlers().set(idx, null);
+        settler = null;
+        gui.settlerPerformedAction();
     }
 
     public void mine() {
         /* TODO SelectedSettler.mine */
         
         // settler.mine();
+    	performAction();
     }
 
     public void drill() {
         /* TODO SelectedSettler.drill */
         
         // settler.drill();
+    	performAction();
     }
 
     public void buildTeleportGate() {
         /* TODO SelectedSettler.buildTeleportGate */
         
         // settler.build(new TeleportGatePair());
+    	performAction();
     }
 
     public void placeTeleportGate() {
         /* TODO SelectedSettler.placeTeleportGate */
+    	performAction();
     }
 
     public void buildRobot() {
@@ -110,36 +116,42 @@ public class SelectedSettler {
         
         // Robot r = new Robot(settler.getAsteroid());
         // settler.build(r);
+    	performAction();
     }
 
     public void move() {
         /* TODO SelectedSettler.move */
 
         // settler.move(Game.getInstance().getSelectedAsteroid())
+    	performAction();
     }
 
     public void putIronBack() {
         /* TODO SelectedSettler.putIronBack */
 
         // settler.putIronBack();
+    	performAction();
     }
 
     public void putCoalBack() {
         /* TODO SelectedSettler.putCoalBack */
 
         // settler.putCoalBack();
+    	performAction();
     }
 
     public void putUraniumBack() {
         /* TODO SelectedSettler.move */
 
         // settler.putUraniumBack();
+    	performAction();
     }
 
     public void putIceBack() {
         /* TODO SelectedSettler.putIceBack */
 
         // settler.putIceBack();
+    	performAction();
     }
     
     

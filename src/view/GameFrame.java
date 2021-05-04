@@ -81,7 +81,8 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     }
 
     public void settlerPerformedAction(){
-        /* TODO GameFrame.SettlerPerformedAction */
+    	settlerPanel.update();
+		teamPanel.update();
     }
 
     public void log(){

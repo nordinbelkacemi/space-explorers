@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import controllers.Game;
 import controllers.SelectedSettler;
 import model.playfield.AsteroidField;
 import model.settler.Settler;
@@ -59,18 +62,88 @@ public class SettlerPanel extends UpdatablePanel {
     }
 
     public void initButtons() {
-    	actionButtons.add(new GameButton("move"));
-    	actionButtons.add(new GameButton("drill"));
-    	actionButtons.add(new GameButton("mine"));
-    	actionButtons.add(new GameButton("build robot"));
-    	actionButtons.add(new GameButton("build teleportgate"));;
-    	actionButtons.add(new GameButton("place teleportgate"));
-    	actionButtons.add(new GameButton("putback iron"));
-    	actionButtons.add(new GameButton("putback uranium"));
-    	actionButtons.add(new GameButton("putback coal"));
-    	actionButtons.add(new GameButton("putback ice"));
-    	for (JButton button : actionButtons) {
-			add(button);
+    	JButton button = new GameButton("move");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().move();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("drill");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().drill();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("mine");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().mine();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("build robot");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().buildRobot();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("build teleportgate");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().buildTeleportGate();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("place teleportgate");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().placeTeleportGate();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("putback iron");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().putIronBack();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("putback uranium");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().putUraniumBack();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("putback coal");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().putCoalBack();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	button = new GameButton("putback ice");
+    	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+               	SelectedSettler.getInstance().putIceBack();
+            }
+		});
+    	actionButtons.add(button);
+    	
+    	for (JButton b : actionButtons) {
+			add(b);
 		}
     	clearButtons();
     }
