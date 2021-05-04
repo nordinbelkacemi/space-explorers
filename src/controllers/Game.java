@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import models.ai.RobotAi;
-import models.ai.UfoAi;
-import models.playfield.Asteroid;
-import models.playfield.AsteroidField;
-import models.playfield.MegkergultGates;
-import models.playfield.SolarSystem;
-import models.playfield.Sun;
-import models.settler.Settler;
-import models.settler.SettlerTeam;
-import views.GameFrame;
-import views.SpaceExplorersGui;
+import model.ai.RobotAi;
+import model.ai.UfoAi;
+import model.playfield.Asteroid;
+import model.playfield.AsteroidField;
+import model.playfield.MegkergultGates;
+import model.playfield.SolarSystem;
+import model.playfield.Sun;
+import model.settler.Settler;
+import model.settler.SettlerTeam;
+import view.GameFrame;
+import view.SpaceExplorersGui;
 
 public class Game {
 	private static Game instance = new Game();
@@ -81,13 +81,14 @@ public class Game {
 	}
 
 	/**
-	 * Egy AsteroidField-et kiválasztó függvény: beállítja a chosenField-et a
+	 * Egy AsteroidField-et kiválasztó függvény: beállítja a selectedField-et a
 	 * megfelelö asteroid fieldre.
 	 * 
 	 * @param n A kiválasztott AsteroidField sorszáma
 	 */
 	public void selectField(int n) {
-		/* TODO Game.selectField */
+		selectedField = solarSystem.getBelt().get(n);
+		gui.fieldSelected();
 	}
 
 	/**
@@ -180,61 +181,6 @@ public class Game {
 	//  */
 	// public boolean over() {
 	// 	return getChoosableSettlers().isEmpty();
-	// }
-
-	// public ArrayList<String> getActions() {
-	// 	ArrayList<String> actions = new ArrayList<String>();
-
-	// 	Asteroid currentAsteroid = chosenSettler.getAsteroid();
-	// 	ArrayList<AsteroidField> neighbors = currentAsteroid.getNeighbours();
-
-	// 	if (currentAsteroid.getThickness() > 0) {
-	// 		actions.add("drill");
-	// 	}
-
-	// 	for (AsteroidField af : neighbors) {
-	// 		if (af.getAsteroids().size() > 0) {
-	// 			actions.add("move");
-	// 			break;
-	// 		}
-	// 	}
-
-	// 	if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
-	// 		actions.add("mine");
-	// 	}
-
-	// 	if (chosenSettler.canBuildGate()) {
-	// 		actions.add("build teleportgate");
-	// 	}
-
-	// 	if (chosenSettler.canBuildRobot()) {
-	// 		actions.add("build robot");
-	// 	}
-
-	// 	if (chosenSettler.canPlaceGate()) {
-	// 		actions.add("place teleportgate");
-	// 	}
-
-	// 	if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
-	// 		if (chosenSettler.getIronCount() >= 1) {
-	// 			actions.add("putback iron");
-	// 		}
-	// 		if (chosenSettler.getUraniumCount() >= 1) {
-	// 			actions.add("putback uranium");
-	// 		}
-	// 		if (chosenSettler.getCoalCount() >= 1) {
-	// 			actions.add("putback coal");
-	// 		}
-	// 		if (chosenSettler.getIceCount() >= 1) {
-	// 			actions.add("putback ice");
-	// 		}
-	// 	}
-
-	// 	return actions;
-	// }
-
-	// public List<Integer> getChoosableSettlers() {
-	// 	return choosableSettlers;
 	// }
 
 	// public void endSettlerTurn(int n) {

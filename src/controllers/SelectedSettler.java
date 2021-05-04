@@ -3,11 +3,11 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.playfield.Asteroid;
-import models.playfield.AsteroidField;
-import models.settler.Settler;
-import views.GameFrame;
-import views.SpaceExplorersGui;
+import model.playfield.Asteroid;
+import model.playfield.AsteroidField;
+import model.settler.Settler;
+import view.GameFrame;
+import view.SpaceExplorersGui;
 
 public class SelectedSettler {
     private static SelectedSettler instance = new SelectedSettler(null);
