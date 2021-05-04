@@ -113,7 +113,17 @@ public class Game {
 		sun.performAction(); // csak a 
 	}
 
-	
+	public void checkTurnEnd() {
+		boolean turnended = true;
+		for (Settler settler : selectableSettlers) {
+			if(settler != null) {
+				turnended = false;
+				break;
+			}
+		}
+		if(turnended)
+			endTurn();
+	}
 	
 	
 	public void setGui(GameFrame gameFrame) {
@@ -150,6 +160,8 @@ public class Game {
 			selectableSettlers.add(settler);
 		}
 	}
+
+
 
 
 
