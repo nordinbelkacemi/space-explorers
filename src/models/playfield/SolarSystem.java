@@ -65,9 +65,15 @@ public class SolarSystem {
 	 */
 	private void setNeighbours() {
 		for (AsteroidField field1 : asteroidBelt) {
+			Coordinate co1 = field1.getCo();
+			double X1 = co1.getX() + co1.getY() / 2.0f;
+			double Y1 = co1.getY() * Math.sqrt(3) / 2.0f;
 			for (AsteroidField field2 : asteroidBelt) {
 				if(!field1.equals(field2)) {
-					if (Math.abs(field1.position.getX() - field2.position.getX()) <= 1 && Math.abs(field1.position.getY() - field2.position.getY()) <= 1) {
+					Coordinate co2 = field2.getCo();
+					double X2 = co2.getX() + co2.getY() / 2.0f;
+					double Y2 = co2.getY() * Math.sqrt(3) / 2.0f;
+					if (Math.pow(X1 - X2,2) + Math.pow(Y1 - Y2,2) <= 1.1) {
 						field1.addNeighbour(field2);
 					}
 				}
@@ -110,8 +116,14 @@ public class SolarSystem {
 	 * A napközelben lévő AsteroidField-ekre meghívja a CheckDangers() függvényt.
 	 */
 	public void updateDangerZone() {
+		Coordinate sunCo = sun.getCo();
+		double SX = sunCo.getX() + sunCo.getY() / 2.0f;
+		double SY = sunCo.getY() * Math.sqrt(3) / 2.0f;
 		for (AsteroidField field : asteroidBelt) {
-			if (Math.abs(field.position.getX() - sun.position.getX()) <= 2 && Math.abs(field.position.getY() - sun.position.getY()) <= 2)
+			Coordinate co = field.getCo();
+			double X = co.getX() + co.getY() / 2.0f;
+			double Y = co.getY() * Math.sqrt(3) / 2.0f;
+			if (Math.pow(SX - X,2) + Math.pow(SY - Y,2) <= 4)
 				field.checkDangers();
 		}
 

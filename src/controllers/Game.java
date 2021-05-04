@@ -108,6 +108,8 @@ public class Game {
 		SelectedSettler.getInstance().set(null);
 		resetSelectableSettlers();
 		gui.turnEnded();
+		
+		sun.performAction(); // csak a 
 	}
 
 	
