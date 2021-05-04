@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -56,24 +56,19 @@ public class TeamPanel extends UpdatablePanel {
 			e.printStackTrace();
 		}
     	
-    	addMouseListener(new MouseListener() {
+    	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				int x = (int) e.getPoint().getX(), y = (int) e.getPoint().getY();
-				int startX = (getSize().width - 575)/2;
-				if(y < 125 && y > 50 && x < startX+575 && x > startX) {
+				int startX = (getSize().width - 575) / 2;
+				if (y < 125 && y > 50 && x < startX + 575 && x > startX) {
 					x -= startX;
 					x /= 96;
 					Settler settler = selectableSettlers.get(x);
-					if(x < selectableSettlers.size() && settler != null)
+					if (x < selectableSettlers.size() && settler != null)
 						Game.getInstance().selectSettler(settler.getId());
 				}
 			}
-
-			public void mousePressed(MouseEvent e) {}
-			public void mouseReleased(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
 		});
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
