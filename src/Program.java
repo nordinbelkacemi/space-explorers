@@ -2,7 +2,7 @@ import javax.swing.SwingUtilities;
 
 import controllers.Game;
 import controllers.SelectedSettler;
-import views.GameFrame;
+import view.GameFrame;
 
 public class Program {
 
