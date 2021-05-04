@@ -66,7 +66,6 @@ public class TeamPanel extends UpdatablePanel {
 				if(y < 125 && y > 50 && x < startX+575 && x > startX) {
 					x -= startX;
 					x /= 96;
-					//System.out.println(x + " " +selectableSettlers.get(x).getId());
 					if(x < selectableSettlers.size())
 						Game.getInstance().selectSettler(selectableSettlers.get(x).getId());
 				}

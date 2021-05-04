@@ -69,6 +69,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 
 	public void settlerSelected(){
 		settlerPanel.update();
+		spacePanel.update();
     }
 
     public void fieldSelected(){
@@ -91,5 +92,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 	public void turnEnded() {
 		settlerPanel.update();
 		teamPanel.update();
+		spacePanel.update();
 	}
 }
