@@ -12,6 +12,7 @@ public class ActionButton extends JButton {
 		super(text);
 		setBackground(Color.black);
 		setForeground(Color.white);
+		setBorderPainted(false);
 		setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
 		setMinimumSize(new Dimension(100,30));
 		setFocusPainted(false);
