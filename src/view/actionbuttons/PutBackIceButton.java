@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.SelectedSettler;
+import view.GameButton;
 
-public class PutBackIceButton extends ActionButton {
+public class PutBackIceButton extends GameButton {
     public PutBackIceButton() {
         super("putback ice");
         addActionListener(new ActionListener() {

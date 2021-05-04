@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,10 +9,17 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public abstract class GamePanel extends JPanel implements Updatable {
 
+	public GamePanel(Dimension d) {
+    	setBorder(BorderFactory.createLineBorder(Color.white));
+		setBackground(Color.black);
+		setForeground(Color.white);
+		setPreferredSize(d);
+	}
     /**
      * Egy adott panelen levo kepeket tarolo listajaba betolti a paths listaban
      * tarolt eleresi utak altal meghatarozott kepeket

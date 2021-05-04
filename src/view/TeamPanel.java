@@ -18,8 +18,6 @@ import javax.swing.JButton;
 
 import controllers.Game;
 import model.settler.Settler;
-import view.actionbuttons.ActionButton;
-
 
 public class TeamPanel extends GamePanel {
 
@@ -37,6 +35,7 @@ public class TeamPanel extends GamePanel {
 	));
 
     public TeamPanel() {
+    	super(new Dimension(300,150));
 		loadImages(settlerImages, settlerImagePaths);
 
     	addMouseListener(new MouseAdapter() {
@@ -53,11 +52,7 @@ public class TeamPanel extends GamePanel {
 				}
 			}
 		});
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setForeground(Color.white);
-		setPreferredSize(new Dimension(300,150));
-		nextTurnButton = new ActionButton("next turn");
+		nextTurnButton = new GameButton("next turn");
         nextTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 Game.getInstance().endTurn();

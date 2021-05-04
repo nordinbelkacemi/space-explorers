@@ -19,10 +19,7 @@ public class FieldPanel extends GamePanel {
     private String index;
 
     public FieldPanel() {
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setForeground(Color.white);
-		setPreferredSize(new Dimension(250,300));
+    	super(new Dimension(250,300));
 		setVisible(true);
 		update();
     }

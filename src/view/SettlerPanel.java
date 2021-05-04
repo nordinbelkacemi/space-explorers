@@ -19,33 +19,36 @@ import javax.swing.JLabel;
 import controllers.Game;
 import controllers.SelectedSettler;
 import model.settler.Settler;
-import view.actionbuttons.ActionButton;
+import view.actionbuttons.BuildRobotButton;
+import view.actionbuttons.BuildTeleportGateButton;
+import view.actionbuttons.DrillButton;
+import view.actionbuttons.MineButton;
 import view.actionbuttons.MoveButton;
+import view.actionbuttons.PlaceTeleportGateButton;
+import view.actionbuttons.PutBackCoalButton;
+import view.actionbuttons.PutBackIceButton;
+import view.actionbuttons.PutBackIronButton;
+import view.actionbuttons.PutBackUraniumButton;
 
 public class SettlerPanel extends GamePanel {
     private List<JLabel> inventory;
     private Settler settler;
     private List<BufferedImage> settlerImages = new ArrayList<>();
 	private ArrayList<String> settlerImagePaths = new ArrayList<>(Arrays.asList(
-		"res/redsmall.png",
-		"res/bluesmall.png",
-		"res/greensmall.png",
-		"res/yellowsmall.png",
-		"res/purplesmall.png",
-		"res/orangesmall.png",
-		"res/graysmall.png"
+		"res/redbig.png",
+		"res/bluebig.png",
+		"res/greenbig.png",
+		"res/yellowbig.png",
+		"res/purplebig.png",
+		"res/orangebig.png"
 	));
 
 	private List<String> actions;
-	private HashMap<String, ActionButton> actionButtons = new HashMap<>();
+	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
     SettlerPanel() {
-		loadImages(settlerImages, settlerImagePaths);
-
-    	setBorder(BorderFactory.createLineBorder(Color.white));
-		setBackground(Color.black);
-		setForeground(Color.white);
-		setPreferredSize(new Dimension(300,600));
+    	super(new Dimension(300,600));
+		loadImages(settlerImages, settlerImagePaths);    	
 		initButtons();
 		setVisible(true);
 		update();
@@ -53,16 +56,15 @@ public class SettlerPanel extends GamePanel {
 
     public void initButtons() {
 		actionButtons.put("move", new MoveButton());
-		actionButtons.put("move", new MoveButton());
-		actionButtons.put("drill", new MoveButton());
-		actionButtons.put("mine", new MoveButton());
-		actionButtons.put("build robot", new MoveButton());
-		actionButtons.put("build teleportgate", new MoveButton());
-		actionButtons.put("place teleportgate", new MoveButton());
-		actionButtons.put("putback iron", new MoveButton());
-		actionButtons.put("putback uranium", new MoveButton());
-		actionButtons.put("putback coal", new MoveButton());
-		actionButtons.put("putback ice", new MoveButton());
+		actionButtons.put("drill", new DrillButton());
+		actionButtons.put("mine", new MineButton());
+		actionButtons.put("build robot", new BuildRobotButton());
+		actionButtons.put("build teleportgate", new BuildTeleportGateButton());
+		actionButtons.put("place teleportgate", new PlaceTeleportGateButton());
+		actionButtons.put("putback iron", new PutBackIronButton());
+		actionButtons.put("putback uranium", new PutBackUraniumButton());
+		actionButtons.put("putback coal", new PutBackCoalButton());
+		actionButtons.put("putback ice", new PutBackIceButton());
 
 		for (String action : actionButtons.keySet()) {
 			JButton button = actionButtons.get(action);
