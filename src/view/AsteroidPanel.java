@@ -104,12 +104,15 @@ public class AsteroidPanel extends GamePanel{
 	}
 
 	private void displayTravelers(Graphics g) {
+		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
+		g.drawString("Travelers:", 15, 150);
+		
 		int i = 0;
 		List<Traveler> travelers = asteroid.getTravelers();
 		for (Traveler traveler : travelers) {
 			String identifier = traveler.toString();
 			int x = 15 + 55 * (i % 4);
-			int y = 150 + i / 4 * 55;
+			int y = 170 + i / 4 * 55;
 			switch (identifier) {
 				case "settler":
 					int settlerId = traveler.getId();
