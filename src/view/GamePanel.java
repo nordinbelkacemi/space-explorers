@@ -18,6 +18,7 @@ public abstract class GamePanel extends JPanel implements Updatable {
     	setBorder(BorderFactory.createLineBorder(Color.white));
 		setBackground(Color.black);
 		setForeground(Color.white);
+		setMinimumSize(d);
 		setPreferredSize(d);
 	}
     /**

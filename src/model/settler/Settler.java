@@ -46,8 +46,6 @@ public class Settler extends Traveler implements Miner, Driller {
 
     /** A telepes csapata. */
     private static SettlerTeam team;
-
-    private int id;
     
     //////////////////////////////////////// konstruktorok
 
@@ -288,10 +286,6 @@ public class Settler extends Traveler implements Miner, Driller {
      */
     public int getUraniumCount() {
         return uraniumStorage.size();
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {

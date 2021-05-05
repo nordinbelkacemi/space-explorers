@@ -1,6 +1,7 @@
 package model.playfield;
 import java.util.List;
 
+import controller.Game;
 import model.materials.Material;
 import model.settler.Traveler;
 
@@ -117,6 +118,8 @@ public class Asteroid {
 
 	/** Az aszteroida felrobban, megsemmisítve ezzel magát és a rajta lévő utazókat. */
 	public void explode() {
+		Coordinate i = getIndexes();
+		Game.getInstance().log("EXPLOSION! field " + i.getX() + " asteroid " + i.getY());
 		Iterator<Traveler> travelerIter = travelers.iterator();
 		while (travelerIter.hasNext()) {
 			travelerIter.next().reactToExplosion(travelerIter);
@@ -126,6 +129,8 @@ public class Asteroid {
 
 	/** A jégből álló mag elszublimál. */
 	public void sublime() {
+		Coordinate i = getIndexes();
+		Game.getInstance().log("Ice sublimed at field " + i.getX() + " asteroid " + i.getY());
 		material = null;
 	}
 

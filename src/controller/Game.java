@@ -110,7 +110,7 @@ public class Game {
 	}
 
 	public void endTurn() {
-		sun.performAction();// csak a gui miatt maugy a stepben lesz
+		step();
 		SelectedSettler.getInstance().set(null);
 		resetSelectableSettlers();
 		selectedField = null;
@@ -130,7 +130,6 @@ public class Game {
 		if(turnended)
 			endTurn();
 	}
-	
 	
 	public void setGui(GameFrame gameFrame) {
 		gui = gameFrame;
@@ -167,7 +166,11 @@ public class Game {
 		}
 	}
 
-
+	public void step() {
+		sun.performAction();
+		robotAi.control();
+		ufoAi.control();
+	}
 
 
 
@@ -231,13 +234,5 @@ public class Game {
 	
 	// public void selectTeleportgatePair(int selectedPair) {
 	// 	selectedTeleportgatePair = selectedPair;
-	// }
-
-	// public void step() {
-	// 	sun.performAction();
-	// 	robotAi.control();
-	// 	ufoAi.control();
-
-	// 	resetChoosableSettlers();
 	// }
 }

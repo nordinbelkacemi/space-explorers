@@ -3,7 +3,9 @@ package model.playfield;
 import java.io.PrintStream;
 import java.util.Iterator;
 
+import controller.Game;
 import model.ai.UfoAi;
+import model.materials.Material;
 import model.settler.Miner;
 import model.settler.Traveler;
 
@@ -13,6 +15,8 @@ import model.settler.Traveler;
  */
 public class Ufo extends Traveler implements Miner {
 
+	private static int idCount = 0;
+	
 	/**
 	 * Az ufót irányító központi vezető.
 	 */
@@ -24,6 +28,7 @@ public class Ufo extends Traveler implements Miner {
 	 */
 	public Ufo(Asteroid a) {
 		super(a);
+		id = idCount++;
 	}
 
 	/**
@@ -31,7 +36,9 @@ public class Ufo extends Traveler implements Miner {
 	 */
 	@Override
 	public void mine() {
-		asteroid.removeMaterial();
+		Material m = asteroid.removeMaterial();
+		Coordinate i = asteroid.getIndexes();
+		Game.getInstance().log(toString() + " " + getId() + " STOLE " + m.toString() + "at field " + i.getX() + " asteroid " + i.getY());
 	}
 	
 	/**
@@ -62,5 +69,10 @@ public class Ufo extends Traveler implements Miner {
 	public void die() {
 		ai.remove(this);
 		super.die();
+	}
+	
+	@Override
+	public String toString() {
+		return "Ufo";
 	}
 }
