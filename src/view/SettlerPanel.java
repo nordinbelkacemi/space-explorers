@@ -16,8 +16,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import controllers.Game;
-import controllers.SelectedSettler;
+import controller.Game;
+import controller.SelectedSettler;
+import model.playfield.Asteroid;
+import model.playfield.AsteroidField;
 import model.settler.Settler;
 import view.actionbuttons.BuildRobotButton;
 import view.actionbuttons.BuildTeleportGateButton;
@@ -50,6 +52,7 @@ public class SettlerPanel extends GamePanel {
 
 	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
+	private GameButton showButton;
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
@@ -65,12 +68,12 @@ public class SettlerPanel extends GamePanel {
 			"putback uranium",
 			"putback coal",
 			"putback ice"
-		));
+		));		
 		setVisible(true);
 		update();
     }
 
-    public void initButtons() {
+    private void initButtons() {
 		actionButtons.put("move", new MoveButton());
 		actionButtons.put("drill", new DrillButton());
 		actionButtons.put("mine", new MineButton());
@@ -86,19 +89,30 @@ public class SettlerPanel extends GamePanel {
 			JButton button = actionButtons.get(action);
 			add(button);
 		}
+    	
+    	showButton = new GameButton("Show asteroid");
+		showButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Asteroid asteroid = settler.getAsteroid();
+            	AsteroidField field = asteroid.getAsteroidField();
+            	List<AsteroidField> belt = Game.getInstance().getSolarSystem().getBelt();
+                Game.getInstance().selectField(belt.indexOf(field));
+                Game.getInstance().selectAsteroid(field.getAsteroids().indexOf(asteroid));
+            }
+        });
+		add(showButton);
     	clearButtons();
     }
     
-    public void clearButtons() {
+    private void clearButtons() {
     	for (String action : actionButtons.keySet()) {
 			JButton button = actionButtons.get(action);
 			button.setVisible(false);
 		}
+    	showButton.setVisible(false);
     }
     
-    public void placeButtons() {
-		/* TODO SettlerPanel.placeButtons */
-
+    private void placeButtons() {
     	for (int i = 0; i < 3; i++) {
 			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 30);
 		}
@@ -108,15 +122,17 @@ public class SettlerPanel extends GamePanel {
     	for (int i = 6; i < 10; i++) {
     		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2+ 210 + (i-6)*40);
 		}
+		showButton.setLocation(15,220);
     }
     
-    public void updateAvailableButtons() {
+    private void updateAvailableButtons() {
     	actions = SelectedSettler.getInstance().getActions();
     	
 		for (String action : actions) {
 			JButton button = actionButtons.get(action);
 			button.setVisible(true);
 		}
+		showButton.setVisible(true);
     }
 
     public void update() {

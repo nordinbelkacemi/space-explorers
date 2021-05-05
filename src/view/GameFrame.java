@@ -8,8 +8,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controllers.Game;
-import controllers.SelectedSettler;
+import controller.Game;
+import controller.SelectedSettler;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
@@ -76,7 +76,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     }
 
     public void asteroidSelected(){
-        /* TODO GameFrame.AsteroidSelected */
+        asteroidPanel.update();
     }
 
     public void settlerPerformedAction(){
@@ -93,5 +93,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		settlerPanel.update();
 		teamPanel.update();
 		spacePanel.update();
+		fieldPanel.update();
+        asteroidPanel.update();
 	}
 }

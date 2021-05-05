@@ -13,8 +13,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 
-import controllers.Game;
-import controllers.SelectedSettler;
+import controller.Game;
+import controller.SelectedSettler;
 import model.playfield.AsteroidField;
 import model.playfield.Coordinate;
 import model.playfield.SolarSystem;

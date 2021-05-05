@@ -3,7 +3,7 @@ package view.actionbuttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controllers.SelectedSettler;
+import controller.SelectedSettler;
 import view.GameButton;
 
 public class PutBackIceButton extends GameButton {

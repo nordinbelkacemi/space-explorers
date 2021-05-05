@@ -1,7 +1,7 @@
 import javax.swing.SwingUtilities;
 
-import controllers.Game;
-import controllers.SelectedSettler;
+import controller.Game;
+import controller.SelectedSettler;
 import view.GameFrame;
 
 public class Program {

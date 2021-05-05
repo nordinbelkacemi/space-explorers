@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import controllers.Game;
+import controller.Game;
 import model.settler.Settler;
 
 public class TeamPanel extends GamePanel {
