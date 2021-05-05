@@ -46,9 +46,11 @@ public class TeamPanel extends GamePanel {
 				if (y < 125 && y > 50 && x < startX + 575 && x > startX) {
 					x -= startX;
 					x /= 96;
-					Settler settler = selectableSettlers.get(x);
-					if (x < selectableSettlers.size() && settler != null)
-						Game.getInstance().selectSettler(settler.getId());
+					if (x < selectableSettlers.size()) {
+						Settler settler = selectableSettlers.get(x);
+						if(settler != null)
+							Game.getInstance().selectSettler(settler.getId());
+					}
 				}
 			}
 		});

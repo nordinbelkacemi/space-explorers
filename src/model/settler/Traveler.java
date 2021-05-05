@@ -3,6 +3,7 @@ package model.settler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import controller.Game;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
@@ -66,6 +67,7 @@ public abstract class Traveler {
 	 */
 	public void reactToFlare(Iterator<Traveler> travelerIter) {
 		this.travelerIter = travelerIter;
+		Game.getInstance().log(toString() + " died");
 		die();
 	}
 

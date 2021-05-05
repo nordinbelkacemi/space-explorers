@@ -2,6 +2,8 @@ package model.playfield;
 
 import java.util.Random;
 
+import controller.Game;
+
 /**
  * Tőle függ, hogy melyik aszteroidamezők vannak napközelben,
  * valamint a napkitöréseket is ez az osztály indítja el.
@@ -29,11 +31,12 @@ public class Sun extends Hexagon {
 	 * @return 1 ha történt napkitörés, 0 ha nem.
 	 */
 	public void performAction() {
+		move();
 		dir = null;
 		if (r.nextInt(5) == 1) {
+			Game.getInstance().log("Solar flare happened this turn.");
 			startFlare();
 		}
-		move();
 	}
 	
 	/**
