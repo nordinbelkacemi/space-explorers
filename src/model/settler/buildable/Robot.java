@@ -18,6 +18,8 @@ import model.settler.Traveler;
  */
 public class Robot extends Traveler implements Buildable, Driller {
 
+	private static int idCount = 0;
+	
 	/**
 	 * A robotot irányító mesterséges intelligencia.
 	 */
@@ -34,6 +36,7 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	public Robot(Asteroid a) {
 		super(a);
+		id = idCount++;
 		ai.addRobot(this);
 	}
 	
