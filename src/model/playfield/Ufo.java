@@ -73,6 +73,6 @@ public class Ufo extends Traveler implements Miner {
 	
 	@Override
 	public String toString() {
-		return "Ufo";
+		return "ufo";
 	}
 }

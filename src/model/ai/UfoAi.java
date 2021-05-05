@@ -26,7 +26,7 @@ public class UfoAi implements Ai {
 	public UfoAi(List<AsteroidField> b) {
 		Ufo.setAi(this);
 		ufos = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			ufos.add(new Ufo(b.get(r.nextInt(42)).getAsteroids().get(0)));
 		}
 	}

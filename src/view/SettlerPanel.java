@@ -157,7 +157,7 @@ public class SettlerPanel extends GamePanel {
 		}
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLER", 10, 30);
-		
+
     	if (settler != null) {
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 	    	g.drawString("Can do:", 10, getSize().height/2+50);
