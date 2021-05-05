@@ -109,4 +109,5 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		logPanel.log(message);
 		logPanel.update();
 	}
+	  
 }
