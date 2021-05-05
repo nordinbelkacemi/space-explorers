@@ -32,7 +32,7 @@ public class AsteroidPanel extends GamePanel{
 		"res/uranium.png",
 		"res/iron.png"
 	));
-	private int ice = 0, coal = 1, uranium = 2, iron = 3, dildo = 4;
+	private int ice = 0, coal = 1, uranium = 2, iron = 3;
 
 	private List<BufferedImage> travelerIcons = new ArrayList<>();
 	private ArrayList<String> travelerIconPaths = new ArrayList<>(Arrays.asList(
@@ -42,9 +42,10 @@ public class AsteroidPanel extends GamePanel{
 		"res/yellowicon.png",
 		"res/purpleicon.png",
 		"res/orangeicon.png",
-		"res/roboticon,png",
+		"res/roboticon.png",
 		"res/ufoicon.png"
 	));
+	int robot = 6, ufo = 7;
 
     public AsteroidPanel() {
     	super(new Dimension(250,300));
@@ -107,6 +108,23 @@ public class AsteroidPanel extends GamePanel{
 		List<Traveler> travelers = asteroid.getTravelers();
 		for (Traveler traveler : travelers) {
 			String identifier = traveler.toString();
+			int x = 15 + 55 * (i % 4);
+			int y = 150 + i / 4 * 55;
+			switch (identifier) {
+				case "settler":
+					int settlerId = traveler.getId();
+					g.drawImage(travelerIcons.get(settlerId - 1), x, y, null);
+					break;
+				case "robot":
+					g.drawImage(travelerIcons.get(robot), x, y, null);
+					break;
+				case "ufo":
+					g.drawImage(travelerIcons.get(ufo), x, y, null);
+					break;
+				default:
+
+			}
+			i += 1;
 		}
 	}
 }

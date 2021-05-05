@@ -70,7 +70,7 @@ public class Settler extends Traveler implements Miner, Driller {
 	 */
 	@Override
     public String toString() {
-        return "Settler";
+        return "settler";
     }
 
     /**
