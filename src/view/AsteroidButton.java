@@ -3,7 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controllers.Game;
+import controller.Game;
 
 public class AsteroidButton extends GameButton {
 	int index;

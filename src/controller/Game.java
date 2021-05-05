@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,6 +88,7 @@ public class Game {
 	 */
 	public void selectField(int n) {
 		selectedField = solarSystem.getBelt().get(n);
+		selectedAsteroid = null;
 		gui.fieldSelected();
 	}
 
@@ -98,7 +99,8 @@ public class Game {
 	 * @param n A kiválasztott AsteroidField sorszáma
 	 */
 	public void selectAsteroid(int n) {
-		/* TODO Game.selectField */
+		selectedAsteroid = selectedField.getAsteroids().get(n);
+		gui.asteroidSelected();
 	}
 
 	public void log(String message) {
@@ -108,9 +110,11 @@ public class Game {
 	public void endTurn() {
 		SelectedSettler.getInstance().set(null);
 		resetSelectableSettlers();
+		selectedField = null;
+		selectedAsteroid = null;
 		gui.turnEnded();
 		
-		sun.performAction(); // csak a 
+		sun.performAction(); // csak a gui miatt maugy a stepben lesz
 	}
 
 	public void checkTurnEnd() {
