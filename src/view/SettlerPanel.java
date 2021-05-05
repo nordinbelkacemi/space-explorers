@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,9 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 import controller.Game;
 import controller.SelectedSettler;
@@ -43,6 +40,17 @@ public class SettlerPanel extends GamePanel {
 		"res/purplebig.png",
 		"res/orangebig.png"
 	));
+
+	private List<BufferedImage> materialImages = new ArrayList<>();
+	private List<String> materialImagePaths = new ArrayList<>(Arrays.asList(
+		"res/icesmall.png",
+		"res/coalsmall.png",
+		"res/uraniumsmall.png",
+		"res/ironsmall.png"
+	));
+
+	private int ice = 0, coal = 1, uranium = 2, iron = 3;
+
 	/** amit lehet csinalni eppen */
 	private List<String> actions;
 
@@ -55,6 +63,7 @@ public class SettlerPanel extends GamePanel {
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
+		loadImages(materialImages, materialImagePaths);
 		initButtons();
 		allActions = new ArrayList<>(Arrays.asList(
 			"move",
@@ -148,15 +157,23 @@ public class SettlerPanel extends GamePanel {
 		}
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLER", 10, 30);
+		
     	if (settler != null) {
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 	    	g.drawString("Can do:", 10, getSize().height/2+50);
 	    	g.drawString("Inventory:", 10, 280);
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
-	    	g.drawString(settler.getIceCount() + " ice", 15, 300);
-	    	g.drawString(settler.getCoalCount() + " coal", 15, 320);
-	    	g.drawString(settler.getIronCount() + " iron", 15, 340);
-	    	g.drawString(settler.getUraniumCount() + " uranium", 15, 360);
+
+			g.drawImage(materialImages.get(ice), 15, 300, null);
+			g.drawImage(materialImages.get(coal), 15, 325, null);
+			g.drawImage(materialImages.get(uranium), 15, 350, null);
+			g.drawImage(materialImages.get(iron), 15, 375, null);
+
+	    	g.drawString("x" + settler.getIceCount(), 40, 315);
+	    	g.drawString("x" + settler.getCoalCount(), 40, 340);
+	    	g.drawString("x" + settler.getUraniumCount(), 40, 365);
+	    	g.drawString("x" + settler.getIronCount(), 40, 390);
+
 			int id = settler.getId();
 			g.drawImage(settlerImages.get(id - 1), 100, 50, null);
 		}

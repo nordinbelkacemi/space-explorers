@@ -40,7 +40,8 @@ public class Uranium extends Material {
 	 */
     @Override
     public String toString() {
-        return "uranium " + exposureCount + " ";
+        // return "uranium " + exposureCount;
+		return "uranium";
     }
     
     ////////////////////////////////// test

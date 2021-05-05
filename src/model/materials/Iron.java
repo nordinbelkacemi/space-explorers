@@ -20,7 +20,7 @@ public class Iron extends Material {
 	 */
     @Override
     public String toString() {
-        return "iron ";
+        return "iron";
     }
 
 }
