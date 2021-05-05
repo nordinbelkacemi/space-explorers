@@ -96,8 +96,4 @@ public abstract class Traveler {
 	protected void die() {
 		asteroid.removeTraveler(travelerIter);
 	}
-
-	protected String getTravelerInfo() {
-		return new String("");
-	}
 }

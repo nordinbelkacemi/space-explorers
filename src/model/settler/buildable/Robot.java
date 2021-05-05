@@ -51,7 +51,7 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 */
 	@Override
 	public String toString() {
-		return "Robot";
+		return "robot";
 	}
 
 	/**
@@ -113,11 +113,5 @@ public class Robot extends Traveler implements Buildable, Driller {
 		super.reactToFlare(travelerIter);
 		ai.remove(travelerIter);
 		// ai.remove(this);
-	}
-
-	@Override
-	protected String getTravelerInfo() {
-		int robotNum = ai.getRobots().indexOf(this) + 1;
-		return "robot " + robotNum;
 	}
 }

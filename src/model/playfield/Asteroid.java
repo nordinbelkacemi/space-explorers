@@ -184,4 +184,8 @@ public class Asteroid {
 	public Material getMaterial() {
 		return material;
 	}
+
+	public List<Traveler> getTravelers() {
+		return travelers;
+	}
 }
