@@ -42,15 +42,12 @@ public class Game {
 	private int selectedTeleportgatePair;
 
 	private Game() {
-		/* TODO Game.ctor where/how to set gui ? */ // itt csak azokat kell setelni amiket a gui lekérhet
-
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
 		settlerTeam = new SettlerTeam(solarSystem.getBelt());
 		robotAi = new RobotAi();
 		ufoAi = new UfoAi(solarSystem.getBelt());
 		megkergultGates = new MegkergultGates();
-
 		selectableSettlers = new ArrayList<Settler>();
 		initSelectableSettlers();
 	}
@@ -59,6 +56,11 @@ public class Game {
 		return instance;
 	}
 
+	
+	public void startGame() {
+		log("GAME STARTED 🚀 Hello There!\n");		
+	}
+	
 	/**
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo
 	 * telepesre
@@ -104,7 +106,7 @@ public class Game {
 	}
 
 	public void log(String message) {
-		/* TODO Game.log */
+		gui.log(message);
 	}
 
 	public void endTurn() {
@@ -113,7 +115,7 @@ public class Game {
 		selectedField = null;
 		selectedAsteroid = null;
 		gui.turnEnded();
-		
+		gui.log("NEW TURN\n");
 		sun.performAction(); // csak a gui miatt maugy a stepben lesz
 	}
 
@@ -178,10 +180,6 @@ public class Game {
 
 
 
-	// /** A játékot elindító függvény */
-	// public void start() {
-	// 
-	// }
 
 	// public void resetChoosableSettlers() {
 	// 	choosableSettlers.clear();

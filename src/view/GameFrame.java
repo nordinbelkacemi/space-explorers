@@ -3,7 +3,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +29,15 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		SelectedSettler.getInstance().setGui(this);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	setTitle("SPACE EXPLORERS");
+    	
+    	Image img = null;
+		try {
+			img = ImageIO.read(new File("res/icon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setIconImage(img);
+    	
     	setExtendedState(JFrame.MAXIMIZED_BOTH); 
     	setMinimumSize(new Dimension(1200,800));
     	
@@ -60,9 +73,9 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		eastPanel.add(asteroidPanel);
 		eastPanel.setVisible(true);
 		add(eastPanel,BorderLayout.LINE_END);
-	
 		pack();
 		setVisible(true);
+		Game.getInstance().startGame();
 	}
 
 	public void settlerSelected(){
@@ -84,16 +97,16 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		teamPanel.update();
     }
 
-    public void log(){
-        /* TODO GameFrame.log */
-    }
-
-	@Override
 	public void turnEnded() {
 		settlerPanel.update();
 		teamPanel.update();
 		spacePanel.update();
 		fieldPanel.update();
         asteroidPanel.update();
+	}
+
+	public void log(String message) {
+		logPanel.log(message);
+		logPanel.update();
 	}
 }

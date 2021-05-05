@@ -6,5 +6,5 @@ public interface SpaceExplorersGui {
     public void asteroidSelected();
     public void settlerPerformedAction();
     public void turnEnded();
-    public void log();
+    public void log(String message);
 }
