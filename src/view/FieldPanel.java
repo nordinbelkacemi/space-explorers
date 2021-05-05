@@ -17,7 +17,7 @@ public class FieldPanel extends GamePanel {
     private List<AsteroidButton> asteroidButtons = new ArrayList<>();
     private List<JLabel> teleportGates;
     private AsteroidField field;
-    private String index;
+    private int index;
 
     public FieldPanel() {
     	super(new Dimension(250,300));
@@ -58,7 +58,7 @@ public class FieldPanel extends GamePanel {
     public void update() {
         field = Game.getInstance().getSelectedField();
         if (field != null) {
-            index = String.valueOf(Game.getInstance().getSolarSystem().getBelt().indexOf(field));
+            index = Game.getInstance().getSolarSystem().getBelt().indexOf(field);
         }
     	clearButtons();
         repaint();
@@ -71,7 +71,7 @@ public class FieldPanel extends GamePanel {
     	if(field != null) {
     		placeButtons();
     		updateAsteroidButtons();
-    		g.drawString(index, getSize().width-100, 30);
+    		g.drawString("" + index, getSize().width-100, 30);
     	}
 	}
 }

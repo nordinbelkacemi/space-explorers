@@ -17,6 +17,8 @@ public class Sun extends Hexagon {
 	
 	private int coordCounter = 0;
 	
+	private Coordinate dir;
+	
 	public Sun() {
 		position = new Coordinate(2, 0);
 	}
@@ -27,6 +29,7 @@ public class Sun extends Hexagon {
 	 * @return 1 ha történt napkitörés, 0 ha nem.
 	 */
 	public void performAction() {
+		dir = null;
 		if (r.nextInt(5) == 1) {
 			startFlare();
 		}
@@ -37,7 +40,6 @@ public class Sun extends Hexagon {
 	 * Elindítja a napvihart.
 	 */
 	private void startFlare() {
-		Coordinate dir;
 		switch (r.nextInt(6)) {
 			case 0: dir = new Coordinate(0, 1);		break;
 			case 1: dir = new Coordinate(1, 0);		break;
@@ -85,6 +87,10 @@ public class Sun extends Hexagon {
 	@Override
 	public String toString() {
 		return position.toString();
+	}
+
+	public Coordinate getFlareDir() {
+		return dir;
 	}
 	
 }
