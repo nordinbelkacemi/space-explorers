@@ -1,21 +1,47 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 
-import javax.swing.BorderFactory;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class LogPanel extends GamePanel {
 
-    private JTextField log;
+	private JTextArea text;
+    private JScrollPane log;
 
     public LogPanel() {
-    	super(new Dimension(300,150));
+    	super(new Dimension(300,200));
+    	text = new JTextArea();
+    	text.setLineWrap(true);
+    	text.setBackground(getBackground());
+    	text.setForeground(getForeground());
+    	log = new JScrollPane(text);
+    	add(log);
 		setVisible(true);
+    }
+    
+    private void updateSize() {
+    	log.setLocation(0, 40);
+    	log.setSize(getWidth(), getHeight()-40);
+    	text.setMinimumSize(log.getSize());
+    }
+    
+    public void log(String s) {
+    	text.append(s);
     }
 
     public void update() {
-        /* TODO LogPanel.update */
+        repaint();
+    }
+    
+    @Override
+    public void paint(Graphics g) {
+    	super.paint(g);
+    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
+    	g.drawString("LOG", 10, 30);
+    	updateSize();
     }
 }
