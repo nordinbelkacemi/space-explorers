@@ -137,7 +137,7 @@ public class SelectedSettler {
     }
 
     public void buildRobot() {
-        Robot r = new Robot(settler.getAsteroid());
+        Robot r = new Robot();
         settler.build(r);
     	performAction();
     }

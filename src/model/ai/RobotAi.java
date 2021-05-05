@@ -63,14 +63,7 @@ public class RobotAi implements Ai {
 		}
 	}
   
-  public List<Robot> getRobots() {
+	public List<Robot> getRobots() {
 		return robots;
-	}
-	
-	///////////////////////////////////////// test
-	public void addRobot(String s,List<AsteroidField> belt) {
-		String[] asteroid = s.split(",");
-		robots.add(new Robot(belt.get(Integer.parseInt(asteroid[0])).getAsteroids().get(Integer.parseInt(asteroid[1]))));
-  }
-	
+	}	
 }
