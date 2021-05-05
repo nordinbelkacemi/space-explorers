@@ -89,19 +89,19 @@ public class SolarSystem {
 		for (AsteroidField field : asteroidBelt) {
 			Coordinate f = field.getCo();
 			
-			if(d.getX() == 0) {
+			if(d.getX() == 0 && s.getX() == f.getX()) {
 				int b = (f.getY() - s.getY()) / d.getY();
 				if (b > 0) {
 					field.reactToFlare();
 				}
 			}
-			else if(d.getY() == 0) {
+			else if(d.getY() == 0 && s.getY() == f.getY()) {
 				int a = (f.getX() - s.getX()) / d.getX();
 				if (a > 0) {
 					field.reactToFlare();
 				}
 			}
-			else {
+			else if(d.getX() != 0 && d.getY() != 0){
 				int a = (f.getX() - s.getX()) / d.getX();
 				int b = (f.getY() - s.getY()) / d.getY();
 				if (a > 0 && a == b) {
