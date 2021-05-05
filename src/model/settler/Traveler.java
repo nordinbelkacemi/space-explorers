@@ -6,6 +6,7 @@ import java.util.Iterator;
 import controller.Game;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
+import model.playfield.Coordinate;
 
 /**
  * Absztrakt ősosztály.
@@ -14,6 +15,8 @@ import model.playfield.AsteroidField;
  */
 public abstract class Traveler {
 
+    protected int id;
+    
 	/**
 	 * Az aszteroida, amelyen a Traveler jelenleg tartózkodik.
 	 */
@@ -67,7 +70,6 @@ public abstract class Traveler {
 	 */
 	public void reactToFlare(Iterator<Traveler> travelerIter) {
 		this.travelerIter = travelerIter;
-		Game.getInstance().log(toString() + " died");
 		die();
 	}
 
@@ -95,5 +97,15 @@ public abstract class Traveler {
 	 */
 	protected void die() {
 		asteroid.removeTraveler(travelerIter);
+		Coordinate i = asteroid.getIndexes();
+		Game.getInstance().log(toString() + " " + getId() + " died at field " + i.getX() + " asteroid " + i.getY());
 	}
+
+	protected String getTravelerInfo() {
+		return new String("");
+	}
+	
+    public int getId() {
+        return id;
+    }
 }

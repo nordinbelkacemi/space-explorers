@@ -6,6 +6,8 @@ import java.util.List;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.settler.Settler;
+import model.settler.buildable.Robot;
+import model.settler.buildable.TeleportGatePair;
 import view.GameFrame;
 import view.SpaceExplorersGui;
 
@@ -124,10 +126,8 @@ public class SelectedSettler {
     	performAction();
     }
 
-    public void buildTeleportGate() {
-        /* TODO SelectedSettler.buildTeleportGate */
-        
-        // settler.build(new TeleportGatePair());
+    public void buildTeleportGate() {        
+        settler.build(new TeleportGatePair());
     	performAction();
     }
 
@@ -137,38 +137,28 @@ public class SelectedSettler {
     }
 
     public void buildRobot() {
-        /* TODO SelectedSettler.buildRobot */
-        
-        // Robot r = new Robot(settler.getAsteroid());
-        // settler.build(r);
+        Robot r = new Robot(settler.getAsteroid());
+        settler.build(r);
     	performAction();
     }
 
     public void putIronBack() {
-        /* TODO SelectedSettler.putIronBack */
-
-        // settler.putIronBack();
+        settler.putIronBack();
     	performAction();
     }
 
     public void putCoalBack() {
-        /* TODO SelectedSettler.putCoalBack */
-
-        // settler.putCoalBack();
+        settler.putCoalBack();
     	performAction();
     }
 
     public void putUraniumBack() {
-        /* TODO SelectedSettler.move */
-
-        // settler.putUraniumBack();
+        settler.putUraniumBack();
     	performAction();
     }
 
     public void putIceBack() {
-        /* TODO SelectedSettler.putIceBack */
-
-        // settler.putIceBack();
+        settler.putIceBack();
     	performAction();
     }
     

@@ -36,15 +36,14 @@ public class LogPanel extends GamePanel {
     }
 
     public void update() {
-    	updateSize();
         repaint();
     }
     
     @Override
     public void paint(Graphics g) {
+    	updateSize();
     	super.paint(g);
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("LOG", 10, 30);
-    	updateSize();
     }
 }
