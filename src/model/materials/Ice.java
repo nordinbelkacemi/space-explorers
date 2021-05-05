@@ -30,6 +30,6 @@ public class Ice extends Material {
 	 */
     @Override
     public String toString() {
-        return "ice ";
+        return "ice";
     }
 }

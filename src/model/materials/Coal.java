@@ -20,6 +20,6 @@ public class Coal extends Material {
 	 */
     @Override
     public String toString() {
-    	return "coal ";
+    	return "coal";
     }
 }
