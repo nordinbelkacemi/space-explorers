@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -29,6 +31,7 @@ public class SpacePanel extends GamePanel {
     private BufferedImage hexagonImg;
     private BufferedImage hexagon2Img;
     private List<AsteroidField> belt;
+    
     public SpacePanel() {
     	super(null);
     	try {
@@ -71,8 +74,7 @@ public class SpacePanel extends GamePanel {
         repaint();
     }
     
-    public void paint(Graphics g) {
-    	super.paint(g);
+    private void paintNeighbours(Graphics g) {
     	Settler settler = SelectedSettler.getInstance().getSelectedSettler();
     	if(settler != null) {
     		List<AsteroidField> neighbours = settler.getNeighbours();
@@ -86,10 +88,10 @@ public class SpacePanel extends GamePanel {
     				g.drawImage(hexagon2Img,x,y,null);
     		}
     	}
-    	
+    }
+    
+    private void paintFields(Graphics g) {
     	Coordinate sunCo = solarSystem.getSun().getCo();
-    	//double SX = sunCo.getX() + sunCo.getY() / 2.0f;
-		//double SY = sunCo.getY() * Math.sqrt(3) / 2.0f;
     	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25)-20;
 		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25) -20;
 		g.drawImage(sunImg,sx,sy,null);
@@ -97,8 +99,6 @@ public class SpacePanel extends GamePanel {
 			Coordinate co = field.getCo();
 			int x = (getSize().width/2 + co.getX()*50+co.getY()*25)-20;
 			int y = (int) (getSize().height/2 - co.getY()*Math.sqrt(3)*25) -20;
-			//double X = co.getX() + co.getY() / 2.0f;
-			//double Y = co.getY() * Math.sqrt(3) / 2.0f;
 			int diffX = sunCo.getX() - co.getX();
 			int diffY = sunCo.getY() - co.getY();
 			if (Math.abs(diffX) <= 2 && Math.abs(diffY) <= 2 && Math.abs(diffX + diffY) <= 2) {
@@ -106,6 +106,35 @@ public class SpacePanel extends GamePanel {
 				}
 			else
 				g.drawImage(fieldImg,x,y,null);
-		}    	
+		} 
+    }
+    
+    
+    private Coordinate pre = null;
+    
+    private void paintSolarFlair(Graphics g) {
+    	Coordinate flare = solarSystem.getSun().getFlareDir();
+    	if(flare == null)
+    		pre = null;
+    	else if(flare != pre) {
+    		Coordinate sunCo = solarSystem.getSun().getCo();
+        	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25);
+    		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25);
+    		int fx =  flare.getX()*50+flare.getY()*25;
+    		int fy =  (int) (flare.getY()*Math.sqrt(3)*25);
+    		g.setColor(Color.yellow);
+    		Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(10));
+    		g2.drawLine(sx+fx/2, sy+fy/2, sx+fx*20, sy+fy*20);
+    		
+    		pre = flare;
+    	}
+    }
+    
+    public void paint(Graphics g) {
+    	super.paint(g);
+    	paintNeighbours(g);
+    	paintFields(g);
+    	paintSolarFlair(g);
 	}
 }

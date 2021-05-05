@@ -15,6 +15,7 @@ public class LogPanel extends GamePanel {
     public LogPanel() {
     	super(new Dimension(300,200));
     	text = new JTextArea();
+    	text.setEditable(false);
     	text.setLineWrap(true);
     	text.setBackground(getBackground());
     	text.setForeground(getForeground());
@@ -27,6 +28,7 @@ public class LogPanel extends GamePanel {
     	log.setLocation(0, 40);
     	log.setSize(getWidth(), getHeight()-40);
     	text.setMinimumSize(log.getSize());
+    	text.setCaretPosition(text.getDocument().getLength());
     }
     
     public void log(String s) {
@@ -34,6 +36,7 @@ public class LogPanel extends GamePanel {
     }
 
     public void update() {
+    	updateSize();
         repaint();
     }
     

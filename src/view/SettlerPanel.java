@@ -33,7 +33,6 @@ import view.actionbuttons.PutBackIronButton;
 import view.actionbuttons.PutBackUraniumButton;
 
 public class SettlerPanel extends GamePanel {
-    private List<JLabel> inventory;
     private Settler settler;
     private List<BufferedImage> settlerImages = new ArrayList<>();
 	private ArrayList<String> settlerImagePaths = new ArrayList<>(Arrays.asList(
@@ -114,13 +113,13 @@ public class SettlerPanel extends GamePanel {
     
     private void placeButtons() {
     	for (int i = 0; i < 3; i++) {
-			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 30);
+			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 60);
 		}
     	for (int i = 3; i < 6; i++) {
-    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2+ 80 + (i-3)*40);
+    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-3)*35 + 110);
 		}
     	for (int i = 6; i < 10; i++) {
-    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2+ 210 + (i-6)*40);
+    		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-6)*35 + 240);
 		}
 		showButton.setLocation(15,220);
     }
@@ -149,9 +148,15 @@ public class SettlerPanel extends GamePanel {
 		}
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLER", 10, 30);
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
-    	g.drawString("Can do:", 10, getSize().height/2);
-		if (settler != null) {
+    	if (settler != null) {
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
+	    	g.drawString("Can do:", 10, getSize().height/2+50);
+	    	g.drawString("Inventory:", 10, 280);
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
+	    	g.drawString(settler.getIceCount() + " ice", 15, 300);
+	    	g.drawString(settler.getCoalCount() + " coal", 15, 320);
+	    	g.drawString(settler.getIronCount() + " iron", 15, 340);
+	    	g.drawString(settler.getUraniumCount() + " uranium", 15, 360);
 			int id = settler.getId();
 			g.drawImage(settlerImages.get(id - 1), 100, 50, null);
 		}

@@ -117,13 +117,11 @@ public class SolarSystem {
 	 */
 	public void updateDangerZone() {
 		Coordinate sunCo = sun.getCo();
-		double SX = sunCo.getX() + sunCo.getY() / 2.0f;
-		double SY = sunCo.getY() * Math.sqrt(3) / 2.0f;
 		for (AsteroidField field : asteroidBelt) {
 			Coordinate co = field.getCo();
-			double X = co.getX() + co.getY() / 2.0f;
-			double Y = co.getY() * Math.sqrt(3) / 2.0f;
-			if (Math.pow(SX - X,2) + Math.pow(SY - Y,2) <= 4)
+			int diffX = sunCo.getX() - co.getX();
+			int diffY = sunCo.getY() - co.getY();
+			if (Math.abs(diffX) <= 2 && Math.abs(diffY) <= 2 && Math.abs(diffX + diffY) <= 2)
 				field.checkDangers();
 		}
 
@@ -171,7 +169,7 @@ public class SolarSystem {
 		return asteroidBelt;
 	}
 
-	public Hexagon getSun() {
+	public Sun getSun() {
 		return sun;
 	}
 }

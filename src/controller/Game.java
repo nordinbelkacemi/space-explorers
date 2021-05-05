@@ -58,7 +58,7 @@ public class Game {
 
 	
 	public void startGame() {
-		log("GAME STARTED 🚀 Hello There!\n");		
+		log("GAME STARTED 🚀  Hello There!\n");		
 	}
 	
 	/**
@@ -106,17 +106,17 @@ public class Game {
 	}
 
 	public void log(String message) {
-		gui.log(message);
+		gui.log(message + "\n");
 	}
 
 	public void endTurn() {
+		sun.performAction();// csak a gui miatt maugy a stepben lesz
 		SelectedSettler.getInstance().set(null);
 		resetSelectableSettlers();
 		selectedField = null;
 		selectedAsteroid = null;
 		gui.turnEnded();
-		gui.log("NEW TURN\n");
-		sun.performAction(); // csak a gui miatt maugy a stepben lesz
+		log("\nNEW TURN");
 	}
 
 	public void checkTurnEnd() {

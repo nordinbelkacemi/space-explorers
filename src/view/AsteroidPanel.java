@@ -18,6 +18,7 @@ public class AsteroidPanel extends GamePanel{
     private JLabel core;
     private List<JLabel> travelerLabels;
     private Asteroid asteroid;
+    private int index;
 
     public AsteroidPanel() {
     	super(new Dimension(250,300));
@@ -26,6 +27,9 @@ public class AsteroidPanel extends GamePanel{
 
     public void update() {
         asteroid = Game.getInstance().getSelectedAsteroid();
+        if (asteroid != null) {
+            index = Game.getInstance().getSelectedField().getAsteroids().indexOf(asteroid);
+        }
         repaint();
     }
     
@@ -34,6 +38,7 @@ public class AsteroidPanel extends GamePanel{
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("ASTEROID", 10, 30);
     	if(asteroid != null) {
+    		g.drawString("" + index, getSize().width-50, 30);
     		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
     		if(asteroid.getMaterial() != null) {
     			g.drawString("Core: " + asteroid.getMaterial().toString(), 15, 70);

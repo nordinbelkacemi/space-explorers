@@ -85,18 +85,42 @@ public class SelectedSettler {
         Game.getInstance().checkTurnEnd();
         gui.settlerPerformedAction();
     }
-
-    public void mine() {
-        /* TODO SelectedSettler.mine */
-        
-        // settler.mine();
+    
+    public void move() {
+    	Asteroid asteroid = Game.getInstance().getSelectedAsteroid();
+    	Asteroid currentAsteroid = settler.getAsteroid();
+    	if(asteroid != null) {
+    		if(asteroid != currentAsteroid) {
+    			List<AsteroidField> neighbors = currentAsteroid.getNeighbours();
+        		boolean isNeighbour = false;
+         	 	for (AsteroidField field : neighbors) {
+         	 		if(field.getAsteroids().contains(asteroid)) {
+         	 			isNeighbour = true;
+         	 			break;
+         	 		}
+         	 	}
+        		if(isNeighbour) {
+        			settler.move(asteroid);
+        	    	performAction();
+        		}
+        		else
+        			Game.getInstance().log("Are you blind? You cannot go there man... Choose one of your neighbours!");
+    		}
+    		else
+    			Game.getInstance().log("What a lazy man. You standing right there. Choose an other!");
+    		
+    	}
+    	else
+    		Game.getInstance().log("Please choose an asteroid... idiot.");
+    }
+    
+    public void drill() {
+        settler.drill();
     	performAction();
     }
-
-    public void drill() {
-        /* TODO SelectedSettler.drill */
-        
-        // settler.drill();
+    
+    public void mine() {        
+        settler.mine();
     	performAction();
     }
 
@@ -117,13 +141,6 @@ public class SelectedSettler {
         
         // Robot r = new Robot(settler.getAsteroid());
         // settler.build(r);
-    	performAction();
-    }
-
-    public void move() {
-        /* TODO SelectedSettler.move */
-
-        // settler.move(Game.getInstance().getSelectedAsteroid())
     	performAction();
     }
 
