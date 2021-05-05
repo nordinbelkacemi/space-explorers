@@ -34,10 +34,8 @@ public class Robot extends Traveler implements Buildable, Driller {
 	 * Konstruktor.
 	 * @param a az aszteroida, amelyiken megépül a robot
 	 */
-	public Robot(Asteroid a) {
-		super(a);
+	public Robot() {
 		id = idCount++;
-		ai.addRobot(this);
 	}
 	
 	/**
