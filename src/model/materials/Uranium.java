@@ -1,5 +1,7 @@
 package model.materials;
 
+import java.util.Random;
+
 import model.playfield.Asteroid;
 import model.settler.Settler;
 
@@ -21,7 +23,10 @@ public class Uranium extends Material {
 	 */
     @Override
     public void reactToSun(Asteroid a) {
-    	a.explode();
+		exposureCount += 1;
+		if (exposureCount == instability) {
+    		a.explode();
+		}
     }
     
     public Uranium() {}
@@ -40,8 +45,7 @@ public class Uranium extends Material {
 	 */
     @Override
     public String toString() {
-        // return "uranium " + exposureCount;
-		return "uranium";
+        return "uranium" + " " + exposureCount;
     }
     
     ////////////////////////////////// test
