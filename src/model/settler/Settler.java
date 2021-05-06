@@ -119,7 +119,7 @@ public class Settler extends Traveler implements Miner, Driller {
     	AsteroidField af = this.asteroid.getAsteroidField();
     	tg.setAsteroidField(af);
     	af.addTeleportGate(tg);
-    	if (teleportGatePairs.get(index).getGates().size() == 0) {
+    	if (teleportGatePairs.get(index).getGates().isEmpty()) {
     		TeleportGate firstTg = tg.getOtherGate();
     		AsteroidField firstAf = firstTg.getAsteroidField();
     		af.addNeighbour(firstAf);

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import model.ai.RobotAi;
@@ -16,7 +15,7 @@ import model.settler.SettlerTeam;
 import view.GameFrame;
 import view.SpaceExplorersGui;
 
-public class Game {
+public final class Game {
 	private static Game instance = new Game();
 	private SpaceExplorersGui gui;
 

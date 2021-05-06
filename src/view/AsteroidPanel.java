@@ -1,21 +1,17 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import controller.Game;
 import model.materials.Material;
-import model.materials.Uranium;
 import model.playfield.Asteroid;
 import model.settler.Traveler;
 
