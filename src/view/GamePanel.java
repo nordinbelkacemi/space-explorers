@@ -33,6 +33,7 @@ public abstract class GamePanel extends JPanel implements Updatable {
             try {
                 InputStream in = new FileInputStream(path);
                 images.add(ImageIO.read(in));
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
