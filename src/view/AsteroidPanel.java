@@ -14,6 +14,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import controller.Game;
+import model.materials.Material;
+import model.materials.Uranium;
 import model.playfield.Asteroid;
 import model.settler.Traveler;
 
@@ -30,9 +32,11 @@ public class AsteroidPanel extends GamePanel{
 		"res/ice.png",
 		"res/coal.png",
 		"res/uranium.png",
+		"res/uranium1.png",
+		"res/uranium2.png",
 		"res/iron.png"
 	));
-	private int ice = 0, coal = 1, uranium = 2, iron = 3;
+	private int ice = 0, coal = 1, uranium = 2, uranium1 = 3, uranium2 = 4, iron = 5;
 
 	private List<BufferedImage> travelerIcons = new ArrayList<>();
 	private ArrayList<String> travelerIconPaths = new ArrayList<>(Arrays.asList(
@@ -77,10 +81,10 @@ public class AsteroidPanel extends GamePanel{
 
 	private void displayMaterialInfo(Graphics g) {
 		if (asteroid.getMaterial() != null) {
-			String material = asteroid.getMaterial().toString();
-			g.drawString("Core: " + material, 15, 70);
+			Material material = asteroid.getMaterial();
+			g.drawString("Core: " + material.toString().split(" ")[0], 15, 70);
 			BufferedImage materialImage = null;
-			switch (material) {
+			switch (material.toString().split(" ")[0]) {
 				case "ice":
 					materialImage = materialImages.get(ice);
 					break;
@@ -88,13 +92,22 @@ public class AsteroidPanel extends GamePanel{
 					materialImage = materialImages.get(coal);
 					break;
 				case "uranium":
-					materialImage = materialImages.get(uranium);
+					String exposureCount = material.toString().split(" ")[1];
+					switch (exposureCount) {
+						case "0":
+							materialImage = materialImages.get(uranium);
+							break;
+						case "1":
+							materialImage = materialImages.get(uranium1);
+							break;
+						case "2":
+							materialImage = materialImages.get(uranium2);
+							break;
+					}
 					break;
 				case "iron":
 					materialImage = materialImages.get(iron);
 					break;
-				default:
-
 			}
 			g.drawImage(materialImage, 150, 50, null);
 		} else {
