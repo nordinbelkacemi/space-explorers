@@ -147,7 +147,7 @@ public class SettlerPanel extends GamePanel {
     		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-6)*35 + 240);
 		}
 		showButton.setLocation(15,220);
-		gateButton.setLocation(160, 330);
+		gateButton.setLocation(160, 340);
     }
     
     private void updateAvailableButtons() {

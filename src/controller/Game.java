@@ -114,8 +114,10 @@ public final class Game {
 		resetSelectableSettlers();
 		selectedField = null;
 		selectedAsteroid = null;
-		gui.turnEnded();
+		
 		log("\nNEW TURN");
+		gui.turnEnded();
+		
 	}
 
 	public void checkTurnEnd() {

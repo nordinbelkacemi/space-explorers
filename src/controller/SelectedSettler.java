@@ -17,7 +17,6 @@ public class SelectedSettler {
     private SpaceExplorersGui gui;
 
     private SelectedSettler(Settler settler) {
-        /* TODO Game.ctor where/how to set gui ? */
         set(settler);
     }
 
