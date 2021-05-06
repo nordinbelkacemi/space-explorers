@@ -107,24 +107,25 @@ public class Settler extends Traveler implements Miner, Driller {
     /**
      * Kitörli a teleportGatePair-ben tárolt kapupárt.
      */
-    public void removeTeleportGatePair(int index) {
-    	teleportGatePairs.remove(index);
+    public void removeTeleportGatePair() {
+    	teleportGatePairs.remove(0);
     }
 
     /**
      * Elhelyez egy teleportkaput azon az AsteroidField-en, amelyen a telepes elhelyezkedik.
      */
-    public void placeTeleportGate(int index) {
-    	TeleportGate tg = teleportGatePairs.get(index).removeTeleportGate();
+    public void placeTeleportGate() {
+    	TeleportGatePair pair = teleportGatePairs.get(0);
+    	TeleportGate tg = pair.removeTeleportGate();
     	AsteroidField af = this.asteroid.getAsteroidField();
     	tg.setAsteroidField(af);
     	af.addTeleportGate(tg);
-    	if (teleportGatePairs.get(index).getGates().size() == 0) {
+    	if (pair.getGates().size() == 0) {
     		TeleportGate firstTg = tg.getOtherGate();
     		AsteroidField firstAf = firstTg.getAsteroidField();
     		af.addNeighbour(firstAf);
     		firstAf.addNeighbour(af);
-    		removeTeleportGatePair(index);
+    		removeTeleportGatePair();
     	}
     }
 
@@ -290,5 +291,9 @@ public class Settler extends Traveler implements Miner, Driller {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public List<TeleportGatePair> getTeleportGatePairs() {
+		return teleportGatePairs;
     }
 }   

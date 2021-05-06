@@ -18,6 +18,7 @@ import controller.SelectedSettler;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.settler.Settler;
+import model.settler.buildable.TeleportGatePair;
 import view.actionbuttons.BuildRobotButton;
 import view.actionbuttons.BuildTeleportGateButton;
 import view.actionbuttons.DrillButton;
@@ -41,15 +42,18 @@ public class SettlerPanel extends GamePanel {
 		"res/orangebig.png"
 	));
 
-	private List<BufferedImage> materialImages = new ArrayList<>();
-	private List<String> materialImagePaths = new ArrayList<>(Arrays.asList(
+	private List<BufferedImage> invetoryImages = new ArrayList<>();
+	private List<String> invetoryImagePaths = new ArrayList<>(Arrays.asList(
 		"res/icesmall.png",
 		"res/coalsmall.png",
 		"res/uraniumsmall.png",
-		"res/ironsmall.png"
+		"res/ironsmall.png",
+		"res/gate.png"
 	));
 
 	private int ice = 0, coal = 1, uranium = 2, iron = 3;
+	
+	private int gate = 4;
 
 	/** amit lehet csinalni eppen */
 	private List<String> actions;
@@ -63,7 +67,7 @@ public class SettlerPanel extends GamePanel {
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
-		loadImages(materialImages, materialImagePaths);
+		loadImages(invetoryImages, invetoryImagePaths);
 		initButtons();
 		allActions = new ArrayList<>(Arrays.asList(
 			"move",
@@ -149,6 +153,23 @@ public class SettlerPanel extends GamePanel {
         repaint();
     }
     
+    private void paintGates(Graphics g) {
+    	if(settler.getNumberofTeleportgatePairs() > 0) {
+    		List<TeleportGatePair> pairs = settler.getTeleportGatePairs();
+    		for (int i = 0; i < pairs.size(); i++) {
+    			int gateCount = pairs.get(0).getGates().size();
+    			if(gateCount == 1) {
+    				g.drawImage(invetoryImages.get(gate), 80, 330, null);
+    			}
+    			if(gateCount == 2) {
+    				g.drawImage(invetoryImages.get(gate), 80, 330, null);
+    				g.drawImage(invetoryImages.get(gate), 150, 330, null);
+    			}
+        		
+			}
+    	}
+    }
+    
     public void paint(Graphics g) {
 		super.paint(g);
 		if(settler != null) {
@@ -162,17 +183,22 @@ public class SettlerPanel extends GamePanel {
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 	    	g.drawString("Can do:", 10, getSize().height/2+50);
 	    	g.drawString("Inventory:", 10, 280);
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
+	    	g.drawString("Gates:", 10, 350);
+	    	
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
 
-			g.drawImage(materialImages.get(ice), 15, 300, null);
-			g.drawImage(materialImages.get(coal), 15, 325, null);
-			g.drawImage(materialImages.get(uranium), 15, 350, null);
-			g.drawImage(materialImages.get(iron), 15, 375, null);
+			g.drawImage(invetoryImages.get(ice), 15, 300, null);
+			g.drawImage(invetoryImages.get(coal), 85, 300, null);
+			g.drawImage(invetoryImages.get(uranium), 155, 300, null);
+			g.drawImage(invetoryImages.get(iron), 225, 300, null);
 
 	    	g.drawString("x" + settler.getIceCount(), 40, 315);
-	    	g.drawString("x" + settler.getCoalCount(), 40, 340);
-	    	g.drawString("x" + settler.getUraniumCount(), 40, 365);
-	    	g.drawString("x" + settler.getIronCount(), 40, 390);
+	    	g.drawString("x" + settler.getCoalCount(), 110, 315);
+	    	g.drawString("x" + settler.getUraniumCount(), 180, 315);
+	    	g.drawString("x" + settler.getIronCount(), 250, 315);
+	    	
+	    	paintGates(g);
 
 			int id = settler.getId();
 			g.drawImage(settlerImages.get(id - 1), 100, 50, null);
