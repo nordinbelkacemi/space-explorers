@@ -234,7 +234,14 @@ public class Settler extends Traveler implements Miner, Driller {
      * @return a logikai érték
      */
     public boolean canBuildGate() {
-        return ironStorage.size() >= 2 && iceStorage.size() >= 1 && uraniumStorage.size() >= 1;
+    	int size = teleportGatePairs.size();
+    	if(ironStorage.size() >= 2 && iceStorage.size() >= 1 && uraniumStorage.size() >= 1 && size < 2) {
+    		if(size == 0)
+    			return true;
+    		if(size == 1 && teleportGatePairs.get(0).getGates().size() == 1) 
+    			 return true;
+    	}
+        return false;
     }
 
     /**
