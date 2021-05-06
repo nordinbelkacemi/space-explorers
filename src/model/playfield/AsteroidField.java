@@ -198,6 +198,10 @@ public class AsteroidField extends Hexagon {
 		return position;
 	}
 
+	public List<TeleportGate> getGates() {
+		return teleportGates;
+	}
+
 	/////////////////////////////////// test
 	public AsteroidField(Coordinate c,int t) {
 		position = c;

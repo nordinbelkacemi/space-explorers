@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 
 import controller.Game;
 import controller.SelectedSettler;
@@ -45,10 +44,11 @@ public class SpacePanel extends GamePanel {
 			hexagonImg = ImageIO.read(in);
 			in = new FileInputStream("res/hexagon2.png");
 			hexagon2Img = ImageIO.read(in);
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
+
     	addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -92,20 +92,21 @@ public class SpacePanel extends GamePanel {
     
     private void paintFields(Graphics g) {
     	Coordinate sunCo = solarSystem.getSun().getCo();
-    	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25)-20;
-		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25) -20;
-		g.drawImage(sunImg,sx,sy,null);
+    	int sx = getSize().width / 2 + sunCo.getX() * 50 + sunCo.getY() * 25 - 20;
+		int sy = (int) (getSize().height / 2 - sunCo.getY() * Math.sqrt(3) * 25) - 20;
+		g.drawImage(sunImg, sx, sy, null);
     	for (AsteroidField field : belt) {
 			Coordinate co = field.getCo();
-			int x = (getSize().width/2 + co.getX()*50+co.getY()*25)-20;
-			int y = (int) (getSize().height/2 - co.getY()*Math.sqrt(3)*25) -20;
+			int x = getSize().width / 2 + co.getX() * 50 + co.getY() * 25 - 20;
+			int y = (int) (getSize().height / 2 - co.getY() * Math.sqrt(3) * 25) - 20;
 			int diffX = sunCo.getX() - co.getX();
 			int diffY = sunCo.getY() - co.getY();
 			if (Math.abs(diffX) <= 2 && Math.abs(diffY) <= 2 && Math.abs(diffX + diffY) <= 2) {
-					g.drawImage(sunFieldImg,x,y,null);
+					g.drawImage(sunFieldImg, x, y, null);
 				}
-			else
-				g.drawImage(fieldImg,x,y,null);
+			else {
+				g.drawImage(fieldImg, x, y, null);
+			}
 		} 
     }
     

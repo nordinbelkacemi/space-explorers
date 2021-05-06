@@ -1,7 +1,5 @@
 package model.materials;
 
-import java.util.Random;
-
 import model.playfield.Asteroid;
 import model.settler.Settler;
 

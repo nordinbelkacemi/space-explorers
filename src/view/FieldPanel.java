@@ -1,12 +1,13 @@
 package view;
 
+import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import controller.Game;
@@ -15,13 +16,19 @@ import model.playfield.AsteroidField;
 
 public class FieldPanel extends GamePanel {
     private List<AsteroidButton> asteroidButtons = new ArrayList<>();
-    private List<JLabel> teleportGates;
     private AsteroidField field;
-    private int index;
+    private int index, gateCount;
+	
+	private List<BufferedImage> images = new ArrayList<>();
+	private List<String> imagePaths = new ArrayList<>(Arrays.asList(
+		"res/gate.png"
+	));
+	private int teleportGate = 0;
 
     public FieldPanel() {
     	super(new Dimension(250,300));
 		setVisible(true);
+		loadImages(images, imagePaths);
 		initButtons();
 		update();
     }
@@ -59,6 +66,7 @@ public class FieldPanel extends GamePanel {
         field = Game.getInstance().getSelectedField();
         if (field != null) {
             index = Game.getInstance().getSolarSystem().getBelt().indexOf(field);
+			gateCount = field.getGates().size();
         }
     	clearButtons();
         repaint();
@@ -69,9 +77,12 @@ public class FieldPanel extends GamePanel {
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("FIELD", 10, 30);
     	if(field != null) {
-    		placeButtons();
+			placeButtons();
     		updateAsteroidButtons();
     		g.drawString("" + index, getSize().width-100, 30);
+
+			g.drawImage(images.get(teleportGate), 15, getSize().height - 100, null);
+			g.drawString("x" + gateCount, 70, getSize().height - 60);
     	}
 	}
 }
