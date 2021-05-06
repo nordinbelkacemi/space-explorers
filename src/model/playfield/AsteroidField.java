@@ -2,6 +2,7 @@ package model.playfield;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -81,7 +82,8 @@ public class AsteroidField extends Hexagon {
 		int uraniumcount = r.nextInt(2); // 0-1 urán
 		for (int i = 0; i < uraniumcount; i++) {
 			field.add(new Asteroid(new Uranium(),r.nextInt(5),this));
-		}
+		}	
+		Collections.shuffle(field);
 		return field;
 	}
 
