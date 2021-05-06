@@ -122,7 +122,7 @@ public class SpacePanel extends GamePanel {
         	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25);
     		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25);
     		int fx =  flare.getX()*50+flare.getY()*25;
-    		int fy =  (int) (flare.getY()*Math.sqrt(3)*25);
+    		int fy =  (int) (flare.getY()*Math.sqrt(3)*-25);
     		g.setColor(Color.yellow);
     		Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(10));
