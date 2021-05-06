@@ -90,11 +90,14 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 
     public void asteroidSelected(){
         asteroidPanel.update();
+        logPanel.update();
     }
 
     public void settlerPerformedAction(){
     	settlerPanel.update();
 		teamPanel.update();
+		fieldPanel.update();
+        asteroidPanel.update();
     }
 
 	public void turnEnded() {

@@ -132,7 +132,7 @@ public class SelectedSettler {
     }
 
     public void placeTeleportGate() {
-        /* TODO SelectedSettler.placeTeleportGate */
+        settler.placeTeleportGate();
     	performAction();
     }
 
