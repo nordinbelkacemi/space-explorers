@@ -8,7 +8,7 @@ import view.GameButton;
 
 public class PutBackIronButton extends GameButton {
     public PutBackIronButton() {
-        super("putback iron");
+        super("put iron back");
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SelectedSettler.getInstance().putIronBack();
