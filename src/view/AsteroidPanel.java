@@ -44,6 +44,7 @@ public class AsteroidPanel extends GamePanel {
 
     public AsteroidPanel() {
     	super(new Dimension(300,100));
+		setBorder(null);
 		loadImages(images, imagePaths);
 		setVisible(true);
     }
@@ -54,8 +55,8 @@ public class AsteroidPanel extends GamePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-		
 		setBackground(Color.BLACK);
+
     	if(asteroid != null) {
     		g.drawImage(images.get(asteroidIcon), 10 + 2, 2, null);
     		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
@@ -107,7 +108,6 @@ public class AsteroidPanel extends GamePanel {
 	}
 
 	private void displayTravelers(Graphics g) {
-
 		int settlerCount = 0, robotCount = 0, ufoCount = 0;
 
 		List<Traveler> travelers = asteroid.getTravelers();
