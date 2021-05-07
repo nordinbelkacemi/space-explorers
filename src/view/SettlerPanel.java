@@ -15,7 +15,7 @@ import javax.swing.JButton;
 
 import controller.Game;
 import controller.SelectedSettler;
-import jdk.nashorn.api.tree.Tree;
+//import jdk.nashorn.api.tree.Tree;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.settler.Settler;
