@@ -8,7 +8,7 @@ import view.GameButton;
 
 public class PutBackUraniumButton extends GameButton {
     public PutBackUraniumButton() {
-        super("putback uranium");
+        super("put uranium back");
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SelectedSettler.getInstance().putUraniumBack();
