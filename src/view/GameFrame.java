@@ -78,6 +78,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 	public void settlerSelected(){
 		settlerPanel.update();
 		spacePanel.update();
+		fieldPanel.update();
     }
 
     public void fieldSelected(){

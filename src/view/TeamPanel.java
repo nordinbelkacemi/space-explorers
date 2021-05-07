@@ -15,6 +15,8 @@ import java.util.List;
 import javax.swing.JButton;
 
 import controller.Game;
+import model.playfield.Asteroid;
+import model.playfield.AsteroidField;
 import model.settler.Settler;
 
 public class TeamPanel extends GamePanel {
@@ -46,8 +48,14 @@ public class TeamPanel extends GamePanel {
 					x /= 96;
 					if (x < selectableSettlers.size()) {
 						Settler settler = selectableSettlers.get(x);
-						if(settler != null)
-							Game.getInstance().selectSettler(settler.getId());
+						if(settler != null) {
+							Asteroid asteroid = settler.getAsteroid();
+			            	AsteroidField field = asteroid.getAsteroidField();
+			            	List<AsteroidField> belt = Game.getInstance().getSolarSystem().getBelt();
+			                Game.getInstance().selectField(belt.indexOf(field));
+			                Game.getInstance().selectAsteroid(field.getAsteroids().indexOf(asteroid));
+			                Game.getInstance().selectSettler(settler.getId());
+						}
 					}
 				}
 			}
