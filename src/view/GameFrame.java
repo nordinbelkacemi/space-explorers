@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import controller.Game;
 import controller.SelectedSettler;
+import model.playfield.Asteroid;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
     
@@ -81,6 +82,8 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     }
 
     public void fieldSelected(){
+		Asteroid currentAsteroid = Game.getInstance().getSelectedField().getAsteroids().get(0);
+		Game.getInstance().selectAsteroid(Game.getInstance().getSelectedField().getAsteroids().indexOf(currentAsteroid));
         fieldPanel.update();
         //asteroidPanel.update();
     }
