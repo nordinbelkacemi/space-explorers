@@ -69,12 +69,12 @@ public class AsteroidField extends Hexagon {
 			field.add(new Asteroid(new Iron(),r.nextInt(5),this));
 		}
 
-		int icecount = r.nextInt(3); // 0-2 jég
+		int icecount = r.nextInt(1); // 0-1 jég
 		for (int i = 0; i < icecount; i++) {
 			field.add(new Asteroid(new Ice(),r.nextInt(5),this));
 		}
 
-		int coalcount = r.nextInt(3); // 0-2 szén
+		int coalcount = r.nextInt(1); // 0-1 szén
 		for (int i = 0; i < coalcount; i++) {
 			field.add(new Asteroid(new Coal(),r.nextInt(5),this));
 		}
