@@ -43,8 +43,8 @@ public class SettlerPanel extends GamePanel {
 		"res/orangebig.png"
 	));
 
-	private List<BufferedImage> invetoryImages = new ArrayList<>();
-	private List<String> invetoryImagePaths = new ArrayList<>(Arrays.asList(
+	private List<BufferedImage> inventoryImages = new ArrayList<>();
+	private List<String> inventoryImagePaths = new ArrayList<>(Arrays.asList(
 		"res/icesmall.png",
 		"res/coalsmall.png",
 		"res/uraniumsmall.png",
@@ -71,7 +71,7 @@ public class SettlerPanel extends GamePanel {
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
-		loadImages(invetoryImages, invetoryImagePaths);
+		loadImages(inventoryImages, inventoryImagePaths);
 		initButtons();
 		allActions = new ArrayList<>(Arrays.asList(
 			"move",
@@ -80,10 +80,10 @@ public class SettlerPanel extends GamePanel {
 			"build robot",
 			"build teleportgate",
 			"place teleportgate",
-			"putback iron",
-			"putback uranium",
-			"putback coal",
-			"putback ice"
+			"put iron back",
+			"put uranium back",
+			"put coal back",
+			"put ice back"
 		));
 		setVisible(true);
 		update();
@@ -96,10 +96,10 @@ public class SettlerPanel extends GamePanel {
 		actionButtons.put("build robot", new BuildRobotButton());
 		actionButtons.put("build teleportgate", new BuildTeleportGateButton());
 		actionButtons.put("place teleportgate", new PlaceTeleportGateButton());
-		actionButtons.put("putback iron", new PutBackIronButton());
-		actionButtons.put("putback uranium", new PutBackUraniumButton());
-		actionButtons.put("putback coal", new PutBackCoalButton());
-		actionButtons.put("putback ice", new PutBackIceButton());
+		actionButtons.put("put iron back", new PutBackIronButton());
+		actionButtons.put("put uranium back", new PutBackUraniumButton());
+		actionButtons.put("put coal back", new PutBackCoalButton());
+		actionButtons.put("put ice back", new PutBackIceButton());
 
 		for (String action : actionButtons.keySet()) {
 			JButton button = actionButtons.get(action);
@@ -178,11 +178,11 @@ public class SettlerPanel extends GamePanel {
     		for (int i = 0; i < pairs.size(); i++) {
     			int gateCount = pairs.get(i).getGates().size();
     			if(gateCount == 1) {
-    				g.drawImage(invetoryImages.get(gate), 80, 330, null);
+    				g.drawImage(inventoryImages.get(gate), 80, 330, null);
     			}
     			if(gateCount == 2) {
-    				g.drawImage(invetoryImages.get(gate), 80, 330+i*60, null);
-    				g.drawImage(invetoryImages.get(gate), 150, 330+i*60, null);
+    				g.drawImage(inventoryImages.get(gate), 80, 330+i*60, null);
+    				g.drawImage(inventoryImages.get(gate), 150, 330+i*60, null);
     			}
 			}
     	}
@@ -206,10 +206,10 @@ public class SettlerPanel extends GamePanel {
 
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
 
-			g.drawImage(invetoryImages.get(ice), 15, 300, null);
-			g.drawImage(invetoryImages.get(coal), 85, 300, null);
-			g.drawImage(invetoryImages.get(uranium), 155, 300, null);
-			g.drawImage(invetoryImages.get(iron), 225, 300, null);
+			g.drawImage(inventoryImages.get(ice), 15, 300, null);
+			g.drawImage(inventoryImages.get(coal), 85, 300, null);
+			g.drawImage(inventoryImages.get(uranium), 155, 300, null);
+			g.drawImage(inventoryImages.get(iron), 225, 300, null);
 
 	    	g.drawString("x" + settler.getIceCount(), 40, 315);
 	    	g.drawString("x" + settler.getCoalCount(), 110, 315);
@@ -219,7 +219,7 @@ public class SettlerPanel extends GamePanel {
 	    	paintGates(g);
 
 			int id = settler.getId();
-			g.drawImage(settlerImages.get(id - 1), 100, 50, null);
+			g.drawImage(settlerImages.get(id - 1), 70, 50, null);
 		}
 	}
 }
