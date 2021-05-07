@@ -15,10 +15,10 @@ import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 public class FieldPanel extends GamePanel {
-    //private List<AsteroidButton> asteroidButtons = new ArrayList<>();
 	private List<AsteroidPanel> asteroidPanels = new ArrayList<>();
     private AsteroidField field;
     private int index, gateCount;
+	private AsteroidPanel selectedAsteroidPanel;
 	
 	private List<BufferedImage> images = new ArrayList<>();
 	private List<String> imagePaths = new ArrayList<>(Arrays.asList(
@@ -27,7 +27,7 @@ public class FieldPanel extends GamePanel {
 	private int teleportGate = 0;
 
     public FieldPanel() {
-    	super(new Dimension(300,300));
+    	super(new Dimension(300, 300));
 		setVisible(true);
 		loadImages(images, imagePaths);
 		initAsteroids();
@@ -41,8 +41,11 @@ public class FieldPanel extends GamePanel {
 					if (yc > 50) {
 						int index = (yc - 50) / 108;
 						if (((yc - 150) - index * 108) < 0 && index < field.getAsteroids().size()) {
+							selectedAsteroidPanel.update();
 							Game.getInstance().selectAsteroid(index);
-							update();
+							
+							selectedAsteroidPanel = asteroidPanels.get(index);
+							selectedAsteroidPanel.update();
 						}
 					}
 				}
@@ -67,7 +70,7 @@ public class FieldPanel extends GamePanel {
     
     private void placeAsteroidPanels() {
     	for (int i = 0; i < 9; i++) {
-			asteroidPanels.get(i).setLocation(0,50+i*108);
+			asteroidPanels.get(i).setLocation(5, 50 + i * 108);
 		}
 	}
     
@@ -89,6 +92,8 @@ public class FieldPanel extends GamePanel {
 			gateCount = field.getGates().size();
         }
     	clearAsteroids();
+		
+		selectedAsteroidPanel = asteroidPanels.get(0);
         repaint();
     }
     

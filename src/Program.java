@@ -10,7 +10,7 @@ import view.GameFrame;
 public class Program {
 
 	public static void main(String[] args) {
-		playSound();
+		// playSound();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
