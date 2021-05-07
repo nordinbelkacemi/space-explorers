@@ -48,7 +48,7 @@ public class AsteroidPanel extends GamePanel{
 	int robot = 6, ufo = 7;
 
     public AsteroidPanel() {
-    	super(new Dimension(250,300));
+    	super(new Dimension(300,100));
 		loadImages(materialImages, materialImagePaths);
 		loadImages(travelerIcons, travelerIconPaths);
 		setVisible(true);
