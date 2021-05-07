@@ -11,12 +11,12 @@ import model.playfield.AsteroidField;
  * A telepesek tárolásáért és a játékossal való kapcsolatért felelős objektum.
  */
 public class SettlerTeam {
-	
+
 	/**
 	 * Az összes telepest tárolja.
 	 */
 	private List<Settler> settlers;
-	
+
 	/**
 	 * Az aszteroidaöv.
 	 */
@@ -37,7 +37,7 @@ public class SettlerTeam {
 			settlers.add(settler);
 		}
 	}
-	
+
 	/**
 	 * Visszaadja a telepesek listájából a kiválasztott telepest.
 	 * @param n a választott telepes sorszáma
@@ -46,7 +46,7 @@ public class SettlerTeam {
 	public Settler chooseSettler(int n) {
 		return settlers.get(n - 1);
 	}
-	
+
 	/**
 	 * Kitörli a telepesek listájából a paraméterként átadott telepest.
 	 * @param s a kitörlendő telepes
@@ -54,7 +54,7 @@ public class SettlerTeam {
 	public void removeSettler(Settler s) {
 		settlers.remove(s);
 	}
-	
+
 	/**
 	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a SettlerTeam adatait.
 	 * @param out ahova kiírja az adatokat
@@ -68,5 +68,9 @@ public class SettlerTeam {
 
 	public List<Settler> getSettlers() {
 		return settlers;
+	}
+
+	public int getSize() {
+		return settlers.size();
 	}
 }

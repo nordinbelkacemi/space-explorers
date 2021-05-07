@@ -64,6 +64,9 @@ public class SettlerPanel extends GamePanel {
 	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
 	private GameButton showButton;
+	
+	private GameButton gateButton;
+	
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
@@ -113,6 +116,14 @@ public class SettlerPanel extends GamePanel {
             }
         });
 		add(showButton);
+		
+		gateButton = new GameButton("Show pair");
+		gateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Game.getInstance().selectField(Game.getInstance().getSolarSystem().getBelt().indexOf(settler.getTeleportGatePairs().get(0).getGates().get(0).getOtherGate().getAsteroidField()));
+            }
+        });
+		add(gateButton);
     	clearButtons();
     }
     
@@ -122,6 +133,7 @@ public class SettlerPanel extends GamePanel {
 			button.setVisible(false);
 		}
     	showButton.setVisible(false);
+    	gateButton.setVisible(false);
     }
     
     private void placeButtons() {
@@ -135,6 +147,7 @@ public class SettlerPanel extends GamePanel {
     		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-6)*35 + 240);
 		}
 		showButton.setLocation(15,220);
+		gateButton.setLocation(160, 330);
     }
     
     private void updateAvailableButtons() {
@@ -145,6 +158,11 @@ public class SettlerPanel extends GamePanel {
 			button.setVisible(true);
 		}
 		showButton.setVisible(true);
+		List<TeleportGatePair> pairs = settler.getTeleportGatePairs();
+		if(pairs.size() == 1) {
+			if(pairs.get(0).getGates().size() == 1)
+				gateButton.setVisible(true);
+		}
     }
 
     public void update() {
@@ -157,15 +175,14 @@ public class SettlerPanel extends GamePanel {
     	if(settler.getNumberofTeleportgatePairs() > 0) {
     		List<TeleportGatePair> pairs = settler.getTeleportGatePairs();
     		for (int i = 0; i < pairs.size(); i++) {
-    			int gateCount = pairs.get(0).getGates().size();
+    			int gateCount = pairs.get(i).getGates().size();
     			if(gateCount == 1) {
     				g.drawImage(invetoryImages.get(gate), 80, 330, null);
     			}
     			if(gateCount == 2) {
-    				g.drawImage(invetoryImages.get(gate), 80, 330, null);
-    				g.drawImage(invetoryImages.get(gate), 150, 330, null);
+    				g.drawImage(invetoryImages.get(gate), 80, 330+i*60, null);
+    				g.drawImage(invetoryImages.get(gate), 150, 330+i*60, null);
     			}
-        		
 			}
     	}
     }

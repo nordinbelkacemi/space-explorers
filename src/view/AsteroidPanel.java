@@ -41,18 +41,13 @@ public class AsteroidPanel extends GamePanel {
 
 	private int robot = 6, ufo = 7, asteroidIcon = 8, ice = 9, coal = 10, uranium = 11, uranium1 = 12, uranium2 = 13, iron = 14, empty = 15;
 
-    public AsteroidPanel(Asteroid asteroid) {
-    	super(new Dimension(250,300));
-		this.asteroid = asteroid;
+    public AsteroidPanel() {
+    	super(new Dimension(300,100));
 		loadImages(images, imagePaths);
 		setVisible(true);
     }
 
     public void update() {
-        asteroid = Game.getInstance().getSelectedAsteroid();
-        if (asteroid != null) {
-            index = Game.getInstance().getSelectedField().getAsteroids().indexOf(asteroid);
-        }
         repaint();
     }
     
@@ -137,5 +132,9 @@ public class AsteroidPanel extends GamePanel {
 			g.drawImage(images.get(ufo), getWidth() - 30 - 25, getHeight() * 2 / 3 - 25 / 2, null);
 			g.drawString("x" + ufoCount, getWidth() - 25, getHeight() * 2 / 3 + 20 / 2);
 		}
+	}
+
+	public void setAsteroid(Asteroid asteroid) {
+		this.asteroid = asteroid;
 	}
 }

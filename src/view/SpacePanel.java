@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -30,7 +32,7 @@ public class SpacePanel extends GamePanel {
     private BufferedImage hexagonImg;
     private BufferedImage hexagon2Img;
     private List<AsteroidField> belt;
-    
+
     public SpacePanel() {
     	super(null);
     	try {
@@ -52,14 +54,16 @@ public class SpacePanel extends GamePanel {
     	addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
-				for (int i = 0; i < belt.size(); i++) {
-					Coordinate co = belt.get(i).getCo();
-					int x = (getSize().width / 2 + co.getX() * 50 + co.getY() * 25);
-					int y = (int) (getSize().height / 2 - co.getY() * Math.sqrt(3) * 25);
-					if (Math.pow(x - xc, 2) + Math.pow(y - yc, 2) < 1600) {
-						Game.getInstance().selectField(i);
-						break;
+				if (!Game.getInstance().isGameOver()) {
+					int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
+					for (int i = 0; i < belt.size(); i++) {
+						Coordinate co = belt.get(i).getCo();
+						int x = (getSize().width / 2 + co.getX() * 50 + co.getY() * 25);
+						int y = (int) (getSize().height / 2 - co.getY() * Math.sqrt(3) * 25);
+						if (Math.pow(x - xc, 2) + Math.pow(y - yc, 2) < 1600) {
+							Game.getInstance().selectField(i);
+							break;
+						}
 					}
 				}
 			}
@@ -73,7 +77,7 @@ public class SpacePanel extends GamePanel {
         belt = solarSystem.getBelt();
         repaint();
     }
-    
+
     private void paintNeighbours(Graphics g) {
     	Settler settler = SelectedSettler.getInstance().getSelectedSettler();
     	if(settler != null) {
@@ -89,7 +93,7 @@ public class SpacePanel extends GamePanel {
     		}
     	}
     }
-    
+
     private void paintFields(Graphics g) {
     	Coordinate sunCo = solarSystem.getSun().getCo();
     	int sx = getSize().width / 2 + sunCo.getX() * 50 + sunCo.getY() * 25 - 20;
@@ -107,13 +111,12 @@ public class SpacePanel extends GamePanel {
 			else {
 				g.drawImage(fieldImg, x, y, null);
 			}
-		} 
+		}
     }
-    
-    
+
     private Coordinate pre = null;
-    
-    private void paintSolarFlair(Graphics g) {
+
+    private void paintSolarFlare(Graphics g) {
     	Coordinate flare = solarSystem.getSun().getFlareDir();
     	if(flare == null)
     		pre = null;
@@ -123,19 +126,31 @@ public class SpacePanel extends GamePanel {
     		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25);
     		int fx =  flare.getX()*50+flare.getY()*25;
     		int fy =  (int) (flare.getY()*Math.sqrt(3)*-25);
-    		g.setColor(Color.yellow);
+            Color startColor = new Color(0.96f, 0.82f, 0.19f, 0.7f);
+            Color endColor = new Color(0.96f, 0.96f, 0.23f, 0.1f);
+    		GradientPaint gp = new GradientPaint(sx+fx/2, sy+fy/2, startColor, sx+fx*20, sy+fy*20, endColor, false);
     		Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(10));
+            g2.setStroke(new BasicStroke(30));
+    		g2.setPaint(gp);
     		g2.drawLine(sx+fx/2, sy+fy/2, sx+fx*20, sy+fy*20);
-    		
+
     		pre = flare;
     	}
     }
-    
+
     public void paint(Graphics g) {
     	super.paint(g);
-    	paintNeighbours(g);
-    	paintFields(g);
-    	paintSolarFlair(g);
+		if (!Game.getInstance().isGameOver()) {
+			paintNeighbours(g);
+			paintFields(g);
+			paintSolarFlare(g);
+		} else {
+			String endText = "GAME OVER";
+			g.setFont(new Font(getFont().getFontName(), Font.BOLD, 60));
+			int lenght = g.getFontMetrics().stringWidth(endText);
+			int x = getSize().width / 2 - lenght / 2;
+			int y = getSize().height / 2 - getFont().getSize() / 2;
+			g.drawString(endText, x, y);
+		}
 	}
 }
