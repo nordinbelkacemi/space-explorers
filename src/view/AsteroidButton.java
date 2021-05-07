@@ -7,7 +7,7 @@ import controller.Game;
 
 public class AsteroidButton extends GameButton {
 	int index;
-	public AsteroidButton(String text,int i) {
+	public AsteroidButton(String text, int i) {
 		super(text);
 		index = i;
 		addActionListener(new ActionListener() {

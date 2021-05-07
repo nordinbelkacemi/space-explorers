@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JLabel;
-
 import controller.Game;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
@@ -25,11 +23,16 @@ public class FieldPanel extends GamePanel {
 	));
 	private int teleportGate = 0;
 
+	private List<AsteroidPanel> asteroidPanels = new ArrayList<>();
+
     public FieldPanel() {
     	super(new Dimension(250,300));
 		setVisible(true);
 		loadImages(images, imagePaths);
 		initButtons();
+		for (AsteroidPanel asteroidPanel : asteroidPanels) {
+			add(asteroidPanel);
+		}
 		update();
     }
 
@@ -40,7 +43,6 @@ public class FieldPanel extends GamePanel {
 			add(button);
 			clearButtons();
 		}
-    	
     }
     
     private void clearButtons() {

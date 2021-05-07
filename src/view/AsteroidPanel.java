@@ -15,27 +15,12 @@ import model.materials.Material;
 import model.playfield.Asteroid;
 import model.settler.Traveler;
 
-public class AsteroidPanel extends GamePanel{
-
-    private JLabel thickness;
-    private JLabel core;
-    private List<JLabel> travelerLabels;
+public class AsteroidPanel extends GamePanel {
     private Asteroid asteroid;
     private int index;
 	
-	private List<BufferedImage> materialImages = new ArrayList<>();
-	private List<String> materialImagePaths = new ArrayList<>(Arrays.asList(
-		"res/ice.png",
-		"res/coal.png",
-		"res/uranium.png",
-		"res/uranium1.png",
-		"res/uranium2.png",
-		"res/iron.png"
-	));
-	private int ice = 0, coal = 1, uranium = 2, uranium1 = 3, uranium2 = 4, iron = 5;
-
-	private List<BufferedImage> travelerIcons = new ArrayList<>();
-	private ArrayList<String> travelerIconPaths = new ArrayList<>(Arrays.asList(
+	private List<BufferedImage> images = new ArrayList<>();
+	private List<String> imagePaths = new ArrayList<>(Arrays.asList(
 		"res/redicon.png",
 		"res/blueicon.png",
 		"res/greenicon.png",
@@ -43,14 +28,23 @@ public class AsteroidPanel extends GamePanel{
 		"res/purpleicon.png",
 		"res/orangeicon.png",
 		"res/roboticon.png",
-		"res/ufoicon.png"
+		"res/ufoicon.png",
+		"res/asteroid.png",
+		"res/ice.png",
+		"res/coal.png",
+		"res/uranium.png",
+		"res/uranium1.png",
+		"res/uranium2.png",
+		"res/iron.png",
+		"res/empty.png"
 	));
-	int robot = 6, ufo = 7;
 
-    public AsteroidPanel() {
+	private int robot = 6, ufo = 7, asteroidIcon = 8, ice = 9, coal = 10, uranium = 11, uranium1 = 12, uranium2 = 13, iron = 14, empty = 15;
+
+    public AsteroidPanel(Asteroid asteroid) {
     	super(new Dimension(250,300));
-		loadImages(materialImages, materialImagePaths);
-		loadImages(travelerIcons, travelerIconPaths);
+		this.asteroid = asteroid;
+		loadImages(images, imagePaths);
 		setVisible(true);
     }
 
@@ -64,11 +58,10 @@ public class AsteroidPanel extends GamePanel{
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
-    	g.drawString("ASTEROID", 10, 30);
+    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 		
     	if(asteroid != null) {
-    		g.drawString("" + index, getSize().width - 50, 30);
+    		g.drawImage(images.get(asteroidIcon), 10 + 2, 2, null);
     		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
 			displayMaterialInfo(g);
 			displayTravelers(g);
@@ -76,67 +69,73 @@ public class AsteroidPanel extends GamePanel{
 	}
 
 	private void displayMaterialInfo(Graphics g) {
+		g.drawString("Core:", 12 + 65 + 5, 20 + 2);
+		g.drawString("Thickness: " + asteroid.getThickness(), 12 + 65 + 5, 65 + 2 - 10);
+
 		if (asteroid.getMaterial() != null) {
 			Material material = asteroid.getMaterial();
-			g.drawString("Core: " + material.toString().split(" ")[0], 15, 70);
 			BufferedImage materialImage = null;
 			switch (material.toString().split(" ")[0]) {
 				case "ice":
-					materialImage = materialImages.get(ice);
+					materialImage = images.get(ice);
 					break;
 				case "coal":
-					materialImage = materialImages.get(coal);
+					materialImage = images.get(coal);
 					break;
 				case "uranium":
 					String exposureCount = material.toString().split(" ")[1];
 					switch (exposureCount) {
 						case "0":
-							materialImage = materialImages.get(uranium);
+							materialImage = images.get(uranium);
 							break;
 						case "1":
-							materialImage = materialImages.get(uranium1);
+							materialImage = images.get(uranium1);
 							break;
 						case "2":
-							materialImage = materialImages.get(uranium2);
+							materialImage = images.get(uranium2);
 							break;
 					}
 					break;
 				case "iron":
-					materialImage = materialImages.get(iron);
+					materialImage = images.get(iron);
 					break;
 			}
-			g.drawImage(materialImage, 150, 50, null);
+			g.drawImage(materialImage, 140, 2, null);
 		} else {
-			g.drawString("Core: empty", 15, 70);
+			g.drawImage(images.get(empty), 140, 2, null);
 		}
-		g.drawString("Thickness: " + asteroid.getThickness(), 15, 100);
 	}
 
 	private void displayTravelers(Graphics g) {
-		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
-		g.drawString("Travelers:", 15, 150);
-		
-		int i = 0;
+
+		int settlerCount = 0, robotCount = 0, ufoCount = 0;
+
 		List<Traveler> travelers = asteroid.getTravelers();
 		for (Traveler traveler : travelers) {
 			String identifier = traveler.toString();
-			int x = 15 + 55 * (i % 4);
-			int y = 170 + i / 4 * 55;
 			switch (identifier) {
 				case "settler":
+					settlerCount += 1;
 					int settlerId = traveler.getId();
-					g.drawImage(travelerIcons.get(settlerId - 1), x, y, null);
+					g.drawImage(images.get(settlerId - 1), 10 + 2 + 25 * (settlerCount - 1), getHeight() - 2 - 25, null);
 					break;
 				case "robot":
-					g.drawImage(travelerIcons.get(robot), x, y, null);
+					robotCount += 1;
 					break;
 				case "ufo":
-					g.drawImage(travelerIcons.get(ufo), x, y, null);
+					ufoCount += 2;
 					break;
-				default:
-
 			}
-			i += 1;
+		}
+
+		if (robotCount > 0) {
+			g.drawImage(images.get(robot), getWidth() - 30 - 25, getHeight() * 1 / 3 - 25 / 2, null);
+			g.drawString("x" + robotCount, getWidth() - 25, getHeight() * 1 / 3 + 20 / 2);
+		}
+
+		if (ufoCount > 0) {
+			g.drawImage(images.get(ufo), getWidth() - 30 - 25, getHeight() * 2 / 3 - 25 / 2, null);
+			g.drawString("x" + ufoCount, getWidth() - 25, getHeight() * 2 / 3 + 20 / 2);
 		}
 	}
 }

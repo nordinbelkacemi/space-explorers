@@ -69,7 +69,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		eastPanel.setBackground(Color.black);
 		fieldPanel = new FieldPanel();
 		eastPanel.add(fieldPanel);
-		asteroidPanel = new AsteroidPanel();
+		asteroidPanel = new AsteroidPanel(null);
 		eastPanel.add(asteroidPanel);
 		eastPanel.setVisible(true);
 		add(eastPanel,BorderLayout.LINE_END);
