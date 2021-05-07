@@ -115,7 +115,7 @@ public class SpacePanel extends GamePanel {
     }
 
     private Coordinate pre = null;
-    
+
     private void paintSolarFlare(Graphics g) {
     	Coordinate flare = solarSystem.getSun().getFlareDir();
     	if(flare == null)

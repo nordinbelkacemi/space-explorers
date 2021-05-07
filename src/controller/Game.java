@@ -115,6 +115,7 @@ public final class Game {
 
 		if (settlerTeam.getSize() == 0) {
 			gameOver = true;
+			gui.turnEnded();
 			log("Game Over");
 		} else {
 			step();
