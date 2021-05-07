@@ -10,8 +10,8 @@ public class GameButton extends JButton {
 
 	public GameButton(String text) {
 		super(text);
-		// setBackground(Color.black);
-		// setForeground(Color.white);
+		setBackground(Color.black);
+		setForeground(Color.white);
 		setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
 		setMinimumSize(new Dimension(100,30));
 		setFocusPainted(false);

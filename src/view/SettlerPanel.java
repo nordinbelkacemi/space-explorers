@@ -15,6 +15,7 @@ import javax.swing.JButton;
 
 import controller.Game;
 import controller.SelectedSettler;
+//import jdk.nashorn.api.tree.Tree;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 import model.settler.Settler;
@@ -52,7 +53,7 @@ public class SettlerPanel extends GamePanel {
 	));
 
 	private int ice = 0, coal = 1, uranium = 2, iron = 3;
-	
+
 	private int gate = 4;
 
 	/** amit lehet csinalni eppen */
@@ -64,9 +65,9 @@ public class SettlerPanel extends GamePanel {
 	private HashMap<String, GameButton> actionButtons = new HashMap<>();
 
 	private GameButton showButton;
-	
+
 	private GameButton gateButton;
-	
+
     SettlerPanel() {
 		super(new Dimension(300,600));
 		loadImages(settlerImages, settlerImagePaths);
@@ -83,7 +84,7 @@ public class SettlerPanel extends GamePanel {
 			"putback uranium",
 			"putback coal",
 			"putback ice"
-		));		
+		));
 		setVisible(true);
 		update();
     }
@@ -104,7 +105,7 @@ public class SettlerPanel extends GamePanel {
 			JButton button = actionButtons.get(action);
 			add(button);
 		}
-    	
+
     	showButton = new GameButton("Show asteroid");
 		showButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -116,7 +117,7 @@ public class SettlerPanel extends GamePanel {
             }
         });
 		add(showButton);
-		
+
 		gateButton = new GameButton("Show pair");
 		gateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -126,7 +127,7 @@ public class SettlerPanel extends GamePanel {
 		add(gateButton);
     	clearButtons();
     }
-    
+
     private void clearButtons() {
     	for (String action : actionButtons.keySet()) {
 			JButton button = actionButtons.get(action);
@@ -135,7 +136,7 @@ public class SettlerPanel extends GamePanel {
     	showButton.setVisible(false);
     	gateButton.setVisible(false);
     }
-    
+
     private void placeButtons() {
     	for (int i = 0; i < 3; i++) {
 			actionButtons.get(allActions.get(i)).setLocation(15+i*100, getSize().height/2 + 60);
@@ -147,12 +148,12 @@ public class SettlerPanel extends GamePanel {
     		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-6)*35 + 240);
 		}
 		showButton.setLocation(15,220);
-		gateButton.setLocation(160, 330);
+		gateButton.setLocation(160, 340);
     }
-    
+
     private void updateAvailableButtons() {
     	actions = SelectedSettler.getInstance().getActions();
-    	
+
 		for (String action : actions) {
 			JButton button = actionButtons.get(action);
 			button.setVisible(true);
@@ -170,7 +171,7 @@ public class SettlerPanel extends GamePanel {
 		clearButtons();
         repaint();
     }
-    
+
     private void paintGates(Graphics g) {
     	if(settler.getNumberofTeleportgatePairs() > 0) {
     		List<TeleportGatePair> pairs = settler.getTeleportGatePairs();
@@ -186,7 +187,7 @@ public class SettlerPanel extends GamePanel {
 			}
     	}
     }
-    
+
     public void paint(Graphics g) {
 		super.paint(g);
 		if(settler != null) {
@@ -202,7 +203,7 @@ public class SettlerPanel extends GamePanel {
 	    	g.drawString("Inventory:", 10, 280);
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
 	    	g.drawString("Gates:", 10, 350);
-	    	
+
 	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
 
 			g.drawImage(invetoryImages.get(ice), 15, 300, null);
@@ -214,7 +215,7 @@ public class SettlerPanel extends GamePanel {
 	    	g.drawString("x" + settler.getCoalCount(), 110, 315);
 	    	g.drawString("x" + settler.getUraniumCount(), 180, 315);
 	    	g.drawString("x" + settler.getIronCount(), 250, 315);
-	    	
+
 	    	paintGates(g);
 
 			int id = settler.getId();

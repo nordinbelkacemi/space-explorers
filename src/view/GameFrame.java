@@ -17,19 +17,19 @@ import controller.SelectedSettler;
 import model.playfield.Asteroid;
 
 public class GameFrame extends JFrame implements SpaceExplorersGui {
-    
+
     private TeamPanel teamPanel;
     private SettlerPanel settlerPanel;
     private FieldPanel fieldPanel;
     private LogPanel logPanel;
     private SpacePanel spacePanel;
-    
+
     public GameFrame() {
     	Game.getInstance().setGui(this);
 		SelectedSettler.getInstance().setGui(this);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	setTitle("SPACE EXPLORERS");
-    	
+
     	Image img = null;
 		try {
 			img = ImageIO.read(new File("res/icon.png"));
@@ -39,16 +39,16 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		setIconImage(img);
     	
     	setExtendedState(JFrame.MAXIMIZED_BOTH); 
-    	setMinimumSize(new Dimension(1200,800));
+    	setMinimumSize(new Dimension(1200,830));
     	
     	// full frame layout
     	BorderLayout BL = new BorderLayout();
 		setLayout(BL);
-		
+
 		// settlerpanel (westpanel)
 		settlerPanel = new SettlerPanel();
 		add(settlerPanel,BorderLayout.LINE_START);
-		
+
 		// centerpanel
 		JPanel centerPanel = new JPanel();
 		BorderLayout BL2 = new BorderLayout();
@@ -61,7 +61,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		centerPanel.add(logPanel,BorderLayout.PAGE_END);
 		centerPanel.setVisible(true);
 		add(centerPanel,BorderLayout.CENTER);
-		
+
 		// eastpanel layout
 		JPanel eastPanel = new JPanel();
 		BoxLayout box = new BoxLayout(eastPanel,BoxLayout.Y_AXIS);
@@ -79,6 +79,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 	public void settlerSelected(){
 		settlerPanel.update();
 		spacePanel.update();
+		fieldPanel.update();
     }
 
     public void fieldSelected(){
@@ -112,5 +113,5 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		logPanel.log(message);
 		logPanel.update();
 	}
-	  
+
 }

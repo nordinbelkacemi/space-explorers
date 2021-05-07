@@ -112,20 +112,18 @@ public final class Game {
 	}
 
 	public void endTurn() {
-
+		step();
+		SelectedSettler.getInstance().set(null);
+		resetSelectableSettlers();
+		selectedField = null;
+		selectedAsteroid = null;
 		if (settlerTeam.getSize() == 0) {
 			gameOver = true;
-			gui.turnEnded();
 			log("Game Over");
 		} else {
-			step();
-			SelectedSettler.getInstance().set(null);
-			resetSelectableSettlers();
-			selectedField = null;
-			selectedAsteroid = null;
-			gui.turnEnded();
 			log("\nNEW TURN");
 		}
+    gui.turnEnded();
 	}
 
 	public void checkTurnEnd() {
