@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -53,13 +54,17 @@ public class AsteroidPanel extends GamePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
 		
+		setBackground(Color.BLACK);
     	if(asteroid != null) {
     		g.drawImage(images.get(asteroidIcon), 10 + 2, 2, null);
     		g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
 			displayMaterialInfo(g);
 			displayTravelers(g);
+
+			if (asteroid.equals(Game.getInstance().getSelectedAsteroid())) {
+				setBackground(Color.DARK_GRAY);
+			}
     	}
 	}
 
