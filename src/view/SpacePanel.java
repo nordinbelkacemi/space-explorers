@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -113,7 +114,7 @@ public class SpacePanel extends GamePanel {
     
     private Coordinate pre = null;
     
-    private void paintSolarFlair(Graphics g) {
+    private void paintSolarFlare(Graphics g) {
     	Coordinate flare = solarSystem.getSun().getFlareDir();
     	if(flare == null)
     		pre = null;
@@ -123,9 +124,12 @@ public class SpacePanel extends GamePanel {
     		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25);
     		int fx =  flare.getX()*50+flare.getY()*25;
     		int fy =  (int) (flare.getY()*Math.sqrt(3)*-25);
-    		g.setColor(Color.yellow);
+            Color startColor = new Color(0.96f, 0.82f, 0.19f, 0.7f);
+            Color endColor = new Color(0.96f, 0.96f, 0.23f, 0.1f);
+    		GradientPaint gp = new GradientPaint(sx+fx/2, sy+fy/2, startColor, sx+fx*20, sy+fy*20, endColor, false);
     		Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(10));
+            g2.setStroke(new BasicStroke(30));
+    		g2.setPaint(gp);
     		g2.drawLine(sx+fx/2, sy+fy/2, sx+fx*20, sy+fy*20);
     		
     		pre = flare;
@@ -136,6 +140,6 @@ public class SpacePanel extends GamePanel {
     	super.paint(g);
     	paintNeighbours(g);
     	paintFields(g);
-    	paintSolarFlair(g);
+    	paintSolarFlare(g);
 	}
 }
