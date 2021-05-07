@@ -4,18 +4,19 @@ import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.swing.JLabel;
 
 import controller.Game;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
 
 public class FieldPanel extends GamePanel {
-    private List<AsteroidButton> asteroidButtons = new ArrayList<>();
+    //private List<AsteroidButton> asteroidButtons = new ArrayList<>();
+	private List<AsteroidPanel> asteroidPanels = new ArrayList<>();
     private AsteroidField field;
     private int index, gateCount;
 	
@@ -24,41 +25,56 @@ public class FieldPanel extends GamePanel {
 		"res/gate.png"
 	));
 	private int teleportGate = 0;
-
+	
     public FieldPanel() {
-    	super(new Dimension(250,300));
+    	super(new Dimension(300,300));
 		setVisible(true);
 		loadImages(images, imagePaths);
-		initButtons();
+		initAsteroids();
 		update();
+		
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (!Game.getInstance().isGameOver()) {
+					int yc = (int) e.getPoint().getY();
+					if (yc > 50) {
+						int index = (yc - 50) / 108;
+						if (((yc - 150) - index * 108) < 0 && index < field.getAsteroids().size()) {
+							Game.getInstance().selectAsteroid(index);
+						}
+					}
+				}
+			}
+		});
     }
 
-    private void initButtons() {
+    private void initAsteroids() {
     	for (int i = 0; i < 9; i++) {
-    		AsteroidButton button = new AsteroidButton("Asteroid " + i, i);
-			asteroidButtons.add(button);
-			add(button);
-			clearButtons();
+    		AsteroidPanel panel = new AsteroidPanel();
+			asteroidPanels.add(panel);
+			add(panel);
+			clearAsteroids();
 		}
     	
     }
     
-    private void clearButtons() {
-		for (AsteroidButton button : asteroidButtons) {
-			button.setVisible(false);
+    private void clearAsteroids() {
+		for (AsteroidPanel panel : asteroidPanels) {
+			panel.setVisible(false);
 		}
 	}
     
-    private void placeButtons() {
+    private void placeAsteroidPanels() {
     	for (int i = 0; i < 9; i++) {
-			asteroidButtons.get(i).setLocation(15,50+i*30);
+			asteroidPanels.get(i).setLocation(0,50+i*108);
 		}
 	}
     
-    private void updateAsteroidButtons() {
+    private void updateAsteroidPanels() {
         List<Asteroid> asteroids = field.getAsteroids();
         for (int i = 0; i < asteroids.size(); i++) {
-			asteroidButtons.get(i).setVisible(true);
+			asteroidPanels.get(i).setVisible(true);
 		}
     }
     
@@ -68,21 +84,21 @@ public class FieldPanel extends GamePanel {
             index = Game.getInstance().getSolarSystem().getBelt().indexOf(field);
 			gateCount = field.getGates().size();
         }
-    	clearButtons();
+    	clearAsteroids();
         repaint();
     }
     
     public void paint(Graphics g) {
     	super.paint(g);
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
-    	g.drawString("FIELD", 10, 30);
+    	g.drawString("FIELD", 10, 36);
     	if(field != null) {
-			placeButtons();
-    		updateAsteroidButtons();
-    		g.drawString("" + index, getSize().width-100, 30);
+			placeAsteroidPanels();
+    		updateAsteroidPanels();
+    		g.drawString("" + index, 105, 36);
 
-			g.drawImage(images.get(teleportGate), 15, getSize().height - 100, null);
-			g.drawString("x" + gateCount, 70, getSize().height - 60);
+			g.drawImage(images.get(teleportGate), 190, 0, null);
+			g.drawString("x" + gateCount, 245, 36);
     	}
 	}
 }
