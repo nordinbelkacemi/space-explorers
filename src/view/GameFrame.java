@@ -20,7 +20,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     private TeamPanel teamPanel;
     private SettlerPanel settlerPanel;
     private FieldPanel fieldPanel;
-    private AsteroidPanel asteroidPanel;
     private LogPanel logPanel;
     private SpacePanel spacePanel;
     
@@ -45,7 +44,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     	BorderLayout BL = new BorderLayout();
 		setLayout(BL);
 		
-		//settlerpanel (westpanel)
+		// settlerpanel (westpanel)
 		settlerPanel = new SettlerPanel();
 		add(settlerPanel,BorderLayout.LINE_START);
 		
@@ -69,8 +68,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		eastPanel.setBackground(Color.black);
 		fieldPanel = new FieldPanel();
 		eastPanel.add(fieldPanel);
-		asteroidPanel = new AsteroidPanel();
-		eastPanel.add(asteroidPanel);
 		eastPanel.setVisible(true);
 		add(eastPanel,BorderLayout.LINE_END);
 		pack();
@@ -85,11 +82,11 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 
     public void fieldSelected(){
         fieldPanel.update();
-        asteroidPanel.update();
+        //asteroidPanel.update();
     }
 
     public void asteroidSelected(){
-        asteroidPanel.update();
+        //asteroidPanel.update();
         logPanel.update();
     }
 
@@ -97,7 +94,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     	settlerPanel.update();
 		teamPanel.update();
 		fieldPanel.update();
-        asteroidPanel.update();
+        //asteroidPanel.update();
     }
 
 	public void turnEnded() {
@@ -105,7 +102,7 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		teamPanel.update();
 		spacePanel.update();
 		fieldPanel.update();
-        asteroidPanel.update();
+        //asteroidPanel.update();
 	}
 
 	public void log(String message) {

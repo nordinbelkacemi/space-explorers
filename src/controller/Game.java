@@ -26,9 +26,12 @@ public final class Game {
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
 
+	private boolean gameOver;
+
 	/**
 	 * A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6
-	 * telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5, 6)
+	 * telepes és már léptünk az elsövel, akkor ennek a tartalma: null, 2, 3, 4, 5,
+	 * 6)
 	 */
 	private List<Settler> selectableSettlers;
 
@@ -37,7 +40,7 @@ public final class Game {
 
 	/** telepes mozgása során kiválasztott cél aszteroida */
 	private Asteroid selectedAsteroid;
-	
+
 	private int selectedTeleportgatePair;
 
 	private Game() {
@@ -49,21 +52,21 @@ public final class Game {
 		megkergultGates = new MegkergultGates();
 		selectableSettlers = new ArrayList<Settler>();
 		initSelectableSettlers();
+		gameOver = false;
 	}
 
 	public static Game getInstance() {
 		return instance;
 	}
 
-	
 	public void startGame() {
-		log("GAME STARTED 🚀  Hello There!\n");		
+		log("GAME STARTED 🚀  Hello There!\n");
 	}
-	
+
 	/**
 	 * Egy telepest kiválasztó függvény: beállítja a chosenSettler-t a megfelelo
 	 * telepesre
-	 * 
+	 *
 	 * @param n A kiválasztott telepes sorszáma
 	 */
 	public void selectSettler(int id) {
@@ -76,7 +79,7 @@ public final class Game {
 				break;
 			}
 		}
-		
+
 		SelectedSettler.getInstance().set(selectedSettler);
 		gui.settlerSelected();
 	}
@@ -84,7 +87,7 @@ public final class Game {
 	/**
 	 * Egy AsteroidField-et kiválasztó függvény: beállítja a selectedField-et a
 	 * megfelelö asteroid fieldre.
-	 * 
+	 *
 	 * @param n A kiválasztott AsteroidField sorszáma
 	 */
 	public void selectField(int n) {
@@ -96,7 +99,7 @@ public final class Game {
 	/**
 	 * Egy AsteroidField-et kiválasztó függvény: beállítja a chosenField-et a
 	 * megfelelö asteroid fieldre.
-	 * 
+	 *
 	 * @param n A kiválasztott AsteroidField sorszáma
 	 */
 	public void selectAsteroid(int n) {
@@ -114,28 +117,32 @@ public final class Game {
 		resetSelectableSettlers();
 		selectedField = null;
 		selectedAsteroid = null;
-		
-		log("\nNEW TURN");
-		gui.turnEnded();
-		
+		if (settlerTeam.getSize() == 0) {
+			gameOver = true;
+			log("Game Over");
+		} else {
+			log("\nNEW TURN");
+		}
+    gui.turnEnded();
 	}
 
 	public void checkTurnEnd() {
 		boolean turnended = true;
 		for (Settler settler : selectableSettlers) {
-			if(settler != null) {
+			if (settler != null) {
 				turnended = false;
 				break;
 			}
 		}
-		if(turnended)
+		if (turnended) {
 			endTurn();
+		}
 	}
-	
+
 	public void setGui(GameFrame gameFrame) {
 		gui = gameFrame;
 	}
-	
+
 	public AsteroidField getSelectedField() {
 		return selectedField;
 	}
@@ -173,67 +180,58 @@ public final class Game {
 		ufoAi.control();
 	}
 
-
-
-
-
-
-
-
-
-
-
-
+	public boolean isGameOver() {
+		return gameOver;
+	}
 
 	// public void resetChoosableSettlers() {
-	// 	choosableSettlers.clear();
-	// 	for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
-	// 		choosableSettlers.add(i);
-	// 	}
+	// choosableSettlers.clear();
+	// for (int i = 1; i <= settlerTeam.getSettlers().size(); i++) {
+	// choosableSettlers.add(i);
 	// }
-	
+	// }
+
 	// /**
-	//  * A gameOver változó lekérdezö függvénye
-	//  * 
-	//  * @return True ha a játék véget ért, egyébként False
-	//  */
+	// * A gameOver változó lekérdezö függvénye
+	// *
+	// * @return True ha a játék véget ért, egyébként False
+	// */
 	// public boolean over() {
-	// 	return getChoosableSettlers().isEmpty();
+	// return getChoosableSettlers().isEmpty();
 	// }
 
 	// public void endSettlerTurn(int n) {
-	// 	choosableSettlers.set(n - 1, null);
+	// choosableSettlers.set(n - 1, null);
 	// }
 
 	// public ArrayList<AsteroidField> getNeighbours() {
-	// 	return chosenSettler.getNeighbours();
+	// return chosenSettler.getNeighbours();
 	// }
 
 	// public AsteroidField getField(int idx) {
-	// 	return chosenSettler.getAsteroid().getNeighbours().get(idx);
+	// return chosenSettler.getAsteroid().getNeighbours().get(idx);
 	// }
 
 	// public List<Asteroid> getFieldAsteroids(int idx) {
-	// 	AsteroidField field = getField(idx);
-	// 	List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
-	// 	for (Asteroid asteroid : field.getAsteroids()) {
-	// 		if (asteroid != chosenSettler.getAsteroid()) {
-	// 			onlyNeighbours.add(asteroid);
-	// 		}
-	// 	}
-	// 	return onlyNeighbours;
+	// AsteroidField field = getField(idx);
+	// List<Asteroid> onlyNeighbours = new ArrayList<Asteroid>();
+	// for (Asteroid asteroid : field.getAsteroids()) {
+	// if (asteroid != chosenSettler.getAsteroid()) {
+	// onlyNeighbours.add(asteroid);
 	// }
-
+	// }
+	// return onlyNeighbours;
+	// }
 
 	// public AsteroidField getSelectedField() {
-	// 	return selectedField;
+	// return selectedField;
 	// }
-	
+
 	// public int getNumberofTeleportgatePairs() {
-	// 	return chosenSettler.getNumberofTeleportgatePairs();
+	// return chosenSettler.getNumberofTeleportgatePairs();
 	// }
-	
+
 	// public void selectTeleportgatePair(int selectedPair) {
-	// 	selectedTeleportgatePair = selectedPair;
+	// selectedTeleportgatePair = selectedPair;
 	// }
 }
