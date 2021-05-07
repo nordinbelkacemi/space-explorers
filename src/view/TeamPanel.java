@@ -80,7 +80,7 @@ public class TeamPanel extends GamePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	nextTurnButton.setLocation(getSize().width - 150, 10);
+    	nextTurnButton.setLocation(getSize().width/2 - 55, 10);
     	int startX = (getSize().width - 575)/2;
     	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
     	g.drawString("SETTLERTEAM", 10, 30);

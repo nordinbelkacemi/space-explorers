@@ -64,16 +64,16 @@ public class SelectedSettler {
 
  	 	if (currentAsteroid.isEmpty() && currentAsteroid.getThickness() == 0) {
  	 		if (settler.getIronCount() >= 1) {
- 	 			actions.add("putback iron");
+ 	 			actions.add("put iron back");
  	 		}
  	 		if (settler.getUraniumCount() >= 1) {
- 	 			actions.add("putback uranium");
+ 	 			actions.add("put uranium back");
  	 		}
  	 		if (settler.getCoalCount() >= 1) {
- 	 			actions.add("putback coal");
+ 	 			actions.add("put coal back");
  	 		}
  	 		if (settler.getIceCount() >= 1) {
- 	 			actions.add("putback ice");
+ 	 			actions.add("put ice back");
  	 		}
  	 	}
  	 	return actions;
