@@ -43,7 +43,7 @@ public class AsteroidPanel extends GamePanel {
 	private int robot = 6, ufo = 7, asteroidIcon = 8, ice = 9, coal = 10, uranium = 11, uranium1 = 12, uranium2 = 13, iron = 14, empty = 15;
 
     public AsteroidPanel() {
-    	super(new Dimension(300,100));
+    	super(new Dimension(290,100));
 		setBorder(null);
 		loadImages(images, imagePaths);
 		setVisible(true);
