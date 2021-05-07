@@ -8,7 +8,7 @@ import view.GameButton;
 
 public class PutBackIceButton extends GameButton {
     public PutBackIceButton() {
-        super("putback ice");
+        super("put ice back");
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SelectedSettler.getInstance().putIceBack();
