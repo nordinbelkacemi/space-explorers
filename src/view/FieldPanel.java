@@ -25,7 +25,7 @@ public class FieldPanel extends GamePanel {
 		"res/gate.png"
 	));
 	private int teleportGate = 0;
-	
+
     public FieldPanel() {
     	super(new Dimension(300,300));
 		setVisible(true);
@@ -42,6 +42,7 @@ public class FieldPanel extends GamePanel {
 						int index = (yc - 50) / 108;
 						if (((yc - 150) - index * 108) < 0 && index < field.getAsteroids().size()) {
 							Game.getInstance().selectAsteroid(index);
+							update();
 						}
 					}
 				}
@@ -56,7 +57,6 @@ public class FieldPanel extends GamePanel {
 			add(panel);
 			clearAsteroids();
 		}
-    	
     }
     
     private void clearAsteroids() {
@@ -74,6 +74,10 @@ public class FieldPanel extends GamePanel {
     private void updateAsteroidPanels() {
         List<Asteroid> asteroids = field.getAsteroids();
         for (int i = 0; i < asteroids.size(); i++) {
+			AsteroidPanel panel = asteroidPanels.get(i);
+			Asteroid asteroid = asteroids.get(i);
+
+			panel.setAsteroid(asteroid);
 			asteroidPanels.get(i).setVisible(true);
 		}
     }
