@@ -33,7 +33,7 @@ public class Sun extends Hexagon {
 	public void performAction() {
 		move();
 		dir = null;
-		if (r.nextInt(5) == 1) {
+		if (r.nextInt(5) == 0) {
 			Game.getInstance().log("Solar flare happened this turn.");
 			startFlare();
 		}

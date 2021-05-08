@@ -46,7 +46,7 @@ public class SelectedSettler {
  	 		actions.add("drill");
  	 	}
 
- 	 	if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty()) {
+ 	 	if (currentAsteroid.getThickness() == 0 && !currentAsteroid.isEmpty() && settler.getMaterialCount() < settler.getCapacity()) {
  	 		actions.add("mine");
  	 	}
 

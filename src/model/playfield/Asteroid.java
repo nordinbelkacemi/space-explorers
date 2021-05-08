@@ -25,7 +25,7 @@ public class Asteroid {
 	/** Az aszteroida tároló mezője. */
 	private AsteroidField field;
 
-	/** Az aszteroidán tartózkodó travelereket (robotok vagy telepesek) tárolja. */
+	/** Az aszteroidán tartózkodó travelereket (robotok, telepesek, ufók) tárolja. */
 	private List<Traveler> travelers = new ArrayList<>();
 
 	private Iterator<Asteroid> asteroidIter;

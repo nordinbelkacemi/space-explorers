@@ -295,6 +295,10 @@ public class Settler extends Traveler implements Miner, Driller {
     public int getUraniumCount() {
         return uraniumStorage.size();
     }
+    
+    public int getMaterialCount() {
+    	return getIronCount() + getCoalCount() + getIceCount() + getUraniumCount();
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -302,5 +306,9 @@ public class Settler extends Traveler implements Miner, Driller {
     
     public List<TeleportGatePair> getTeleportGatePairs() {
 		return teleportGatePairs;
+    }
+    
+    public int getCapacity() {
+    	return capacity;
     }
 }   
