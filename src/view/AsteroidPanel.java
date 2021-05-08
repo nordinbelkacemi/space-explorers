@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JLabel;
-
 import controller.Game;
 import model.materials.Material;
 import model.playfield.Asteroid;
