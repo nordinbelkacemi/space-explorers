@@ -27,6 +27,7 @@ public final class Game {
 	private UfoAi ufoAi;
 
 	private boolean gameOver;
+	private boolean playerLost;
 
 	/**
 	 * A kiválasztható/léptethetö telepesek sorszámait tároló lista. (pl. ha van 6
@@ -117,13 +118,15 @@ public final class Game {
 		resetSelectableSettlers();
 		selectedField = null;
 		selectedAsteroid = null;
-		if (settlerTeam.getSize() == 0) {
-			gameOver = true;
-			log("Game Over");
+		if (checkEndConditions()) {
+			if (playerLost)
+				log("Game over, you lost!");
+			else
+				log("Game over, you won!");
 		} else {
 			log("\nNEW TURN");
 		}
-    gui.turnEnded();
+		gui.turnEnded();
 	}
 
 	public void checkTurnEnd() {
@@ -175,6 +178,7 @@ public final class Game {
 	}
 
 	public void step() {
+		solarSystem.megkergultGates.kergit();
 		sun.performAction();
 		robotAi.control();
 		ufoAi.control();
@@ -182,6 +186,41 @@ public final class Game {
 
 	public boolean isGameOver() {
 		return gameOver;
+	}
+	
+	public boolean playerLost() {
+		return playerLost;
+	}
+	
+	private boolean checkEndConditions() {
+		if (settlerTeam.getSize() == 0) {
+			playerLost = true;
+			gameOver = true;
+			return true;
+		}
+		else {
+			List<AsteroidField> fields = solarSystem.getBelt();
+			for (AsteroidField field : fields) {
+				List<Asteroid> asteroids = field.getAsteroids();
+				for (Asteroid asteroid : asteroids) {
+					int ironCount = 0, coalCount = 0, iceCount = 0, uraniumCount = 0;
+					for (Settler settler : settlerTeam.getSettlers()) {
+						if (settler.getAsteroid() == asteroid) {
+							ironCount += settler.getIronCount();
+							coalCount += settler.getCoalCount();
+							iceCount += settler.getIceCount();
+							uraniumCount += settler.getUraniumCount();
+						}
+					}
+					if (ironCount >= 3 && coalCount >= 3 && iceCount >= 3 && uraniumCount >= 3) {
+						playerLost = false;
+						gameOver = true;
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	// public void resetChoosableSettlers() {
