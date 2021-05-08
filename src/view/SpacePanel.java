@@ -55,7 +55,7 @@ public class SpacePanel extends GamePanel {
 
     	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (!Game.getInstance().isGameOver()) {
 					int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
 					for (int i = 0; i < belt.size(); i++) {
@@ -92,7 +92,6 @@ public class SpacePanel extends GamePanel {
     public void update() {
         solarSystem = Game.getInstance().getSolarSystem();
         belt = solarSystem.getBelt();
-		updateSettlerIconPanels();
         repaint();
     }
 
@@ -140,17 +139,17 @@ public class SpacePanel extends GamePanel {
     		pre = null;
     	else if(flare != pre) {
     		Coordinate sunCo = solarSystem.getSun().getCo();
-        	int sx = (getSize().width/2 + sunCo.getX()*50+sunCo.getY()*25);
-    		int sy = (int) (getSize().height/2 - sunCo.getY()*Math.sqrt(3)*25);
-    		int fx =  flare.getX()*50+flare.getY()*25;
-    		int fy =  (int) (flare.getY()*Math.sqrt(3)*-25);
+        	int sx = (getSize().width / 2 + sunCo.getX() * 50 + sunCo.getY() * 25);
+    		int sy = (int) (getSize().height/2 - sunCo.getY() * Math.sqrt(3) * 25);
+    		int fx =  flare.getX() * 50 + flare.getY() * 25;
+    		int fy =  (int) (flare.getY() * Math.sqrt(3) *- 25);
             Color startColor = new Color(0.96f, 0.82f, 0.19f, 0.7f);
             Color endColor = new Color(0.96f, 0.96f, 0.23f, 0.1f);
-    		GradientPaint gp = new GradientPaint(sx+fx/2, sy+fy/2, startColor, sx+fx*20, sy+fy*20, endColor, false);
+    		GradientPaint gp = new GradientPaint(sx + fx / 2, sy + fy / 2, startColor, sx + fx * 20, sy + fy * 20, endColor, false);
     		Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(30));
     		g2.setPaint(gp);
-    		g2.drawLine(sx+fx/2, sy+fy/2, sx+fx*20, sy+fy*20);
+    		g2.drawLine(sx + fx / 2, sy + fy / 2, sx + fx * 20, sy + fy * 20);
 
     		pre = flare;
     	}
@@ -162,6 +161,10 @@ public class SpacePanel extends GamePanel {
 			paintNeighbours(g);
 			paintFields(g);
 			paintSolarFlare(g);
+			updateSettlerIconPanels();
+			for (int i = 0; i < 6; i++) {
+				settlerIconPanels.get(i).repaint();
+			}
 		} else {
 			String endText;
 			if (Game.getInstance().playerLost()) {
@@ -178,13 +181,12 @@ public class SpacePanel extends GamePanel {
 	}
 
 	private void updateSettlerIconPanels() {
-		/* TODO SpacePanel.updateSettlerIconPanels */
 		int i = 0;
 		for (Settler settler : Game.getInstance().getSettlers()) {
 			Coordinate co = settler.getAsteroid().getAsteroidField().getCo();
-			int x = (getSize().width / 2 + co.getX() * 50 + co.getY() * 25) - 30;
-			int y = (int) (getSize().height / 2 - co.getY() * Math.sqrt(3) * 25) - 30;
-			settlerIconPanels.get(i++).setBounds(x + 25 / 2, y + 25 / 2, 25, 25);
+			int x = (getSize().width / 2 + co.getX() * 50 + co.getY() * 25) - 25 / 2;
+			int y = (int) (getSize().height / 2 - co.getY() * Math.sqrt(3) * 25) - 25 / 2;
+			settlerIconPanels.get(i++).setBounds(x, y, 25, 25);
 		}
 	}
 

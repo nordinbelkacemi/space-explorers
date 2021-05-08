@@ -178,7 +178,7 @@ public final class Game {
 	}
 
 	public void step() {
-		solarSystem.megkergultGates.kergit();
+		SolarSystem.megkergultGates.kergit();
 		sun.performAction();
 		robotAi.control();
 		ufoAi.control();

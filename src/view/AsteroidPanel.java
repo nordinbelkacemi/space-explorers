@@ -68,8 +68,8 @@ public class AsteroidPanel extends GamePanel {
 	}
 
 	private void displayMaterialInfo(Graphics g) {
-		g.drawString("Core:", 12 + 65 + 5, 20 + 2);
-		g.drawString("Thickness: " + asteroid.getThickness(), 12 + 65 + 5, 65 + 2 - 10);
+		g.drawString("Core:", 12 + 65 + 10, 20 + 5);
+		g.drawString("Thickness: " + asteroid.getThickness(), 12 + 65 + 10, 65 + 2 - 10);
 
 		if (asteroid.getMaterial() != null) {
 			Material material = asteroid.getMaterial();
