@@ -53,7 +53,7 @@ public class SpacePanel extends GamePanel {
 
     	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (!Game.getInstance().isGameOver()) {
 					int xc = (int) e.getPoint().getX(), yc = (int) e.getPoint().getY();
 					for (int i = 0; i < belt.size(); i++) {
