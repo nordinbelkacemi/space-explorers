@@ -40,7 +40,7 @@ public class TeamPanel extends GamePanel {
 
     	addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				int x = (int) e.getPoint().getX(), y = (int) e.getPoint().getY();
 				int startX = (getSize().width - 575) / 2;
 				if (y < 125 && y > 50 && x < startX + 575 && x > startX) {
