@@ -145,10 +145,15 @@ public class SpacePanel extends GamePanel {
 			paintFields(g);
 			paintSolarFlare(g);
 		} else {
-			String endText = "GAME OVER";
+			String endText;
+			if (Game.getInstance().playerLost()) {
+				endText = "YOU LOST";
+			} else {
+				endText = "YOU WON";
+			}
 			g.setFont(new Font(getFont().getFontName(), Font.BOLD, 60));
-			int lenght = g.getFontMetrics().stringWidth(endText);
-			int x = getSize().width / 2 - lenght / 2;
+			int length = g.getFontMetrics().stringWidth(endText);
+			int x = getSize().width / 2 - length / 2;
 			int y = getSize().height / 2 - getFont().getSize() / 2;
 			g.drawString(endText, x, y);
 		}
