@@ -36,6 +36,9 @@ public class SolarSystem {
 	 */
 	private List<AsteroidField> asteroidBelt;
 	
+	/** A megkergült kapukat tartalmazó osztály. */
+	public static MegkergultGates megkergultGates = new MegkergultGates();
+	
 	/**
 	 * Konstruktor.
 	 * @param s az aszteroidaövben lévő nap

@@ -3,7 +3,10 @@ package model.settler.buildable;
 import java.util.List;
 import java.util.Random;
 
+import controller.Game;
 import model.playfield.AsteroidField;
+import model.playfield.Coordinate;
+import model.playfield.SolarSystem;
 
 /**
  * Minden teleportkapu ismeri a párját, rajtuk keresztül oldjuk meg a
@@ -17,21 +20,23 @@ public class TeleportGate {
 	private TeleportGate otherGate;
 	
 	/**
-	 * A megkergült kapu mozgatásakor használt Random objektum.
-	 */
-	Random r = new Random();
-	
-	/**
 	 * A kapu helyszínéül szolgáló aszteroidamezőt tárolja.
 	 */
 	private AsteroidField asteroidField;
 	
-	/** Áthelyezi a kaput egy véletlen választott szomszádos aszteroida mezőre. */
+	/**
+	 * A kapu kergültségét tároló logikai érték.
+	 */
+	private boolean kergult = false;
+	
+	/** Megkergíti a teleportkaput. */
 	public void kergul() {
-		List<AsteroidField> neighbourFields = asteroidField.getNeighbours();
-		AsteroidField randomField = neighbourFields.get(r.nextInt(neighbourFields.size()));
-		setAsteroidField(randomField);
-		randomField.addTeleportGate(this);
+		if (!kergult) {
+			Game.getInstance().getSolarSystem().megkergultGates.addGate(this);
+			Coordinate i = asteroidField.getAsteroids().get(0).getIndexes();
+			Game.getInstance().log("Teleportgate at field " + i.getX() + " megkergült.");
+			kergult = true;
+		}
 	}
 	
 	/**

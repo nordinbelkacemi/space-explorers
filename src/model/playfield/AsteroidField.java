@@ -30,9 +30,6 @@ public class AsteroidField extends Hexagon {
 	/** Az AsteroidFielden elhelyezkedő teleportkapukat tárolja. */
 	private List<TeleportGate> teleportGates;
 
-	/** A megkergült kapukat tartalmazó osztály. */
-	private static MegkergultGates megkergultGates;
-
 	/** Az összes AsteroidField listája. */
 	private static List<AsteroidField> belt;
 
@@ -96,6 +93,9 @@ public class AsteroidField extends Hexagon {
 		for (int i = 0; i < asteroids.size(); i++) {
 			asteroids.get(i).reactToFlare();
 		}
+		
+		for (TeleportGate gate : teleportGates)
+			gate.kergul();
 	}
 
 	/**
@@ -134,6 +134,14 @@ public class AsteroidField extends Hexagon {
 	public void addTeleportGate(TeleportGate tg) {
 		teleportGates.add(tg);
 	}
+	
+	/**
+	 * Eltávolítja a paraméterként kapott kaput a teleportGates tárolóból.
+	 * @param tg a törlendő teleportkapu
+	 */
+	public void removeTeleportGate(TeleportGate tg) {
+		teleportGates.remove(tg);
+	}
 
 	/**
 	 * Hozzáad egy AsteroidField-et a szomszédokat tároló neighbours-hoz.
@@ -141,6 +149,14 @@ public class AsteroidField extends Hexagon {
 	 */
 	public void addNeighbour(AsteroidField af){
 		neighbours.add(af);
+	}
+	
+	/**
+	 * Kitörli a megadott AsteroidField-et a szomszédokat tároló neighbours-ből.
+	 * @param af a törlendő szomszéd
+	 */
+	public void removeNeighbour(AsteroidField af){
+		neighbours.remove(af);
 	}
 
 	/**

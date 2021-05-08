@@ -38,7 +38,7 @@ public class Ufo extends Traveler implements Miner {
 	public void mine() {
 		Material m = asteroid.removeMaterial();
 		Coordinate i = asteroid.getIndexes();
-		Game.getInstance().log(toString() + " " + getId() + " STOLE " + m.toString() + "at field " + i.getX() + " asteroid " + i.getY());
+		Game.getInstance().log(toString() + " " + getId() + " STOLE " + m.toString() + " at field " + i.getX() + " asteroid " + i.getY());
 	}
 	
 	/**
