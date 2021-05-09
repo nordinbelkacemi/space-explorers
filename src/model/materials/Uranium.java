@@ -45,9 +45,4 @@ public class Uranium extends Material {
     public String toString() {
         return "uranium" + " " + exposureCount;
     }
-    
-    ////////////////////////////////// test
-    public Uranium(int e) {
-		exposureCount = e;
-	}
 }
