@@ -80,17 +80,22 @@ public class TeamPanel extends GamePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	nextTurnButton.setLocation(getSize().width/2 - 55, 10);
-    	int startX = (getSize().width - 575)/2;
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
-    	g.drawString("SETTLERTEAM", 10, 30);
-    	for (int i = 0; i < selectableSettlers.size(); i++) {
-    		if(selectableSettlers.get(i) != null) {
-	    		int imgIndex = selectableSettlers.get(i).getId();
-	    		g.drawImage(settlerImages.get(imgIndex-1),startX +i*100,50,null);
+    	if (!Game.getInstance().isGameOver()) {
+	    	nextTurnButton.setLocation(getSize().width - 150, 8);
+	    	int startX = (getSize().width - 575)/2;
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
+	    	g.drawString("SETTLERTEAM", 10, 30);
+	    	for (int i = 0; i < selectableSettlers.size(); i++) {
+	    		if(selectableSettlers.get(i) != null) {
+		    		int imgIndex = selectableSettlers.get(i).getId();
+		    		g.drawImage(settlerImages.get(imgIndex-1),startX +i*100,50,null);
+		    	}
+	    		else
+	    			g.drawImage(settlerImages.get(6),startX +i*100,50,null);
 	    	}
-    		else
-    			g.drawImage(settlerImages.get(6),startX +i*100,50,null);
+    	}
+    	else {
+    		nextTurnButton.setVisible(false);
     	}
 	}
 }
