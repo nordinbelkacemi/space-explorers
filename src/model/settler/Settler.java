@@ -217,17 +217,6 @@ public class Settler extends Traveler implements Miner, Driller {
     public static void setTeam(SettlerTeam st) {
     	team = st;
     }
-    
-    /**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a telepes adatait.
-	 * @param out ahova kiírja az adatokat
-	 */
-    public void printToConfig(PrintStream out) {
-		out.print(asteroid.getIndexes().toString());
-    	
-    	
-    	// material cuccokat majd később
-	}
 
     /**
      * Visszaadja, hogy a telepes tud-e teleportkapukat építeni.
