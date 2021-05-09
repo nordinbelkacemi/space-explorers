@@ -31,13 +31,6 @@ public class UfoAi implements Ai {
 		}
 	}
 	
-	public void configOut(PrintStream out) {
-		for (Ufo u : ufos) {
-			u.printToConfig(out);
-			out.println();
-		}
-	}
-	
 	/**
 	* Meghatározza az ufok következő lépését és végre is hajtja azokat.
 	*/
