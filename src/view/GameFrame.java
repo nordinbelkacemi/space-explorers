@@ -86,11 +86,9 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		Asteroid currentAsteroid = Game.getInstance().getSelectedField().getAsteroids().get(0);
 		Game.getInstance().selectAsteroid(Game.getInstance().getSelectedField().getAsteroids().indexOf(currentAsteroid));
         fieldPanel.update();
-        //asteroidPanel.update();
     }
 
     public void asteroidSelected(){
-        //asteroidPanel.update();
         logPanel.update();
     }
 
@@ -98,7 +96,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
     	settlerPanel.update();
 		teamPanel.update();
 		fieldPanel.update();
-        //asteroidPanel.update();
     }
 
 	public void turnEnded() {
@@ -106,7 +103,6 @@ public class GameFrame extends JFrame implements SpaceExplorersGui {
 		teamPanel.update();
 		spacePanel.update();
 		fieldPanel.update();
-        //asteroidPanel.update();
 	}
 
 	public void log(String message) {
