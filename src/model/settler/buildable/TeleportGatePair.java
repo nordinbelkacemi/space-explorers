@@ -73,50 +73,6 @@ public class TeleportGatePair implements Buildable {
 	public List<TeleportGate> getGates() {
 		return gates;
 	}
-	
-	////////////////////////////////////////////////////// test
 
-	public TeleportGatePair() {
-
-	}
-	
-	public TeleportGatePair(String s, SettlerTeam st, List<AsteroidField> belt, MegkergultGates kergult) {
-		TeleportGate teleportgate1 = new TeleportGate();
-		TeleportGate teleportgate2 = new TeleportGate();
-		gates.add(teleportgate1);
-		gates.add(teleportgate1);
-		gates.get(0).setOtherGate(gates.get(1));
-		gates.get(1).setOtherGate(gates.get(0));
-		
-		String[] data =s.split(",");
-		if (data.length == 1) {
-			String[] gate = data[0].split(" ");
-			if(gate[0] == "settler") {
-				st.chooseSettler(Integer.parseInt(gate[1])).storeTeleportGatePair(this);
-			}
-		}
-		else if(data.length == 2){
-			String[] gate1 =data[0].split(" ");
-			if (gate1[0].equals("field")) {
-				int x = 1;
-				if (gate1.length == 3) {
-					kergult.addGate(teleportgate1);
-				}
-				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
-			}
-			
-			String[] gate2 =data[1].split(" ");
-			if(gate2[0].equals("field")) {
-				int x = 1;
-				if(gate2.length == 3) {
-					kergult.addGate(teleportgate2);
-				}
-				belt.get(Integer.parseInt(gate1[x])).addTeleportGate(removeTeleportGate());
-			}
-			else if (gate2[0].equals("settler")) {
-				st.chooseSettler(Integer.parseInt(gate2[1])).storeTeleportGatePair(this);
-			}
-			
-		}
-	}
+	public TeleportGatePair() { }
 }
