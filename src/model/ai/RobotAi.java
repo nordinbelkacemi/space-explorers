@@ -55,13 +55,6 @@ public class RobotAi implements Ai {
 	public void remove(Iterator<Traveler> robotIter) {
 		robotIter.remove();
 	}
-	
-	public void configOut(PrintStream out) {
-		for (Robot r : robots) {
-			r.printToConfig(out);
-			out.println();
-		}
-	}
   
 	public List<Robot> getRobots() {
 		return robots;
