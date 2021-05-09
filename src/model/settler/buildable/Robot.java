@@ -97,16 +97,6 @@ public class Robot extends Traveler implements Buildable, Driller {
 	}
 	
 	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak
-	 * megfelelő formátumban a Robot adatait.
-	 * 
-	 * @param out ahova kiírja az adatokat
-	 */
-	public void printToConfig(PrintStream out) {
-		out.print(asteroid.getIndexes().toString());
-	}
-	
-	/**
 	 * Napvihar hatására elpusztítja a robotot.
 	 */
 	@Override
