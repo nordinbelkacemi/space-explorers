@@ -147,7 +147,7 @@ public class SettlerPanel extends GamePanel {
     	for (int i = 6; i < 10; i++) {
     		actionButtons.get(allActions.get(i)).setLocation(15, getSize().height/2 + (i-6)*35 + 240);
 		}
-		showButton.setLocation(15,220);
+		showButton.setLocation(75,220);
 		gateButton.setLocation(160, 340);
     }
 
@@ -190,36 +190,38 @@ public class SettlerPanel extends GamePanel {
 
     public void paint(Graphics g) {
 		super.paint(g);
-		if(settler != null) {
-			placeButtons();
-			updateAvailableButtons();
-		}
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
-    	g.drawString("SETTLER", 10, 30);
-
-    	if (settler != null) {
-	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
-	    	g.drawString("Can do:", 10, getSize().height/2+50);
-	    	g.drawString("Inventory:", 10, 280);
-	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
-	    	g.drawString("Gates:", 10, 350);
-
-	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
-
-			g.drawImage(inventoryImages.get(ice), 15, 300, null);
-			g.drawImage(inventoryImages.get(coal), 85, 300, null);
-			g.drawImage(inventoryImages.get(uranium), 155, 300, null);
-			g.drawImage(inventoryImages.get(iron), 225, 300, null);
-
-	    	g.drawString("x" + settler.getIceCount(), 40, 315);
-	    	g.drawString("x" + settler.getCoalCount(), 110, 315);
-	    	g.drawString("x" + settler.getUraniumCount(), 180, 315);
-	    	g.drawString("x" + settler.getIronCount(), 250, 315);
-
-	    	paintGates(g);
-
-			int id = settler.getId();
-			g.drawImage(settlerImages.get(id - 1), 70, 50, null);
+		if (!Game.getInstance().isGameOver()) {
+			if(settler != null) {
+				placeButtons();
+				updateAvailableButtons();
+			}
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
+	    	g.drawString("SETTLER", 10, 30);
+	
+	    	if (settler != null) {
+		    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 20));
+		    	g.drawString("Can do:", 10, getSize().height/2+50);
+		    	g.drawString("Inventory:", 10, 280);
+		    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 15));
+		    	g.drawString("Gates:", 10, 350);
+	
+		    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 12));
+	
+				g.drawImage(inventoryImages.get(ice), 15, 300, null);
+				g.drawImage(inventoryImages.get(coal), 85, 300, null);
+				g.drawImage(inventoryImages.get(uranium), 155, 300, null);
+				g.drawImage(inventoryImages.get(iron), 225, 300, null);
+	
+		    	g.drawString("x" + settler.getIceCount(), 40, 315);
+		    	g.drawString("x" + settler.getCoalCount(), 110, 315);
+		    	g.drawString("x" + settler.getUraniumCount(), 180, 315);
+		    	g.drawString("x" + settler.getIronCount(), 250, 315);
+	
+		    	paintGates(g);
+	
+				int id = settler.getId();
+				g.drawImage(settlerImages.get(id - 1), 70, 50, null);
+			}
 		}
 	}
 }
