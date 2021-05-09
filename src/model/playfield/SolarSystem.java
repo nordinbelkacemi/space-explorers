@@ -147,24 +147,6 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a SolarSystem adatait.
-	 * @param out ahova kiírja az adatokat
-	 */
-	public void configOut(PrintStream out) {
-		int i = 0;
-		for (AsteroidField f : asteroidBelt) {
-			if(!f.getAsteroids().isEmpty()) {
-				out.print(i);
-				f.printToConfig(out);
-				out.println();
-				i++;
-			}
-		}
-		out.println();
-		out.println(sun.toString());
-	}
-	
-	/**
 	 * Visszaadja a játékteret alkotó AsteroidFieldek listáját.
 	 * @return az AsteroidFieldek listája
 	 */
