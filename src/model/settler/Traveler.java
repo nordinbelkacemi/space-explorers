@@ -23,12 +23,12 @@ public abstract class Traveler {
 	protected Asteroid asteroid;
 
 	protected Iterator<Traveler> travelerIter;
-	
+
 	/**
 	 * Paraméter nélküli konstruktor.
 	 */
 	public Traveler() { }
-
+	
 	/**
 	 * Konstruktor.
 	 * @param a az aszteroida, amelyiken tartózkodik a telepes
@@ -99,10 +99,6 @@ public abstract class Traveler {
 		asteroid.removeTraveler(travelerIter);
 		Coordinate i = asteroid.getIndexes();
 		Game.getInstance().log(toString() + " " + getId() + " died at field " + i.getX() + " asteroid " + i.getY());
-	}
-
-	protected String getTravelerInfo() {
-		return new String("");
 	}
 	
     public int getId() {

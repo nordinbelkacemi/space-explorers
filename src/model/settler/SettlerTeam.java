@@ -39,31 +39,11 @@ public class SettlerTeam {
 	}
 
 	/**
-	 * Visszaadja a telepesek listájából a kiválasztott telepest.
-	 * @param n a választott telepes sorszáma
-	 * @return a sorszámnak megfelelő telepes
-	 */
-	public Settler chooseSettler(int n) {
-		return settlers.get(n - 1);
-	}
-
-	/**
 	 * Kitörli a telepesek listájából a paraméterként átadott telepest.
 	 * @param s a kitörlendő telepes
 	 */
 	public void removeSettler(Settler s) {
 		settlers.remove(s);
-	}
-
-	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban a SettlerTeam adatait.
-	 * @param out ahova kiírja az adatokat
-	 */
-	public void configOut(PrintStream out) {
-		for (Settler s : settlers) {
-			s.printToConfig(out);
-			out.println();
-		}
 	}
 
 	public List<Settler> getSettlers() {

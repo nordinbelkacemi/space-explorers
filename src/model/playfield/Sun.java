@@ -78,19 +78,6 @@ public class Sun extends Hexagon {
 	public void setSolarSystem(SolarSystem ss) {
 		solarSystem = ss;
 	}
-	
-	/////////////////////////////// test
-	
-	public Sun(String s, SolarSystem solarSystem) {
-		String[] data = s.split(" ");
-		position = new Coordinate(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
-		solarSystem.setSun(this);
-	}
-	
-	@Override
-	public String toString() {
-		return position.toString();
-	}
 
 	public Coordinate getFlareDir() {
 		return dir;

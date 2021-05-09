@@ -34,11 +34,6 @@ public class AsteroidField extends Hexagon {
 	private static List<AsteroidField> belt;
 
 	//////////////////////////////////////// konstruktorok
-	public AsteroidField() {
-		asteroids = new ArrayList<>();
-		neighbours = new ArrayList<>();
-		teleportGates = new ArrayList<>();
-	}
 
 	public AsteroidField(Coordinate c) {
 		position = c;
@@ -193,18 +188,6 @@ public class AsteroidField extends Hexagon {
 		int y = asteroids.indexOf(a);
 		return new Coordinate(x, y);
 	}
-
-	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban az AsteroidField adatait.
-	 * @param out ahova kiírja az adatokat
-	 */
-	public void printToConfig(PrintStream out) {
-		for (Asteroid a : asteroids) {
-			out.print(',');
-			a.printToConfig(out);
-		}
-	}	
-  
 	
 	/**
 	 * Visszaadja az AsteroidField koordinátáit.
@@ -216,13 +199,5 @@ public class AsteroidField extends Hexagon {
 
 	public List<TeleportGate> getGates() {
 		return teleportGates;
-	}
-
-	/////////////////////////////////// test
-	public AsteroidField(Coordinate c,int t) {
-		position = c;
-		asteroids = new ArrayList<>();
-		neighbours = new ArrayList<>();
-		teleportGates = new ArrayList<>();
 	}
 }
