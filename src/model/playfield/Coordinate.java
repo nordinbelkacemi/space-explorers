@@ -20,15 +20,6 @@ public class Coordinate {
     }
     
     /**
-	 * Visszaadja a koordináta String reprezentációját.
-	 * @return a String
-	 */
-    @Override
-    public String toString() {
-    	return x + " " + y;
-    }
-    
-    /**
      * Visszaadja az x koordinátát
      * @return az x koordináta
      */
