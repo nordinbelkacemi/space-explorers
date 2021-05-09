@@ -99,15 +99,17 @@ public class FieldPanel extends GamePanel {
     
     public void paint(Graphics g) {
     	super.paint(g);
-    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
-    	g.drawString("FIELD", 10, 36);
-    	if(field != null) {
-			placeAsteroidPanels();
-    		updateAsteroidPanels();
-    		g.drawString("" + index, 105, 36);
-
-			g.drawImage(images.get(teleportGate), 190, 0, null);
-			g.drawString("x" + gateCount, 245, 36);
+    	if (!Game.getInstance().isGameOver()) {
+	    	g.setFont(new Font(getFont().getFontName(), Font.BOLD, 30));
+	    	g.drawString("FIELD", 10, 36);
+	    	if(field != null) {
+				placeAsteroidPanels();
+	    		updateAsteroidPanels();
+	    		g.drawString("" + index, 105, 36);
+	
+				g.drawImage(images.get(teleportGate), 190, 0, null);
+				g.drawString("x" + gateCount, 245, 36);
+	    	}
     	}
 	}
 }
