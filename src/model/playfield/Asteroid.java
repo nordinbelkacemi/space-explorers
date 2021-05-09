@@ -174,18 +174,6 @@ public class Asteroid {
 		return thickness;
 	}
 
-	/**
-	 * Kiírja a megadott PrintStream-re az általunk definiált config fájloknak megfelelő formátumban az aszteroida adatait.
-	 * @param out ahova kiírja az adatokat
-	 */
-	public void printToConfig(PrintStream out) {
-		if(material != null)
-			out.print(material.toString());
-		else
-			out.print("empty ");
-		out.print(thickness);
-	}
-
 	public Material getMaterial() {
 		return material;
 	}
