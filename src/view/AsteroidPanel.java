@@ -16,7 +16,6 @@ import model.settler.Traveler;
 
 public class AsteroidPanel extends GamePanel {
     private Asteroid asteroid;
-    private int index;
 	
 	private List<BufferedImage> images = new ArrayList<>();
 	private List<String> imagePaths = new ArrayList<>(Arrays.asList(
