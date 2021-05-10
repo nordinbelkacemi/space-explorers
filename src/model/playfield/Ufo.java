@@ -1,6 +1,5 @@
 package model.playfield;
 
-import java.io.PrintStream;
 import java.util.Iterator;
 
 import controller.Game;
