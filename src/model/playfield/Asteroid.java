@@ -93,9 +93,11 @@ public class Asteroid {
 
 	/** Napvihar esetén meghívódik, és meghívja az összes rajta tartózkodó traveler ReactToFlare() függvényét. */
 	public void reactToFlare() {
-		Iterator<Traveler> travelerIter = travelers.iterator();
-		while (travelerIter.hasNext()) {
-			travelerIter.next().reactToFlare(travelerIter);
+		if(thickness != 0 || !isEmpty()) {
+			Iterator<Traveler> travelerIter = travelers.iterator();
+			while (travelerIter.hasNext()) {
+				travelerIter.next().reactToFlare(travelerIter);
+			}
 		}
 	}
 
