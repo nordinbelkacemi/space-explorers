@@ -1,7 +1,6 @@
 package model.playfield;
 import java.util.List;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 
