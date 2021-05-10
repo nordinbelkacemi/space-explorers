@@ -1,6 +1,5 @@
 package model.settler;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +33,6 @@ public class Settler extends Traveler implements Miner, Driller {
 
     /** Az eszköztárában lévő Ice típusú nyersanyagok. */
     private List<Ice> iceStorage;
-
-    /** Az eszköztárában lévő nyersanyagok száma. */
-    private int materialCount;
     
     /** A telepes eszköztárának kapacitása. */
     private static int capacity = 10;
@@ -59,7 +55,6 @@ public class Settler extends Traveler implements Miner, Driller {
         coalStorage = new ArrayList<>();
         iceStorage = new ArrayList<>();
         ironStorage = new ArrayList<>();
-        materialCount = 0;
         teleportGatePairs = new ArrayList<>();
     }
 

@@ -5,7 +5,6 @@ import controller.Game;
 import model.materials.Material;
 import model.settler.Traveler;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 

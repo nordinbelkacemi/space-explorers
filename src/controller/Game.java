@@ -7,7 +7,6 @@ import model.ai.RobotAi;
 import model.ai.UfoAi;
 import model.playfield.Asteroid;
 import model.playfield.AsteroidField;
-import model.playfield.MegkergultGates;
 import model.playfield.SolarSystem;
 import model.playfield.Sun;
 import model.settler.Settler;
@@ -21,7 +20,6 @@ public final class Game {
 
 	private Sun sun;
 	private SolarSystem solarSystem;
-	private MegkergultGates megkergultGates;
 	private SettlerTeam settlerTeam;
 	private RobotAi robotAi;
 	private UfoAi ufoAi;
@@ -42,15 +40,12 @@ public final class Game {
 	/** telepes mozgása során kiválasztott cél aszteroida */
 	private Asteroid selectedAsteroid;
 
-	private int selectedTeleportgatePair;
-
 	private Game() {
 		sun = new Sun();
 		solarSystem = new SolarSystem(sun);
 		settlerTeam = new SettlerTeam(solarSystem.getBelt());
 		robotAi = new RobotAi();
 		ufoAi = new UfoAi(solarSystem.getBelt());
-		megkergultGates = new MegkergultGates();
 		selectableSettlers = new ArrayList<Settler>();
 		initSelectableSettlers();
 		gameOver = false;
