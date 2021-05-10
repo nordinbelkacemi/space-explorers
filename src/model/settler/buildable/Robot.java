@@ -1,7 +1,5 @@
 package model.settler.buildable;
 
-
-import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
